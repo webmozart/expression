@@ -31,15 +31,4 @@ class EqualsTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($criterion->match(array('amount' => '100')));
         $this->assertFalse($criterion->match(array('amount' => 11)));
     }
-
-    public function testEqualOneOfWithSingleValueIfNotStrict()
-    {
-        $criterion = new Equals('amount', '10');
-
-        $this->assertTrue($criterion->equals(new OneOf('amount', array('10'), false)));
-        $this->assertTrue($criterion->equals(new OneOf('amount', array(10), false)));
-        $this->assertFalse($criterion->equals(new OneOf('amount', array('10'), true)));
-        $this->assertFalse($criterion->equals(new OneOf('amount', array(), false)));
-        $this->assertFalse($criterion->equals(new OneOf('amount', array('10', '11'), false)));
-    }
 }
