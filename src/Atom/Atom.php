@@ -53,7 +53,7 @@ abstract class Atom extends Literal
      */
     public function match(array $values)
     {
-        if (!isset($values[$this->field])) {
+        if (!array_key_exists($this->field, $values)) {
             throw new LogicException(sprintf(
                 'Cannot evaluate criterion: The field "%s" is missing.',
                 $this->field
