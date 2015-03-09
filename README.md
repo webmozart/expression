@@ -155,41 +155,33 @@ Testing
 -------
 
 To make sure that PHPUnit compares [`Criteria`] objects correctly, you should 
-call the `register()` method of [`CriteriaComparator`] in the 
-`setUpBeforeClass()` method of all tests that compare [`Criteria`] instances:
+call the `register()` method of [`CriteriaComparator`] in your PHPUnit
+bootstrap file:
 
 ```php
-use Webmozart\Criteria\Criterion;
+// tests/bootstrap.php
 use Webmozart\Criteria\PhpUnit\CriteriaComparator;
 
-class PersonManagerTest extends PHPUnit_Framework_TestCase
-{
-    public static function setUpBeforeClass()
-    {
-        CriteriaComparator::register();
-    }
-    
-    public function testManagePersons()
-    {
-        $repository = $this->getMock('PersonRepository');
-        
-        $repository->expects($this->once())
-            ->method('findPersons')
-            ->with(Criterion::startsWith(Person::FIRST_NAME, 'Tho')
-                ->andGreaterThan(Person::AGE, 35))
-            ->willReturn(array(
-                // ...
-            ));
-            
-        // ...
-    }
-}
+require_once __DIR__.'/../vendor/autoload.php';
+
+CriteriaComparator::register();
 ```
 
-The [`CriteriaComparator`] makes sure that the [`Criteria`] created in the test
-and the [`Criteria`] created in the implementation are compared by *logical
-equivalence* instead of object equality. For example, the following [`Criteria`] 
-are logically equivalent, but not equal as objects:
+Make sure the file is registered correctly in `phpunit.xml.dist`:
+
+```xml
+<!-- phpunit.xml.dist -->
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="tests/bootstrap.php" colors="true">
+    <!-- ... -->
+</phpunit>
+```
+
+The [`CriteriaComparator`] makes sure that PHPUnit compares different 
+[`Criteria`] instances by *logical equivalence* instead of by object equality. 
+For example, the following [`Criteria`] are logically equivalent, but not equal 
+as objects:
  
 ```php
 // Logically equivalent
