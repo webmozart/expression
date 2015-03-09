@@ -27,14 +27,25 @@ class False extends Atom
     /**
      * Creates the criterion.
      *
-     * @param string $field  The field name.
-     * @param bool   $strict Whether to use strict comparison.
+     * @param string $fieldName The field name.
+     * @param bool   $strict    Whether to use strict comparison.
      */
-    public function __construct($field, $strict = true)
+    public function __construct($fieldName, $strict = true)
     {
-        parent::__construct($field);
+        parent::__construct($fieldName);
 
         $this->strict = $strict;
+    }
+
+    /**
+     * Returns whether the value is compared strictly.
+     *
+     * @return boolean Returns `true` if using strict comparison (`===`) and
+     *                 `false` if using weak comparison (`==`).
+     */
+    public function isStrict()
+    {
+        return $this->strict;
     }
 
     /**

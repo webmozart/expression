@@ -34,13 +34,13 @@ class OneOf extends Atom
     /**
      * Creates the criterion.
      *
-     * @param string $field          The field name.
+     * @param string $fieldName      The field name.
      * @param array  $acceptedValues The accepted value.
      * @param bool   $strict         Whether to do strict comparison.
      */
-    public function __construct($field, array $acceptedValues, $strict = true)
+    public function __construct($fieldName, array $acceptedValues, $strict = true)
     {
-        parent::__construct($field);
+        parent::__construct($fieldName);
 
         $this->acceptedValues = $acceptedValues;
         $this->strict = $strict;
@@ -75,13 +75,13 @@ class OneOf extends Atom
         if (1 === count($this->acceptedValues)) {
             // OneOf is logically equivalent to Same if strict and only one value
             if ($this->strict && $other instanceof Same) {
-                return $this->field === $other->field
+                return $this->fieldName === $other->fieldName
                 && reset($this->acceptedValues) === $other->getComparedValue();
             }
 
             // OneOf is logically equivalent to Equals if not strict and only one value
             if (!$this->strict && $other instanceof Equals) {
-                return $this->field === $other->field
+                return $this->fieldName === $other->fieldName
                 && reset($this->acceptedValues) == $other->getComparedValue();
             }
         }

@@ -36,16 +36,26 @@ abstract class Atom extends Literal
     /**
      * @var string
      */
-    protected $field;
+    protected $fieldName;
 
     /**
      * Creates the atom.
      *
-     * @param string $field The name of the field to test.
+     * @param string $fieldName The name of the field to compare.
      */
-    public function __construct($field)
+    public function __construct($fieldName)
     {
-        $this->field = $field;
+        $this->fieldName = $fieldName;
+    }
+
+    /**
+     * Returns the name of the compared field.
+     *
+     * @return string The name of the compared field.
+     */
+    public function getFieldName()
+    {
+        return $this->fieldName;
     }
 
     /**
@@ -53,14 +63,14 @@ abstract class Atom extends Literal
      */
     public function match(array $values)
     {
-        if (!array_key_exists($this->field, $values)) {
+        if (!array_key_exists($this->fieldName, $values)) {
             throw new LogicException(sprintf(
                 'Cannot evaluate criterion: The field "%s" is missing.',
-                $this->field
+                $this->fieldName
             ));
         }
 
-        return $this->matchValue($values[$this->field]);
+        return $this->matchValue($values[$this->fieldName]);
     }
 
     /**

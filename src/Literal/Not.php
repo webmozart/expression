@@ -37,6 +37,16 @@ class Not extends Literal
     }
 
     /**
+     * Returns the negated criteria.
+     *
+     * @return Criteria The negated criteria.
+     */
+    public function getNegatedCriteria()
+    {
+        return $this->negatedCriteria;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function match(array $values)

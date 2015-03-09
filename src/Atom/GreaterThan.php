@@ -24,19 +24,29 @@ class GreaterThan extends Atom
     /**
      * @var mixed
      */
-    private $value;
+    private $comparedValue;
 
     /**
      * Creates the criterion.
      *
-     * @param string $field The field name.
+     * @param string $fieldName     The field name.
      * @param mixed  $comparedValue The compared value.
      */
-    public function __construct($field, $comparedValue)
+    public function __construct($fieldName, $comparedValue)
     {
-        parent::__construct($field);
+        parent::__construct($fieldName);
 
-        $this->value = $comparedValue;
+        $this->comparedValue = $comparedValue;
+    }
+
+    /**
+     * Returns the compared value.
+     *
+     * @return mixed The compared value.
+     */
+    public function getComparedValue()
+    {
+        return $this->comparedValue;
     }
 
     /**
@@ -44,6 +54,6 @@ class GreaterThan extends Atom
      */
     protected function matchValue($value)
     {
-        return $value > $this->value;
+        return $value > $this->comparedValue;
     }
 }

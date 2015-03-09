@@ -31,12 +31,12 @@ class Same extends Atom
     /**
      * Creates the criterion.
      *
-     * @param string $field         The field name.
+     * @param string $fieldName     The field name.
      * @param mixed  $comparedValue The compared value.
      */
-    public function __construct($field, $comparedValue)
+    public function __construct($fieldName, $comparedValue)
     {
-        parent::__construct($field);
+        parent::__construct($fieldName);
 
         $this->comparedValue = $comparedValue;
     }
@@ -57,7 +57,7 @@ class Same extends Atom
     public function equals(Criteria $other)
     {
         if ($other instanceof OneOf && $other->isStrict()) {
-            return $this->field === $other->field
+            return $this->fieldName === $other->fieldName
                 && array($this->comparedValue) === $other->getAcceptedValues();
         }
 

@@ -22,19 +22,29 @@ class EndsWith extends Atom
     /**
      * @var string
      */
-    private $suffix;
+    private $acceptedSuffix;
 
     /**
      * Creates the criterion.
      *
-     * @param string $field  The field name.
-     * @param string $suffix The suffix string.
+     * @param string $fieldName      The field name.
+     * @param string $acceptedSuffix The accepted suffix.
      */
-    public function __construct($field, $suffix)
+    public function __construct($fieldName, $acceptedSuffix)
     {
-        parent::__construct($field);
+        parent::__construct($fieldName);
 
-        $this->suffix = $suffix;
+        $this->acceptedSuffix = $acceptedSuffix;
+    }
+
+    /**
+     * Returns the accepted suffix.
+     *
+     * @return string The accepted suffix.
+     */
+    public function getAcceptedSuffix()
+    {
+        return $this->acceptedSuffix;
     }
 
     /**
@@ -42,6 +52,6 @@ class EndsWith extends Atom
      */
     protected function matchValue($value)
     {
-        return $this->suffix === substr($value, -strlen($this->suffix));
+        return $this->acceptedSuffix === substr($value, -strlen($this->acceptedSuffix));
     }
 }

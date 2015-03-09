@@ -29,14 +29,24 @@ class Matches extends Atom
     /**
      * Creates the criterion.
      *
-     * @param string $field  The field name.
-     * @param string $regExp The regular expression.
+     * @param string $fieldName The field name.
+     * @param string $regExp    The regular expression.
      */
-    public function __construct($field, $regExp)
+    public function __construct($fieldName, $regExp)
     {
-        parent::__construct($field);
+        parent::__construct($fieldName);
 
         $this->regExp = $regExp;
+    }
+
+    /**
+     * Returns the regular expression.
+     *
+     * @return mixed The regular expression.
+     */
+    public function getRegularExpression()
+    {
+        return $this->regExp;
     }
 
     /**

@@ -22,19 +22,29 @@ class StartsWith extends Atom
     /**
      * @var string
      */
-    private $prefix;
+    private $acceptedPrefix;
 
     /**
      * Creates the criterion.
      *
-     * @param string $field  The field name.
-     * @param string $prefix The prefix.
+     * @param string $fieldName      The field name.
+     * @param string $acceptedPrefix The accepted prefix.
      */
-    public function __construct($field, $prefix)
+    public function __construct($fieldName, $acceptedPrefix)
     {
-        parent::__construct($field);
+        parent::__construct($fieldName);
 
-        $this->prefix = $prefix;
+        $this->acceptedPrefix = $acceptedPrefix;
+    }
+
+    /**
+     * Returns the accepted prefix.
+     *
+     * @return string The accepted prefix.
+     */
+    public function getAcceptedPrefix()
+    {
+        return $this->acceptedPrefix;
     }
 
     /**
@@ -42,6 +52,6 @@ class StartsWith extends Atom
      */
     protected function matchValue($value)
     {
-        return 0 === strpos($value, $this->prefix);
+        return 0 === strpos($value, $this->acceptedPrefix);
     }
 }
