@@ -181,4 +181,33 @@ class Conjunction implements Criteria
 
         return true;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function equals(Criteria $other)
+    {
+        if (get_class($this) !== get_class($other)) {
+            return false;
+        }
+
+        /** @var static $other */
+        $leftConjuncts = $this->conjuncts;
+        $rightConjuncts = $other->conjuncts;
+
+        foreach ($leftConjuncts as $leftConjunct) {
+            foreach ($rightConjuncts as $j => $rightConjunct) {
+                if ($leftConjunct->equals($rightConjunct)) {
+                    unset($rightConjuncts[$j]);
+                    continue 2;
+                }
+            }
+
+            // $leftConjunct was not found in $rightConjuncts
+            return false;
+        }
+
+        // All $leftConjuncts were found. Check if any $rightConjuncts are left
+        return 0 === count($rightConjuncts);
+    }
 }

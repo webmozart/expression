@@ -12,6 +12,7 @@
 namespace Webmozart\Criteria\Tests\Literal;
 
 use PHPUnit_Framework_TestCase;
+use Webmozart\Criteria\Atom\NotNull;
 use Webmozart\Criteria\Atom\Null;
 use Webmozart\Criteria\Formula\Conjunction;
 use Webmozart\Criteria\Formula\Disjunction;
@@ -71,5 +72,16 @@ class LiteralTest extends PHPUnit_Framework_TestCase
         $result = call_user_func_array(array($literal, $method), $args);
 
         $this->assertEquals(new Disjunction(array($literal, $expected)), $result);
+    }
+
+    public function testEquals()
+    {
+        $criterion1 = new TestLiteral('foo');
+        $criterion2 = new Null('field');
+
+        $this->assertTrue($criterion1->equals(new TestLiteral('foo')));
+        $this->assertFalse($criterion1->equals(new TestLiteral('bar')));
+        $this->assertTrue($criterion2->equals(new Null('field')));
+        $this->assertFalse($criterion2->equals(new NotNull('field')));
     }
 }

@@ -19,6 +19,13 @@ use Webmozart\Criteria\Literal\Literal;
  */
 class TestLiteral extends Literal
 {
+    private $field;
+
+    public function __construct($field = null)
+    {
+        $this->field = $field;
+    }
+
     public function match(array $values)
     {
     }

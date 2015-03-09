@@ -55,6 +55,14 @@ use Webmozart\Criteria\Formula\Disjunction;
  */
 abstract class Literal implements Criteria
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function equals(Criteria $other)
+    {
+        return $other == $this;
+    }
+
     public function andX(Criteria $x)
     {
         return new Conjunction(array($this, $x));

@@ -181,4 +181,33 @@ class Disjunction implements Criteria
 
         return false;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function equals(Criteria $other)
+    {
+        if (get_class($this) !== get_class($other)) {
+            return false;
+        }
+
+        /** @var static $other */
+        $leftDisjuncts = $this->disjuncts;
+        $rightDisjuncts = $other->disjuncts;
+
+        foreach ($leftDisjuncts as $leftDisjunct) {
+            foreach ($rightDisjuncts as $j => $rightDisjunct) {
+                if ($leftDisjunct->equals($rightDisjunct)) {
+                    unset($rightDisjuncts[$j]);
+                    continue 2;
+                }
+            }
+
+            // $leftDisjunct was not found in $rightDisjuncts
+            return false;
+        }
+
+        // All $leftDisjuncts were found. Check if any $rightDisjuncts are left
+        return 0 === count($rightDisjuncts);
+    }
 }

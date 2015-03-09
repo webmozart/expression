@@ -24,7 +24,7 @@ class Not extends Literal
     /**
      * @var Criteria
      */
-    private $criteria;
+    private $negatedCriteria;
 
     /**
      * Creates the negation.
@@ -33,7 +33,7 @@ class Not extends Literal
      */
     public function __construct(Criteria $criteria)
     {
-        $this->criteria = $criteria;
+        $this->negatedCriteria = $criteria;
     }
 
     /**
@@ -41,6 +41,19 @@ class Not extends Literal
      */
     public function match(array $values)
     {
-        return !$this->criteria->match($values);
+        return !$this->negatedCriteria->match($values);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function equals(Criteria $other)
+    {
+        if (get_class($this) !== get_class($other)) {
+            return false;
+        }
+
+        /** @var Not $other */
+        return $this->negatedCriteria->equals($other->negatedCriteria);
     }
 }
