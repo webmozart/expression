@@ -137,5 +137,4 @@ class CriterionTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals($expected, call_user_func_array(array('Webmozart\Criteria\Criterion', $method), $args));
     }
-
 }
