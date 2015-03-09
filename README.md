@@ -256,3 +256,4 @@ All contents of this package are licensed under the [MIT license].
 [MIT license]: LICENSE
 [`Criteria`]: src/Criteria.php
 [`Criterion`]: src/Criterion.php
+[`CriteriaComparator`]: src/PhpUnit/CriteriaComparator.php
