@@ -13,6 +13,7 @@ namespace Webmozart\Criteria\Formula;
 
 use Webmozart\Criteria\Atom\EndsWith;
 use Webmozart\Criteria\Atom\Equals;
+use Webmozart\Criteria\Atom\False;
 use Webmozart\Criteria\Atom\GreaterThan;
 use Webmozart\Criteria\Atom\GreaterThanEqual;
 use Webmozart\Criteria\Atom\IsEmpty;
@@ -27,6 +28,7 @@ use Webmozart\Criteria\Atom\Null;
 use Webmozart\Criteria\Atom\OneOf;
 use Webmozart\Criteria\Atom\Same;
 use Webmozart\Criteria\Atom\StartsWith;
+use Webmozart\Criteria\Atom\True;
 use Webmozart\Criteria\Criteria;
 use Webmozart\Criteria\Literal\Not;
 
@@ -94,6 +96,16 @@ class Conjunction implements Criteria
     public function andNotEmpty($field)
     {
         $this->conjuncts[] = new NotEmpty($field);
+    }
+
+    public function andTrue($field, $strict = true)
+    {
+        $this->conjuncts[] = new True($field, $strict);
+    }
+
+    public function andFalse($field, $strict = true)
+    {
+        $this->conjuncts[] = new False($field, $strict);
     }
 
     public function andEquals($field, $value)

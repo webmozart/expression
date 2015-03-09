@@ -14,6 +14,7 @@ namespace Webmozart\Criteria\Tests;
 use PHPUnit_Framework_TestCase;
 use Webmozart\Criteria\Atom\EndsWith;
 use Webmozart\Criteria\Atom\Equals;
+use Webmozart\Criteria\Atom\False;
 use Webmozart\Criteria\Atom\GreaterThan;
 use Webmozart\Criteria\Atom\GreaterThanEqual;
 use Webmozart\Criteria\Atom\IsEmpty;
@@ -28,6 +29,7 @@ use Webmozart\Criteria\Atom\Null;
 use Webmozart\Criteria\Atom\OneOf;
 use Webmozart\Criteria\Atom\Same;
 use Webmozart\Criteria\Atom\StartsWith;
+use Webmozart\Criteria\Atom\True;
 use Webmozart\Criteria\Criterion;
 use Webmozart\Criteria\Literal\Not;
 
@@ -66,6 +68,16 @@ class CriterionTest extends PHPUnit_Framework_TestCase
                 'notEmpty',
                 array('amount'),
                 new NotEmpty('amount')
+            ),
+            array(
+                'true',
+                array('enabled', false),
+                new True('enabled', false)
+            ),
+            array(
+                'false',
+                array('false', false),
+                new False('false', false)
             ),
             array(
                 'equals',

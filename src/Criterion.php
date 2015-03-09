@@ -13,6 +13,7 @@ namespace Webmozart\Criteria;
 
 use Webmozart\Criteria\Atom\EndsWith;
 use Webmozart\Criteria\Atom\Equals;
+use Webmozart\Criteria\Atom\False;
 use Webmozart\Criteria\Atom\GreaterThan;
 use Webmozart\Criteria\Atom\GreaterThanEqual;
 use Webmozart\Criteria\Atom\IsEmpty;
@@ -27,6 +28,7 @@ use Webmozart\Criteria\Atom\Null;
 use Webmozart\Criteria\Atom\OneOf;
 use Webmozart\Criteria\Atom\Same;
 use Webmozart\Criteria\Atom\StartsWith;
+use Webmozart\Criteria\Atom\True;
 use Webmozart\Criteria\Literal\Not;
 
 /**
@@ -116,6 +118,32 @@ class Criterion
     public static function notEmpty($field)
     {
         return new NotEmpty($field);
+    }
+
+    /**
+     * Check that a field is true.
+     *
+     * @param string $field  The field name.
+     * @param bool   $strict Whether to use strict comparison.
+     *
+     * @return Null The created criterion.
+     */
+    public static function true($field, $strict = true)
+    {
+        return new True($field, $strict);
+    }
+
+    /**
+     * Check that a field is false.
+     *
+     * @param string $field  The field name.
+     * @param bool   $strict Whether to use strict comparison.
+     *
+     * @return Null The created criterion.
+     */
+    public static function false($field, $strict = true)
+    {
+        return new False($field, $strict);
     }
 
     /**

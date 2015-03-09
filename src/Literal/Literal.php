@@ -13,6 +13,7 @@ namespace Webmozart\Criteria\Literal;
 
 use Webmozart\Criteria\Atom\EndsWith;
 use Webmozart\Criteria\Atom\Equals;
+use Webmozart\Criteria\Atom\False;
 use Webmozart\Criteria\Atom\GreaterThan;
 use Webmozart\Criteria\Atom\GreaterThanEqual;
 use Webmozart\Criteria\Atom\IsEmpty;
@@ -27,6 +28,7 @@ use Webmozart\Criteria\Atom\Null;
 use Webmozart\Criteria\Atom\OneOf;
 use Webmozart\Criteria\Atom\Same;
 use Webmozart\Criteria\Atom\StartsWith;
+use Webmozart\Criteria\Atom\True;
 use Webmozart\Criteria\Criteria;
 use Webmozart\Criteria\Formula\Conjunction;
 use Webmozart\Criteria\Formula\Disjunction;
@@ -81,6 +83,16 @@ abstract class Literal implements Criteria
     public function andNotEmpty($field)
     {
         return new Conjunction(array($this, new NotEmpty($field)));
+    }
+
+    public function andTrue($field, $strict = true)
+    {
+        return new Conjunction(array($this, new True($field, $strict)));
+    }
+
+    public function andFalse($field, $strict = true)
+    {
+        return new Conjunction(array($this, new False($field, $strict)));
     }
 
     public function andEquals($field, $value)
@@ -171,6 +183,16 @@ abstract class Literal implements Criteria
     public function orNotEmpty($field)
     {
         return new Disjunction(array($this, new NotEmpty($field)));
+    }
+
+    public function orTrue($field, $strict = true)
+    {
+        return new Disjunction(array($this, new True($field, $strict)));
+    }
+
+    public function orFalse($field, $strict = true)
+    {
+        return new Disjunction(array($this, new False($field, $strict)));
     }
 
     public function orEquals($field, $value)
