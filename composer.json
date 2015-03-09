@@ -1,0 +1,30 @@
+{
+    "name": "webmozart/criteria",
+    "description": "Formulate search criteria using PHP objects.",
+    "keywords": ["criteria", "formula", "expression", "filter", "match"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bernhard Schussek",
+            "email": "bschussek@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Webmozart\\Criteria\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Webmozart\\Criteria\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
