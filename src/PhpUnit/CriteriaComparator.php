@@ -37,7 +37,7 @@ class CriteriaComparator extends ObjectComparator
      */
     public static function register()
     {
-        if (!static::$registered) {
+        if (!self::$registered) {
             self::$registered = true;
             Factory::getInstance()->register(new static());
         }
