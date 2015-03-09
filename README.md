@@ -160,22 +160,19 @@ Authors
 Installation
 ------------
 
-Installation
-------------
-
 Use [Composer] to install the package:
 
 ```
-$ composer require webmozart/key-value-store@dev
+$ composer require webmozart/criteria@dev
 ```
 
 Contribute
 ----------
 
-Contributions to are very welcome!
+Contributions to the package are always welcome!
 
 * Report any bugs or issues you find on the [issue tracker].
-* You can grab the source code at Puli’s [Git repository].
+* You can grab the source code at the package's [Git repository].
 
 Support
 -------
@@ -188,12 +185,10 @@ License
 
 All contents of this package are licensed under the [MIT license].
 
-[Puli]: http://webmozart.io
+[Composer]: https://getcomposer.org
 [Bernhard Schussek]: http://webmozarts.com
 [The Community Contributors]: https://github.com/webmozart/criteria/graphs/contributors
-[Getting Started]: http://docs.webmozart.io/en/latest/getting-started.html
-[Puli Documentation]: http://docs.webmozart.io/en/latest/index.html
-[issue tracker]: https://github.com/webmozart/issues/issues
+[issue tracker]: https://github.com/webmozart/criteria
 [Git repository]: https://github.com/webmozart/criteria
 [@webmozart]: https://twitter.com/webmozart
 [MIT license]: LICENSE
