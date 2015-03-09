@@ -68,9 +68,9 @@ class Conjunction implements Criteria
         return $this->conjuncts;
     }
 
-    public function andCriteria(Criteria $criteria)
+    public function andX(Criteria $x)
     {
-        $this->conjuncts[] = $criteria;
+        $this->conjuncts[] = $x;
     }
 
     public function andNot(Criteria $criteria)

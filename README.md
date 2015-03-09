@@ -134,18 +134,18 @@ $criteria = Criterion::startsWith(Person::FIRST_NAME, 'Tho')
     ->orGreaterThan(Person::AGE, 35);
 ```
 
-If you want to mix and match "and" and "or" operators, use `andCriteria()`
-and `orCriteria()` to add embedded criteria:
+If you want to mix and match "and" and "or" operators, use `andX()` and `orX()`
+to add embedded criteria:
 
 ```php
 $criteria = Criterion::startsWith(Person::FIRST_NAME, 'Tho')
-    ->andCriteria(
+    ->andX(
         Criterion::greaterThan(Person::AGE, 35)
             ->orLessThan(Person::AGE, 20);
     );
     
 $criteria = Criterion::startsWith(Person::FIRST_NAME, 'Tho')
-    ->orCriteria(
+    ->orX(
         Criterion::notEmpty(Person::FIRST_NAME)
             ->andGreaterThan(Person::AGE, 35);
     );

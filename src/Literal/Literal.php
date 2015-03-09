@@ -55,9 +55,9 @@ use Webmozart\Criteria\Formula\Disjunction;
  */
 abstract class Literal implements Criteria
 {
-    public function andCriteria(Criteria $criteria)
+    public function andX(Criteria $x)
     {
-        return new Conjunction(array($this, $criteria));
+        return new Conjunction(array($this, $x));
     }
 
     public function andNot(Criteria $criteria)
@@ -155,9 +155,9 @@ abstract class Literal implements Criteria
         return new Conjunction(array($this, new EndsWith($field, $suffix)));
     }
 
-    public function orCriteria(Criteria $criteria)
+    public function orX(Criteria $x)
     {
-        return new Disjunction(array($this, $criteria));
+        return new Disjunction(array($this, $x));
     }
 
     public function orNot(Criteria $criteria)

@@ -23,12 +23,12 @@ use Webmozart\Criteria\Tests\Literal\Fixtures\TestLiteral;
  */
 class LiteralTest extends PHPUnit_Framework_TestCase
 {
-    public function testAndCriteria()
+    public function testAndX()
     {
         $literal = new TestLiteral();
         $criterion = new Null('field');
 
-        $this->assertEquals(new Conjunction(array($literal, $criterion)), $literal->andCriteria($criterion));
+        $this->assertEquals(new Conjunction(array($literal, $criterion)), $literal->andX($criterion));
     }
 
     /**
@@ -48,12 +48,12 @@ class LiteralTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(new Conjunction(array($literal, $expected)), $result);
     }
 
-    public function testOrCriteria()
+    public function testOrX()
     {
         $literal = new TestLiteral();
         $criterion = new Null('field');
 
-        $this->assertEquals(new Disjunction(array($literal, $criterion)), $literal->orCriteria($criterion));
+        $this->assertEquals(new Disjunction(array($literal, $criterion)), $literal->orX($criterion));
     }
 
     /**

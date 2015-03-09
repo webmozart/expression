@@ -32,11 +32,11 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
         $this->assertSame(array($notNull, $greaterThan), $conjunction->getConjuncts());
     }
 
-    public function testAndCriteria()
+    public function testAndX()
     {
         $conjunction = new Conjunction();
-        $conjunction->andCriteria($notNull = new NotNull('name'));
-        $conjunction->andCriteria($greaterThan = new GreaterThan('age', 0));
+        $conjunction->andX($notNull = new NotNull('name'));
+        $conjunction->andX($greaterThan = new GreaterThan('age', 0));
 
         $this->assertSame(array($notNull, $greaterThan), $conjunction->getConjuncts());
     }

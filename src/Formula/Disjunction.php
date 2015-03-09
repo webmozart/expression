@@ -68,9 +68,9 @@ class Disjunction implements Criteria
         return $this->disjuncts;
     }
 
-    public function orCriteria(Criteria $criteria)
+    public function orX(Criteria $x)
     {
-        $this->disjuncts[] = $criteria;
+        $this->disjuncts[] = $x;
     }
 
     public function orNot(Criteria $criteria)
