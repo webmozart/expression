@@ -151,6 +151,68 @@ $criteria = Criterion::startsWith(Person::FIRST_NAME, 'Tho')
     );
 ```
 
+Testing
+-------
+
+To make sure that PHPUnit compares [`Criteria`] objects correctly, you should 
+call the `register()` method of [`CriteriaComparator`] in the 
+`setUpBeforeClass()` method of all tests that compare [`Criteria`] instances:
+
+```php
+use Webmozart\Criteria\Criterion;
+use Webmozart\Criteria\PhpUnit\CriteriaComparator;
+
+class PersonManagerTest extends PHPUnit_Framework_TestCase
+{
+    public static function setUpBeforeClass()
+    {
+        CriteriaComparator::register();
+    }
+    
+    public function testManagePersons()
+    {
+        $repository = $this->getMock('PersonRepository');
+        
+        $repository->expects($this->once())
+            ->method('findPersons')
+            ->with(Criterion::startsWith(Person::FIRST_NAME, 'Tho')
+                ->andGreaterThan(Person::AGE, 35))
+            ->willReturn(array(
+                // ...
+            ));
+            
+        // ...
+    }
+}
+```
+
+The [`CriteriaComparator`] makes sure that the [`Criteria`] created in the test
+and the [`Criteria`] created in the implementation are compared by *logical
+equivalence* instead of object equality. For example, the following [`Criteria`] 
+are logically equivalent, but not equal as objects:
+ 
+```php
+// Logically equivalent
+$c1 = Criterion::notNull(Person::FIRST_NAME)->andSame(Person::AGE, 35);
+$c2 = Criterion::same(Person::AGE, 35)->andNotNull(Person::FIRST_NAME);
+
+$c1 == $c2;
+// => false
+
+$c1->equals($c2);
+// => true
+
+// Also logically equivalent
+$c1 = Criterion::same(Person::AGE, 35);
+$c2 = Criterion::oneOf(Person::AGE, array(35));
+
+$c1 == $c2;
+// => false
+
+$c1->equals($c2);
+// => true
+```
+
 Authors
 -------
 
