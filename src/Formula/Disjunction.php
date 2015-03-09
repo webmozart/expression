@@ -70,102 +70,108 @@ class Disjunction implements Criteria
 
     public function orX(Criteria $x)
     {
+        foreach ($this->disjuncts as $disjunct) {
+            if ($disjunct->equals($x)) {
+                return;
+            }
+        }
+
         $this->disjuncts[] = $x;
     }
 
     public function orNot(Criteria $criteria)
     {
-        $this->disjuncts[] = new Not($criteria);
+        $this->orX(new Not($criteria));
     }
 
     public function orNull($field)
     {
-        $this->disjuncts[] = new Null($field);
+        $this->orX(new Null($field));
     }
 
     public function orNotNull($field)
     {
-        $this->disjuncts[] = new NotNull($field);
+        $this->orX(new NotNull($field));
     }
 
     public function orEmpty($field)
     {
-        $this->disjuncts[] = new IsEmpty($field);
+        $this->orX(new IsEmpty($field));
     }
 
     public function orNotEmpty($field)
     {
-        $this->disjuncts[] = new NotEmpty($field);
+        $this->orX(new NotEmpty($field));
     }
 
     public function orTrue($field, $strict = true)
     {
-        $this->disjuncts[] = new True($field, $strict);
+        $this->orX(new True($field, $strict));
     }
 
     public function orFalse($field, $strict = true)
     {
-        $this->disjuncts[] = new False($field, $strict);
+        $this->orX(new False($field, $strict));
     }
 
     public function orEquals($field, $value)
     {
-        $this->disjuncts[] = new Equals($field, $value);
+        $this->orX(new Equals($field, $value));
     }
 
     public function orNotEquals($field, $value)
     {
-        $this->disjuncts[] = new NotEquals($field, $value);
+        $this->orX(new NotEquals($field, $value));
     }
 
     public function orSame($field, $value)
     {
-        $this->disjuncts[] = new Same($field, $value);
+        $this->orX(new Same($field, $value));
     }
 
     public function orNotSame($field, $value)
     {
-        $this->disjuncts[] = new NotSame($field, $value);
+        $this->orX(new NotSame($field, $value));
     }
 
     public function orGreaterThan($field, $value)
     {
-        $this->disjuncts[] = new GreaterThan($field, $value);
+        $this->orX(new GreaterThan($field, $value));
     }
 
     public function orGreaterThanEqual($field, $value)
     {
-        $this->disjuncts[] = new GreaterThanEqual($field, $value);
+        $this->orX(new GreaterThanEqual($field, $value));
     }
 
     public function orLessThan($field, $value)
     {
-        $this->disjuncts[] = new LessThan($field, $value);
+        $this->orX(new LessThan($field, $value));
     }
 
     public function orLessThanEqual($field, $value)
     {
-        $this->disjuncts[] = new LessThanEqual($field, $value);
+        $this->orX(new LessThanEqual($field, $value));
     }
 
     public function orOneOf($field, array $values, $strict = true)
     {
-        $this->disjuncts[] = new OneOf($field, $values, $strict);
+        $this->orX(new OneOf($field, $values, $strict));
     }
 
     public function orMatches($field, $regExp)
     {
-        $this->disjuncts[] = new Matches($field, $regExp);
+        $this->orX(new Matches($field, $regExp));
     }
 
     public function orStartsWith($field, $prefix)
     {
-        $this->disjuncts[] = new StartsWith($field, $prefix);
+        $this->orX(new StartsWith($field, $prefix));
     }
 
     public function orEndsWith($field, $suffix)
     {
-        $this->disjuncts[] = new EndsWith($field, $suffix);
+        $this->orX(new EndsWith($field, $suffix));
     }
 
     /**

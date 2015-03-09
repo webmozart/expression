@@ -65,201 +65,209 @@ abstract class Literal implements Criteria
 
     public function andX(Criteria $x)
     {
+        if ($this->equals($x)) {
+            return $this;
+        }
+
         return new Conjunction(array($this, $x));
     }
 
     public function andNot(Criteria $criteria)
     {
-        return new Conjunction(array($this, new Not($criteria)));
+        return $this->andX(new Not($criteria));
     }
 
     public function andNull($field)
     {
-        return new Conjunction(array($this, new Null($field)));
+        return $this->andX(new Null($field));
     }
 
     public function andNotNull($field)
     {
-        return new Conjunction(array($this, new NotNull($field)));
+        return $this->andX(new NotNull($field));
     }
 
     public function andEmpty($field)
     {
-        return new Conjunction(array($this, new IsEmpty($field)));
+        return $this->andX(new IsEmpty($field));
     }
 
     public function andNotEmpty($field)
     {
-        return new Conjunction(array($this, new NotEmpty($field)));
+        return $this->andX(new NotEmpty($field));
     }
 
     public function andTrue($field, $strict = true)
     {
-        return new Conjunction(array($this, new True($field, $strict)));
+        return $this->andX(new True($field, $strict));
     }
 
     public function andFalse($field, $strict = true)
     {
-        return new Conjunction(array($this, new False($field, $strict)));
+        return $this->andX(new False($field, $strict));
     }
 
     public function andEquals($field, $value)
     {
-        return new Conjunction(array($this, new Equals($field, $value)));
+        return $this->andX(new Equals($field, $value));
     }
 
     public function andNotEquals($field, $value)
     {
-        return new Conjunction(array($this, new NotEquals($field, $value)));
+        return $this->andX(new NotEquals($field, $value));
     }
 
     public function andSame($field, $value)
     {
-        return new Conjunction(array($this, new Same($field, $value)));
+        return $this->andX(new Same($field, $value));
     }
 
     public function andNotSame($field, $value)
     {
-        return new Conjunction(array($this, new NotSame($field, $value)));
+        return $this->andX(new NotSame($field, $value));
     }
 
     public function andGreaterThan($field, $value)
     {
-        return new Conjunction(array($this, new GreaterThan($field, $value)));
+        return $this->andX(new GreaterThan($field, $value));
     }
 
     public function andGreaterThanEqual($field, $value)
     {
-        return new Conjunction(array($this, new GreaterThanEqual($field, $value)));
+        return $this->andX(new GreaterThanEqual($field, $value));
     }
 
     public function andLessThan($field, $value)
     {
-        return new Conjunction(array($this, new LessThan($field, $value)));
+        return $this->andX(new LessThan($field, $value));
     }
 
     public function andLessThanEqual($field, $value)
     {
-        return new Conjunction(array($this, new LessThanEqual($field, $value)));
+        return $this->andX(new LessThanEqual($field, $value));
     }
 
     public function andOneOf($field, array $values, $strict = true)
     {
-        return new Conjunction(array($this, new OneOf($field, $values, $strict)));
+        return $this->andX(new OneOf($field, $values, $strict));
     }
 
     public function andMatches($field, $regExp)
     {
-        return new Conjunction(array($this, new Matches($field, $regExp)));
+        return $this->andX(new Matches($field, $regExp));
     }
 
     public function andStartsWith($field, $prefix)
     {
-        return new Conjunction(array($this, new StartsWith($field, $prefix)));
+        return $this->andX(new StartsWith($field, $prefix));
     }
 
     public function andEndsWith($field, $suffix)
     {
-        return new Conjunction(array($this, new EndsWith($field, $suffix)));
+        return $this->andX(new EndsWith($field, $suffix));
     }
 
     public function orX(Criteria $x)
     {
+        if ($this->equals($x)) {
+            return $this;
+        }
+
         return new Disjunction(array($this, $x));
     }
 
     public function orNot(Criteria $criteria)
     {
-        return new Disjunction(array($this, new Not($criteria)));
+        return $this->orX(new Not($criteria));
     }
 
     public function orNull($field)
     {
-        return new Disjunction(array($this, new Null($field)));
+        return $this->orX(new Null($field));
     }
 
     public function orNotNull($field)
     {
-        return new Disjunction(array($this, new NotNull($field)));
+        return $this->orX(new NotNull($field));
     }
 
     public function orEmpty($field)
     {
-        return new Disjunction(array($this, new IsEmpty($field)));
+        return $this->orX(new IsEmpty($field));
     }
 
     public function orNotEmpty($field)
     {
-        return new Disjunction(array($this, new NotEmpty($field)));
+        return $this->orX(new NotEmpty($field));
     }
 
     public function orTrue($field, $strict = true)
     {
-        return new Disjunction(array($this, new True($field, $strict)));
+        return $this->orX(new True($field, $strict));
     }
 
     public function orFalse($field, $strict = true)
     {
-        return new Disjunction(array($this, new False($field, $strict)));
+        return $this->orX(new False($field, $strict));
     }
 
     public function orEquals($field, $value)
     {
-        return new Disjunction(array($this, new Equals($field, $value)));
+        return $this->orX(new Equals($field, $value));
     }
 
     public function orNotEquals($field, $value)
     {
-        return new Disjunction(array($this, new NotEquals($field, $value)));
+        return $this->orX(new NotEquals($field, $value));
     }
 
     public function orSame($field, $value)
     {
-        return new Disjunction(array($this, new Same($field, $value)));
+        return $this->orX(new Same($field, $value));
     }
 
     public function orNotSame($field, $value)
     {
-        return new Disjunction(array($this, new NotSame($field, $value)));
+        return $this->orX(new NotSame($field, $value));
     }
 
     public function orGreaterThan($field, $value)
     {
-        return new Disjunction(array($this, new GreaterThan($field, $value)));
+        return $this->orX(new GreaterThan($field, $value));
     }
 
     public function orGreaterThanEqual($field, $value)
     {
-        return new Disjunction(array($this, new GreaterThanEqual($field, $value)));
+        return $this->orX(new GreaterThanEqual($field, $value));
     }
 
     public function orLessThan($field, $value)
     {
-        return new Disjunction(array($this, new LessThan($field, $value)));
+        return $this->orX(new LessThan($field, $value));
     }
 
     public function orLessThanEqual($field, $value)
     {
-        return new Disjunction(array($this, new LessThanEqual($field, $value)));
+        return $this->orX(new LessThanEqual($field, $value));
     }
 
     public function orOneOf($field, array $values, $strict = true)
     {
-        return new Disjunction(array($this, new OneOf($field, $values, $strict)));
+        return $this->orX(new OneOf($field, $values, $strict));
     }
 
     public function orMatches($field, $regExp)
     {
-        return new Disjunction(array($this, new Matches($field, $regExp)));
+        return $this->orX(new Matches($field, $regExp));
     }
 
     public function orStartsWith($field, $prefix)
     {
-        return new Disjunction(array($this, new StartsWith($field, $prefix)));
+        return $this->orX(new StartsWith($field, $prefix));
     }
 
     public function orEndsWith($field, $suffix)
     {
-        return new Disjunction(array($this, new EndsWith($field, $suffix)));
+        return $this->orX(new EndsWith($field, $suffix));
     }
 }

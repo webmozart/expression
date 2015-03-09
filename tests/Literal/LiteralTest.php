@@ -32,6 +32,13 @@ class LiteralTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(new Conjunction(array($literal, $criterion)), $literal->andX($criterion));
     }
 
+    public function testAndXIgnoresDuplicates()
+    {
+        $literal = new TestLiteral('field');
+
+        $this->assertEquals($literal, $literal->andX(new TestLiteral('field')));
+    }
+
     /**
      * @dataProvider \Webmozart\Criteria\Tests\CriterionTest::getCriterionTests
      */
@@ -55,6 +62,13 @@ class LiteralTest extends PHPUnit_Framework_TestCase
         $criterion = new Null('field');
 
         $this->assertEquals(new Disjunction(array($literal, $criterion)), $literal->orX($criterion));
+    }
+
+    public function testOrXIgnoresDuplicates()
+    {
+        $literal = new TestLiteral('field');
+
+        $this->assertEquals($literal, $literal->orX(new TestLiteral('field')));
     }
 
     /**

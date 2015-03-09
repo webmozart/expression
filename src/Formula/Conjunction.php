@@ -70,102 +70,108 @@ class Conjunction implements Criteria
 
     public function andX(Criteria $x)
     {
+        foreach ($this->conjuncts as $conjunct) {
+            if ($conjunct->equals($x)) {
+                return;
+            }
+        }
+
         $this->conjuncts[] = $x;
     }
 
     public function andNot(Criteria $criteria)
     {
-        $this->conjuncts[] = new Not($criteria);
+        $this->andX(new Not($criteria));
     }
 
     public function andNull($field)
     {
-        $this->conjuncts[] = new Null($field);
+        $this->andX(new Null($field));
     }
 
     public function andNotNull($field)
     {
-        $this->conjuncts[] = new NotNull($field);
+        $this->andX(new NotNull($field));
     }
 
     public function andEmpty($field)
     {
-        $this->conjuncts[] = new IsEmpty($field);
+        $this->andX(new IsEmpty($field));
     }
 
     public function andNotEmpty($field)
     {
-        $this->conjuncts[] = new NotEmpty($field);
+        $this->andX(new NotEmpty($field));
     }
 
     public function andTrue($field, $strict = true)
     {
-        $this->conjuncts[] = new True($field, $strict);
+        $this->andX(new True($field, $strict));
     }
 
     public function andFalse($field, $strict = true)
     {
-        $this->conjuncts[] = new False($field, $strict);
+        $this->andX(new False($field, $strict));
     }
 
     public function andEquals($field, $value)
     {
-        $this->conjuncts[] = new Equals($field, $value);
+        $this->andX(new Equals($field, $value));
     }
 
     public function andNotEquals($field, $value)
     {
-        $this->conjuncts[] = new NotEquals($field, $value);
+        $this->andX(new NotEquals($field, $value));
     }
 
     public function andSame($field, $value)
     {
-        $this->conjuncts[] = new Same($field, $value);
+        $this->andX(new Same($field, $value));
     }
 
     public function andNotSame($field, $value)
     {
-        $this->conjuncts[] = new NotSame($field, $value);
+        $this->andX(new NotSame($field, $value));
     }
 
     public function andGreaterThan($field, $value)
     {
-        $this->conjuncts[] = new GreaterThan($field, $value);
+        $this->andX(new GreaterThan($field, $value));
     }
 
     public function andGreaterThanEqual($field, $value)
     {
-        $this->conjuncts[] = new GreaterThanEqual($field, $value);
+        $this->andX(new GreaterThanEqual($field, $value));
     }
 
     public function andLessThan($field, $value)
     {
-        $this->conjuncts[] = new LessThan($field, $value);
+        $this->andX(new LessThan($field, $value));
     }
 
     public function andLessThanEqual($field, $value)
     {
-        $this->conjuncts[] = new LessThanEqual($field, $value);
+        $this->andX(new LessThanEqual($field, $value));
     }
 
     public function andOneOf($field, array $values, $strict = true)
     {
-        $this->conjuncts[] = new OneOf($field, $values, $strict);
+        $this->andX(new OneOf($field, $values, $strict));
     }
 
     public function andMatches($field, $regExp)
     {
-        $this->conjuncts[] = new Matches($field, $regExp);
+        $this->andX(new Matches($field, $regExp));
     }
 
     public function andStartsWith($field, $prefix)
     {
-        $this->conjuncts[] = new StartsWith($field, $prefix);
+        $this->andX(new StartsWith($field, $prefix));
     }
 
     public function andEndsWith($field, $suffix)
     {
-        $this->conjuncts[] = new EndsWith($field, $suffix);
+        $this->andX(new EndsWith($field, $suffix));
     }
 
     /**

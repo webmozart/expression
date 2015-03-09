@@ -42,6 +42,15 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
         $this->assertSame(array($notNull, $greaterThan), $conjunction->getConjuncts());
     }
 
+    public function testAndXIgnoresDuplicates()
+    {
+        $conjunction = new Conjunction();
+        $conjunction->andX($notNull = new NotNull('name'));
+        $conjunction->andX(new NotNull('name'));
+
+        $this->assertSame(array($notNull), $conjunction->getConjuncts());
+    }
+
     /**
      * @dataProvider \Webmozart\Criteria\Tests\CriterionTest::getCriterionTests
      */

@@ -42,6 +42,15 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
         $this->assertSame(array($notNull, $greaterThan), $conjunction->getDisjuncts());
     }
 
+    public function testOrXIgnoresDuplicates()
+    {
+        $conjunction = new Disjunction();
+        $conjunction->orX($notNull = new NotNull('name'));
+        $conjunction->orX(new NotNull('name'));
+
+        $this->assertSame(array($notNull), $conjunction->getDisjuncts());
+    }
+
     /**
      * @dataProvider \Webmozart\Criteria\Tests\CriterionTest::getCriterionTests
      */
