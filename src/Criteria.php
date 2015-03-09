@@ -30,12 +30,12 @@ interface Criteria
     public function match(array $values);
 
     /**
-     * Compares the criteria to other criteria.
+     * Returns whether this criteria is logically equivalent to other criteria.
      *
      * @param Criteria $other Some criteria.
      *
-     * @return bool Returns `true` if the criteria are equal and `false`
-     *              otherwise.
+     * @return bool Returns `true` if the criteria are logically equivalent and
+     *              `false` otherwise.
      */
     public function equals(Criteria $other);
 }
