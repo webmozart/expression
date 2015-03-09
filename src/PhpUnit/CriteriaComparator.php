@@ -12,6 +12,7 @@
 namespace Webmozart\Criteria\PhpUnit;
 
 use SebastianBergmann\Comparator\ComparisonFailure;
+use SebastianBergmann\Comparator\Factory;
 use SebastianBergmann\Comparator\ObjectComparator;
 use Webmozart\Criteria\Criteria;
 
@@ -23,6 +24,25 @@ use Webmozart\Criteria\Criteria;
  */
 class CriteriaComparator extends ObjectComparator
 {
+    /**
+     * @var bool
+     */
+    private static $registered = false;
+
+    /**
+     * Registers the comparator with PHPUnit.
+     *
+     * You should call this method in the `setUpBeforeClass()` method of all
+     * test cases that compare {@link Criteria} instances.
+     */
+    public static function register()
+    {
+        if (!static::$registered) {
+            self::$registered = true;
+            Factory::getInstance()->register(new static());
+        }
+    }
+
     /**
      * {@inheritdoc}
      */
