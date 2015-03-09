@@ -11,6 +11,8 @@
 
 namespace Webmozart\Criteria\Atom;
 
+use Webmozart\Criteria\Criteria;
+
 /**
  * Checks that a field value is one of a list of values.
  *
@@ -22,7 +24,7 @@ class OneOf extends Atom
     /**
      * @var array
      */
-    private $values;
+    private $acceptedValues;
 
     /**
      * @var bool
@@ -32,16 +34,59 @@ class OneOf extends Atom
     /**
      * Creates the criterion.
      *
-     * @param string $field  The field name.
-     * @param array  $values The accepted value.
-     * @param bool   $strict Whether to do strict comparison.
+     * @param string $field          The field name.
+     * @param array  $acceptedValues The accepted value.
+     * @param bool   $strict         Whether to do strict comparison.
      */
-    public function __construct($field, array $values, $strict = true)
+    public function __construct($field, array $acceptedValues, $strict = true)
     {
         parent::__construct($field);
 
-        $this->values = $values;
+        $this->acceptedValues = $acceptedValues;
         $this->strict = $strict;
+    }
+
+    /**
+     * Returns the accepted values.
+     *
+     * @return array The accepted values.
+     */
+    public function getAcceptedValues()
+    {
+        return $this->acceptedValues;
+    }
+
+    /**
+     * Returns whether the value is compared strictly.
+     *
+     * @return boolean Returns `true` if using strict comparison (`===`) and
+     *                 `false` if using weak comparison (`==`).
+     */
+    public function isStrict()
+    {
+        return $this->strict;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function equals(Criteria $other)
+    {
+        if (1 === count($this->acceptedValues)) {
+            // OneOf is logically equivalent to Same if strict and only one value
+            if ($this->strict && $other instanceof Same) {
+                return $this->field === $other->field
+                && reset($this->acceptedValues) === $other->getComparedValue();
+            }
+
+            // OneOf is logically equivalent to Equals if not strict and only one value
+            if (!$this->strict && $other instanceof Equals) {
+                return $this->field === $other->field
+                && reset($this->acceptedValues) == $other->getComparedValue();
+            }
+        }
+
+        return parent::equals($other);
     }
 
     /**
@@ -49,6 +94,7 @@ class OneOf extends Atom
      */
     protected function matchValue($value)
     {
-        return in_array($value, $this->values, $this->strict);
+        return in_array($value, $this->acceptedValues, $this->strict);
     }
+
 }

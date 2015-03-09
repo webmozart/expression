@@ -11,6 +11,8 @@
 
 namespace Webmozart\Criteria\Atom;
 
+use Webmozart\Criteria\Criteria;
+
 /**
  * Checks that a field value equals another value.
  *
@@ -24,26 +26,50 @@ class Equals extends Atom
     /**
      * @var string
      */
-    private $value;
+    private $comparedValue;
 
     /**
      * Creates the criterion.
      *
      * @param string $field The field name.
-     * @param mixed  $value The compared value.
+     * @param mixed  $comparedValue The compared value.
      */
-    public function __construct($field, $value)
+    public function __construct($field, $comparedValue)
     {
         parent::__construct($field);
 
-        $this->value = $value;
+        $this->comparedValue = $comparedValue;
     }
+
+    /**
+     * Returns the compared value.
+     *
+     * @return mixed The compared value.
+     */
+    public function getComparedValue()
+    {
+        return $this->comparedValue;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function equals(Criteria $other)
+    {
+        if ($other instanceof OneOf && !$other->isStrict()) {
+            return $this->field === $other->field
+                && array($this->comparedValue) == $other->getAcceptedValues();
+        }
+
+        return parent::equals($other);
+    }
+
 
     /**
      * {@inheritdoc}
      */
     protected function matchValue($value)
     {
-        return $this->value == $value;
+        return $this->comparedValue == $value;
     }
 }

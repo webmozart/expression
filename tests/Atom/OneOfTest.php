@@ -12,7 +12,9 @@
 namespace Webmozart\Criteria\Tests\Atom;
 
 use PHPUnit_Framework_TestCase;
+use Webmozart\Criteria\Atom\Equals;
 use Webmozart\Criteria\Atom\OneOf;
+use Webmozart\Criteria\Atom\Same;
 
 /**
  * @since  1.0
@@ -42,5 +44,40 @@ class OneOfTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($criterion->match(array('amount' => 0)));
         $this->assertFalse($criterion->match(array('amount' => 10)));
         $this->assertFalse($criterion->match(array('amount' => null)));
+    }
+
+    public function testEqualsSameIfStrictAndSingleValue()
+    {
+        $criterion = new OneOf('amount', array('1'), true);
+
+        // OneOf with a single value and Same are logically equivalent if strict
+        $this->assertTrue($criterion->equals(new Same('amount', '1')));
+        $this->assertFalse($criterion->equals(new Same('amount', 1)));
+        $this->assertFalse($criterion->equals(new Equals('amount', '1')));
+    }
+
+    public function testDoesNotEqualSameIfMoreThanOneValue()
+    {
+        $criterion = new OneOf('amount', array('1', '2'), true);
+
+        $this->assertFalse($criterion->equals(new Same('amount', '1')));
+    }
+
+    public function testEqualsEqualsIfNotStrictAndSingleValue()
+    {
+        $criterion = new OneOf('amount', array('1'), false);
+
+        // OneOf with a single value and Equals are logically equivalent if not strict
+        $this->assertTrue($criterion->equals(new Equals('amount', '1')));
+        $this->assertTrue($criterion->equals(new Equals('amount', 1)));
+        $this->assertFalse($criterion->equals(new Same('amount', '1')));
+    }
+
+    public function testDoesNotEqualEqualsIfMoreThanOneValue()
+    {
+        $criterion = new OneOf('amount', array('1', '2'), false);
+
+        $this->assertFalse($criterion->equals(new Equals('amount', '1')));
+        $this->assertFalse($criterion->equals(new Equals('amount', 1)));
     }
 }

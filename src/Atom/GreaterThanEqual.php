@@ -30,13 +30,13 @@ class GreaterThanEqual extends Atom
      * Creates the criterion.
      *
      * @param string $field The field name.
-     * @param mixed  $value The compared value.
+     * @param mixed  $comparedValue The compared value.
      */
-    public function __construct($field, $value)
+    public function __construct($field, $comparedValue)
     {
         parent::__construct($field);
 
-        $this->value = $value;
+        $this->value = $comparedValue;
     }
 
     /**

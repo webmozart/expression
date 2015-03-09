@@ -12,6 +12,7 @@
 namespace Webmozart\Criteria\Tests\Atom;
 
 use PHPUnit_Framework_TestCase;
+use Webmozart\Criteria\Atom\OneOf;
 use Webmozart\Criteria\Atom\Same;
 
 /**
@@ -29,5 +30,16 @@ class SameTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($criterion->match(array('amount' => 11)));
         $this->assertFalse($criterion->match(array('amount' => 10)));
         $this->assertFalse($criterion->match(array('amount' => 10.0)));
+    }
+
+    public function testEqualOneOfWithSingleValueIfStrict()
+    {
+        $criterion = new Same('amount', '10');
+
+        $this->assertTrue($criterion->equals(new OneOf('amount', array('10'), true)));
+        $this->assertFalse($criterion->equals(new OneOf('amount', array(10), true)));
+        $this->assertFalse($criterion->equals(new OneOf('amount', array('10'), false)));
+        $this->assertFalse($criterion->equals(new OneOf('amount', array(), true)));
+        $this->assertFalse($criterion->equals(new OneOf('amount', array('10', '11'), true)));
     }
 }

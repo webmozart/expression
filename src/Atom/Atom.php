@@ -36,7 +36,7 @@ abstract class Atom extends Literal
     /**
      * @var string
      */
-    private $field;
+    protected $field;
 
     /**
      * Creates the atom.
