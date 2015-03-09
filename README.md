@@ -90,24 +90,26 @@ Basic Criteria
 
 The [`Criterion`] class is able to create the following basic criteria:
 
-| `null($field)` | Check that a field is `null` |
-| `notNull($field)` | Check that a field is not `null` |
-| `isEmpty($field)` | Check that a field is empty (using `empty()`) |
-| `notEmpty($field)` | Check that a field is not empty (using `empty()`) |
-| `true($field, $strict = true)` | Check that a field is `true` |
-| `false($field, $strict = true)` | Check that a field is `false |
-| `equals($field, $value)` | Check that a field equals a value (using `==`) |
-| `notEquals($field, $value)` | Check that a field does not equal a value (using `!=`) |
-| `same($field, $value)` | Check that a field is identical to a value (using `===`) |
-| `notSame($field, $value)` | Check that a field does not equal a value (using `!==`) |
-| `greaterThan($field, $value)` | Check that a field is greater than a value |
-| `greaterThanEqual($field, $value)` | Check that a field is greater than or equal to a value |
-| `lessThan($field, $value)` | Check that a field is less than a value |
-| `lessThanEqual($field, $value)` | Check that a field is less than or equal to a value |
-| `startsWith($field, $prefix)` | Check that a field starts with a given string |
-| `endsWith($field, $suffix)` | Check that a field ends with a given string |
-| `matches($field, $regExp)` | Check that a field matches a regular expression |
-| `oneOf($field, $values, $strict = true)` | Check that a field contains one of a list of values |
+Method                                      | Description
+------------------------------------------- | --------------------------------------------------------
+`null($field)`                              | Check that a field is `null` 
+`notNull($field)`                           | Check that a field is not `null` 
+`isEmpty($field)`                           | Check that a field is empty (using `empty()`) 
+`notEmpty($field)`                          | Check that a field is not empty (using `empty()`) 
+`true($field, $strict = true)`              | Check that a field is `true` 
+`false($field, $strict = true)`             | Check that a field is `false`
+`equals($field, $value)`                    | Check that a field equals a value (using `==`) 
+`notEquals($field, $value)`                 | Check that a field does not equal a value (using `!=`) 
+`same($field, $value)`                      | Check that a field is identical to a value (using `===`) 
+`notSame($field, $value)`                   | Check that a field does not equal a value (using `!==`) 
+`greaterThan($field, $value)`               | Check that a field is greater than a value 
+`greaterThanEqual($field, $value)`          | Check that a field is greater than or equal to a value 
+`lessThan($field, $value)`                  | Check that a field is less than a value 
+`lessThanEqual($field, $value)`             | Check that a field is less than or equal to a value 
+`startsWith($field, $prefix)`               | Check that a field starts with a given string 
+`endsWith($field, $suffix)`                 | Check that a field ends with a given string 
+`matches($field, $regExp)`                  | Check that a field matches a regular expression 
+`oneOf($field, $values, $strict = true)`    | Check that a field contains one of a list of values
 
 Logical Operators
 -----------------
