@@ -3,7 +3,7 @@ Webmozart Criteria
 
 [![Build Status](https://travis-ci.org/webmozart/criteria.svg?branch=master)](https://travis-ci.org/webmozart/criteria)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/webmozart/criteria/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/webmozart/criteria/?branch=master)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/6505ed38-0d0f-4c8d-ac85-f343f8e135a9/mini.png)](https://insight.sensiolabs.com/projects/6505ed38-0d0f-4c8d-ac85-f343f8e135a9)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/00d2acd0-d0b7-458f-abca-278f79f0c2ed/mini.png)](https://insight.sensiolabs.com/projects/00d2acd0-d0b7-458f-abca-278f79f0c2ed)
 [![Latest Stable Version](https://poser.pugx.org/webmozart/criteria/v/stable.svg)](https://packagist.org/packages/webmozart/criteria)
 [![Total Downloads](https://poser.pugx.org/webmozart/criteria/downloads.svg)](https://packagist.org/packages/webmozart/criteria)
 [![Dependency Status](https://www.versioneye.com/php/webmozart:criteria/1.0.0/badge.svg)](https://www.versioneye.com/php/webmozart:criteria/1.0.0)
