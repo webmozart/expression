@@ -58,7 +58,14 @@ class Conjunction implements Expression
     public function __construct(array $conjuncts = array())
     {
         foreach ($conjuncts as $conjunct) {
-            $this->add($conjunct);
+            if ($conjunct instanceof self) {
+                foreach ($conjunct->conjuncts as $expr) {
+                    // $conjunct is guaranteed not to contain Conjunctions
+                    $this->conjuncts[] = $expr;
+                }
+            } else {
+                $this->conjuncts[] = $conjunct;
+            }
         };
     }
 
@@ -332,16 +339,5 @@ class Conjunction implements Expression
 
         // All $leftConjuncts were found. Check if any $rightConjuncts are left
         return 0 === count($rightConjuncts);
-    }
-
-    private function add(Expression $conjunct)
-    {
-        if ($conjunct instanceof self) {
-            foreach ($conjunct->conjuncts as $expr) {
-                $this->add($expr);
-            }
-        } else {
-            $this->conjuncts[] = $conjunct;
-        }
     }
 }

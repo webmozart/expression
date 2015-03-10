@@ -58,7 +58,14 @@ class Disjunction implements Expression
     public function __construct(array $disjuncts = array())
     {
         foreach ($disjuncts as $disjunct) {
-            $this->add($disjunct);
+            if ($disjunct instanceof self) {
+                foreach ($disjunct->disjuncts as $expr) {
+                    // $disjunct is guaranteed not to contain Disjunctions
+                    $this->disjuncts[] = $expr;
+                }
+            } else {
+                $this->disjuncts[] = $disjunct;
+            }
         }
     }
 
@@ -332,16 +339,5 @@ class Disjunction implements Expression
 
         // All $leftDisjuncts were found. Check if any $rightDisjuncts are left
         return 0 === count($rightDisjuncts);
-    }
-
-    private function add(Expression $disjunct)
-    {
-        if ($disjunct instanceof self) {
-            foreach ($disjunct->disjuncts as $expr) {
-                $this->add($expr);
-            }
-        } else {
-            $this->disjuncts[] = $disjunct;
-        }
     }
 }
