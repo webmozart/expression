@@ -29,4 +29,8 @@ class TestLiteral extends Literal
     public function evaluate($value)
     {
     }
+
+    public function toString()
+    {
+    }
 }

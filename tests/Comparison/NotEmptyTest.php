@@ -31,4 +31,11 @@ class NotEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($expr->evaluate(''));
         $this->assertFalse($expr->evaluate(false));
     }
+
+    public function testToString()
+    {
+        $expr = new NotEmpty();
+
+        $this->assertSame('notEmpty()', $expr->toString());
+    }
 }

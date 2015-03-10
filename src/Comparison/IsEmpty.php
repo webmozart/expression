@@ -28,4 +28,12 @@ class IsEmpty extends Literal
     {
         return empty($value);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toString()
+    {
+        return 'empty()';
+    }
 }

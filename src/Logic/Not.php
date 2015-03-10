@@ -66,4 +66,11 @@ class Not extends Literal
         /** @var Not $other */
         return $this->negatedExpression->equals($other->negatedExpression);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toString()
+    {
+    }
 }

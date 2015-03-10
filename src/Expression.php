@@ -38,4 +38,11 @@ interface Expression
      *              and `false` otherwise.
      */
     public function equals(Expression $other);
+
+    /**
+     * Returns a string representation of the expression.
+     *
+     * @return string The expression as string.
+     */
+    public function toString();
 }

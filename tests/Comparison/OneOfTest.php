@@ -43,4 +43,11 @@ class OneOfTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($expr->evaluate(10));
         $this->assertFalse($expr->evaluate(null));
     }
+
+    public function testToString()
+    {
+        $expr = new OneOf(array('1', '2', '3'), false);
+
+        $this->assertSame('oneOf("1", "2", "3")', $expr->toString());
+    }
 }

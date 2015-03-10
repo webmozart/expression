@@ -12,6 +12,7 @@
 namespace Webmozart\Expression\Comparison;
 
 use Webmozart\Expression\Logic\Literal;
+use Webmozart\Expression\Util\StringUtil;
 
 /**
  * Checks that a value has a given prefix.
@@ -52,5 +53,13 @@ class StartsWith extends Literal
     public function evaluate($value)
     {
         return 0 === strpos($value, $this->acceptedPrefix);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toString()
+    {
+        return 'startsWith('.StringUtil::formatValue($this->acceptedPrefix).')';
     }
 }

@@ -30,4 +30,11 @@ class EqualsTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($expr->evaluate('100'));
         $this->assertFalse($expr->evaluate(11));
     }
+
+    public function testToString()
+    {
+        $expr = new Equals('10');
+
+        $this->assertSame('=="10"', $expr->toString());
+    }
 }

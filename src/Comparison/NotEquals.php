@@ -12,6 +12,7 @@
 namespace Webmozart\Expression\Comparison;
 
 use Webmozart\Expression\Logic\Literal;
+use Webmozart\Expression\Util\StringUtil;
 
 /**
  * Checks that a value does not equal another value.
@@ -54,5 +55,13 @@ class NotEquals extends Literal
     public function evaluate($value)
     {
         return $this->comparedValue != $value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toString()
+    {
+        return '!='.StringUtil::formatValue($this->comparedValue);
     }
 }

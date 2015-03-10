@@ -27,4 +27,11 @@ class StartsWithTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($expr->evaluate('Thomas Edison'));
         $this->assertFalse($expr->evaluate('Mr. Thomas Edison'));
     }
+
+    public function testToString()
+    {
+        $expr = new StartsWith('Thomas');
+
+        $this->assertSame('startsWith("Thomas")', $expr->toString());
+    }
 }

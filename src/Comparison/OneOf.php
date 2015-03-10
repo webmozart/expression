@@ -13,6 +13,7 @@ namespace Webmozart\Expression\Comparison;
 
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
+use Webmozart\Expression\Util\StringUtil;
 
 /**
  * Checks that a value is one of a list of values.
@@ -91,5 +92,17 @@ class OneOf extends Literal
         }
 
         return $this == $other;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toString()
+    {
+        $values = array_map(function ($value) {
+            return StringUtil::formatValue($value);
+        }, $this->acceptedValues);
+
+        return 'oneOf('.implode(', ', $values).')';
     }
 }

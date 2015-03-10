@@ -13,6 +13,7 @@ namespace Webmozart\Expression\Key;
 
 use RuntimeException;
 use Webmozart\Expression\Logic\Literal;
+use Webmozart\Expression\Util\StringUtil;
 
 /**
  * Checks that an array key does not exist.
@@ -60,5 +61,13 @@ class KeyNotExists extends Literal
         }
 
         return !array_key_exists($this->key, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toString()
+    {
+        return 'keyNotExists('.StringUtil::formatValue($this->key).')';
     }
 }

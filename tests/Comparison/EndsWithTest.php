@@ -27,4 +27,11 @@ class EndsWithTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($expr->evaluate('style.css'));
         $this->assertFalse($expr->evaluate('style.css.dist'));
     }
+
+    public function testToString()
+    {
+        $expr = new EndsWith('.css');
+
+        $this->assertSame('endsWith(".css")', $expr->toString());
+    }
 }

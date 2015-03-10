@@ -12,6 +12,7 @@
 namespace Webmozart\Expression\Comparison;
 
 use Webmozart\Expression\Logic\Literal;
+use Webmozart\Expression\Util\StringUtil;
 
 /**
  * Checks that a value has a given suffix.
@@ -52,5 +53,13 @@ class EndsWith extends Literal
     public function evaluate($value)
     {
         return $this->acceptedSuffix === substr($value, -strlen($this->acceptedSuffix));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toString()
+    {
+        return 'endsWith('.StringUtil::formatValue($this->acceptedSuffix).')';
     }
 }

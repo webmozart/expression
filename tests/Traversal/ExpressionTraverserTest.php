@@ -13,7 +13,7 @@ namespace Webmozart\Expression\Tests\Traversal;
 
 use PHPUnit_Framework_TestCase;
 use Webmozart\Expression\Comparison\GreaterThan;
-use Webmozart\Expression\Comparison\Null;
+use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Key\Key;
 use Webmozart\Expression\Logic\Conjunction;
 use Webmozart\Expression\Logic\Disjunction;
@@ -412,7 +412,7 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
     {
         $expr = new Conjunction(array(
             $gt = new GreaterThan(10),
-            $null = new Null(),
+            $same = new Same('5'),
         ));
 
         $visitor = $this->getMock('Webmozart\Expression\Traversal\ExpressionVisitor');
@@ -430,12 +430,12 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
             ->willReturn($gt);
         $visitor->expects($this->at(3))
             ->method('enterExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(4))
             ->method('leaveExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(5))
             ->method('leaveExpression')
             ->with($this->identicalTo($expr))
@@ -450,11 +450,11 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
     {
         $expr1 = new Conjunction(array(
             $gt1 = new GreaterThan(10),
-            $null = new Null(),
+            $same = new Same('5'),
         ));
         $expr2 = new Conjunction(array(
             $gt2 = new GreaterThan(5),
-            $null,
+            $same,
         ));
 
         $visitor = $this->getMock('Webmozart\Expression\Traversal\ExpressionVisitor');
@@ -472,12 +472,12 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
             ->willReturn($gt2);
         $visitor->expects($this->at(3))
             ->method('enterExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(4))
             ->method('leaveExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(5))
             ->method('leaveExpression')
             ->with($this->equalTo($expr2))
@@ -492,11 +492,11 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
     {
         $expr1 = new Conjunction(array(
             $gt1 = new GreaterThan(10),
-            $null = new Null(),
+            $same = new Same('5'),
         ));
         $expr2 = new Conjunction(array(
             $gt2 = new GreaterThan(5),
-            $null,
+            $same,
         ));
 
         $visitor = $this->getMock('Webmozart\Expression\Traversal\ExpressionVisitor');
@@ -514,12 +514,12 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
             ->willReturn($gt2);
         $visitor->expects($this->at(3))
             ->method('enterExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(4))
             ->method('leaveExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(5))
             ->method('leaveExpression')
             ->with($this->equalTo($expr2))
@@ -534,9 +534,9 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
     {
         $expr1 = new Conjunction(array(
             $gt1 = new GreaterThan(10),
-            $null = new Null(),
+            $same = new Same('5'),
         ));
-        $expr2 = new Conjunction(array($null));
+        $expr2 = new Conjunction(array($same));
 
         $visitor = $this->getMock('Webmozart\Expression\Traversal\ExpressionVisitor');
         $visitor->expects($this->at(0))
@@ -553,12 +553,12 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
             ->willReturn(null);
         $visitor->expects($this->at(3))
             ->method('enterExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(4))
             ->method('leaveExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(5))
             ->method('leaveExpression')
             ->with($this->equalTo($expr2))
@@ -573,7 +573,7 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
     {
         $expr1 = new Conjunction(array(
             $gt1 = new GreaterThan(10),
-            $null = new Null(),
+            $same = new Same('5'),
         ));
 
         $visitor = $this->getMock('Webmozart\Expression\Traversal\ExpressionVisitor');
@@ -591,11 +591,11 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
             ->willReturn(null);
         $visitor->expects($this->at(3))
             ->method('enterExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(4))
             ->method('leaveExpression')
-            ->with($this->identicalTo($null))
+            ->with($this->identicalTo($same))
             ->willReturn(null);
 
         $this->traverser->addVisitor($visitor);
@@ -607,7 +607,7 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
     {
         $expr = new Disjunction(array(
             $gt = new GreaterThan(10),
-            $null = new Null(),
+            $same = new Same('5'),
         ));
 
         $visitor = $this->getMock('Webmozart\Expression\Traversal\ExpressionVisitor');
@@ -625,12 +625,12 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
             ->willReturn($gt);
         $visitor->expects($this->at(3))
             ->method('enterExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(4))
             ->method('leaveExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(5))
             ->method('leaveExpression')
             ->with($this->identicalTo($expr))
@@ -645,11 +645,11 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
     {
         $expr1 = new Disjunction(array(
             $gt1 = new GreaterThan(10),
-            $null = new Null(),
+            $same = new Same('5'),
         ));
         $expr2 = new Disjunction(array(
             $gt2 = new GreaterThan(5),
-            $null,
+            $same,
         ));
 
         $visitor = $this->getMock('Webmozart\Expression\Traversal\ExpressionVisitor');
@@ -667,12 +667,12 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
             ->willReturn($gt2);
         $visitor->expects($this->at(3))
             ->method('enterExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(4))
             ->method('leaveExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(5))
             ->method('leaveExpression')
             ->with($this->equalTo($expr2))
@@ -687,11 +687,11 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
     {
         $expr1 = new Disjunction(array(
             $gt1 = new GreaterThan(10),
-            $null = new Null(),
+            $same = new Same('5'),
         ));
         $expr2 = new Disjunction(array(
             $gt2 = new GreaterThan(5),
-            $null,
+            $same,
         ));
 
         $visitor = $this->getMock('Webmozart\Expression\Traversal\ExpressionVisitor');
@@ -709,12 +709,12 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
             ->willReturn($gt2);
         $visitor->expects($this->at(3))
             ->method('enterExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(4))
             ->method('leaveExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(5))
             ->method('leaveExpression')
             ->with($this->equalTo($expr2))
@@ -729,9 +729,9 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
     {
         $expr1 = new Disjunction(array(
             $gt1 = new GreaterThan(10),
-            $null = new Null(),
+            $same = new Same('5'),
         ));
-        $expr2 = new Disjunction(array($null));
+        $expr2 = new Disjunction(array($same));
 
         $visitor = $this->getMock('Webmozart\Expression\Traversal\ExpressionVisitor');
         $visitor->expects($this->at(0))
@@ -748,12 +748,12 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
             ->willReturn(null);
         $visitor->expects($this->at(3))
             ->method('enterExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(4))
             ->method('leaveExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(5))
             ->method('leaveExpression')
             ->with($this->equalTo($expr2))
@@ -768,7 +768,7 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
     {
         $expr1 = new Disjunction(array(
             $gt1 = new GreaterThan(10),
-            $null = new Null(),
+            $same = new Same('5'),
         ));
 
         $visitor = $this->getMock('Webmozart\Expression\Traversal\ExpressionVisitor');
@@ -786,11 +786,11 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
             ->willReturn(null);
         $visitor->expects($this->at(3))
             ->method('enterExpression')
-            ->with($this->identicalTo($null))
-            ->willReturn($null);
+            ->with($this->identicalTo($same))
+            ->willReturn($same);
         $visitor->expects($this->at(4))
             ->method('leaveExpression')
-            ->with($this->identicalTo($null))
+            ->with($this->identicalTo($same))
             ->willReturn(null);
 
         $this->traverser->addVisitor($visitor);

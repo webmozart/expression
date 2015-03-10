@@ -31,4 +31,11 @@ class IsEmptyTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($expr->evaluate(true));
         $this->assertFalse($expr->evaluate('abcd'));
     }
+
+    public function testToString()
+    {
+        $expr = new IsEmpty();
+
+        $this->assertSame('empty()', $expr->toString());
+    }
 }

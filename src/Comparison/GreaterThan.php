@@ -12,6 +12,7 @@
 namespace Webmozart\Expression\Comparison;
 
 use Webmozart\Expression\Logic\Literal;
+use Webmozart\Expression\Util\StringUtil;
 
 /**
  * Checks that a value is greater than a given value.
@@ -54,5 +55,13 @@ class GreaterThan extends Literal
     public function evaluate($value)
     {
         return $value > $this->comparedValue;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toString()
+    {
+        return '>'.StringUtil::formatValue($this->comparedValue);
     }
 }

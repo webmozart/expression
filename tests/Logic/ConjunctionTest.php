@@ -12,8 +12,9 @@
 namespace Webmozart\Expression\Tests\Logic;
 
 use PHPUnit_Framework_TestCase;
+use Webmozart\Expression\Comparison\EndsWith;
 use Webmozart\Expression\Comparison\GreaterThan;
-use Webmozart\Expression\Comparison\NotNull;
+use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Key\Key;
 use Webmozart\Expression\Logic\Conjunction;
 
@@ -26,7 +27,7 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
     public function testCreate()
     {
         $conjunction = new Conjunction(array(
-            $notNull = new NotNull('name'),
+            $notNull = new Same('10'),
             $greaterThan = new GreaterThan('age', 0)
         ));
 
@@ -36,7 +37,7 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
     public function testCreateInlinesConjunction()
     {
         $conjunction = new Conjunction(array(
-            $notNull = new NotNull('name'),
+            $notNull = new Same('10'),
             new Conjunction(array($greaterThan = new GreaterThan('age', 0))),
         ));
 
@@ -45,7 +46,7 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
 
     public function testAndX()
     {
-        $conjunction1 = new Conjunction(array($notNull = new NotNull('name')));
+        $conjunction1 = new Conjunction(array($notNull = new Same('10')));
 
         // Expressions are value objects, hence we must not alter the original
         // conjunction
@@ -57,15 +58,15 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
 
     public function testAndXIgnoresDuplicates()
     {
-        $conjunction1 = new Conjunction(array($notNull = new NotNull('name')));
-        $conjunction2 = $conjunction1->andX(new NotNull('name'));
+        $conjunction1 = new Conjunction(array($notNull = new Same('10')));
+        $conjunction2 = $conjunction1->andX(new Same('10'));
 
         $this->assertSame($conjunction1, $conjunction2);
     }
 
     public function testAndXInlinesConjunctions()
     {
-        $conjunction1 = new Conjunction(array($notNull = new NotNull('name')));
+        $conjunction1 = new Conjunction(array($notNull = new Same('10')));
         $conjunction2 = new Conjunction(array($greaterThan = new GreaterThan('name')));
 
         $conjunction3 = $conjunction1->andX($conjunction2);
@@ -96,7 +97,7 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
     public function testMatch()
     {
         $conjunction = new Conjunction(array(
-            new Key('name', new NotNull()),
+            new Key('name', new Same('Thomas')),
             new Key('age', new GreaterThan(0)),
         ));
 
@@ -109,14 +110,14 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
     public function testEquals()
     {
         $conjunction1 = new Conjunction(array(
-            new Key('name', new NotNull()),
+            new Key('name', new Same('10')),
             new Key('age', new GreaterThan(0)),
         ));
 
         // conjunctions match independent of the order of the conjuncts
         $conjunction2 = new Conjunction(array(
             new Key('age', new GreaterThan(0)),
-            new Key('name', new NotNull()),
+            new Key('name', new Same('10')),
         ));
 
         $conjunction3 = new Conjunction(array(
@@ -129,5 +130,14 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($conjunction3->equals($conjunction2));
         $this->assertFalse($conjunction1->equals($conjunction3));
         $this->assertFalse($conjunction3->equals($conjunction1));
+    }
+
+    public function testToString()
+    {
+        $expr1 = new Conjunction();
+        $expr2 = new Conjunction(array(new GreaterThan(10), new EndsWith('.css')));
+
+        $this->assertSame('()', $expr1->toString());
+        $this->assertSame('(>10 && endsWith(".css"))', $expr2->toString());
     }
 }

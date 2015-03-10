@@ -13,6 +13,7 @@ namespace Webmozart\Expression\Comparison;
 
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
+use Webmozart\Expression\Util\StringUtil;
 
 /**
  * Checks that a value equals another value.
@@ -67,5 +68,13 @@ class Equals extends Literal
         }
 
         return $this == $other;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toString()
+    {
+        return '=='.StringUtil::formatValue($this->comparedValue);
     }
 }

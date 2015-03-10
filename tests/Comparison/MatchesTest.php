@@ -29,4 +29,11 @@ class MatchesTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($expr->evaluate('abcd'));
         $this->assertFalse($expr->evaluate('10101'));
     }
+
+    public function testToString()
+    {
+        $expr = new Matches('~^\d{4}$~');
+
+        $this->assertSame('matches("~^\d{4}$~")', $expr->toString());
+    }
 }

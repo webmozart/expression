@@ -12,8 +12,7 @@
 namespace Webmozart\Expression\Tests\Logic;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Expression\Comparison\NotNull;
-use Webmozart\Expression\Comparison\Null;
+use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Logic\Conjunction;
 use Webmozart\Expression\Logic\Disjunction;
 use Webmozart\Expression\Tests\Logic\Fixtures\TestLiteral;
@@ -27,7 +26,7 @@ class LiteralTest extends PHPUnit_Framework_TestCase
     public function testAndX()
     {
         $literal = new TestLiteral();
-        $expr = new Null();
+        $expr = new Same('10');
 
         $this->assertEquals(new Conjunction(array($literal, $expr)), $literal->andX($expr));
     }
@@ -59,7 +58,7 @@ class LiteralTest extends PHPUnit_Framework_TestCase
     public function testOrX()
     {
         $literal = new TestLiteral();
-        $expr = new Null();
+        $expr = new Same('10');
 
         $this->assertEquals(new Disjunction(array($literal, $expr)), $literal->orX($expr));
     }
@@ -91,11 +90,11 @@ class LiteralTest extends PHPUnit_Framework_TestCase
     public function testEquals()
     {
         $expr1 = new TestLiteral('foo');
-        $expr2 = new Null();
+        $expr2 = new Same('10');
 
         $this->assertTrue($expr1->equals(new TestLiteral('foo')));
         $this->assertFalse($expr1->equals(new TestLiteral('bar')));
-        $this->assertTrue($expr2->equals(new Null()));
-        $this->assertFalse($expr2->equals(new NotNull('value')));
+        $this->assertTrue($expr2->equals(new Same('10')));
+        $this->assertFalse($expr2->equals(new Same('11')));
     }
 }

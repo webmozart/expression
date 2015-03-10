@@ -30,4 +30,11 @@ class LessThanEqualTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($expr->evaluate(10));
         $this->assertFalse($expr->evaluate(11));
     }
+
+    public function testToString()
+    {
+        $expr = new LessThanEqual(10);
+
+        $this->assertSame('<=10', $expr->toString());
+    }
 }

@@ -37,4 +37,11 @@ class KeyNotExistsTest extends PHPUnit_Framework_TestCase
 
         $expr->evaluate('foobar');
     }
+
+    public function testToString()
+    {
+        $expr = new KeyNotExists('key');
+
+        $this->assertSame('keyNotExists("key")', $expr->toString());
+    }
 }

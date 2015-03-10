@@ -12,6 +12,7 @@
 namespace Webmozart\Expression\Comparison;
 
 use Webmozart\Expression\Logic\Literal;
+use Webmozart\Expression\Util\StringUtil;
 
 /**
  * Checks that a value matches a given regular expression.
@@ -54,5 +55,13 @@ class Matches extends Literal
     public function evaluate($value)
     {
         return (bool) preg_match($this->regExp, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toString()
+    {
+        return 'matches('.StringUtil::formatValue($this->regExp).')';
     }
 }

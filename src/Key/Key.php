@@ -96,4 +96,19 @@ class Key extends Literal
         /** @var Key $other */
         return $this->key === $other->key && $this->expr->equals($other->expr);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function toString()
+    {
+        $exprString = $this->expr->toString();
+
+        // Append "functions" with "."
+        if (isset($exprString[0]) && ctype_alpha($exprString[0])) {
+            return $this->key.'.'.$exprString;
+        }
+
+        return $this->key.$exprString;
+    }
 }

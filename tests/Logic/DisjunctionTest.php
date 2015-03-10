@@ -12,8 +12,9 @@
 namespace Webmozart\Expression\Tests\Logic;
 
 use PHPUnit_Framework_TestCase;
+use Webmozart\Expression\Comparison\EndsWith;
 use Webmozart\Expression\Comparison\GreaterThan;
-use Webmozart\Expression\Comparison\NotNull;
+use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Key\Key;
 use Webmozart\Expression\Logic\Disjunction;
 
@@ -26,7 +27,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
     public function testCreate()
     {
         $disjunction = new Disjunction(array(
-            $notNull = new NotNull('name'),
+            $notNull = new Same('10'),
             $greaterThan = new GreaterThan('age', 0)
         ));
 
@@ -36,7 +37,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
     public function testCreateInlinesDisjunctions()
     {
         $disjunction = new Disjunction(array(
-            $notNull = new NotNull('name'),
+            $notNull = new Same('10'),
             new Disjunction(array($greaterThan = new GreaterThan('age', 0))),
         ));
 
@@ -45,7 +46,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
 
     public function testOrX()
     {
-        $disjunction1 = new Disjunction(array($notNull = new NotNull('name')));
+        $disjunction1 = new Disjunction(array($notNull = new Same('10')));
 
         // Expressions are value objects, hence we must not alter the original
         // conjunction
@@ -57,15 +58,15 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
 
     public function testOrXIgnoresDuplicates()
     {
-        $disjunction1 = new Disjunction(array($notNull = new NotNull('name')));
-        $disjunction2 = $disjunction1->orX(new NotNull('name'));
+        $disjunction1 = new Disjunction(array($notNull = new Same('10')));
+        $disjunction2 = $disjunction1->orX(new Same('10'));
 
         $this->assertSame($disjunction1, $disjunction2);
     }
 
     public function testOrXInlinesDisjunctions()
     {
-        $disjunction1 = new Disjunction(array($notNull = new NotNull('name')));
+        $disjunction1 = new Disjunction(array($notNull = new Same('10')));
         $disjunction2 = new Disjunction(array($greaterThan = new GreaterThan('age', 0)));
 
         // Expressions are value objects, hence we must not alter the original
@@ -98,7 +99,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
     public function testMatch()
     {
         $disjunction = new Disjunction(array(
-            new Key('name', new NotNull()),
+            new Key('name', new Same('Thomas')),
             new Key('age', new GreaterThan(0)),
         ));
 
@@ -111,14 +112,14 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
     public function testEquals()
     {
         $disjunction1 = new Disjunction(array(
-            new Key('name', new NotNull()),
+            new Key('name', new Same('10')),
             new Key('age', new GreaterThan(0)),
         ));
 
         // disjunctions match independent of the order of the conjuncts
         $disjunction2 = new Disjunction(array(
             new Key('age', new GreaterThan(0)),
-            new Key('name', new NotNull()),
+            new Key('name', new Same('10')),
         ));
 
         $disjunction3 = new Disjunction(array(
@@ -131,5 +132,14 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($disjunction3->equals($disjunction2));
         $this->assertFalse($disjunction1->equals($disjunction3));
         $this->assertFalse($disjunction3->equals($disjunction1));
+    }
+
+    public function testToString()
+    {
+        $expr1 = new Disjunction();
+        $expr2 = new Disjunction(array(new GreaterThan(10), new EndsWith('.css')));
+
+        $this->assertSame('()', $expr1->toString());
+        $this->assertSame('(>10 || endsWith(".css"))', $expr2->toString());
     }
 }

@@ -30,4 +30,11 @@ class SameTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($expr->evaluate(10));
         $this->assertFalse($expr->evaluate(10.0));
     }
+
+    public function testToString()
+    {
+        $expr = new Same('10');
+
+        $this->assertSame('==="10"', $expr->toString());
+    }
 }

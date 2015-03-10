@@ -13,7 +13,6 @@ namespace Webmozart\Expression;
 
 use Webmozart\Expression\Comparison\EndsWith;
 use Webmozart\Expression\Comparison\Equals;
-use Webmozart\Expression\Comparison\False;
 use Webmozart\Expression\Comparison\GreaterThan;
 use Webmozart\Expression\Comparison\GreaterThanEqual;
 use Webmozart\Expression\Comparison\IsEmpty;
@@ -22,13 +21,10 @@ use Webmozart\Expression\Comparison\LessThanEqual;
 use Webmozart\Expression\Comparison\Matches;
 use Webmozart\Expression\Comparison\NotEmpty;
 use Webmozart\Expression\Comparison\NotEquals;
-use Webmozart\Expression\Comparison\NotNull;
 use Webmozart\Expression\Comparison\NotSame;
-use Webmozart\Expression\Comparison\Null;
 use Webmozart\Expression\Comparison\OneOf;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
-use Webmozart\Expression\Comparison\True;
 use Webmozart\Expression\Key\Key;
 use Webmozart\Expression\Key\KeyExists;
 use Webmozart\Expression\Key\KeyNotExists;
@@ -84,7 +80,7 @@ class Expr
      */
     public static function null($field)
     {
-        return new Key($field, new Null());
+        return new Key($field, new Same(null));
     }
 
     /**
@@ -96,7 +92,7 @@ class Expr
      */
     public static function notNull($field)
     {
-        return new Key($field, new NotNull());
+        return new Key($field, new NotSame(null));
     }
 
     /**
@@ -133,7 +129,7 @@ class Expr
      */
     public static function true($field, $strict = true)
     {
-        return new Key($field, new True($strict));
+        return new Key($field, $strict ? new Same(true) : new Equals(true));
     }
 
     /**
@@ -146,7 +142,7 @@ class Expr
      */
     public static function false($field, $strict = true)
     {
-        return new Key($field, new False($strict));
+        return new Key($field, $strict ? new Same(false) : new Equals(false));
     }
 
     /**
@@ -356,7 +352,7 @@ class Expr
      */
     public static function keyNull($field, $key)
     {
-        return new Key($field, new Key($key, new Null()));
+        return new Key($field, new Key($key, new Same(null)));
     }
 
     /**
@@ -369,7 +365,7 @@ class Expr
      */
     public static function keyNotNull($field, $key)
     {
-        return new Key($field, new Key($key, new NotNull()));
+        return new Key($field, new Key($key, new NotSame(null)));
     }
 
     /**
@@ -409,7 +405,7 @@ class Expr
      */
     public static function keyTrue($field, $key, $strict = true)
     {
-        return new Key($field, new Key($key, new True($strict)));
+        return new Key($field, new Key($key, $strict ? new Same(true) : new Equals(true)));
     }
 
     /**
@@ -423,7 +419,7 @@ class Expr
      */
     public static function keyFalse($field, $key, $strict = true)
     {
-        return new Key($field, new Key($key, new False($strict)));
+        return new Key($field, new Key($key, $strict ? new Same(false) : new Equals(false)));
     }
 
     /**

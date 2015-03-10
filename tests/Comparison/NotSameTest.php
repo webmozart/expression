@@ -30,4 +30,11 @@ class NotSameTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($expr->evaluate(10.0));
         $this->assertFalse($expr->evaluate('10'));
     }
+
+    public function testToString()
+    {
+        $expr = new NotSame('10');
+
+        $this->assertSame('!=="10"', $expr->toString());
+    }
 }

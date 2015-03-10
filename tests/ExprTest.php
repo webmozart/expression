@@ -14,7 +14,6 @@ namespace Webmozart\Expression\Tests;
 use PHPUnit_Framework_TestCase;
 use Webmozart\Expression\Comparison\EndsWith;
 use Webmozart\Expression\Comparison\Equals;
-use Webmozart\Expression\Comparison\False;
 use Webmozart\Expression\Comparison\GreaterThan;
 use Webmozart\Expression\Comparison\GreaterThanEqual;
 use Webmozart\Expression\Comparison\IsEmpty;
@@ -23,13 +22,10 @@ use Webmozart\Expression\Comparison\LessThanEqual;
 use Webmozart\Expression\Comparison\Matches;
 use Webmozart\Expression\Comparison\NotEmpty;
 use Webmozart\Expression\Comparison\NotEquals;
-use Webmozart\Expression\Comparison\NotNull;
 use Webmozart\Expression\Comparison\NotSame;
-use Webmozart\Expression\Comparison\Null;
 use Webmozart\Expression\Comparison\OneOf;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
-use Webmozart\Expression\Comparison\True;
 use Webmozart\Expression\Expr;
 use Webmozart\Expression\Key\Key;
 use Webmozart\Expression\Key\KeyExists;
@@ -48,12 +44,12 @@ class ExprTest extends PHPUnit_Framework_TestCase
             array(
                 'null',
                 array(),
-                new Null()
+                new Same(null)
             ),
             array(
                 'notNull',
                 array(),
-                new NotNull()
+                new NotSame(null)
             ),
             array(
                 'isEmpty',
@@ -67,13 +63,23 @@ class ExprTest extends PHPUnit_Framework_TestCase
             ),
             array(
                 'true',
+                array(true),
+                new Same(true)
+            ),
+            array(
+                'true',
                 array(false),
-                new True(false)
+                new Equals(true)
+            ),
+            array(
+                'false',
+                array(true),
+                new Same(false)
             ),
             array(
                 'false',
                 array(false),
-                new False(false)
+                new Equals(false)
             ),
             array(
                 'equals',
@@ -140,7 +146,7 @@ class ExprTest extends PHPUnit_Framework_TestCase
 
     public static function getCriterionTests()
     {
-        $expr = new Null('amount');
+        $expr = new Same('10');
 
         $tests = array(
             array(

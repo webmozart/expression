@@ -30,4 +30,11 @@ class GreaterThanTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($expr->evaluate(10));
         $this->assertFalse($expr->evaluate(9));
     }
+
+    public function testToString()
+    {
+        $expr = new GreaterThan(10);
+
+        $this->assertSame('>10', $expr->toString());
+    }
 }

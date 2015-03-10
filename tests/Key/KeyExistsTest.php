@@ -39,4 +39,11 @@ class KeyExistsTest extends PHPUnit_Framework_TestCase
 
         $expr->evaluate('foobar');
     }
+
+    public function testToString()
+    {
+        $expr = new KeyExists('key');
+
+        $this->assertSame('keyExists("key")', $expr->toString());
+    }
 }
