@@ -1,5 +1,5 @@
 Webmozart Expression
-==================
+====================
 
 [![Build Status](https://travis-ci.org/webmozart/expression.svg?branch=master)](https://travis-ci.org/webmozart/expression)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/webmozart/expression/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/webmozart/expression/?branch=master)
@@ -86,7 +86,7 @@ class PersonRepositoryImpl implements PersonRepository
 ```
 
 Basic Expression
---------------
+----------------
 
 The [`Expr`] class is able to create the following expressions:
 
