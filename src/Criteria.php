@@ -12,7 +12,7 @@
 namespace Webmozart\Criteria;
 
 /**
- * Criteria that can be matched against a set of values.
+ * Criteria that can be matched against a value.
  *
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
@@ -20,14 +20,14 @@ namespace Webmozart\Criteria;
 interface Criteria
 {
     /**
-     * Evaluates the criteria with the given values.
+     * Evaluates the criteria with the given value.
      *
-     * @param array $values An array of values indexed by field names.
+     * @param mixed $value A value.
      *
-     * @return bool Returns `true` if the values satisfy the criteria and
+     * @return bool Returns `true` if the value satisfies the criteria and
      *              `false` otherwise.
      */
-    public function match(array $values);
+    public function match($value);
 
     /**
      * Returns whether this criteria is logically equivalent to other criteria.

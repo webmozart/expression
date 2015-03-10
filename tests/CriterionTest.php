@@ -12,26 +12,29 @@
 namespace Webmozart\Criteria\Tests;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Atom\EndsWith;
-use Webmozart\Criteria\Atom\Equals;
-use Webmozart\Criteria\Atom\False;
-use Webmozart\Criteria\Atom\GreaterThan;
-use Webmozart\Criteria\Atom\GreaterThanEqual;
-use Webmozart\Criteria\Atom\IsEmpty;
-use Webmozart\Criteria\Atom\LessThan;
-use Webmozart\Criteria\Atom\LessThanEqual;
-use Webmozart\Criteria\Atom\Matches;
-use Webmozart\Criteria\Atom\NotEmpty;
-use Webmozart\Criteria\Atom\NotEquals;
-use Webmozart\Criteria\Atom\NotNull;
-use Webmozart\Criteria\Atom\NotSame;
-use Webmozart\Criteria\Atom\Null;
-use Webmozart\Criteria\Atom\OneOf;
-use Webmozart\Criteria\Atom\Same;
-use Webmozart\Criteria\Atom\StartsWith;
-use Webmozart\Criteria\Atom\True;
+use Webmozart\Criteria\Comparison\EndsWith;
+use Webmozart\Criteria\Comparison\Equals;
+use Webmozart\Criteria\Comparison\False;
+use Webmozart\Criteria\Comparison\GreaterThan;
+use Webmozart\Criteria\Comparison\GreaterThanEqual;
+use Webmozart\Criteria\Comparison\IsEmpty;
+use Webmozart\Criteria\Comparison\LessThan;
+use Webmozart\Criteria\Comparison\LessThanEqual;
+use Webmozart\Criteria\Comparison\Matches;
+use Webmozart\Criteria\Comparison\NotEmpty;
+use Webmozart\Criteria\Comparison\NotEquals;
+use Webmozart\Criteria\Comparison\NotNull;
+use Webmozart\Criteria\Comparison\NotSame;
+use Webmozart\Criteria\Comparison\Null;
+use Webmozart\Criteria\Comparison\OneOf;
+use Webmozart\Criteria\Comparison\Same;
+use Webmozart\Criteria\Comparison\StartsWith;
+use Webmozart\Criteria\Comparison\True;
 use Webmozart\Criteria\Criterion;
-use Webmozart\Criteria\Literal\Not;
+use Webmozart\Criteria\Key\Key;
+use Webmozart\Criteria\Key\KeyExists;
+use Webmozart\Criteria\Key\KeyNotExists;
+use Webmozart\Criteria\Logic\Not;
 
 /**
  * @since  1.0
@@ -39,107 +42,152 @@ use Webmozart\Criteria\Literal\Not;
  */
 class CriterionTest extends PHPUnit_Framework_TestCase
 {
+    public static function getComparisons()
+    {
+        return array(
+            array(
+                'null',
+                array(),
+                new Null()
+            ),
+            array(
+                'notNull',
+                array(),
+                new NotNull()
+            ),
+            array(
+                'isEmpty',
+                array(),
+                new IsEmpty()
+            ),
+            array(
+                'notEmpty',
+                array(),
+                new NotEmpty()
+            ),
+            array(
+                'true',
+                array(false),
+                new True(false)
+            ),
+            array(
+                'false',
+                array(false),
+                new False(false)
+            ),
+            array(
+                'equals',
+                array(10),
+                new Equals(10)
+            ),
+            array(
+                'notEquals',
+                array(10),
+                new NotEquals(10)
+            ),
+            array(
+                'same',
+                array(10),
+                new Same(10)
+            ),
+            array(
+                'notSame',
+                array(10),
+                new NotSame(10)
+            ),
+            array(
+                'greaterThan',
+                array(10),
+                new GreaterThan(10)
+            ),
+            array(
+                'greaterThanEqual',
+                array(10),
+                new GreaterThanEqual(10)
+            ),
+            array(
+                'lessThan',
+                array(10),
+                new LessThan(10)
+            ),
+            array(
+                'lessThanEqual',
+                array(10),
+                new LessThanEqual(10)
+            ),
+            array(
+                'matches',
+                array('~^\d{4}$~'),
+                new Matches('~^\d{4}$~')
+            ),
+            array(
+                'startsWith',
+                array('Thomas'),
+                new StartsWith('Thomas')
+            ),
+            array(
+                'endsWith',
+                array('.css'),
+                new EndsWith('.css')
+            ),
+            array(
+                'oneOf',
+                array(array('1', '2', '3'), false),
+                new OneOf(array('1', '2', '3'), false)
+            ),
+        );
+    }
+
     public static function getCriterionTests()
     {
         $criterion = new Null('amount');
 
-        return array(
+        $tests = array(
             array(
                 'not',
                 array($criterion),
-                new Not($criterion)
+                new Not($criterion),
             ),
             array(
-                'null',
-                array('amount'),
-                new Null('amount')
+                'key',
+                array('field', 'key', $criterion),
+                new Key('field', new Key('key', $criterion)),
             ),
             array(
-                'notNull',
-                array('amount'),
-                new NotNull('amount')
+                'keyExists',
+                array('field', 'key'),
+                new Key('field', new KeyExists('key')),
             ),
             array(
-                'isEmpty',
-                array('amount'),
-                new IsEmpty('amount')
-            ),
-            array(
-                'notEmpty',
-                array('amount'),
-                new NotEmpty('amount')
-            ),
-            array(
-                'true',
-                array('enabled', false),
-                new True('enabled', false)
-            ),
-            array(
-                'false',
-                array('false', false),
-                new False('false', false)
-            ),
-            array(
-                'equals',
-                array('amount', 10),
-                new Equals('amount', 10)
-            ),
-            array(
-                'notEquals',
-                array('amount', 10),
-                new NotEquals('amount', 10)
-            ),
-            array(
-                'same',
-                array('amount', 10),
-                new Same('amount', 10)
-            ),
-            array(
-                'notSame',
-                array('amount', 10),
-                new NotSame('amount', 10)
-            ),
-            array(
-                'greaterThan',
-                array('amount', 10),
-                new GreaterThan('amount', 10)
-            ),
-            array(
-                'greaterThanEqual',
-                array('amount', 10),
-                new GreaterThanEqual('amount', 10)
-            ),
-            array(
-                'lessThan',
-                array('amount', 10),
-                new LessThan('amount', 10)
-            ),
-            array(
-                'lessThanEqual',
-                array('amount', 10),
-                new LessThanEqual('amount', 10)
-            ),
-            array(
-                'matches',
-                array('postalCode', '~^\d{4}$~'),
-                new Matches('postalCode', '~^\d{4}$~')
-            ),
-            array(
-                'startsWith',
-                array('name', 'Thomas'),
-                new StartsWith('name', 'Thomas')
-            ),
-            array(
-                'endsWith',
-                array('filename', '.css'),
-                new EndsWith('filename', '.css')
-            ),
-            array(
-                'oneOf',
-                array('amount', array('1', '2', '3'), false),
-                new OneOf('amount', array('1', '2', '3'), false)
+                'keyNotExists',
+                array('field', 'key'),
+                new Key('field', new KeyNotExists('key')),
             ),
         );
+
+        // Add tests for the field methods
+        foreach (self::getComparisons() as $comparisonTest) {
+            $tests[] = array(
+                $comparisonTest[0],
+                array_merge(array('field'), $comparisonTest[1]),
+                new Key('field', $comparisonTest[2]),
+            );
+        }
+
+        // Add tests for the key methods
+        foreach (self::getComparisons() as $comparisonTest) {
+            if ('is' === substr($comparisonTest[0], 0, 2)) {
+                $comparisonTest[0] = substr($comparisonTest[0], 2);
+            }
+
+            $tests[] = array(
+                'key'.ucfirst($comparisonTest[0]),
+                array_merge(array('field', 'key'), $comparisonTest[1]),
+                new Key('field', new Key('key', $comparisonTest[2])),
+            );
+        }
+
+        return $tests;
     }
 
     /**

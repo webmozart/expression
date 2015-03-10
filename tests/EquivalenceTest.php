@@ -12,9 +12,9 @@
 namespace Webmozart\Criteria\Tests;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Atom\Equals;
-use Webmozart\Criteria\Atom\OneOf;
-use Webmozart\Criteria\Atom\Same;
+use Webmozart\Criteria\Comparison\Equals;
+use Webmozart\Criteria\Comparison\OneOf;
+use Webmozart\Criteria\Comparison\Same;
 use Webmozart\Criteria\Criteria;
 
 /**
@@ -26,10 +26,10 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
     public function getEquivalentCriteria()
     {
         return array(
-            array(new Same('field', '10'), new OneOf('field', array('10'), true)),
+            array(new Same('10'), new OneOf(array('10'), true)),
 
-            array(new Equals('field', '10'), new OneOf('field', array('10'), false)),
-            array(new Equals('field', '10'), new OneOf('field', array(10), false)),
+            array(new Equals('10'), new OneOf(array('10'), false)),
+            array(new Equals('10'), new OneOf(array(10), false)),
         );
     }
 
@@ -45,16 +45,14 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
     public function getNonEquivalentCriteria()
     {
         return array(
-            array(new Same('field', '10'), new OneOf('other', array('10'), true)),
-            array(new Same('field', '10'), new OneOf('field', array(10), true)),
-            array(new Same('field', '10'), new OneOf('field', array('10'), false)),
-            array(new Same('field', '10'), new OneOf('field', array(), true)),
-            array(new Same('field', '10'), new OneOf('field', array('10', '11'), true)),
+            array(new Same('10'), new OneOf(array(10), true)),
+            array(new Same('10'), new OneOf(array('10'), false)),
+            array(new Same('10'), new OneOf(array(), true)),
+            array(new Same('10'), new OneOf(array('10', '11'), true)),
 
-            array(new Equals('field', '10'), new OneOf('other', array('10'), false)),
-            array(new Equals('field', '10'), new OneOf('field', array('10'), true)),
-            array(new Equals('field', '10'), new OneOf('field', array(), false)),
-            array(new Equals('field', '10'), new OneOf('field', array('10', '11'), false)),
+            array(new Equals('10'), new OneOf(array('10'), true)),
+            array(new Equals('10'), new OneOf(array(), false)),
+            array(new Equals('10'), new OneOf(array('10', '11'), false)),
         );
     }
 

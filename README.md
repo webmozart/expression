@@ -90,6 +90,8 @@ Basic Criteria
 
 The [`Criterion`] class is able to create the following basic criteria:
 
+### Field Expressions
+
 Method                                      | Description
 ------------------------------------------- | --------------------------------------------------------
 `null($field)`                              | Check that a field is `null` 
@@ -110,6 +112,32 @@ Method                                      | Description
 `endsWith($field, $suffix)`                 | Check that a field ends with a given string 
 `matches($field, $regExp)`                  | Check that a field matches a regular expression 
 `oneOf($field, $values, $strict = true)`    | Check that a field contains one of a list of values
+
+### Array Expressions
+
+Method                                               | Description
+---------------------------------------------------- | --------------------------------------------------------
+`keyExists($field, $key)`                            | Check that a key exists 
+`keyNotExists($field, $key)`                         | Check that a key does not exist 
+`keyNull($field, $key)`                              | Check that a key is `null` 
+`keyNotNull($field, $key)`                           | Check that a key is not `null` 
+`keyEmpty($field, $key)`                             | Check that a key is empty (using `empty()`) 
+`keyNotEmpty($field, $key)`                          | Check that a key is not empty (using `empty()`) 
+`keyTrue($field, $key, $strict = true)`              | Check that a key is `true` 
+`keyFalse($field, $key, $strict = true)`             | Check that a key is `false`
+`keyEquals($field, $key, $value)`                    | Check that a key equals a value (using `==`) 
+`keyNotEquals($field, $key, $value)`                 | Check that a key does not equal a value (using `!=`) 
+`keySame($field, $key, $value)`                      | Check that a key is identical to a value (using `===`) 
+`keyNotSame($field, $key, $value)`                   | Check that a key does not equal a value (using `!==`) 
+`keyGreaterThan($field, $key, $value)`               | Check that a key is greater than a value 
+`keyGreaterThanEqual($field, $key, $value)`          | Check that a key is greater than or equal to a value 
+`keyLessThan($field, $key, $value)`                  | Check that a key is less than a value 
+`keyLessThanEqual($field, $key, $value)`             | Check that a key is less than or equal to a value 
+`keyStartsWith($field, $key, $prefix)`               | Check that a key starts with a given string 
+`keyEndsWith($field, $key, $suffix)`                 | Check that a key ends with a given string 
+`keyMatches($field, $key, $regExp)`                  | Check that a key matches a regular expression 
+`keyOneOf($field, $key, $values, $strict = true)`    | Check that a key contains one of a list of values
+`key($field, $key, Criteria $criteria)`              | Check that a key matches some criteria
 
 Logical Operators
 -----------------
