@@ -42,4 +42,13 @@ class NotTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($expr2->equals($expr3));
         $this->assertFalse($expr1->equals($expr3));
     }
+
+    public function testToString()
+    {
+        $expr1 = new Not(new StartsWith('Thomas'));
+        $expr2 = new Not(new Disjunction(array(new GreaterThan(10), new LessThan(0))));
+
+        $this->assertSame('not(startsWith("Thomas"))', $expr1->toString());
+        $this->assertSame('not(>10 || <0)', $expr2->toString());
+    }
 }

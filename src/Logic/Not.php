@@ -24,7 +24,7 @@ class Not extends Literal
     /**
      * @var Expression
      */
-    private $negatedExpression;
+    private $expr;
 
     /**
      * Creates the negation.
@@ -33,7 +33,7 @@ class Not extends Literal
      */
     public function __construct(Expression $expr)
     {
-        $this->negatedExpression = $expr;
+        $this->expr = $expr;
     }
 
     /**
@@ -43,7 +43,7 @@ class Not extends Literal
      */
     public function getNegatedExpression()
     {
-        return $this->negatedExpression;
+        return $this->expr;
     }
 
     /**
@@ -51,7 +51,7 @@ class Not extends Literal
      */
     public function evaluate($value)
     {
-        return !$this->negatedExpression->evaluate($value);
+        return !$this->expr->evaluate($value);
     }
 
     /**
@@ -64,7 +64,7 @@ class Not extends Literal
         }
 
         /** @var Not $other */
-        return $this->negatedExpression->equals($other->negatedExpression);
+        return $this->expr->equals($other->expr);
     }
 
     /**
@@ -72,5 +72,12 @@ class Not extends Literal
      */
     public function toString()
     {
+        $exprString = $this->expr->toString();
+
+        if (isset($exprString[0]) && '(' === $exprString[0]) {
+            return 'not'.$exprString;
+        }
+
+        return 'not('.$exprString.')';
     }
 }
