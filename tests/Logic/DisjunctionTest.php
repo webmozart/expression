@@ -33,6 +33,16 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
         $this->assertSame(array($notNull, $greaterThan), $disjunction->getDisjuncts());
     }
 
+    public function testCreateInlinesDisjunctions()
+    {
+        $disjunction = new Disjunction(array(
+            $notNull = new NotNull('name'),
+            new Disjunction(array($greaterThan = new GreaterThan('age', 0))),
+        ));
+
+        $this->assertSame(array($notNull, $greaterThan), $disjunction->getDisjuncts());
+    }
+
     public function testOrX()
     {
         $disjunction1 = new Disjunction(array($notNull = new NotNull('name')));

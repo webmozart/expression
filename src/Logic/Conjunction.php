@@ -48,7 +48,7 @@ class Conjunction implements Expression
     /**
      * @var Expression[]
      */
-    private $conjuncts;
+    private $conjuncts = array();
 
     /**
      * Creates a conjunction of the given expressions.
@@ -57,7 +57,9 @@ class Conjunction implements Expression
      */
     public function __construct(array $conjuncts = array())
     {
-        $this->conjuncts = $conjuncts;
+        foreach ($conjuncts as $conjunct) {
+            $this->add($conjunct);
+        };
     }
 
     /**
@@ -330,5 +332,16 @@ class Conjunction implements Expression
 
         // All $leftConjuncts were found. Check if any $rightConjuncts are left
         return 0 === count($rightConjuncts);
+    }
+
+    private function add(Expression $conjunct)
+    {
+        if ($conjunct instanceof self) {
+            foreach ($conjunct->conjuncts as $expr) {
+                $this->add($expr);
+            }
+        } else {
+            $this->conjuncts[] = $conjunct;
+        }
     }
 }

@@ -48,7 +48,7 @@ class Disjunction implements Expression
     /**
      * @var Expression[]
      */
-    private $disjuncts;
+    private $disjuncts = array();
 
     /**
      * Creates a disjunction of the given expressions.
@@ -57,7 +57,9 @@ class Disjunction implements Expression
      */
     public function __construct(array $disjuncts = array())
     {
-        $this->disjuncts = $disjuncts;
+        foreach ($disjuncts as $disjunct) {
+            $this->add($disjunct);
+        }
     }
 
     /**
@@ -330,5 +332,16 @@ class Disjunction implements Expression
 
         // All $leftDisjuncts were found. Check if any $rightDisjuncts are left
         return 0 === count($rightDisjuncts);
+    }
+
+    private function add(Expression $disjunct)
+    {
+        if ($disjunct instanceof self) {
+            foreach ($disjunct->disjuncts as $expr) {
+                $this->add($expr);
+            }
+        } else {
+            $this->disjuncts[] = $disjunct;
+        }
     }
 }
