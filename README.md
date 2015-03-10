@@ -155,16 +155,16 @@ Testing
 -------
 
 To make sure that PHPUnit compares [`Criteria`] objects correctly, you should 
-call the `register()` method of [`CriteriaComparator`] in your PHPUnit
-bootstrap file:
+register the [`CriteriaComparator`] with PHPUnit in your PHPUnit bootstrap file:
 
 ```php
 // tests/bootstrap.php
+use SebastianBergmann\Comparator\Factory;
 use Webmozart\Criteria\PhpUnit\CriteriaComparator;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-CriteriaComparator::register();
+Factory::getInstance()->register(new CriteriaComparator());
 ```
 
 Make sure the file is registered correctly in `phpunit.xml.dist`:
