@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Comparison;
+namespace Webmozart\Expression\Comparison;
 
-use Webmozart\Criteria\Criteria;
-use Webmozart\Criteria\Logic\Literal;
+use Webmozart\Expression\Expression;
+use Webmozart\Expression\Logic\Literal;
 
 /**
  * Checks that a value equals another value.
@@ -30,7 +30,7 @@ class Equals extends Literal
     private $comparedValue;
 
     /**
-     * Creates the criterion.
+     * Creates the expression.
      *
      * @param mixed  $comparedValue The compared value.
      */
@@ -52,7 +52,7 @@ class Equals extends Literal
     /**
      * {@inheritdoc}
      */
-    public function match($value)
+    public function evaluate($value)
     {
         return $this->comparedValue == $value;
     }
@@ -60,7 +60,7 @@ class Equals extends Literal
     /**
      * {@inheritdoc}
      */
-    public function equals(Criteria $other)
+    public function equals(Expression $other)
     {
         if ($other instanceof OneOf && !$other->isStrict()) {
             return array($this->comparedValue) == $other->getAcceptedValues();

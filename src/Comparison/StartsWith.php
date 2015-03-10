@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Comparison;
+namespace Webmozart\Expression\Comparison;
 
-use Webmozart\Criteria\Logic\Literal;
+use Webmozart\Expression\Logic\Literal;
 
 /**
  * Checks that a value has a given prefix.
@@ -27,7 +27,7 @@ class StartsWith extends Literal
     private $acceptedPrefix;
 
     /**
-     * Creates the criterion.
+     * Creates the expression.
      *
      * @param string $acceptedPrefix The accepted prefix.
      */
@@ -49,7 +49,7 @@ class StartsWith extends Literal
     /**
      * {@inheritdoc}
      */
-    public function match($value)
+    public function evaluate($value)
     {
         return 0 === strpos($value, $this->acceptedPrefix);
     }

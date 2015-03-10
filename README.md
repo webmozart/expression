@@ -1,12 +1,12 @@
-Webmozart Criteria
+Webmozart Expression
 ==================
 
-[![Build Status](https://travis-ci.org/webmozart/criteria.svg?branch=master)](https://travis-ci.org/webmozart/criteria)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/webmozart/criteria/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/webmozart/criteria/?branch=master)
+[![Build Status](https://travis-ci.org/webmozart/expression.svg?branch=master)](https://travis-ci.org/webmozart/expression)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/webmozart/expression/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/webmozart/expression/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/00d2acd0-d0b7-458f-abca-278f79f0c2ed/mini.png)](https://insight.sensiolabs.com/projects/00d2acd0-d0b7-458f-abca-278f79f0c2ed)
-[![Latest Stable Version](https://poser.pugx.org/webmozart/criteria/v/stable.svg)](https://packagist.org/packages/webmozart/criteria)
-[![Total Downloads](https://poser.pugx.org/webmozart/criteria/downloads.svg)](https://packagist.org/packages/webmozart/criteria)
-[![Dependency Status](https://www.versioneye.com/php/webmozart:criteria/1.0.0/badge.svg)](https://www.versioneye.com/php/webmozart:criteria/1.0.0)
+[![Latest Stable Version](https://poser.pugx.org/webmozart/expression/v/stable.svg)](https://packagist.org/packages/webmozart/expression)
+[![Total Downloads](https://poser.pugx.org/webmozart/v/downloads.svg)](https://packagist.org/packages/webmozart/expression)
+[![Dependency Status](https://www.versioneye.com/php/webmozart:expression/1.0.0/badge.svg)](https://www.versioneye.com/php/webmozart:expression/1.0.0)
 
 Latest release: none
 
@@ -18,25 +18,25 @@ logical expressions.
 Usage
 -----
 
-Use the [`Criteria`] interface in finder methods of your service classes:
+Use the [`Expression`] interface in finder methods of your service classes:
 
 ```php
-use Webmozart\Criteria\Criteria;
+use Webmozart\Expression\Expression;
 
 interface PersonRepository
 {
-    public function findPersons(Criteria $criteria);
+    public function findPersons(Expression $expr);
 }
 ```
 
-When querying persons from the repository, you can create new search criteria
-with the [`Criterion`] factory class:
+When querying persons from the repository, you can create new expressions with
+the [`Expr`] factory class:
 
 ```php
-$criteria = Criterion::startsWith(Person::FIRST_NAME, 'Tho')
+$expr = Expr::startsWith(Person::FIRST_NAME, 'Tho')
     ->andGreaterThan(Person::AGE, 35);
     
-$persons = $repository->findPersons($criteria);
+$persons = $repository->findPersons($expr);
 ```
 
 Add the constants for the available search fields and a method `match()` to
@@ -51,9 +51,9 @@ class Person
     
     // ...
     
-    public function match(Criteria $criteria)
+    public function match(Expression $expr)
     {
-        return $criteria->match(array(
+        return $expr->evaluate(array(
             self::FIRST_NAME => $this->firstName,
             self::AGE => $this->age,
             // ...
@@ -70,12 +70,12 @@ class PersonRepositoryImpl implements PersonRepository
 {
     private $persons = array();
     
-    public function findPersons(Criteria $criteria)
+    public function findPersons(Expression $expr)
     {
         $result = array();
         
         foreach ($this->persons as $person) {
-            if ($person->match($criteria)) {
+            if ($person->match($expr)) {
                 $result[] = $person;
             }
         }
@@ -85,10 +85,10 @@ class PersonRepositoryImpl implements PersonRepository
 }
 ```
 
-Basic Criteria
+Basic Expression
 --------------
 
-The [`Criterion`] class is able to create the following basic criteria:
+The [`Expr`] class is able to create the following expressions:
 
 ### Field Expressions
 
@@ -137,44 +137,44 @@ Method                                               | Description
 `keyEndsWith($field, $key, $suffix)`                 | Check that a key ends with a given string 
 `keyMatches($field, $key, $regExp)`                  | Check that a key matches a regular expression 
 `keyOneOf($field, $key, $values, $strict = true)`    | Check that a key contains one of a list of values
-`key($field, $key, Criteria $criteria)`              | Check that a key matches some criteria
+`key($field, $key, Expression $expr)`                | Check that a key matches some expression
 
 Logical Operators
 -----------------
 
-You can negate some criteria with `not()`:
+You can negate an expression with `not()`:
 
 ```php
-$criteria = Criterion::not(Criterion::startsWith(Person::FIRST_NAME, 'Tho'));
+$expr = Expr::not(Expr::startsWith(Person::FIRST_NAME, 'Tho'));
 ```
 
-You can connect multiple criteria with "and" using the `and*()` methods:
+You can connect multiple expressions with "and" using the `and*()` methods:
 
 ```php
-$criteria = Criterion::startsWith(Person::FIRST_NAME, 'Tho')
+$expr = Expr::startsWith(Person::FIRST_NAME, 'Tho')
     ->andGreaterThan(Person::AGE, 35);
 ```
 
 The same is possible for the "or" operator:
 
 ```php
-$criteria = Criterion::startsWith(Person::FIRST_NAME, 'Tho')
+$expr = Expr::startsWith(Person::FIRST_NAME, 'Tho')
     ->orGreaterThan(Person::AGE, 35);
 ```
 
 If you want to mix and match "and" and "or" operators, use `andX()` and `orX()`
-to add embedded criteria:
+to add embedded expressions:
 
 ```php
-$criteria = Criterion::startsWith(Person::FIRST_NAME, 'Tho')
+$expr = Expr::startsWith(Person::FIRST_NAME, 'Tho')
     ->andX(
-        Criterion::greaterThan(Person::AGE, 35)
+        Expr::greaterThan(Person::AGE, 35)
             ->orLessThan(Person::AGE, 20);
     );
     
-$criteria = Criterion::startsWith(Person::FIRST_NAME, 'Tho')
+$expr = Expr::startsWith(Person::FIRST_NAME, 'Tho')
     ->orX(
-        Criterion::notEmpty(Person::FIRST_NAME)
+        Expr::notEmpty(Person::FIRST_NAME)
             ->andGreaterThan(Person::AGE, 35);
     );
 ```
@@ -182,17 +182,17 @@ $criteria = Criterion::startsWith(Person::FIRST_NAME, 'Tho')
 Testing
 -------
 
-To make sure that PHPUnit compares [`Criteria`] objects correctly, you should 
-register the [`CriteriaComparator`] with PHPUnit in your PHPUnit bootstrap file:
+To make sure that PHPUnit compares [`Expression`] objects correctly, you should 
+register the [`ExpressionComparator`] with PHPUnit in your PHPUnit bootstrap file:
 
 ```php
 // tests/bootstrap.php
 use SebastianBergmann\Comparator\Factory;
-use Webmozart\Criteria\PhpUnit\CriteriaComparator;
+use Webmozart\Expression\PhpUnit\ExpressionComparator;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-Factory::getInstance()->register(new CriteriaComparator());
+Factory::getInstance()->register(new ExpressionComparator());
 ```
 
 Make sure the file is registered correctly in `phpunit.xml.dist`:
@@ -206,15 +206,15 @@ Make sure the file is registered correctly in `phpunit.xml.dist`:
 </phpunit>
 ```
 
-The [`CriteriaComparator`] makes sure that PHPUnit compares different 
-[`Criteria`] instances by *logical equivalence* instead of by object equality. 
-For example, the following [`Criteria`] are logically equivalent, but not equal 
+The [`ExpressionComparator`] makes sure that PHPUnit compares different 
+[`Expression`] instances by *logical equivalence* instead of by object equality. 
+For example, the following [`Expression`] are logically equivalent, but not equal 
 as objects:
  
 ```php
 // Logically equivalent
-$c1 = Criterion::notNull(Person::FIRST_NAME)->andSame(Person::AGE, 35);
-$c2 = Criterion::same(Person::AGE, 35)->andNotNull(Person::FIRST_NAME);
+$c1 = Expr::notNull(Person::FIRST_NAME)->andSame(Person::AGE, 35);
+$c2 = Expr::same(Person::AGE, 35)->andNotNull(Person::FIRST_NAME);
 
 $c1 == $c2;
 // => false
@@ -223,8 +223,8 @@ $c1->equals($c2);
 // => true
 
 // Also logically equivalent
-$c1 = Criterion::same(Person::AGE, 35);
-$c2 = Criterion::oneOf(Person::AGE, array(35));
+$c1 = Expr::same(Person::AGE, 35);
+$c2 = Expr::oneOf(Person::AGE, array(35));
 
 $c1 == $c2;
 // => false
@@ -245,7 +245,7 @@ Installation
 Use [Composer] to install the package:
 
 ```
-$ composer require webmozart/criteria@dev
+$ composer require webmozart/expression@dev
 ```
 
 Contribute
@@ -269,11 +269,11 @@ All contents of this package are licensed under the [MIT license].
 
 [Composer]: https://getcomposer.org
 [Bernhard Schussek]: http://webmozarts.com
-[The Community Contributors]: https://github.com/webmozart/criteria/graphs/contributors
-[issue tracker]: https://github.com/webmozart/criteria
-[Git repository]: https://github.com/webmozart/criteria
+[The Community Contributors]: https://github.com/webmozart/expression/graphs/contributors
+[issue tracker]: https://github.com/webmozart/expression
+[Git repository]: https://github.com/webmozart/expression
 [@webmozart]: https://twitter.com/webmozart
 [MIT license]: LICENSE
-[`Criteria`]: src/Criteria.php
-[`Criterion`]: src/Criterion.php
-[`CriteriaComparator`]: src/PhpUnit/CriteriaComparator.php
+[`Expression`]: src/Expression.php
+[`Expr`]: src/Expr.php
+[`ExpressionComparator`]: src/PhpUnit/ExpressionComparator.php

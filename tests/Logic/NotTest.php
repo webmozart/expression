@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Logic;
+namespace Webmozart\Expression\Tests\Logic;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\GreaterThan;
-use Webmozart\Criteria\Comparison\LessThan;
-use Webmozart\Criteria\Comparison\StartsWith;
-use Webmozart\Criteria\Logic\Disjunction;
-use Webmozart\Criteria\Logic\Not;
+use Webmozart\Expression\Comparison\GreaterThan;
+use Webmozart\Expression\Comparison\LessThan;
+use Webmozart\Expression\Comparison\StartsWith;
+use Webmozart\Expression\Logic\Disjunction;
+use Webmozart\Expression\Logic\Not;
 
 /**
  * @since  1.0
@@ -26,20 +26,20 @@ class NotTest extends PHPUnit_Framework_TestCase
 {
     public function testMatch()
     {
-        $criterion = new Not(new StartsWith('Thomas'));
+        $expr = new Not(new StartsWith('Thomas'));
 
-        $this->assertTrue($criterion->match('Mr. Thomas Edison'));
-        $this->assertFalse($criterion->match('Thomas Edison'));
+        $this->assertTrue($expr->evaluate('Mr. Thomas Edison'));
+        $this->assertFalse($expr->evaluate('Thomas Edison'));
     }
 
     public function testEquals()
     {
-        $criterion1 = new Not(new Disjunction(array(new LessThan(0), new GreaterThan(10))));
-        $criterion2 = new Not(new Disjunction(array(new GreaterThan(10), new LessThan(0))));
-        $criterion3 = new Not(new Disjunction(array(new GreaterThan(10))));
+        $expr1 = new Not(new Disjunction(array(new LessThan(0), new GreaterThan(10))));
+        $expr2 = new Not(new Disjunction(array(new GreaterThan(10), new LessThan(0))));
+        $expr3 = new Not(new Disjunction(array(new GreaterThan(10))));
 
-        $this->assertTrue($criterion1->equals($criterion2));
-        $this->assertFalse($criterion2->equals($criterion3));
-        $this->assertFalse($criterion1->equals($criterion3));
+        $this->assertTrue($expr1->equals($expr2));
+        $this->assertFalse($expr2->equals($expr3));
+        $this->assertFalse($expr1->equals($expr3));
     }
 }

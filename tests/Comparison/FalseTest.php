@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Comparison;
+namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\False;
+use Webmozart\Expression\Comparison\False;
 
 /**
  * @since  1.0
@@ -22,25 +22,25 @@ class FalseTest extends PHPUnit_Framework_TestCase
 {
     public function testMatchStrict()
     {
-        $criterion = new False();
+        $expr = new False();
 
-        $this->assertTrue($criterion->match(false));
-        $this->assertFalse($criterion->match(0));
-        $this->assertFalse($criterion->match(''));
-        $this->assertFalse($criterion->match(null));
-        $this->assertFalse($criterion->match(1));
-        $this->assertFalse($criterion->match(true));
+        $this->assertTrue($expr->evaluate(false));
+        $this->assertFalse($expr->evaluate(0));
+        $this->assertFalse($expr->evaluate(''));
+        $this->assertFalse($expr->evaluate(null));
+        $this->assertFalse($expr->evaluate(1));
+        $this->assertFalse($expr->evaluate(true));
     }
 
     public function testMatchNonStrict()
     {
-        $criterion = new False(false);
+        $expr = new False(false);
 
-        $this->assertTrue($criterion->match(false));
-        $this->assertTrue($criterion->match(0));
-        $this->assertTrue($criterion->match(''));
-        $this->assertTrue($criterion->match(null));
-        $this->assertFalse($criterion->match(1));
-        $this->assertFalse($criterion->match(true));
+        $this->assertTrue($expr->evaluate(false));
+        $this->assertTrue($expr->evaluate(0));
+        $this->assertTrue($expr->evaluate(''));
+        $this->assertTrue($expr->evaluate(null));
+        $this->assertFalse($expr->evaluate(1));
+        $this->assertFalse($expr->evaluate(true));
     }
 }

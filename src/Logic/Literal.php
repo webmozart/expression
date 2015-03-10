@@ -9,73 +9,74 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Logic;
+namespace Webmozart\Expression\Logic;
 
-use Webmozart\Criteria\Comparison\EndsWith;
-use Webmozart\Criteria\Comparison\Equals;
-use Webmozart\Criteria\Comparison\False;
-use Webmozart\Criteria\Comparison\GreaterThan;
-use Webmozart\Criteria\Comparison\GreaterThanEqual;
-use Webmozart\Criteria\Comparison\IsEmpty;
-use Webmozart\Criteria\Comparison\LessThan;
-use Webmozart\Criteria\Comparison\LessThanEqual;
-use Webmozart\Criteria\Comparison\Matches;
-use Webmozart\Criteria\Comparison\NotEmpty;
-use Webmozart\Criteria\Comparison\NotEquals;
-use Webmozart\Criteria\Comparison\NotNull;
-use Webmozart\Criteria\Comparison\NotSame;
-use Webmozart\Criteria\Comparison\Null;
-use Webmozart\Criteria\Comparison\OneOf;
-use Webmozart\Criteria\Comparison\Same;
-use Webmozart\Criteria\Comparison\StartsWith;
-use Webmozart\Criteria\Comparison\True;
-use Webmozart\Criteria\Criteria;
-use Webmozart\Criteria\Key\Key;
-use Webmozart\Criteria\Key\KeyExists;
-use Webmozart\Criteria\Key\KeyNotExists;
+use Webmozart\Expression\Comparison\EndsWith;
+use Webmozart\Expression\Comparison\Equals;
+use Webmozart\Expression\Comparison\False;
+use Webmozart\Expression\Comparison\GreaterThan;
+use Webmozart\Expression\Comparison\GreaterThanEqual;
+use Webmozart\Expression\Comparison\IsEmpty;
+use Webmozart\Expression\Comparison\LessThan;
+use Webmozart\Expression\Comparison\LessThanEqual;
+use Webmozart\Expression\Comparison\Matches;
+use Webmozart\Expression\Comparison\NotEmpty;
+use Webmozart\Expression\Comparison\NotEquals;
+use Webmozart\Expression\Comparison\NotNull;
+use Webmozart\Expression\Comparison\NotSame;
+use Webmozart\Expression\Comparison\Null;
+use Webmozart\Expression\Comparison\OneOf;
+use Webmozart\Expression\Comparison\Same;
+use Webmozart\Expression\Comparison\StartsWith;
+use Webmozart\Expression\Comparison\True;
+use Webmozart\Expression\Expression;
+use Webmozart\Expression\Key\Key;
+use Webmozart\Expression\Key\KeyExists;
+use Webmozart\Expression\Key\KeyNotExists;
 
 /**
  * A logical literal.
  *
- * A literal is any part of a formula that does not contain "and" and "or"
- * operators. In other words, a literal is an {@link Atom} or a negated
- * {@link Atom}.
+ * In pure logics, a literal is any part of a formula that does not contain
+ * "and" or "or" operators. In this package, the definition of a literal is
+ * widened to any logical expression that is *not* a conjunction/disjunction.
  *
  * Examples:
  *
- *  * not endsWith(fileName, ".css")
- *  * greaterThan(age, 0)
+ *  * not endsWith(".css")
+ *  * greaterThan(0)
+ *  * not (greaterThan(0) and lessThan(120))
  *
  * The following examples are *not* literals:
  *
- *  * greaterThan(age, 0) and lessThan(age, 120)
- *  * oneOf(category, ["A", "B", "C]) or null(category)
+ *  * greaterThan(0) and lessThan(120)
+ *  * oneOf(["A", "B", "C]) or null()
  *
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-abstract class Literal implements Criteria
+abstract class Literal implements Expression
 {
     /**
      * {@inheritdoc}
      */
-    public function equals(Criteria $other)
+    public function equals(Expression $other)
     {
         return $other == $this;
     }
 
-    public function andX(Criteria $x)
+    public function andX(Expression $expr)
     {
-        if ($this->equals($x)) {
+        if ($this->equals($expr)) {
             return $this;
         }
 
-        return new Conjunction(array($this, $x));
+        return new Conjunction(array($this, $expr));
     }
 
-    public function andNot(Criteria $criteria)
+    public function andNot(Expression $expr)
     {
-        return $this->andX(new Not($criteria));
+        return $this->andX(new Not($expr));
     }
 
     public function andNull($field)
@@ -168,9 +169,9 @@ abstract class Literal implements Criteria
         return $this->andX(new Key($field, new EndsWith($suffix)));
     }
 
-    public function andKey($field, $key, Criteria $criteria)
+    public function andKey($field, $key, Expression $expr)
     {
-        return $this->andX(new Key($field, new Key($key, $criteria)));
+        return $this->andX(new Key($field, new Key($key, $expr)));
     }
 
     public function andKeyExists($field, $key)
@@ -273,18 +274,18 @@ abstract class Literal implements Criteria
         return $this->andX(new Key($field, new Key($key, new EndsWith($suffix))));
     }
 
-    public function orX(Criteria $x)
+    public function orX(Expression $expr)
     {
-        if ($this->equals($x)) {
+        if ($this->equals($expr)) {
             return $this;
         }
 
-        return new Disjunction(array($this, $x));
+        return new Disjunction(array($this, $expr));
     }
 
-    public function orNot(Criteria $criteria)
+    public function orNot(Expression $expr)
     {
-        return $this->orX(new Not($criteria));
+        return $this->orX(new Not($expr));
     }
 
     public function orNull($field)
@@ -377,9 +378,9 @@ abstract class Literal implements Criteria
         return $this->orX(new Key($field, new EndsWith($suffix)));
     }
 
-    public function orKey($field, $key, Criteria $criteria)
+    public function orKey($field, $key, Expression $expr)
     {
-        return $this->orX(new Key($field, new Key($key, $criteria)));
+        return $this->orX(new Key($field, new Key($key, $expr)));
     }
 
     public function orKeyExists($field, $key)

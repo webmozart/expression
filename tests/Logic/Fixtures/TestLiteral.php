@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Logic\Fixtures;
+namespace Webmozart\Expression\Tests\Logic\Fixtures;
 
-use Webmozart\Criteria\Logic\Literal;
+use Webmozart\Expression\Logic\Literal;
 
 /**
  * @since  1.0
@@ -26,7 +26,7 @@ class TestLiteral extends Literal
         $this->value = $value;
     }
 
-    public function match($value)
+    public function evaluate($value)
     {
     }
 }

@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Comparison;
+namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\OneOf;
+use Webmozart\Expression\Comparison\OneOf;
 
 /**
  * @since  1.0
@@ -22,25 +22,25 @@ class OneOfTest extends PHPUnit_Framework_TestCase
 {
     public function testMatchStrict()
     {
-        $criterion = new OneOf(array('1', '2', '3'));
+        $expr = new OneOf(array('1', '2', '3'));
 
-        $this->assertTrue($criterion->match('1'));
-        $this->assertFalse($criterion->match(1));
-        $this->assertFalse($criterion->match(1.0));
-        $this->assertFalse($criterion->match(0));
-        $this->assertFalse($criterion->match(10));
-        $this->assertFalse($criterion->match(null));
+        $this->assertTrue($expr->evaluate('1'));
+        $this->assertFalse($expr->evaluate(1));
+        $this->assertFalse($expr->evaluate(1.0));
+        $this->assertFalse($expr->evaluate(0));
+        $this->assertFalse($expr->evaluate(10));
+        $this->assertFalse($expr->evaluate(null));
     }
 
     public function testMatchNonStrict()
     {
-        $criterion = new OneOf(array('1', '2', '3'), false);
+        $expr = new OneOf(array('1', '2', '3'), false);
 
-        $this->assertTrue($criterion->match('1'));
-        $this->assertTrue($criterion->match(1));
-        $this->assertTrue($criterion->match(1.0));
-        $this->assertFalse($criterion->match(0));
-        $this->assertFalse($criterion->match(10));
-        $this->assertFalse($criterion->match(null));
+        $this->assertTrue($expr->evaluate('1'));
+        $this->assertTrue($expr->evaluate(1));
+        $this->assertTrue($expr->evaluate(1.0));
+        $this->assertFalse($expr->evaluate(0));
+        $this->assertFalse($expr->evaluate(10));
+        $this->assertFalse($expr->evaluate(null));
     }
 }

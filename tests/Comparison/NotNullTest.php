@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Comparison;
+namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\NotNull;
+use Webmozart\Expression\Comparison\NotNull;
 
 /**
  * @since  1.0
@@ -22,11 +22,11 @@ class NotNullTest extends PHPUnit_Framework_TestCase
 {
     public function testMatch()
     {
-        $criterion = new NotNull();
+        $expr = new NotNull();
 
-        $this->assertTrue($criterion->match(0));
-        $this->assertTrue($criterion->match(''));
-        $this->assertTrue($criterion->match(false));
-        $this->assertFalse($criterion->match(null));
+        $this->assertTrue($expr->evaluate(0));
+        $this->assertTrue($expr->evaluate(''));
+        $this->assertTrue($expr->evaluate(false));
+        $this->assertFalse($expr->evaluate(null));
     }
 }

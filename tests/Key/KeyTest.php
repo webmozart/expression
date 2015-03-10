@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Key;
+namespace Webmozart\Expression\Tests\Key;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\GreaterThan;
-use Webmozart\Criteria\Comparison\LessThan;
-use Webmozart\Criteria\Key\Key;
-use Webmozart\Criteria\Logic\Disjunction;
+use Webmozart\Expression\Comparison\GreaterThan;
+use Webmozart\Expression\Comparison\LessThan;
+use Webmozart\Expression\Key\Key;
+use Webmozart\Expression\Logic\Disjunction;
 
 /**
  * @since  1.0
@@ -25,17 +25,17 @@ class KeyTest extends PHPUnit_Framework_TestCase
 {
     public function testMatch()
     {
-        $criterion = new Key('key', new GreaterThan(10));
+        $expr = new Key('key', new GreaterThan(10));
 
-        $this->assertTrue($criterion->match(array('key' => 11)));
-        $this->assertFalse($criterion->match(array('key' => 9)));
+        $this->assertTrue($expr->evaluate(array('key' => 11)));
+        $this->assertFalse($expr->evaluate(array('key' => 9)));
     }
 
     public function testMatchReturnsFalseIfKeyNotFound()
     {
-        $criterion = new Key('key', new GreaterThan(10));
+        $expr = new Key('key', new GreaterThan(10));
 
-        $this->assertFalse($criterion->match(array()));
+        $this->assertFalse($expr->evaluate(array()));
     }
 
     /**
@@ -43,34 +43,34 @@ class KeyTest extends PHPUnit_Framework_TestCase
      */
     public function testMatchFailsIfNoArray()
     {
-        $criterion = new Key('key', new GreaterThan(10));
+        $expr = new Key('key', new GreaterThan(10));
 
-        $criterion->match('foobar');
+        $expr->evaluate('foobar');
     }
 
     public function testEquals()
     {
-        $criterion1 = new Key('key', new Disjunction(array(new LessThan(0), new GreaterThan(10))));
-        $criterion2 = new Key('key', new Disjunction(array(new GreaterThan(10), new LessThan(0))));
-        $criterion3 = new Key('other', new Disjunction(array(new LessThan(0), new GreaterThan(10))));
-        $criterion4 = new Key('key', new Disjunction(array(new LessThan(0))));
+        $expr1 = new Key('key', new Disjunction(array(new LessThan(0), new GreaterThan(10))));
+        $expr2 = new Key('key', new Disjunction(array(new GreaterThan(10), new LessThan(0))));
+        $expr3 = new Key('other', new Disjunction(array(new LessThan(0), new GreaterThan(10))));
+        $expr4 = new Key('key', new Disjunction(array(new LessThan(0))));
 
-        $this->assertTrue($criterion1->equals($criterion2));
-        $this->assertTrue($criterion2->equals($criterion1));
+        $this->assertTrue($expr1->equals($expr2));
+        $this->assertTrue($expr2->equals($expr1));
 
-        $this->assertFalse($criterion1->equals($criterion3));
-        $this->assertFalse($criterion3->equals($criterion1));
+        $this->assertFalse($expr1->equals($expr3));
+        $this->assertFalse($expr3->equals($expr1));
 
-        $this->assertFalse($criterion1->equals($criterion4));
-        $this->assertFalse($criterion4->equals($criterion1));
+        $this->assertFalse($expr1->equals($expr4));
+        $this->assertFalse($expr4->equals($expr1));
 
-        $this->assertFalse($criterion2->equals($criterion3));
-        $this->assertFalse($criterion3->equals($criterion2));
+        $this->assertFalse($expr2->equals($expr3));
+        $this->assertFalse($expr3->equals($expr2));
 
-        $this->assertFalse($criterion2->equals($criterion4));
-        $this->assertFalse($criterion4->equals($criterion2));
+        $this->assertFalse($expr2->equals($expr4));
+        $this->assertFalse($expr4->equals($expr2));
 
-        $this->assertFalse($criterion3->equals($criterion4));
-        $this->assertFalse($criterion4->equals($criterion3));
+        $this->assertFalse($expr3->equals($expr4));
+        $this->assertFalse($expr4->equals($expr3));
     }
 }

@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Comparison;
+namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\GreaterThan;
+use Webmozart\Expression\Comparison\GreaterThan;
 
 /**
  * @since  1.0
@@ -22,12 +22,12 @@ class GreaterThanTest extends PHPUnit_Framework_TestCase
 {
     public function testMatch()
     {
-        $criterion = new GreaterThan(10);
+        $expr = new GreaterThan(10);
 
-        $this->assertTrue($criterion->match(11));
-        $this->assertTrue($criterion->match(11.0));
-        $this->assertTrue($criterion->match('11'));
-        $this->assertFalse($criterion->match(10));
-        $this->assertFalse($criterion->match(9));
+        $this->assertTrue($expr->evaluate(11));
+        $this->assertTrue($expr->evaluate(11.0));
+        $this->assertTrue($expr->evaluate('11'));
+        $this->assertFalse($expr->evaluate(10));
+        $this->assertFalse($expr->evaluate(9));
     }
 }

@@ -9,43 +9,43 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria;
+namespace Webmozart\Expression;
 
-use Webmozart\Criteria\Comparison\EndsWith;
-use Webmozart\Criteria\Comparison\Equals;
-use Webmozart\Criteria\Comparison\False;
-use Webmozart\Criteria\Comparison\GreaterThan;
-use Webmozart\Criteria\Comparison\GreaterThanEqual;
-use Webmozart\Criteria\Comparison\IsEmpty;
-use Webmozart\Criteria\Comparison\LessThan;
-use Webmozart\Criteria\Comparison\LessThanEqual;
-use Webmozart\Criteria\Comparison\Matches;
-use Webmozart\Criteria\Comparison\NotEmpty;
-use Webmozart\Criteria\Comparison\NotEquals;
-use Webmozart\Criteria\Comparison\NotNull;
-use Webmozart\Criteria\Comparison\NotSame;
-use Webmozart\Criteria\Comparison\Null;
-use Webmozart\Criteria\Comparison\OneOf;
-use Webmozart\Criteria\Comparison\Same;
-use Webmozart\Criteria\Comparison\StartsWith;
-use Webmozart\Criteria\Comparison\True;
-use Webmozart\Criteria\Key\Key;
-use Webmozart\Criteria\Key\KeyExists;
-use Webmozart\Criteria\Key\KeyNotExists;
-use Webmozart\Criteria\Logic\Not;
+use Webmozart\Expression\Comparison\EndsWith;
+use Webmozart\Expression\Comparison\Equals;
+use Webmozart\Expression\Comparison\False;
+use Webmozart\Expression\Comparison\GreaterThan;
+use Webmozart\Expression\Comparison\GreaterThanEqual;
+use Webmozart\Expression\Comparison\IsEmpty;
+use Webmozart\Expression\Comparison\LessThan;
+use Webmozart\Expression\Comparison\LessThanEqual;
+use Webmozart\Expression\Comparison\Matches;
+use Webmozart\Expression\Comparison\NotEmpty;
+use Webmozart\Expression\Comparison\NotEquals;
+use Webmozart\Expression\Comparison\NotNull;
+use Webmozart\Expression\Comparison\NotSame;
+use Webmozart\Expression\Comparison\Null;
+use Webmozart\Expression\Comparison\OneOf;
+use Webmozart\Expression\Comparison\Same;
+use Webmozart\Expression\Comparison\StartsWith;
+use Webmozart\Expression\Comparison\True;
+use Webmozart\Expression\Key\Key;
+use Webmozart\Expression\Key\KeyExists;
+use Webmozart\Expression\Key\KeyNotExists;
+use Webmozart\Expression\Logic\Not;
 
 /**
- * Factory for {@link Criteria} instances.
+ * Factory for {@link Expression} instances.
  *
- * Use this class to build criteria for a set of fields:
+ * Use this class to build expressions for a set of fields:
  *
  * ```php
- * $criteria = Criterion::greaterThan('age', 20)
+ * $expr = Expr::greaterThan('age', 20)
  *     ->andStartsWith('name', 'Thomas');
  * ```
  *
- * You can evaluate the criteria with a set of values using
- * {@link Criteria::match()}:
+ * You can evaluate the expression with a set of values using
+ * {@link Expression::evaluate()}:
  *
  * ```php
  * $values = array(
@@ -53,7 +53,7 @@ use Webmozart\Criteria\Logic\Not;
  *     'age' => 35,
  * );
  *
- * if ($criteria->match($values)) {
+ * if ($expr->evaluate($values)) {
  *     // do something...
  * }
  * ```
@@ -61,18 +61,18 @@ use Webmozart\Criteria\Logic\Not;
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class Criterion
+class Expr
 {
     /**
-     * Check that some criteria do not match.
+     * Negate an expression.
      *
-     * @param Criteria $criteria The negated criteria.
+     * @param Expression $expr The negated expression.
      *
      * @return Not The created negation.
      */
-    public static function not(Criteria $criteria)
+    public static function not(Expression $expr)
     {
-        return new Not($criteria);
+        return new Not($expr);
     }
 
     /**
@@ -80,7 +80,7 @@ class Criterion
      *
      * @param string $field The field name.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function null($field)
     {
@@ -92,7 +92,7 @@ class Criterion
      *
      * @param string $field The field name.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function notNull($field)
     {
@@ -104,7 +104,7 @@ class Criterion
      *
      * @param string $field The field name.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function isEmpty($field)
     {
@@ -116,7 +116,7 @@ class Criterion
      *
      * @param string $field The field name.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function notEmpty($field)
     {
@@ -129,7 +129,7 @@ class Criterion
      * @param string $field  The field name.
      * @param bool   $strict Whether to use strict comparison.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function true($field, $strict = true)
     {
@@ -142,7 +142,7 @@ class Criterion
      * @param string $field  The field name.
      * @param bool   $strict Whether to use strict comparison.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function false($field, $strict = true)
     {
@@ -155,7 +155,7 @@ class Criterion
      * @param string $field The field name.
      * @param mixed  $value The compared value.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function equals($field, $value)
     {
@@ -168,7 +168,7 @@ class Criterion
      * @param string $field The field name.
      * @param mixed  $value The compared value.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function notEquals($field, $value)
     {
@@ -181,7 +181,7 @@ class Criterion
      * @param string $field The field name.
      * @param mixed  $value The compared value.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function same($field, $value)
     {
@@ -194,7 +194,7 @@ class Criterion
      * @param string $field The field name.
      * @param mixed  $value The compared value.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function notSame($field, $value)
     {
@@ -207,7 +207,7 @@ class Criterion
      * @param string $field The field name.
      * @param mixed  $value The compared value.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function greaterThan($field, $value)
     {
@@ -220,7 +220,7 @@ class Criterion
      * @param string $field The field name.
      * @param mixed  $value The compared value.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function greaterThanEqual($field, $value)
     {
@@ -233,7 +233,7 @@ class Criterion
      * @param string $field The field name.
      * @param mixed  $value The compared value.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function lessThan($field, $value)
     {
@@ -246,7 +246,7 @@ class Criterion
      * @param string $field The field name.
      * @param mixed  $value The compared value.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function lessThanEqual($field, $value)
     {
@@ -260,7 +260,7 @@ class Criterion
      * @param array  $values The compared values.
      * @param bool   $strict Whether to do strict comparison.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function oneOf($field, array $values, $strict = true)
     {
@@ -273,7 +273,7 @@ class Criterion
      * @param string $field  The field name.
      * @param string $regExp The regular expression.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function matches($field, $regExp)
     {
@@ -286,7 +286,7 @@ class Criterion
      * @param string $field  The field name.
      * @param string $prefix The prefix string.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function startsWith($field, $prefix)
     {
@@ -299,7 +299,7 @@ class Criterion
      * @param string $field  The field name.
      * @param string $suffix The suffix string.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function endsWith($field, $suffix)
     {
@@ -309,15 +309,15 @@ class Criterion
     /**
      * Check that a field key satisfies some criteria.
      *
-     * @param string   $field    The field name.
-     * @param string   $key      The key name.
-     * @param Criteria $criteria The criteria.
+     * @param string     $field The field name.
+     * @param string     $key   The key name.
+     * @param Expression $expr  The expression.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
-    public static function key($field, $key, Criteria $criteria)
+    public static function key($field, $key, Expression $expr)
     {
-        return new Key($field, new Key($key, $criteria));
+        return new Key($field, new Key($key, $expr));
     }
 
     /**
@@ -326,7 +326,7 @@ class Criterion
      * @param string $field The field name.
      * @param string $key   The key name.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyExists($field, $key)
     {
@@ -339,7 +339,7 @@ class Criterion
      * @param string $field The field name.
      * @param string $key   The key name.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyNotExists($field, $key)
     {
@@ -352,7 +352,7 @@ class Criterion
      * @param string $field The field name.
      * @param string $key   The key name.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyNull($field, $key)
     {
@@ -365,7 +365,7 @@ class Criterion
      * @param string $field The field name.
      * @param string $key   The key name.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyNotNull($field, $key)
     {
@@ -378,7 +378,7 @@ class Criterion
      * @param string $field The field name.
      * @param string $key   The key name.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyEmpty($field, $key)
     {
@@ -391,7 +391,7 @@ class Criterion
      * @param string $field The field name.
      * @param string $key   The key name.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyNotEmpty($field, $key)
     {
@@ -405,7 +405,7 @@ class Criterion
      * @param string $key    The key name.
      * @param bool   $strict Whether to use strict comparison.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyTrue($field, $key, $strict = true)
     {
@@ -419,7 +419,7 @@ class Criterion
      * @param string $key    The key name.
      * @param bool   $strict Whether to use strict comparison.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyFalse($field, $key, $strict = true)
     {
@@ -433,7 +433,7 @@ class Criterion
      * @param string $key   The key name.
      * @param mixed  $value The compared value.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyEquals($field, $key, $value)
     {
@@ -447,7 +447,7 @@ class Criterion
      * @param string $key   The key name.
      * @param mixed  $value The compared value.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyNotEquals($field, $key, $value)
     {
@@ -461,7 +461,7 @@ class Criterion
      * @param string $key   The key name.
      * @param mixed  $value The compared value.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keySame($field, $key, $value)
     {
@@ -475,7 +475,7 @@ class Criterion
      * @param string $key   The key name.
      * @param mixed  $value The compared value.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyNotSame($field, $key, $value)
     {
@@ -489,7 +489,7 @@ class Criterion
      * @param string $key   The key name.
      * @param mixed  $value The compared value.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyGreaterThan($field, $key, $value)
     {
@@ -503,7 +503,7 @@ class Criterion
      * @param string $key   The key name.
      * @param mixed  $value The compared value.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyGreaterThanEqual($field, $key, $value)
     {
@@ -517,7 +517,7 @@ class Criterion
      * @param string $key   The key name.
      * @param mixed  $value The compared value.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyLessThan($field, $key, $value)
     {
@@ -531,7 +531,7 @@ class Criterion
      * @param string $key   The key name.
      * @param mixed  $value The compared value.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyLessThanEqual($field, $key, $value)
     {
@@ -546,7 +546,7 @@ class Criterion
      * @param array  $values The compared values.
      * @param bool   $strict Whether to do strict comparison.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyOneOf($field, $key, array $values, $strict = true)
     {
@@ -560,7 +560,7 @@ class Criterion
      * @param string $key    The key name.
      * @param string $regExp The regular expression.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyMatches($field, $key, $regExp)
     {
@@ -574,7 +574,7 @@ class Criterion
      * @param string $key    The key name.
      * @param string $prefix The prefix string.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyStartsWith($field, $key, $prefix)
     {
@@ -588,7 +588,7 @@ class Criterion
      * @param string $key    The key name.
      * @param string $suffix The suffix string.
      *
-     * @return Key The created criterion.
+     * @return Key The created expression.
      */
     public static function keyEndsWith($field, $key, $suffix)
     {

@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Comparison;
+namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\EndsWith;
+use Webmozart\Expression\Comparison\EndsWith;
 
 /**
  * @since  1.0
@@ -22,9 +22,9 @@ class EndsWithTest extends PHPUnit_Framework_TestCase
 {
     public function testMatch()
     {
-        $criterion = new EndsWith('.css');
+        $expr = new EndsWith('.css');
 
-        $this->assertTrue($criterion->match('style.css'));
-        $this->assertFalse($criterion->match('style.css.dist'));
+        $this->assertTrue($expr->evaluate('style.css'));
+        $this->assertFalse($expr->evaluate('style.css.dist'));
     }
 }

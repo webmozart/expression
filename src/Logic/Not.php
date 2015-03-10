@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Logic;
+namespace Webmozart\Expression\Logic;
 
-use Webmozart\Criteria\Criteria;
+use Webmozart\Expression\Expression;
 
 /**
- * Negates some criteria.
+ * Negates another expression.
  *
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
@@ -22,48 +22,48 @@ use Webmozart\Criteria\Criteria;
 class Not extends Literal
 {
     /**
-     * @var Criteria
+     * @var Expression
      */
-    private $negatedCriteria;
+    private $negatedExpression;
 
     /**
      * Creates the negation.
      *
-     * @param Criteria $criteria The negated criteria.
+     * @param Expression $expr The negated expression.
      */
-    public function __construct(Criteria $criteria)
+    public function __construct(Expression $expr)
     {
-        $this->negatedCriteria = $criteria;
+        $this->negatedExpression = $expr;
     }
 
     /**
-     * Returns the negated criteria.
+     * Returns the negated expression.
      *
-     * @return Criteria The negated criteria.
+     * @return Expression The negated expression.
      */
-    public function getNegatedCriteria()
+    public function getNegatedExpression()
     {
-        return $this->negatedCriteria;
+        return $this->negatedExpression;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function match($value)
+    public function evaluate($value)
     {
-        return !$this->negatedCriteria->match($value);
+        return !$this->negatedExpression->evaluate($value);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function equals(Criteria $other)
+    public function equals(Expression $other)
     {
         if (get_class($this) !== get_class($other)) {
             return false;
         }
 
         /** @var Not $other */
-        return $this->negatedCriteria->equals($other->negatedCriteria);
+        return $this->negatedExpression->equals($other->negatedExpression);
     }
 }

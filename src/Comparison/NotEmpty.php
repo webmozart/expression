@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Comparison;
+namespace Webmozart\Expression\Comparison;
 
-use Webmozart\Criteria\Logic\Literal;
+use Webmozart\Expression\Logic\Literal;
 
 /**
  * Checks that a value is not empty.
@@ -24,7 +24,7 @@ class NotEmpty extends Literal
     /**
      * {@inheritdoc}
      */
-    public function match($value)
+    public function evaluate($value)
     {
         return !empty($value);
     }

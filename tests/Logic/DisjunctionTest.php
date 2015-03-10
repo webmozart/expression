@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Logic;
+namespace Webmozart\Expression\Tests\Logic;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\GreaterThan;
-use Webmozart\Criteria\Comparison\NotNull;
-use Webmozart\Criteria\Key\Key;
-use Webmozart\Criteria\Logic\Disjunction;
+use Webmozart\Expression\Comparison\GreaterThan;
+use Webmozart\Expression\Comparison\NotNull;
+use Webmozart\Expression\Key\Key;
+use Webmozart\Expression\Logic\Disjunction;
 
 /**
  * @since  1.0
@@ -52,7 +52,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider \Webmozart\Criteria\Tests\CriterionTest::getCriterionTests
+     * @dataProvider \Webmozart\Expression\Tests\ExprTest::getCriterionTests
      */
     public function testOr($method, $args, $expected)
     {
@@ -75,10 +75,10 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
             new Key('age', new GreaterThan(0)),
         ));
 
-        $this->assertTrue($disjunction->match(array('name' => 'Thomas', 'age' => 35)));
-        $this->assertTrue($disjunction->match(array('name' => null, 'age' => 35)));
-        $this->assertTrue($disjunction->match(array('name' => 'Thomas', 'age' => 0)));
-        $this->assertFalse($disjunction->match(array('name' => null, 'age' => 0)));
+        $this->assertTrue($disjunction->evaluate(array('name' => 'Thomas', 'age' => 35)));
+        $this->assertTrue($disjunction->evaluate(array('name' => null, 'age' => 35)));
+        $this->assertTrue($disjunction->evaluate(array('name' => 'Thomas', 'age' => 0)));
+        $this->assertFalse($disjunction->evaluate(array('name' => null, 'age' => 0)));
     }
 
     public function testEquals()

@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Comparison;
+namespace Webmozart\Expression\Comparison;
 
-use Webmozart\Criteria\Logic\Literal;
+use Webmozart\Expression\Logic\Literal;
 
 /**
  * Checks that a value has a given suffix.
@@ -27,7 +27,7 @@ class EndsWith extends Literal
     private $acceptedSuffix;
 
     /**
-     * Creates the criterion.
+     * Creates the expression.
      *
      * @param string $acceptedSuffix The accepted suffix.
      */
@@ -49,7 +49,7 @@ class EndsWith extends Literal
     /**
      * {@inheritdoc}
      */
-    public function match($value)
+    public function evaluate($value)
     {
         return $this->acceptedSuffix === substr($value, -strlen($this->acceptedSuffix));
     }

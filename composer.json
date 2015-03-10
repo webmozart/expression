@@ -1,7 +1,7 @@
 {
-    "name": "webmozart/criteria",
-    "description": "Formulate search criteria using PHP objects.",
-    "keywords": ["criteria", "formula", "expression", "filter", "match"],
+    "name": "webmozart/expression",
+    "description": "Formulate expressions and search criteria using PHP objects.",
+    "keywords": ["criteria", "formula", "expression", "filter"],
     "license": "MIT",
     "authors": [
         {
@@ -14,12 +14,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Webmozart\\Criteria\\": "src/"
+            "Webmozart\\Expression\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Webmozart\\Criteria\\Tests\\": "tests/"
+            "Webmozart\\Expression\\Tests\\": "tests/"
         }
     },
     "extra": {

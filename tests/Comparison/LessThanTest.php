@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Comparison;
+namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\LessThan;
+use Webmozart\Expression\Comparison\LessThan;
 
 /**
  * @since  1.0
@@ -22,12 +22,12 @@ class LessThanTest extends PHPUnit_Framework_TestCase
 {
     public function testMatch()
     {
-        $criterion = new LessThan(10);
+        $expr = new LessThan(10);
 
-        $this->assertTrue($criterion->match(9));
-        $this->assertTrue($criterion->match(9.0));
-        $this->assertTrue($criterion->match('9'));
-        $this->assertFalse($criterion->match(10));
-        $this->assertFalse($criterion->match(11));
+        $this->assertTrue($expr->evaluate(9));
+        $this->assertTrue($expr->evaluate(9.0));
+        $this->assertTrue($expr->evaluate('9'));
+        $this->assertFalse($expr->evaluate(10));
+        $this->assertFalse($expr->evaluate(11));
     }
 }

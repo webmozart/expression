@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Comparison;
+namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\IsEmpty;
+use Webmozart\Expression\Comparison\IsEmpty;
 
 /**
  * @since  1.0
@@ -22,13 +22,13 @@ class IsEmptyTest extends PHPUnit_Framework_TestCase
 {
     public function testMatch()
     {
-        $criterion = new IsEmpty();
+        $expr = new IsEmpty();
 
-        $this->assertTrue($criterion->match(null));
-        $this->assertTrue($criterion->match(0));
-        $this->assertTrue($criterion->match(''));
-        $this->assertTrue($criterion->match(false));
-        $this->assertFalse($criterion->match(true));
-        $this->assertFalse($criterion->match('abcd'));
+        $this->assertTrue($expr->evaluate(null));
+        $this->assertTrue($expr->evaluate(0));
+        $this->assertTrue($expr->evaluate(''));
+        $this->assertTrue($expr->evaluate(false));
+        $this->assertFalse($expr->evaluate(true));
+        $this->assertFalse($expr->evaluate('abcd'));
     }
 }

@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Comparison;
+namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\NotSame;
+use Webmozart\Expression\Comparison\NotSame;
 
 /**
  * @since  1.0
@@ -22,12 +22,12 @@ class NotSameTest extends PHPUnit_Framework_TestCase
 {
     public function testMatch()
     {
-        $criterion = new NotSame('10');
+        $expr = new NotSame('10');
 
-        $this->assertTrue($criterion->match('100'));
-        $this->assertTrue($criterion->match(11));
-        $this->assertTrue($criterion->match(10));
-        $this->assertTrue($criterion->match(10.0));
-        $this->assertFalse($criterion->match('10'));
+        $this->assertTrue($expr->evaluate('100'));
+        $this->assertTrue($expr->evaluate(11));
+        $this->assertTrue($expr->evaluate(10));
+        $this->assertTrue($expr->evaluate(10.0));
+        $this->assertFalse($expr->evaluate('10'));
     }
 }

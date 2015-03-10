@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests;
+namespace Webmozart\Expression\Tests;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\Equals;
-use Webmozart\Criteria\Comparison\OneOf;
-use Webmozart\Criteria\Comparison\Same;
-use Webmozart\Criteria\Criteria;
+use Webmozart\Expression\Comparison\Equals;
+use Webmozart\Expression\Comparison\OneOf;
+use Webmozart\Expression\Comparison\Same;
+use Webmozart\Expression\Expression;
 
 /**
  * @since  1.0
@@ -36,7 +36,7 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider getEquivalentCriteria
      */
-    public function testEquivalence(Criteria $left, Criteria $right)
+    public function testEquivalence(Expression $left, Expression $right)
     {
         $this->assertTrue($left->equals($right));
         $this->assertTrue($right->equals($left));
@@ -59,7 +59,7 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider getNonEquivalentCriteria
      */
-    public function testNonEquivalence(Criteria $left, Criteria $right)
+    public function testNonEquivalence(Expression $left, Expression $right)
     {
         $this->assertFalse($left->equals($right));
         $this->assertFalse($right->equals($left));

@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Key;
+namespace Webmozart\Expression\Key;
 
 use RuntimeException;
-use Webmozart\Criteria\Criteria;
-use Webmozart\Criteria\Logic\Literal;
+use Webmozart\Expression\Expression;
+use Webmozart\Expression\Logic\Literal;
 
 /**
- * Checks that an array key matches some criteria.
+ * Checks that an array key matches some expression.
  *
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
@@ -29,20 +29,20 @@ class Key extends Literal
     private $key;
 
     /**
-     * @var Criteria
+     * @var Expression
      */
-    private $criteria;
+    private $expr;
 
     /**
-     * Creates the criterion.
+     * Creates the expression.
      *
-     * @param string   $key      The array key.
-     * @param Criteria $criteria The criteria.
+     * @param string     $key  The array key.
+     * @param Expression $expr The expression.
      */
-    public function __construct($key, Criteria $criteria)
+    public function __construct($key, Expression $expr)
     {
         $this->key = $key;
-        $this->criteria = $criteria;
+        $this->expr = $expr;
     }
 
     /**
@@ -56,23 +56,23 @@ class Key extends Literal
     }
 
     /**
-     * Returns the criteria.
+     * Returns the expression.
      *
-     * @return Criteria The criteria.
+     * @return Expression The expression.
      */
-    public function getCriteria()
+    public function getExpression()
     {
-        return $this->criteria;
+        return $this->expr;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function match($value)
+    public function evaluate($value)
     {
         if (!is_array($value)) {
             throw new RuntimeException(sprintf(
-                'Cannot evaluate criterion: Expected an array. Got: %s',
+                'Cannot evaluate expression: Expected an array. Got: %s',
                 is_object($value) ? get_class($value) : gettype($value)
             ));
         }
@@ -81,19 +81,19 @@ class Key extends Literal
             return false;
         }
 
-        return $this->criteria->match($value[$this->key]);
+        return $this->expr->evaluate($value[$this->key]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function equals(Criteria $other)
+    public function equals(Expression $other)
     {
         if (get_class($this) !== get_class($other)) {
             return false;
         }
 
         /** @var Key $other */
-        return $this->key === $other->key && $this->criteria->equals($other->criteria);
+        return $this->key === $other->key && $this->expr->equals($other->expr);
     }
 }

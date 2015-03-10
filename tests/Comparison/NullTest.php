@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Comparison;
+namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\Null;
+use Webmozart\Expression\Comparison\Null;
 
 /**
  * @since  1.0
@@ -22,11 +22,11 @@ class NullTest extends PHPUnit_Framework_TestCase
 {
     public function testMatch()
     {
-        $criterion = new Null();
+        $expr = new Null();
 
-        $this->assertTrue($criterion->match(null));
-        $this->assertFalse($criterion->match(0));
-        $this->assertFalse($criterion->match(''));
-        $this->assertFalse($criterion->match(false));
+        $this->assertTrue($expr->evaluate(null));
+        $this->assertFalse($expr->evaluate(0));
+        $this->assertFalse($expr->evaluate(''));
+        $this->assertFalse($expr->evaluate(false));
     }
 }

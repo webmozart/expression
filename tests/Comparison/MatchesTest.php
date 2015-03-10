@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Comparison;
+namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\Matches;
+use Webmozart\Expression\Comparison\Matches;
 
 /**
  * @since  1.0
@@ -22,11 +22,11 @@ class MatchesTest extends PHPUnit_Framework_TestCase
 {
     public function testMatch()
     {
-        $criterion = new Matches('~^\d{4}$~');
+        $expr = new Matches('~^\d{4}$~');
 
-        $this->assertTrue($criterion->match('1010'));
-        $this->assertTrue($criterion->match(1010));
-        $this->assertFalse($criterion->match('abcd'));
-        $this->assertFalse($criterion->match('10101'));
+        $this->assertTrue($expr->evaluate('1010'));
+        $this->assertTrue($expr->evaluate(1010));
+        $this->assertFalse($expr->evaluate('abcd'));
+        $this->assertFalse($expr->evaluate('10101'));
     }
 }

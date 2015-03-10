@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Comparison;
+namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\StartsWith;
+use Webmozart\Expression\Comparison\StartsWith;
 
 /**
  * @since  1.0
@@ -22,9 +22,9 @@ class StartsWithTest extends PHPUnit_Framework_TestCase
 {
     public function testMatch()
     {
-        $criterion = new StartsWith('Thomas');
+        $expr = new StartsWith('Thomas');
 
-        $this->assertTrue($criterion->match('Thomas Edison'));
-        $this->assertFalse($criterion->match('Mr. Thomas Edison'));
+        $this->assertTrue($expr->evaluate('Thomas Edison'));
+        $this->assertFalse($expr->evaluate('Mr. Thomas Edison'));
     }
 }

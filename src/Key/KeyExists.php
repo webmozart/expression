@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Key;
+namespace Webmozart\Expression\Key;
 
 use RuntimeException;
-use Webmozart\Criteria\Logic\Literal;
+use Webmozart\Expression\Logic\Literal;
 
 /**
  * Checks that an array key exists.
@@ -28,7 +28,7 @@ class KeyExists extends Literal
     private $key;
 
     /**
-     * Creates the criterion.
+     * Creates the expression.
      *
      * @param string $key The array key.
      */
@@ -50,11 +50,11 @@ class KeyExists extends Literal
     /**
      * {@inheritdoc}
      */
-    public function match($value)
+    public function evaluate($value)
     {
         if (!is_array($value)) {
             throw new RuntimeException(sprintf(
-                'Cannot evaluate criterion: Expected an array. Got: %s',
+                'Cannot evaluate expression: Expected an array. Got: %s',
                 is_object($value) ? get_class($value) : gettype($value)
             ));
         }

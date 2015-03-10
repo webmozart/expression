@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Comparison;
+namespace Webmozart\Expression\Comparison;
 
-use Webmozart\Criteria\Criteria;
-use Webmozart\Criteria\Logic\Literal;
+use Webmozart\Expression\Expression;
+use Webmozart\Expression\Logic\Literal;
 
 /**
  * Checks that a value is one of a list of values.
@@ -33,7 +33,7 @@ class OneOf extends Literal
     private $strict;
 
     /**
-     * Creates the criterion.
+     * Creates the expression.
      *
      * @param array $acceptedValues The accepted value.
      * @param bool  $strict         Whether to do strict comparison.
@@ -68,7 +68,7 @@ class OneOf extends Literal
     /**
      * {@inheritdoc}
      */
-    public function match($value)
+    public function evaluate($value)
     {
         return in_array($value, $this->acceptedValues, $this->strict);
     }
@@ -76,7 +76,7 @@ class OneOf extends Literal
     /**
      * {@inheritdoc}
      */
-    public function equals(Criteria $other)
+    public function equals(Expression $other)
     {
         if (1 === count($this->acceptedValues)) {
             // OneOf is logically equivalent to Same if strict and only one value

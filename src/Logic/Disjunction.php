@@ -9,51 +9,51 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Logic;
+namespace Webmozart\Expression\Logic;
 
-use Webmozart\Criteria\Comparison\EndsWith;
-use Webmozart\Criteria\Comparison\Equals;
-use Webmozart\Criteria\Comparison\False;
-use Webmozart\Criteria\Comparison\GreaterThan;
-use Webmozart\Criteria\Comparison\GreaterThanEqual;
-use Webmozart\Criteria\Comparison\IsEmpty;
-use Webmozart\Criteria\Comparison\LessThan;
-use Webmozart\Criteria\Comparison\LessThanEqual;
-use Webmozart\Criteria\Comparison\Matches;
-use Webmozart\Criteria\Comparison\NotEmpty;
-use Webmozart\Criteria\Comparison\NotEquals;
-use Webmozart\Criteria\Comparison\NotNull;
-use Webmozart\Criteria\Comparison\NotSame;
-use Webmozart\Criteria\Comparison\Null;
-use Webmozart\Criteria\Comparison\OneOf;
-use Webmozart\Criteria\Comparison\Same;
-use Webmozart\Criteria\Comparison\StartsWith;
-use Webmozart\Criteria\Comparison\True;
-use Webmozart\Criteria\Criteria;
-use Webmozart\Criteria\Key\Key;
-use Webmozart\Criteria\Key\KeyExists;
-use Webmozart\Criteria\Key\KeyNotExists;
+use Webmozart\Expression\Comparison\EndsWith;
+use Webmozart\Expression\Comparison\Equals;
+use Webmozart\Expression\Comparison\False;
+use Webmozart\Expression\Comparison\GreaterThan;
+use Webmozart\Expression\Comparison\GreaterThanEqual;
+use Webmozart\Expression\Comparison\IsEmpty;
+use Webmozart\Expression\Comparison\LessThan;
+use Webmozart\Expression\Comparison\LessThanEqual;
+use Webmozart\Expression\Comparison\Matches;
+use Webmozart\Expression\Comparison\NotEmpty;
+use Webmozart\Expression\Comparison\NotEquals;
+use Webmozart\Expression\Comparison\NotNull;
+use Webmozart\Expression\Comparison\NotSame;
+use Webmozart\Expression\Comparison\Null;
+use Webmozart\Expression\Comparison\OneOf;
+use Webmozart\Expression\Comparison\Same;
+use Webmozart\Expression\Comparison\StartsWith;
+use Webmozart\Expression\Comparison\True;
+use Webmozart\Expression\Expression;
+use Webmozart\Expression\Key\Key;
+use Webmozart\Expression\Key\KeyExists;
+use Webmozart\Expression\Key\KeyNotExists;
 
 /**
- * A disjunction of criteria.
+ * A disjunction of expressions.
  *
- * A disjunction is a set of {@link Criteria} instances connected by logical
+ * A disjunction is a set of {@link Expression} instances connected by logical
  * "or" operators.
  *
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class Disjunction implements Criteria
+class Disjunction implements Expression
 {
     /**
-     * @var Criteria[]
+     * @var Expression[]
      */
     private $disjuncts;
 
     /**
-     * Creates a disjunction of the given criteria.
+     * Creates a disjunction of the given expressions.
      *
-     * @param Criteria[] $disjuncts The disjuncts.
+     * @param Expression[] $disjuncts The disjuncts.
      */
     public function __construct(array $disjuncts = array())
     {
@@ -63,14 +63,14 @@ class Disjunction implements Criteria
     /**
      * Returns the disjuncts of the disjunction.
      *
-     * @return Criteria[] The disjuncts.
+     * @return Expression[] The disjuncts.
      */
     public function getDisjuncts()
     {
         return $this->disjuncts;
     }
 
-    public function orX(Criteria $x)
+    public function orX(Expression $x)
     {
         foreach ($this->disjuncts as $disjunct) {
             if ($disjunct->equals($x)) {
@@ -83,9 +83,9 @@ class Disjunction implements Criteria
         return $this;
     }
 
-    public function orNot(Criteria $criteria)
+    public function orNot(Expression $expr)
     {
-        return $this->orX(new Not($criteria));
+        return $this->orX(new Not($expr));
     }
 
     public function orNull($field)
@@ -178,9 +178,9 @@ class Disjunction implements Criteria
         return $this->orX(new Key($field, new EndsWith($suffix)));
     }
 
-    public function orKey($field, $key, Criteria $criteria)
+    public function orKey($field, $key, Expression $expr)
     {
-        return $this->orX(new Key($field, new Key($key, $criteria)));
+        return $this->orX(new Key($field, new Key($key, $expr)));
     }
 
     public function orKeyExists($field, $key)
@@ -286,10 +286,10 @@ class Disjunction implements Criteria
     /**
      * {@inheritdoc}
      */
-    public function match($values)
+    public function evaluate($values)
     {
-        foreach ($this->disjuncts as $criteria) {
-            if ($criteria->match($values)) {
+        foreach ($this->disjuncts as $expr) {
+            if ($expr->evaluate($values)) {
                 return true;
             }
         }
@@ -300,7 +300,7 @@ class Disjunction implements Criteria
     /**
      * {@inheritdoc}
      */
-    public function equals(Criteria $other)
+    public function equals(Expression $other)
     {
         if (get_class($this) !== get_class($other)) {
             return false;

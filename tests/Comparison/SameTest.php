@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Comparison;
+namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\Same;
+use Webmozart\Expression\Comparison\Same;
 
 /**
  * @since  1.0
@@ -22,12 +22,12 @@ class SameTest extends PHPUnit_Framework_TestCase
 {
     public function testMatch()
     {
-        $criterion = new Same('10');
+        $expr = new Same('10');
 
-        $this->assertTrue($criterion->match('10'));
-        $this->assertFalse($criterion->match('100'));
-        $this->assertFalse($criterion->match(11));
-        $this->assertFalse($criterion->match(10));
-        $this->assertFalse($criterion->match(10.0));
+        $this->assertTrue($expr->evaluate('10'));
+        $this->assertFalse($expr->evaluate('100'));
+        $this->assertFalse($expr->evaluate(11));
+        $this->assertFalse($expr->evaluate(10));
+        $this->assertFalse($expr->evaluate(10.0));
     }
 }

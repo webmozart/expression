@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Comparison;
+namespace Webmozart\Expression\Comparison;
 
-use Webmozart\Criteria\Logic\Literal;
+use Webmozart\Expression\Logic\Literal;
 
 /**
  * Checks that a value is not identical to another value.
@@ -29,7 +29,7 @@ class NotSame extends Literal
     private $comparedValue;
 
     /**
-     * Creates the criterion.
+     * Creates the expression.
      *
      * @param mixed $comparedValue The compared value.
      */
@@ -51,7 +51,7 @@ class NotSame extends Literal
     /**
      * {@inheritdoc}
      */
-    public function match($value)
+    public function evaluate($value)
     {
         return $this->comparedValue !== $value;
     }

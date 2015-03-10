@@ -9,26 +9,26 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\PhpUnit;
+namespace Webmozart\Expression\PhpUnit;
 
 use SebastianBergmann\Comparator\ComparisonFailure;
 use SebastianBergmann\Comparator\ObjectComparator;
-use Webmozart\Criteria\Criteria;
+use Webmozart\Expression\Expression;
 
 /**
- * Compares {@link Criteria} objects for equality.
+ * Compares {@link Expression} objects for equality.
  *
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class CriteriaComparator extends ObjectComparator
+class ExpressionComparator extends ObjectComparator
 {
     /**
      * {@inheritdoc}
      */
     public function accepts($expected, $actual)
     {
-        return $expected instanceof Criteria && $actual instanceof Criteria;
+        return $expected instanceof Expression && $actual instanceof Expression;
     }
 
     /**
@@ -51,7 +51,7 @@ class CriteriaComparator extends ObjectComparator
             );
         }
 
-        /** @var Criteria $actual */
+        /** @var Expression $actual */
         if (!$actual->equals($expected)) {
             // Let the parent comparator generate the error
             parent::assertEquals($expected, $actual, $delta, $canonicalize, $ignoreCase, $processed);

@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Key;
+namespace Webmozart\Expression\Tests\Key;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\GreaterThan;
-use Webmozart\Criteria\Key\Key;
-use Webmozart\Criteria\Key\KeyExists;
+use Webmozart\Expression\Comparison\GreaterThan;
+use Webmozart\Expression\Key\Key;
+use Webmozart\Expression\Key\KeyExists;
 
 /**
  * @since  1.0
@@ -24,10 +24,10 @@ class KeyExistsTest extends PHPUnit_Framework_TestCase
 {
     public function testMatch()
     {
-        $criterion = new KeyExists('key');
+        $expr = new KeyExists('key');
 
-        $this->assertTrue($criterion->match(array('key' => 11)));
-        $this->assertFalse($criterion->match(array()));
+        $this->assertTrue($expr->evaluate(array('key' => 11)));
+        $this->assertFalse($expr->evaluate(array()));
     }
 
     /**
@@ -35,8 +35,8 @@ class KeyExistsTest extends PHPUnit_Framework_TestCase
      */
     public function testMatchFailsIfNoArray()
     {
-        $criterion = new Key('key', new GreaterThan(10));
+        $expr = new Key('key', new GreaterThan(10));
 
-        $criterion->match('foobar');
+        $expr->evaluate('foobar');
     }
 }

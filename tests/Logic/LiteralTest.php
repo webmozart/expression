@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests\Logic;
+namespace Webmozart\Expression\Tests\Logic;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\NotNull;
-use Webmozart\Criteria\Comparison\Null;
-use Webmozart\Criteria\Logic\Conjunction;
-use Webmozart\Criteria\Logic\Disjunction;
-use Webmozart\Criteria\Tests\Logic\Fixtures\TestLiteral;
+use Webmozart\Expression\Comparison\NotNull;
+use Webmozart\Expression\Comparison\Null;
+use Webmozart\Expression\Logic\Conjunction;
+use Webmozart\Expression\Logic\Disjunction;
+use Webmozart\Expression\Tests\Logic\Fixtures\TestLiteral;
 
 /**
  * @since  1.0
@@ -27,9 +27,9 @@ class LiteralTest extends PHPUnit_Framework_TestCase
     public function testAndX()
     {
         $literal = new TestLiteral();
-        $criterion = new Null();
+        $expr = new Null();
 
-        $this->assertEquals(new Conjunction(array($literal, $criterion)), $literal->andX($criterion));
+        $this->assertEquals(new Conjunction(array($literal, $expr)), $literal->andX($expr));
     }
 
     public function testAndXIgnoresDuplicates()
@@ -40,7 +40,7 @@ class LiteralTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider \Webmozart\Criteria\Tests\CriterionTest::getCriterionTests
+     * @dataProvider \Webmozart\Expression\Tests\ExprTest::getCriterionTests
      */
     public function testAnd($method, $args, $expected)
     {
@@ -59,9 +59,9 @@ class LiteralTest extends PHPUnit_Framework_TestCase
     public function testOrX()
     {
         $literal = new TestLiteral();
-        $criterion = new Null();
+        $expr = new Null();
 
-        $this->assertEquals(new Disjunction(array($literal, $criterion)), $literal->orX($criterion));
+        $this->assertEquals(new Disjunction(array($literal, $expr)), $literal->orX($expr));
     }
 
     public function testOrXIgnoresDuplicates()
@@ -72,7 +72,7 @@ class LiteralTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider \Webmozart\Criteria\Tests\CriterionTest::getCriterionTests
+     * @dataProvider \Webmozart\Expression\Tests\ExprTest::getCriterionTests
      */
     public function testOr($method, $args, $expected)
     {
@@ -90,12 +90,12 @@ class LiteralTest extends PHPUnit_Framework_TestCase
 
     public function testEquals()
     {
-        $criterion1 = new TestLiteral('foo');
-        $criterion2 = new Null();
+        $expr1 = new TestLiteral('foo');
+        $expr2 = new Null();
 
-        $this->assertTrue($criterion1->equals(new TestLiteral('foo')));
-        $this->assertFalse($criterion1->equals(new TestLiteral('bar')));
-        $this->assertTrue($criterion2->equals(new Null()));
-        $this->assertFalse($criterion2->equals(new NotNull('value')));
+        $this->assertTrue($expr1->equals(new TestLiteral('foo')));
+        $this->assertFalse($expr1->equals(new TestLiteral('bar')));
+        $this->assertTrue($expr2->equals(new Null()));
+        $this->assertFalse($expr2->equals(new NotNull('value')));
     }
 }

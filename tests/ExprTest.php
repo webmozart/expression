@@ -9,38 +9,38 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Criteria\Tests;
+namespace Webmozart\Expression\Tests;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Criteria\Comparison\EndsWith;
-use Webmozart\Criteria\Comparison\Equals;
-use Webmozart\Criteria\Comparison\False;
-use Webmozart\Criteria\Comparison\GreaterThan;
-use Webmozart\Criteria\Comparison\GreaterThanEqual;
-use Webmozart\Criteria\Comparison\IsEmpty;
-use Webmozart\Criteria\Comparison\LessThan;
-use Webmozart\Criteria\Comparison\LessThanEqual;
-use Webmozart\Criteria\Comparison\Matches;
-use Webmozart\Criteria\Comparison\NotEmpty;
-use Webmozart\Criteria\Comparison\NotEquals;
-use Webmozart\Criteria\Comparison\NotNull;
-use Webmozart\Criteria\Comparison\NotSame;
-use Webmozart\Criteria\Comparison\Null;
-use Webmozart\Criteria\Comparison\OneOf;
-use Webmozart\Criteria\Comparison\Same;
-use Webmozart\Criteria\Comparison\StartsWith;
-use Webmozart\Criteria\Comparison\True;
-use Webmozart\Criteria\Criterion;
-use Webmozart\Criteria\Key\Key;
-use Webmozart\Criteria\Key\KeyExists;
-use Webmozart\Criteria\Key\KeyNotExists;
-use Webmozart\Criteria\Logic\Not;
+use Webmozart\Expression\Comparison\EndsWith;
+use Webmozart\Expression\Comparison\Equals;
+use Webmozart\Expression\Comparison\False;
+use Webmozart\Expression\Comparison\GreaterThan;
+use Webmozart\Expression\Comparison\GreaterThanEqual;
+use Webmozart\Expression\Comparison\IsEmpty;
+use Webmozart\Expression\Comparison\LessThan;
+use Webmozart\Expression\Comparison\LessThanEqual;
+use Webmozart\Expression\Comparison\Matches;
+use Webmozart\Expression\Comparison\NotEmpty;
+use Webmozart\Expression\Comparison\NotEquals;
+use Webmozart\Expression\Comparison\NotNull;
+use Webmozart\Expression\Comparison\NotSame;
+use Webmozart\Expression\Comparison\Null;
+use Webmozart\Expression\Comparison\OneOf;
+use Webmozart\Expression\Comparison\Same;
+use Webmozart\Expression\Comparison\StartsWith;
+use Webmozart\Expression\Comparison\True;
+use Webmozart\Expression\Expr;
+use Webmozart\Expression\Key\Key;
+use Webmozart\Expression\Key\KeyExists;
+use Webmozart\Expression\Key\KeyNotExists;
+use Webmozart\Expression\Logic\Not;
 
 /**
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class CriterionTest extends PHPUnit_Framework_TestCase
+class ExprTest extends PHPUnit_Framework_TestCase
 {
     public static function getComparisons()
     {
@@ -140,18 +140,18 @@ class CriterionTest extends PHPUnit_Framework_TestCase
 
     public static function getCriterionTests()
     {
-        $criterion = new Null('amount');
+        $expr = new Null('amount');
 
         $tests = array(
             array(
                 'not',
-                array($criterion),
-                new Not($criterion),
+                array($expr),
+                new Not($expr),
             ),
             array(
                 'key',
-                array('field', 'key', $criterion),
-                new Key('field', new Key('key', $criterion)),
+                array('field', 'key', $expr),
+                new Key('field', new Key('key', $expr)),
             ),
             array(
                 'keyExists',
@@ -195,6 +195,6 @@ class CriterionTest extends PHPUnit_Framework_TestCase
      */
     public function testCreate($method, $args, $expected)
     {
-        $this->assertEquals($expected, call_user_func_array(array('Webmozart\Criteria\Criterion', $method), $args));
+        $this->assertEquals($expected, call_user_func_array(array('Webmozart\Expression\Expr', $method), $args));
     }
 }
