@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the webmozart/criteria package.
+ * This file is part of the webmozart/expression package.
  *
  * (c) Bernhard Schussek <bschussek@gmail.com>
  *
