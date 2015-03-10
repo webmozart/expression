@@ -35,20 +35,22 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
 
     public function testAndX()
     {
-        $conjunction = new Conjunction();
-        $conjunction->andX($notNull = new NotNull('name'));
-        $conjunction->andX($greaterThan = new GreaterThan('age', 0));
+        $conjunction1 = new Conjunction(array($notNull = new NotNull('name')));
 
-        $this->assertSame(array($notNull, $greaterThan), $conjunction->getConjuncts());
+        // Expressions are value objects, hence we must not alter the original
+        // conjunction
+        $conjunction2 = $conjunction1->andX($greaterThan = new GreaterThan('age', 0));
+
+        $this->assertSame(array($notNull), $conjunction1->getConjuncts());
+        $this->assertSame(array($notNull, $greaterThan), $conjunction2->getConjuncts());
     }
 
     public function testAndXIgnoresDuplicates()
     {
-        $conjunction = new Conjunction();
-        $conjunction->andX($notNull = new NotNull('name'));
-        $conjunction->andX(new NotNull('name'));
+        $conjunction1 = new Conjunction(array($notNull = new NotNull('name')));
+        $conjunction2 = $conjunction1->andX(new NotNull('name'));
 
-        $this->assertSame(array($notNull), $conjunction->getConjuncts());
+        $this->assertSame($conjunction1, $conjunction2);
     }
 
     /**
@@ -61,11 +63,12 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
         }
 
         $method = 'and'.ucfirst($method);
-        $conjunction = new Conjunction();
+        $conjunction1 = new Conjunction();
 
-        call_user_func_array(array($conjunction, $method), $args);
+        $conjunction2 = call_user_func_array(array($conjunction1, $method), $args);
 
-        $this->assertEquals(array($expected), $conjunction->getConjuncts());
+        $this->assertEquals(array(), $conjunction1->getConjuncts());
+        $this->assertEquals(array($expected), $conjunction2->getConjuncts());
     }
 
     public function testMatch()

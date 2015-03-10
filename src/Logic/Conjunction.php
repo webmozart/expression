@@ -78,9 +78,10 @@ class Conjunction implements Expression
             }
         }
 
-        $this->conjuncts[] = $expr;
+        $conjuncts = $this->conjuncts;
+        $conjuncts[] = $expr;
 
-        return $this;
+        return new Conjunction($conjuncts);
     }
 
     public function andNot(Expression $expr)

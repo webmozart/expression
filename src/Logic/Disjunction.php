@@ -78,9 +78,10 @@ class Disjunction implements Expression
             }
         }
 
-        $this->disjuncts[] = $x;
+        $disjuncts = $this->disjuncts;
+        $disjuncts[] = $x;
 
-        return $this;
+        return new Disjunction($disjuncts);
     }
 
     public function orNot(Expression $expr)

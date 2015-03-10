@@ -35,20 +35,22 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
 
     public function testOrX()
     {
-        $disjunction = new Disjunction();
-        $disjunction->orX($notNull = new NotNull('name'));
-        $disjunction->orX($greaterThan = new GreaterThan('age', 0));
+        $disjunction1 = new Disjunction(array($notNull = new NotNull('name')));
 
-        $this->assertSame(array($notNull, $greaterThan), $disjunction->getDisjuncts());
+        // Expressions are value objects, hence we must not alter the original
+        // conjunction
+        $disjunction2 = $disjunction1->orX($greaterThan = new GreaterThan('age', 0));
+
+        $this->assertSame(array($notNull), $disjunction1->getDisjuncts());
+        $this->assertSame(array($notNull, $greaterThan), $disjunction2->getDisjuncts());
     }
 
     public function testOrXIgnoresDuplicates()
     {
-        $disjunction = new Disjunction();
-        $disjunction->orX($notNull = new NotNull('name'));
-        $disjunction->orX(new NotNull('name'));
+        $disjunction1 = new Disjunction(array($notNull = new NotNull('name')));
+        $disjunction2 = $disjunction1->orX(new NotNull('name'));
 
-        $this->assertSame(array($notNull), $disjunction->getDisjuncts());
+        $this->assertSame($disjunction1, $disjunction2);
     }
 
     /**
@@ -61,11 +63,12 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
         }
 
         $method = 'or'.ucfirst($method);
-        $disjunction = new Disjunction();
+        $disjunction1 = new Disjunction();
 
-        call_user_func_array(array($disjunction, $method), $args);
+        $disjunction2 = call_user_func_array(array($disjunction1, $method), $args);
 
-        $this->assertEquals(array($expected), $disjunction->getDisjuncts());
+        $this->assertEquals(array(), $disjunction1->getDisjuncts());
+        $this->assertEquals(array($expected), $disjunction2->getDisjuncts());
     }
 
     public function testMatch()
