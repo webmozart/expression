@@ -11,8 +11,8 @@
 
 namespace Webmozart\Expression\PhpUnit;
 
+use SebastianBergmann\Comparator\Comparator;
 use SebastianBergmann\Comparator\ComparisonFailure;
-use SebastianBergmann\Comparator\ObjectComparator;
 use Webmozart\Expression\Expression;
 
 /**
@@ -21,7 +21,7 @@ use Webmozart\Expression\Expression;
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class ExpressionComparator extends ObjectComparator
+class ExpressionComparator extends Comparator
 {
     /**
      * {@inheritdoc}
@@ -53,8 +53,14 @@ class ExpressionComparator extends ObjectComparator
 
         /** @var Expression $actual */
         if (!$actual->equals($expected)) {
-            // Let the parent comparator generate the error
-            parent::assertEquals($expected, $actual, $delta, $canonicalize, $ignoreCase, $processed);
+            throw new ComparisonFailure(
+                $expected,
+                $actual,
+                $expected->toString(),
+                $actual->toString(),
+                false,
+                'Failed asserting that two expressions are equal.'
+            );
         }
     }
 }
