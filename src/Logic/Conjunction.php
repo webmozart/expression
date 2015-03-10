@@ -79,7 +79,12 @@ class Conjunction implements Expression
         }
 
         $conjuncts = $this->conjuncts;
-        $conjuncts[] = $expr;
+
+        if ($expr instanceof self) {
+            $conjuncts = array_merge($conjuncts, $expr->conjuncts);
+        } else {
+            $conjuncts[] = $expr;
+        }
 
         return new Conjunction($conjuncts);
     }

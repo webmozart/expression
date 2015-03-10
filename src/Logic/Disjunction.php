@@ -70,16 +70,21 @@ class Disjunction implements Expression
         return $this->disjuncts;
     }
 
-    public function orX(Expression $x)
+    public function orX(Expression $expr)
     {
         foreach ($this->disjuncts as $disjunct) {
-            if ($disjunct->equals($x)) {
+            if ($disjunct->equals($expr)) {
                 return $this;
             }
         }
 
         $disjuncts = $this->disjuncts;
-        $disjuncts[] = $x;
+
+        if ($expr instanceof self) {
+            $disjuncts = array_merge($disjuncts, $expr->disjuncts);
+        } else {
+            $disjuncts[] = $expr;
+        }
 
         return new Disjunction($disjuncts);
     }

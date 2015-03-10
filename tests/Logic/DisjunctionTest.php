@@ -53,6 +53,20 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
         $this->assertSame($disjunction1, $disjunction2);
     }
 
+    public function testOrXInlinesDisjunctions()
+    {
+        $disjunction1 = new Disjunction(array($notNull = new NotNull('name')));
+        $disjunction2 = new Disjunction(array($greaterThan = new GreaterThan('age', 0)));
+
+        // Expressions are value objects, hence we must not alter the original
+        // conjunction
+        $disjunction3 = $disjunction1->orX($disjunction2);
+
+        $this->assertSame(array($notNull), $disjunction1->getDisjuncts());
+        $this->assertSame(array($greaterThan), $disjunction2->getDisjuncts());
+        $this->assertSame(array($notNull, $greaterThan), $disjunction3->getDisjuncts());
+    }
+
     /**
      * @dataProvider \Webmozart\Expression\Tests\ExprTest::getCriterionTests
      */
