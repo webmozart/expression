@@ -3,7 +3,7 @@ Webmozart Expression
 
 [![Build Status](https://travis-ci.org/webmozart/expression.svg?branch=master)](https://travis-ci.org/webmozart/expression)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/webmozart/expression/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/webmozart/expression/?branch=master)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/00d2acd0-d0b7-458f-abca-278f79f0c2ed/mini.png)](https://insight.sensiolabs.com/projects/00d2acd0-d0b7-458f-abca-278f79f0c2ed)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/bd5a6248-0756-47d4-840d-621a33e3da5b/mini.png)](https://insight.sensiolabs.com/projects/bd5a6248-0756-47d4-840d-621a33e3da5b)
 [![Latest Stable Version](https://poser.pugx.org/webmozart/expression/v/stable.svg)](https://packagist.org/packages/webmozart/expression)
 [![Total Downloads](https://poser.pugx.org/webmozart/v/downloads.svg)](https://packagist.org/packages/webmozart/expression)
 [![Dependency Status](https://www.versioneye.com/php/webmozart:expression/1.0.0/badge.svg)](https://www.versioneye.com/php/webmozart:expression/1.0.0)
