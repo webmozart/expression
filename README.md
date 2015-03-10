@@ -5,7 +5,7 @@ Webmozart Expression
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/webmozart/expression/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/webmozart/expression/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/bd5a6248-0756-47d4-840d-621a33e3da5b/mini.png)](https://insight.sensiolabs.com/projects/bd5a6248-0756-47d4-840d-621a33e3da5b)
 [![Latest Stable Version](https://poser.pugx.org/webmozart/expression/v/stable.svg)](https://packagist.org/packages/webmozart/expression)
-[![Total Downloads](https://poser.pugx.org/webmozart/v/downloads.svg)](https://packagist.org/packages/webmozart/expression)
+[![Total Downloads](https://poser.pugx.org/webmozart/expression/downloads.svg)](https://packagist.org/packages/webmozart/expression)
 [![Dependency Status](https://www.versioneye.com/php/webmozart:expression/1.0.0/badge.svg)](https://www.versioneye.com/php/webmozart:expression/1.0.0)
 
 Latest release: none
