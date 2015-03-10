@@ -233,6 +233,56 @@ $c1->equals($c2);
 // => true
 ```
 
+Expression Transformation
+-------------------------
+
+In some cases, you will want to transform expressions to some other
+representation. A prime example is the transformation of an expression to a
+[Doctrine] query.
+
+You can implement a custom [`ExpressionVisitor`] to do the transformation. The 
+visitor's methods `enterExpression()` and `leaveExpression()` are called for 
+every node of the expression tree:
+
+```php
+use Webmozart\Expression\Traversal\ExpressionVisitor;
+
+class QueryBuilderVisitor implements ExpressionVisitor
+{
+    private $qb;
+    
+    public function __construct(QueryBuilder $qb)
+    {
+        $this->qb = $qb;
+    }
+    
+    public function enterExpression(Expression $expr)
+    {
+        // configure the $qb...
+    }
+    
+    public function leaveExpression(Expression $expr)
+    {
+        // configure the $qb...
+    }
+}
+```
+
+Use an [`ExpressionTraverser`] to traverse an expression with your visitor:
+
+```php
+public function expressionToQueryBuilder(Expression $expr)
+{
+    $qb = new QueryBuilder();
+    
+    $traverser = new ExpressionTraverser();
+    $traverser->addVisitor(new QueryBuilderVisitor($qb));
+    $traverser->traverse($expr);
+    
+    return $qb;
+}
+```
+
 Authors
 -------
 
@@ -268,6 +318,7 @@ License
 All contents of this package are licensed under the [MIT license].
 
 [Composer]: https://getcomposer.org
+[Doctrine]: http://www.doctrine-project.org/
 [Bernhard Schussek]: http://webmozarts.com
 [The Community Contributors]: https://github.com/webmozart/expression/graphs/contributors
 [issue tracker]: https://github.com/webmozart/expression
@@ -277,3 +328,5 @@ All contents of this package are licensed under the [MIT license].
 [`Expression`]: src/Expression.php
 [`Expr`]: src/Expr.php
 [`ExpressionComparator`]: src/PhpUnit/ExpressionComparator.php
+[`ExpressionTraverser`]: src/Traversal/ExpressionTraverser.php
+[`ExpressionVisitor`]: src/Traversal/ExpressionVisitor.php
