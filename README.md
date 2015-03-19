@@ -7,12 +7,21 @@ Webmozart Expression
 [![Total Downloads](https://poser.pugx.org/webmozart/expression/downloads.svg)](https://packagist.org/packages/webmozart/expression)
 [![Dependency Status](https://www.versioneye.com/php/webmozart:expression/1.0.0/badge.svg)](https://www.versioneye.com/php/webmozart:expression/1.0.0)
 
-Latest release: none
+Latest release: [1.0.0-beta](https://packagist.org/packages/webmozart/expression#1.0.0-beta)
 
 PHP >= 5.3.9
 
 With this library, you can easily filter results of your domain services using
 logical expressions.
+
+Installation
+------------
+
+Use [Composer] to install the package:
+
+```
+$ composer require webmozart/expression:~1.0@beta
+```
 
 Usage
 -----
@@ -287,15 +296,6 @@ Authors
 
 * [Bernhard Schussek] a.k.a. [@webmozart]
 * [The Community Contributors]
-
-Installation
-------------
-
-Use [Composer] to install the package:
-
-```
-$ composer require webmozart/expression@dev
-```
 
 Contribute
 ----------
