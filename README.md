@@ -177,13 +177,13 @@ to add embedded expressions:
 $expr = Expr::startsWith(Person::FIRST_NAME, 'Tho')
     ->andX(
         Expr::greaterThan(Person::AGE, 35)
-            ->orLessThan(Person::AGE, 20);
+            ->orLessThan(Person::AGE, 20)
     );
     
 $expr = Expr::startsWith(Person::FIRST_NAME, 'Tho')
     ->orX(
         Expr::notEmpty(Person::FIRST_NAME)
-            ->andGreaterThan(Person::AGE, 35);
+            ->andGreaterThan(Person::AGE, 35)
     );
 ```
 
