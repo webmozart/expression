@@ -51,6 +51,11 @@ abstract class Literal implements Expression
         return $this->andX(Expr::not($expr));
     }
 
+    public function andValid()
+    {
+        return $this->andX(Expr::valid());
+    }
+
     public function andKey($key, Expression $expr)
     {
         return $this->andX(Expr::key($key, $expr));
@@ -193,6 +198,11 @@ abstract class Literal implements Expression
     public function orNot(Expression $expr)
     {
         return $this->orX(Expr::not($expr));
+    }
+
+    public function orValid()
+    {
+        return $this->orX(Expr::valid());
     }
 
     public function orKey($key, Expression $expr)

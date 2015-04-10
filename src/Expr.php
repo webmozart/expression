@@ -28,6 +28,7 @@ use Webmozart\Expression\Comparison\In;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Logic\Not;
+use Webmozart\Expression\Logic\Valid;
 use Webmozart\Expression\Selector\All;
 use Webmozart\Expression\Selector\AtLeast;
 use Webmozart\Expression\Selector\AtMost;
@@ -84,6 +85,16 @@ class Expr
     public static function not(Expression $expr)
     {
         return new Not($expr);
+    }
+
+    /**
+     * Always valid (tautology).
+     *
+     * @return Valid The created expression.
+     */
+    public static function valid()
+    {
+        return new Valid();
     }
 
     /**

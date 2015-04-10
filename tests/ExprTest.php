@@ -30,6 +30,7 @@ use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Expr;
 use Webmozart\Expression\Logic\Not;
+use Webmozart\Expression\Logic\Valid;
 use Webmozart\Expression\Selector\All;
 use Webmozart\Expression\Selector\AtLeast;
 use Webmozart\Expression\Selector\AtMost;
@@ -188,6 +189,11 @@ class ExprTest extends PHPUnit_Framework_TestCase
                 'count',
                 array($expr),
                 new Count($expr),
+            ),
+            array(
+                'valid',
+                array(),
+                new Valid(),
             ),
         ), self::getComparisons());
 

@@ -120,6 +120,7 @@ Method                      | Description
 `in($values)`               | Check that a value occurs in a list of values
 `keyExists($key)`           | Check that a key exists in a value
 `keyNotExists($key)`        | Check that a key does not exist in a value
+`valid()`                   | Always true (tautology)
 
 Selectors
 ---------

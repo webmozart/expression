@@ -83,6 +83,11 @@ final class Conjunction implements Expression
         return $this->andX(Expr::not($expr));
     }
 
+    public function andValid()
+    {
+        return $this->andX(Expr::valid());
+    }
+
     public function andKey($key, Expression $expr)
     {
         return $this->andX(Expr::key($key, $expr));
