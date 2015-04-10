@@ -28,6 +28,7 @@ use Webmozart\Expression\Comparison\OneOf;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Logic\Not;
+use Webmozart\Expression\Selector\All;
 use Webmozart\Expression\Selector\AtLeast;
 use Webmozart\Expression\Selector\Exactly;
 use Webmozart\Expression\Selector\Key;
@@ -120,6 +121,18 @@ class Expr
     public static function exactly($count, Expression $expr)
     {
         return new Exactly($count, $expr);
+    }
+
+    /**
+     * Check that all entries of a traversable value match an expression.
+     *
+     * @param Expression $expr The evaluated expression.
+     *
+     * @return Key The created expression.
+     */
+    public static function all(Expression $expr)
+    {
+        return new All($expr);
     }
 
     /**

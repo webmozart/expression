@@ -66,6 +66,11 @@ abstract class Literal implements Expression
         return $this->andX(Expr::exactly($count, $expr));
     }
 
+    public function andAll(Expression $expr)
+    {
+        return $this->andX(Expr::all($expr));
+    }
+
     public function andNull($key = null)
     {
         return $this->andX(Expr::null($key));
@@ -193,6 +198,11 @@ abstract class Literal implements Expression
     public function orExactly($count, Expression $expr)
     {
         return $this->orX(Expr::exactly($count, $expr));
+    }
+
+    public function orAll(Expression $expr)
+    {
+        return $this->orX(Expr::all($expr));
     }
 
     public function orNull($key = null)

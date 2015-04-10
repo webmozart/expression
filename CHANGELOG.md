@@ -11,6 +11,7 @@ Changelog
  * removed argument `$strict` from `true()`, `false()` and `oneOf()`
  * added `atLeast()` selector
  * added `exactly()` selector
+ * added `all()` selector
 
 * 1.0.0-beta (2015-03-19)
 

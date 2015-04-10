@@ -30,6 +30,7 @@ use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Expr;
 use Webmozart\Expression\Logic\Not;
+use Webmozart\Expression\Selector\All;
 use Webmozart\Expression\Selector\AtLeast;
 use Webmozart\Expression\Selector\Exactly;
 use Webmozart\Expression\Selector\Key;
@@ -170,6 +171,11 @@ class ExprTest extends PHPUnit_Framework_TestCase
                 'exactly',
                 array(2, $expr),
                 new Exactly(2, $expr),
+            ),
+            array(
+                'all',
+                array($expr),
+                new All($expr),
             ),
         ), self::getComparisons());
 

@@ -98,6 +98,11 @@ final class Conjunction implements Expression
         return $this->andX(Expr::exactly($count, $expr));
     }
 
+    public function andAll(Expression $expr)
+    {
+        return $this->andX(Expr::all($expr));
+    }
+
     public function andNull($key = null)
     {
         return $this->andX(Expr::null($key));

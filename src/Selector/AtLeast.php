@@ -15,7 +15,7 @@ use Traversable;
 use Webmozart\Expression\Expression;
 
 /**
- * Checks that at least one iterator entry matches an expression.
+ * Checks that at least one iterator entry match an expression.
  *
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
