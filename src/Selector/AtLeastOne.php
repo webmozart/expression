@@ -14,7 +14,7 @@ namespace Webmozart\Expression\Selector;
 use Traversable;
 
 /**
- * Checks whether at least one iterator entry matches an expression.
+ * Checks that at least one iterator entry matches an expression.
  *
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>

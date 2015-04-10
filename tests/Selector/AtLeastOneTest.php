@@ -11,6 +11,7 @@
 
 namespace Webmozart\Expression\Tests\Selector;
 
+use ArrayIterator;
 use PHPUnit_Framework_TestCase;
 use Webmozart\Expression\Comparison\EndsWith;
 use Webmozart\Expression\Comparison\GreaterThan;
@@ -30,6 +31,9 @@ class AtLeastOneTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($expr->evaluate(array(9, 10, 11, 12)));
         $this->assertTrue($expr->evaluate(array(9, 10, 11)));
         $this->assertFalse($expr->evaluate(array(9, 10)));
+        $this->assertTrue($expr->evaluate(new ArrayIterator(array(9, 10, 11, 12))));
+        $this->assertTrue($expr->evaluate(new ArrayIterator(array(9, 10, 11))));
+        $this->assertFalse($expr->evaluate(new ArrayIterator(array(9, 10))));
         $this->assertFalse($expr->evaluate(array()));
         $this->assertFalse($expr->evaluate('foobar'));
     }

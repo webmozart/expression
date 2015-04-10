@@ -29,6 +29,7 @@ use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Logic\Not;
 use Webmozart\Expression\Selector\AtLeastOne;
+use Webmozart\Expression\Selector\Exactly;
 use Webmozart\Expression\Selector\Key;
 
 /**
@@ -105,6 +106,19 @@ class Expr
     public static function atLeastOne(Expression $expr)
     {
         return new AtLeastOne($expr);
+    }
+
+    /**
+     * Check that at exactly N entries of a traversable value match an expression.
+     *
+     * @param int        $count The number of entries that needs to match.
+     * @param Expression $expr  The evaluated expression.
+     *
+     * @return Key The created expression.
+     */
+    public static function exactly($count, Expression $expr)
+    {
+        return new Exactly($count, $expr);
     }
 
     /**

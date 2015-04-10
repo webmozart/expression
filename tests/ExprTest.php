@@ -31,6 +31,7 @@ use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Expr;
 use Webmozart\Expression\Logic\Not;
 use Webmozart\Expression\Selector\AtLeastOne;
+use Webmozart\Expression\Selector\Exactly;
 use Webmozart\Expression\Selector\Key;
 
 /**
@@ -164,6 +165,11 @@ class ExprTest extends PHPUnit_Framework_TestCase
                 'atLeastOne',
                 array($expr),
                 new AtLeastOne($expr),
+            ),
+            array(
+                'exactly',
+                array(2, $expr),
+                new Exactly(2, $expr),
             ),
         ), self::getComparisons());
 
