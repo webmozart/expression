@@ -88,6 +88,11 @@ final class Conjunction implements Expression
         return $this->andX(Expr::key($key, $expr));
     }
 
+    public function andAtLeastOne(Expression $expr)
+    {
+        return $this->andX(Expr::atLeastOne($expr));
+    }
+
     public function andNull($key = null)
     {
         return $this->andX(Expr::null($key));
@@ -236,7 +241,7 @@ final class Conjunction implements Expression
      */
     public function toString()
     {
-        return '('.implode(' && ', $this->conjuncts).')';
+        return implode(' && ', $this->conjuncts);
     }
 
     public function __toString()

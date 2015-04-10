@@ -20,7 +20,7 @@ use Webmozart\Expression\Comparison\NotSame;
  */
 class NotSameTest extends PHPUnit_Framework_TestCase
 {
-    public function testMatch()
+    public function testEvaluate()
     {
         $expr = new NotSame('10');
 

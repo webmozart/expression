@@ -20,7 +20,7 @@ use Webmozart\Expression\Comparison\KeyNotExists;
  */
 class KeyNotExistsTest extends PHPUnit_Framework_TestCase
 {
-    public function testMatch()
+    public function testEvaluate()
     {
         $expr = new KeyNotExists('key');
 

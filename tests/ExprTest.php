@@ -30,6 +30,7 @@ use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Expr;
 use Webmozart\Expression\Logic\Not;
+use Webmozart\Expression\Selector\AtLeastOne;
 use Webmozart\Expression\Selector\Key;
 
 /**
@@ -40,8 +41,6 @@ class ExprTest extends PHPUnit_Framework_TestCase
 {
     public static function getComparisons()
     {
-        $expr = new Same('10');
-
         return array(
             array(
                 'keyExists',
@@ -160,6 +159,11 @@ class ExprTest extends PHPUnit_Framework_TestCase
                 'key',
                 array('key', $expr),
                 new Key('key', $expr),
+            ),
+            array(
+                'atLeastOne',
+                array($expr),
+                new AtLeastOne($expr),
             ),
         ), self::getComparisons());
 

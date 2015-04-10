@@ -20,7 +20,7 @@ use Webmozart\Expression\Comparison\LessThan;
  */
 class LessThanTest extends PHPUnit_Framework_TestCase
 {
-    public function testMatch()
+    public function testEvaluate()
     {
         $expr = new LessThan(10);
 

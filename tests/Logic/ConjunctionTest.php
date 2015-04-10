@@ -94,7 +94,7 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array($expected), $conjunction2->getConjuncts());
     }
 
-    public function testMatch()
+    public function testEvaluate()
     {
         $conjunction = new Conjunction(array(
             new Key('name', new Same('Thomas')),
@@ -137,7 +137,7 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
         $expr1 = new Conjunction();
         $expr2 = new Conjunction(array(new GreaterThan(10), new EndsWith('.css')));
 
-        $this->assertSame('()', $expr1->toString());
-        $this->assertSame('(>10 && endsWith(".css"))', $expr2->toString());
+        $this->assertSame('', $expr1->toString());
+        $this->assertSame('>10 && endsWith(".css")', $expr2->toString());
     }
 }

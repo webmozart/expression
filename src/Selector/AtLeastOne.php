@@ -9,35 +9,34 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Expression\Tests\Selector\Fixtures;
+namespace Webmozart\Expression\Selector;
 
-use Webmozart\Expression\Expression;
-use Webmozart\Expression\Selector\Selector;
+use Traversable;
 
 /**
+ * Checks whether at least one iterator entry matches an expression.
+ *
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class TestSelector extends Selector
+final class AtLeastOne extends Selector
 {
-    /**
-     * @var string|int
-     */
-    private $key;
-
-    public function __construct($key, Expression $expr)
-    {
-        parent::__construct($expr);
-
-        $this->key = $key;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function evaluate($value)
     {
-        return $this->expr->evaluate($value[$this->key]);
+        if (!is_array($value) && !$value instanceof Traversable) {
+            return false;
+        }
+
+        foreach ($value as $entry) {
+            if ($this->expr->evaluate($entry)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -45,5 +44,6 @@ class TestSelector extends Selector
      */
     public function toString()
     {
+        return 'atLeastOne('.$this->expr->toString().')';
     }
 }

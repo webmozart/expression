@@ -20,7 +20,7 @@ use Webmozart\Expression\Comparison\StartsWith;
  */
 class StartsWithTest extends PHPUnit_Framework_TestCase
 {
-    public function testMatch()
+    public function testEvaluate()
     {
         $expr = new StartsWith('Thomas');
 

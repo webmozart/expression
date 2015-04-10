@@ -88,6 +88,11 @@ final class Disjunction implements Expression
         return $this->orX(Expr::key($key, $expr));
     }
 
+    public function orAtLeastOne(Expression $expr)
+    {
+        return $this->orX(Expr::atLeastOne($expr));
+    }
+
     public function orNull($key = null)
     {
         return $this->orX(Expr::null($key));
@@ -236,7 +241,7 @@ final class Disjunction implements Expression
      */
     public function toString()
     {
-        return '('.implode(' || ', $this->disjuncts).')';
+        return implode(' || ', $this->disjuncts);
     }
 
     public function __toString()

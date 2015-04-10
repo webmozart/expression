@@ -20,7 +20,7 @@ use Webmozart\Expression\Comparison\GreaterThan;
  */
 class GreaterThanTest extends PHPUnit_Framework_TestCase
 {
-    public function testMatch()
+    public function testEvaluate()
     {
         $expr = new GreaterThan(10);
 

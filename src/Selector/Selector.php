@@ -27,7 +27,7 @@ abstract class Selector extends Literal
     /**
      * @var Expression
      */
-    private $expr;
+    protected $expr;
 
     /**
      * Checks whether a value selected from the evaluated value matches an
@@ -53,20 +53,6 @@ abstract class Selector extends Literal
     /**
      * {@inheritdoc}
      */
-    final public function evaluate($value)
-    {
-        try {
-            $value = $this->select($value);
-        } catch (SelectFailedException $e) {
-            return false;
-        }
-
-        return $this->expr->evaluate($value);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function equivalentTo(Expression $other)
     {
         if (get_class($this) !== get_class($other)) {
@@ -76,23 +62,4 @@ abstract class Selector extends Literal
         /** @var Selector $other */
         return $this->expr->equivalentTo($other->expr);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function toString()
-    {
-        return $this->expr->toString();
-    }
-
-    /**
-     * Selects the value to be evaluated from the given value.
-     *
-     * @param mixed $value The evaluated value.
-     *
-     * @return mixed The value selected from the evaluated value.
-     *
-     * @throws SelectFailedException If the value cannot be selected.
-     */
-    abstract protected function select($value);
 }

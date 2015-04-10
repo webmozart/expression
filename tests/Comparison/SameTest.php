@@ -20,7 +20,7 @@ use Webmozart\Expression\Comparison\Same;
  */
 class SameTest extends PHPUnit_Framework_TestCase
 {
-    public function testMatch()
+    public function testEvaluate()
     {
         $expr = new Same('10');
 

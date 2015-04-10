@@ -172,8 +172,9 @@ The ['Expr'] class features several other selectors similar to `key()`. The
 following table lists them all:
 
 Method                      | Description
---------------------------- | --------------------------------------------------------
+--------------------------- | --------------------------------------------------------------------------
 `key($key, $expr)`          | Evaluate an expression for a key of an array
+`atLeastOne($expr)`         | Check that an expression matches at least one entry of a traversable value
 
 Logical Operators
 -----------------

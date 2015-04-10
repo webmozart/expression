@@ -24,7 +24,7 @@ use Webmozart\Expression\Logic\Not;
  */
 class NotTest extends PHPUnit_Framework_TestCase
 {
-    public function testMatch()
+    public function testEvaluate()
     {
         $expr = new Not(new StartsWith('Thomas'));
 

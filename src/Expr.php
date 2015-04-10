@@ -28,6 +28,7 @@ use Webmozart\Expression\Comparison\OneOf;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Logic\Not;
+use Webmozart\Expression\Selector\AtLeastOne;
 use Webmozart\Expression\Selector\Key;
 
 /**
@@ -92,6 +93,18 @@ class Expr
     public static function key($key, Expression $expr)
     {
         return new Key($key, $expr);
+    }
+
+    /**
+     * Check that at least one entry of a traversable value matches an expression.
+     *
+     * @param Expression $expr The evaluated expression.
+     *
+     * @return Key The created expression.
+     */
+    public static function atLeastOne(Expression $expr)
+    {
+        return new AtLeastOne($expr);
     }
 
     /**

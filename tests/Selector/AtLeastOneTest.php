@@ -15,35 +15,36 @@ use PHPUnit_Framework_TestCase;
 use Webmozart\Expression\Comparison\EndsWith;
 use Webmozart\Expression\Comparison\GreaterThan;
 use Webmozart\Expression\Logic\Conjunction;
-use Webmozart\Expression\Selector\Key;
+use Webmozart\Expression\Selector\AtLeastOne;
 
 /**
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class KeyTest extends PHPUnit_Framework_TestCase
+class AtLeastOneTest extends PHPUnit_Framework_TestCase
 {
     public function testEvaluate()
     {
-        $expr = new Key('key', new GreaterThan(10));
+        $expr = new AtLeastOne(new GreaterThan(10));
 
-        $this->assertTrue($expr->evaluate(array('key' => 11)));
-        $this->assertFalse($expr->evaluate(array('key' => 9)));
+        $this->assertTrue($expr->evaluate(array(9, 10, 11, 12)));
+        $this->assertTrue($expr->evaluate(array(9, 10, 11)));
+        $this->assertFalse($expr->evaluate(array(9, 10)));
         $this->assertFalse($expr->evaluate(array()));
         $this->assertFalse($expr->evaluate('foobar'));
     }
 
     public function testToString()
     {
-        $expr1 = new Key('name', new GreaterThan(10));
-        $expr2 = new Key('name', new EndsWith('.css'));
-        $expr3 = new Key('name', new Conjunction(array(
+        $expr1 = new AtLeastOne(new GreaterThan(10));
+        $expr2 = new AtLeastOne(new EndsWith('.css'));
+        $expr3 = new AtLeastOne(new Conjunction(array(
             new GreaterThan(10),
             new EndsWith('.css'),
         )));
 
-        $this->assertSame('name>10', $expr1->toString());
-        $this->assertSame('name.endsWith(".css")', $expr2->toString());
-        $this->assertSame('name(>10 && endsWith(".css"))', $expr3->toString());
+        $this->assertSame('atLeastOne(>10)', $expr1->toString());
+        $this->assertSame('atLeastOne(endsWith(".css"))', $expr2->toString());
+        $this->assertSame('atLeastOne(>10 && endsWith(".css"))', $expr3->toString());
     }
 }

@@ -20,7 +20,7 @@ use Webmozart\Expression\Comparison\Matches;
  */
 class MatchesTest extends PHPUnit_Framework_TestCase
 {
-    public function testMatch()
+    public function testEvaluate()
     {
         $expr = new Matches('~^\d{4}$~');
 

@@ -20,7 +20,7 @@ use Webmozart\Expression\Comparison\OneOf;
  */
 class OneOfTest extends PHPUnit_Framework_TestCase
 {
-    public function testMatchStrict()
+    public function testEvaluateStrict()
     {
         $expr = new OneOf(array('1', '2', '3'));
 
@@ -32,7 +32,7 @@ class OneOfTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($expr->evaluate(null));
     }
 
-    public function testMatchNonStrict()
+    public function testEvaluateNonStrict()
     {
         $expr = new OneOf(array('1', '2', '3'), false);
 

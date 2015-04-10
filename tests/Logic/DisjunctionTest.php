@@ -96,7 +96,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(array($expected), $disjunction2->getDisjuncts());
     }
 
-    public function testMatch()
+    public function testEvaluate()
     {
         $disjunction = new Disjunction(array(
             new Key('name', new Same('Thomas')),
@@ -139,7 +139,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
         $expr1 = new Disjunction();
         $expr2 = new Disjunction(array(new GreaterThan(10), new EndsWith('.css')));
 
-        $this->assertSame('()', $expr1->toString());
-        $this->assertSame('(>10 || endsWith(".css"))', $expr2->toString());
+        $this->assertSame('', $expr1->toString());
+        $this->assertSame('>10 || endsWith(".css")', $expr2->toString());
     }
 }

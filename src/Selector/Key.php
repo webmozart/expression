@@ -12,6 +12,8 @@
 namespace Webmozart\Expression\Selector;
 
 use Webmozart\Expression\Expression;
+use Webmozart\Expression\Logic\Conjunction;
+use Webmozart\Expression\Logic\Disjunction;
 
 /**
  * Checks whether an array key matches an expression.
@@ -52,17 +54,17 @@ final class Key extends Selector
     /**
      * {@inheritdoc}
      */
-    protected function select($value)
+    public function evaluate($value)
     {
         if (!is_array($value)) {
-            throw new SelectFailedException('Array expected.');
+            return false;
         }
 
         if (!array_key_exists($this->key, $value)) {
-            throw new SelectFailedException('Key not found expected.');
+            return false;
         }
 
-        return $value[$this->key];
+        return $this->expr->evaluate($value[$this->key]);
     }
 
     /**
@@ -83,7 +85,11 @@ final class Key extends Selector
      */
     public function toString()
     {
-        $exprString = parent::toString();
+        $exprString = $this->expr->toString();
+
+        if ($this->expr instanceof Conjunction || $this->expr instanceof Disjunction) {
+            return $this->key.'('.$exprString.')';
+        }
 
         // Append "functions" with "."
         if (isset($exprString[0]) && ctype_alpha($exprString[0])) {

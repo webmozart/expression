@@ -28,13 +28,6 @@ class SelectorTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expr, $selector->getExpression());
     }
 
-    public function testToString()
-    {
-        $selector = new TestSelector('key', new Same('10'));
-
-        $this->assertSame('==="10"', $selector->toString());
-    }
-
     public function testEquivalentTo()
     {
         // "key" is ignored in the dummy implementation
