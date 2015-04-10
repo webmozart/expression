@@ -33,6 +33,7 @@ use Webmozart\Expression\Logic\Not;
 use Webmozart\Expression\Selector\All;
 use Webmozart\Expression\Selector\AtLeast;
 use Webmozart\Expression\Selector\AtMost;
+use Webmozart\Expression\Selector\Count;
 use Webmozart\Expression\Selector\Exactly;
 use Webmozart\Expression\Selector\Key;
 
@@ -182,6 +183,11 @@ class ExprTest extends PHPUnit_Framework_TestCase
                 'all',
                 array($expr),
                 new All($expr),
+            ),
+            array(
+                'count',
+                array($expr),
+                new Count($expr),
             ),
         ), self::getComparisons());
 

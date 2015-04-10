@@ -145,7 +145,7 @@ $expr->evaluate(12);
 ```
 
 Passing the array key is equivalent to using the `key()` selector of the
-['Expr'] class:
+[`Expr`] class:
 
 ```php
 $expr = Expr::greaterThan(10, 'age');
@@ -168,7 +168,7 @@ $expr->evaluate(array(
 // => true
 ```
 
-The ['Expr'] class features several other selectors similar to `key()`. The
+The [`Expr`] class features several other selectors similar to `key()`. The
 following table lists them all:
 
 Method                      | Description
@@ -178,6 +178,7 @@ Method                      | Description
 `atMost($count, $expr)`     | Check that an expression matches for at most `$count` entries of a traversable
 `exactly($count, $expr)`    | Check that an expression matches for exactly `$count` entries of a traversable
 `all($expr)`                | Check that an expression matches for all entries of a traversable
+`count($expr)`              | Check that an expression matches for the count of a collection
 
 Logical Operators
 -----------------

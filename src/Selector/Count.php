@@ -11,32 +11,26 @@
 
 namespace Webmozart\Expression\Selector;
 
-use Traversable;
+use Countable;
 
 /**
- * Checks that all iterator entries match an expression.
+ * Checks that the count of a collection matches an expression.
  *
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class All extends Selector
+final class Count extends Selector
 {
     /**
      * {@inheritdoc}
      */
     public function evaluate($value)
     {
-        if (!is_array($value) && !$value instanceof Traversable) {
+        if (!is_array($value) && !$value instanceof Countable) {
             return false;
         }
 
-        foreach ($value as $entry) {
-            if (!$this->expr->evaluate($entry)) {
-                return false;
-            }
-        }
-
-        return true;
+        return $this->expr->evaluate(count($value));
     }
 
     /**
@@ -44,6 +38,6 @@ final class All extends Selector
      */
     public function toString()
     {
-        return 'all('.$this->expr->toString().')';
+        return 'count('.$this->expr->toString().')';
     }
 }

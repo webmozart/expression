@@ -33,6 +33,7 @@ use Webmozart\Expression\Logic\Not;
 use Webmozart\Expression\Selector\All;
 use Webmozart\Expression\Selector\AtLeast;
 use Webmozart\Expression\Selector\AtMost;
+use Webmozart\Expression\Selector\Count;
 use Webmozart\Expression\Selector\Exactly;
 use Webmozart\Expression\Selector\Key;
 
@@ -104,6 +105,8 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
             array(new Exactly(1, new Same('10')), new Exactly(1, new Same('10'))),
 
             array(new All(new Same('10')), new All(new Same('10'))),
+
+            array(new Count(new Same(10)), new Count(new Same(10))),
         );
     }
 
@@ -192,6 +195,9 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
 
             array(new All(new Same('10')), new All(new Same(10))),
             array(new All(new Same('10')), new Same('10')),
+
+            array(new Count(new Same('10')), new Count(new Same(10))),
+            array(new Count(new Same('10')), new Same('10')),
         );
     }
 

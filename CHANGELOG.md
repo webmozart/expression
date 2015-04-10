@@ -13,6 +13,7 @@ Changelog
  * added `exactly()` selector
  * added `all()` selector
  * added `atMost()` selector
+ * added `count()` selector
 
 * 1.0.0-beta (2015-03-19)
 

@@ -31,6 +31,7 @@ use Webmozart\Expression\Logic\Not;
 use Webmozart\Expression\Selector\All;
 use Webmozart\Expression\Selector\AtLeast;
 use Webmozart\Expression\Selector\AtMost;
+use Webmozart\Expression\Selector\Count;
 use Webmozart\Expression\Selector\Exactly;
 use Webmozart\Expression\Selector\Key;
 
@@ -104,7 +105,7 @@ class Expr
      * @param int        $count The minimum number of entries that need to match.
      * @param Expression $expr  The evaluated expression.
      *
-     * @return Key The created expression.
+     * @return AtLeast The created expression.
      */
     public static function atLeast($count, Expression $expr)
     {
@@ -117,7 +118,7 @@ class Expr
      * @param int        $count The maximum number of entries that need to match.
      * @param Expression $expr  The evaluated expression.
      *
-     * @return Key The created expression.
+     * @return AtMost The created expression.
      */
     public static function atMost($count, Expression $expr)
     {
@@ -130,7 +131,7 @@ class Expr
      * @param int        $count The number of entries that need to match.
      * @param Expression $expr  The evaluated expression.
      *
-     * @return Key The created expression.
+     * @return Exactly The created expression.
      */
     public static function exactly($count, Expression $expr)
     {
@@ -142,11 +143,23 @@ class Expr
      *
      * @param Expression $expr The evaluated expression.
      *
-     * @return Key The created expression.
+     * @return All The created expression.
      */
     public static function all(Expression $expr)
     {
         return new All($expr);
+    }
+
+    /**
+     * Check that the count of a collection matches an expression.
+     *
+     * @param Expression $expr The evaluated expression.
+     *
+     * @return Count The created expression.
+     */
+    public static function count(Expression $expr)
+    {
+        return new Count($expr);
     }
 
     /**
