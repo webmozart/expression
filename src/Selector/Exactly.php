@@ -68,6 +68,19 @@ final class Exactly extends Selector
     /**
      * {@inheritdoc}
      */
+    public function equivalentTo(Expression $other)
+    {
+        if (!parent::equivalentTo($other)) {
+            return false;
+        }
+
+        /** @var static $other */
+        return $this->count == $other->count;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function toString()
     {
         return 'exactly('.$this->count.', '.$this->expr->toString().')';
