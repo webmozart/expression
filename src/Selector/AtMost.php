@@ -15,12 +15,12 @@ use Traversable;
 use Webmozart\Expression\Expression;
 
 /**
- * Checks that at least N iterator entries match an expression.
+ * Checks that at most N iterator entries match an expression.
  *
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class AtLeast extends Selector
+final class AtMost extends Selector
 {
     /**
      * @var int
@@ -30,7 +30,7 @@ final class AtLeast extends Selector
     /**
      * Creates the expression.
      *
-     * @param int        $count The minimum number of entries that must match
+     * @param int        $count The maximum number of entries that must match
      *                          the expression.
      * @param Expression $expr  The expression to evaluate with each entry.
      */
@@ -56,13 +56,13 @@ final class AtLeast extends Selector
             if ($this->expr->evaluate($entry)) {
                 ++$found;
 
-                if ($found >= $this->count) {
-                    return true;
+                if ($found > $this->count) {
+                    return false;
                 }
             }
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -83,6 +83,6 @@ final class AtLeast extends Selector
      */
     public function toString()
     {
-        return 'atLeast('.$this->count.', '.$this->expr->toString().')';
+        return 'atMost('.$this->count.', '.$this->expr->toString().')';
     }
 }

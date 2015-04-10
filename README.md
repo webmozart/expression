@@ -175,6 +175,7 @@ Method                      | Description
 --------------------------- | -------------------------------------------------------------------------------
 `key($key, $expr)`          | Evaluate an expression for a key of an array
 `atLeast($count, $expr)`    | Check that an expression matches for at least `$count` entries of a traversable
+`atMost($count, $expr)`     | Check that an expression matches for at most `$count` entries of a traversable
 `exactly($count, $expr)`    | Check that an expression matches for exactly `$count` entries of a traversable
 `all($expr)`                | Check that an expression matches for all entries of a traversable
 

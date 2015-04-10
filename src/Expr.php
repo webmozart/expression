@@ -30,6 +30,7 @@ use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Logic\Not;
 use Webmozart\Expression\Selector\All;
 use Webmozart\Expression\Selector\AtLeast;
+use Webmozart\Expression\Selector\AtMost;
 use Webmozart\Expression\Selector\Exactly;
 use Webmozart\Expression\Selector\Key;
 
@@ -108,6 +109,19 @@ class Expr
     public static function atLeast($count, Expression $expr)
     {
         return new AtLeast($count, $expr);
+    }
+
+    /**
+     * Check that at most N entries of a traversable value match an expression.
+     *
+     * @param int        $count The maximum number of entries that need to match.
+     * @param Expression $expr  The evaluated expression.
+     *
+     * @return Key The created expression.
+     */
+    public static function atMost($count, Expression $expr)
+    {
+        return new AtMost($count, $expr);
     }
 
     /**

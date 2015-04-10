@@ -12,6 +12,7 @@ Changelog
  * added `atLeast()` selector
  * added `exactly()` selector
  * added `all()` selector
+ * added `atMost()` selector
 
 * 1.0.0-beta (2015-03-19)
 

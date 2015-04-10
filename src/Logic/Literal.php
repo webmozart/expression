@@ -61,6 +61,11 @@ abstract class Literal implements Expression
         return $this->andX(Expr::atLeast($count, $expr));
     }
 
+    public function andAtMost($count, Expression $expr)
+    {
+        return $this->andX(Expr::atMost($count, $expr));
+    }
+
     public function andExactly($count, Expression $expr)
     {
         return $this->andX(Expr::exactly($count, $expr));
@@ -193,6 +198,11 @@ abstract class Literal implements Expression
     public function orAtLeast($count, Expression $expr)
     {
         return $this->orX(Expr::atLeast($count, $expr));
+    }
+
+    public function orAtMost($count, Expression $expr)
+    {
+        return $this->orX(Expr::atMost($count, $expr));
     }
 
     public function orExactly($count, Expression $expr)

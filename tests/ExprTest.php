@@ -32,6 +32,7 @@ use Webmozart\Expression\Expr;
 use Webmozart\Expression\Logic\Not;
 use Webmozart\Expression\Selector\All;
 use Webmozart\Expression\Selector\AtLeast;
+use Webmozart\Expression\Selector\AtMost;
 use Webmozart\Expression\Selector\Exactly;
 use Webmozart\Expression\Selector\Key;
 
@@ -166,6 +167,11 @@ class ExprTest extends PHPUnit_Framework_TestCase
                 'atLeast',
                 array(2, $expr),
                 new AtLeast(2, $expr),
+            ),
+            array(
+                'atMost',
+                array(2, $expr),
+                new AtMost(2, $expr),
             ),
             array(
                 'exactly',

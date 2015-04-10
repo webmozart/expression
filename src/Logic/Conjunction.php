@@ -93,6 +93,11 @@ final class Conjunction implements Expression
         return $this->andX(Expr::atLeast($count, $expr));
     }
 
+    public function andAtMost($count, Expression $expr)
+    {
+        return $this->andX(Expr::atMost($count, $expr));
+    }
+
     public function andExactly($count, Expression $expr)
     {
         return $this->andX(Expr::exactly($count, $expr));
