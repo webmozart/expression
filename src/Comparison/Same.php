@@ -23,7 +23,7 @@ use Webmozart\Expression\Util\StringUtil;
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class Same extends Literal
+final class Same extends Literal
 {
     /**
      * @var mixed
@@ -61,13 +61,14 @@ class Same extends Literal
     /**
      * {@inheritdoc}
      */
-    public function equals(Expression $other)
+    public function equivalentTo(Expression $other)
     {
         if ($other instanceof OneOf && $other->isStrict()) {
             return array($this->comparedValue) === $other->getAcceptedValues();
         }
 
-        return $this == $other;
+        // Since this class is final, we can check with instanceof
+        return $other instanceof $this && $this->comparedValue === $other->comparedValue;
     }
 
     /**

@@ -52,7 +52,7 @@ class ExpressionComparator extends Comparator
         }
 
         /** @var Expression $actual */
-        if (!$actual->equals($expected)) {
+        if (!$actual->equivalentTo($expected)) {
             throw new ComparisonFailure(
                 $expected,
                 $actual,

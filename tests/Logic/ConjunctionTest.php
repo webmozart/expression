@@ -15,8 +15,8 @@ use PHPUnit_Framework_TestCase;
 use Webmozart\Expression\Comparison\EndsWith;
 use Webmozart\Expression\Comparison\GreaterThan;
 use Webmozart\Expression\Comparison\Same;
-use Webmozart\Expression\Key\Key;
 use Webmozart\Expression\Logic\Conjunction;
+use Webmozart\Expression\Selector\Key;
 
 /**
  * @since  1.0
@@ -77,7 +77,7 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider \Webmozart\Expression\Tests\ExprTest::getCriterionTests
+     * @dataProvider \Webmozart\Expression\Tests\ExprTest::getMethodTests
      */
     public function testAnd($method, $args, $expected)
     {
@@ -107,7 +107,7 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($conjunction->evaluate(array('name' => null, 'age' => 0)));
     }
 
-    public function testEquals()
+    public function testEquivalentTo()
     {
         $conjunction1 = new Conjunction(array(
             new Key('name', new Same('10')),
@@ -124,12 +124,12 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
             new Key('age', new GreaterThan(0)),
         ));
 
-        $this->assertTrue($conjunction1->equals($conjunction2));
-        $this->assertTrue($conjunction2->equals($conjunction1));
-        $this->assertFalse($conjunction2->equals($conjunction3));
-        $this->assertFalse($conjunction3->equals($conjunction2));
-        $this->assertFalse($conjunction1->equals($conjunction3));
-        $this->assertFalse($conjunction3->equals($conjunction1));
+        $this->assertTrue($conjunction1->equivalentTo($conjunction2));
+        $this->assertTrue($conjunction2->equivalentTo($conjunction1));
+        $this->assertFalse($conjunction2->equivalentTo($conjunction3));
+        $this->assertFalse($conjunction3->equivalentTo($conjunction2));
+        $this->assertFalse($conjunction1->equivalentTo($conjunction3));
+        $this->assertFalse($conjunction3->equivalentTo($conjunction1));
     }
 
     public function testToString()

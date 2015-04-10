@@ -41,8 +41,8 @@ When querying persons from the repository, you can create new expressions with
 the [`Expr`] factory class:
 
 ```php
-$expr = Expr::startsWith(Person::FIRST_NAME, 'Tho')
-    ->andGreaterThan(Person::AGE, 35);
+$expr = Expr::startsWith('Tho', Person::FIRST_NAME)
+    ->andGreaterThan(35, Person::AGE);
     
 $persons = $repository->findPersons($expr);
 ```
@@ -93,59 +93,87 @@ class PersonRepositoryImpl implements PersonRepository
 }
 ```
 
-Basic Expression
-----------------
+Expressions
+-----------
 
 The [`Expr`] class is able to create the following expressions:
 
-### Field Expressions
+Method                      | Description
+--------------------------- | --------------------------------------------------------
+`null()`                    | Check that a value is `null`
+`notNull()`                 | Check that a value is not `null`
+`isEmpty()`                 | Check that a value is empty (using `empty()`)
+`notEmpty()`                | Check that a value is not empty (using `empty()`)
+`true()`                    | Check that a value is `true`
+`false()`                   | Check that a value is `false`
+`equals($value)`            | Check that a value equals another value (using `==`)
+`notEquals($value)`         | Check that a value does not equal another value (using `!=`)
+`same($value)`              | Check that a value is identical to another value (using `===`)
+`notSame($value)`           | Check that a value does not equal another value (using `!==`)
+`greaterThan($value)`       | Check that a value is greater than another value
+`greaterThanEqual($value)`  | Check that a value is greater than or equal to another value
+`lessThan($value)`          | Check that a value is less than another value
+`lessThanEqual($value)`     | Check that a value is less than or equal to another value
+`startsWith($prefix)`       | Check that a value starts with a given string
+`endsWith($suffix)`         | Check that a value ends with a given string
+`matches($regExp)`          | Check that a value matches a regular expression
+`oneOf($values)`            | Check that a value is one of a list of values
+`keyExists($key)`           | Check that a key exists in a value
+`keyNotExists($key)`        | Check that a key does not exist in a value
 
-Method                                      | Description
-------------------------------------------- | --------------------------------------------------------
-`null($field)`                              | Check that a field is `null` 
-`notNull($field)`                           | Check that a field is not `null` 
-`isEmpty($field)`                           | Check that a field is empty (using `empty()`) 
-`notEmpty($field)`                          | Check that a field is not empty (using `empty()`) 
-`true($field, $strict = true)`              | Check that a field is `true` 
-`false($field, $strict = true)`             | Check that a field is `false`
-`equals($field, $value)`                    | Check that a field equals a value (using `==`) 
-`notEquals($field, $value)`                 | Check that a field does not equal a value (using `!=`) 
-`same($field, $value)`                      | Check that a field is identical to a value (using `===`) 
-`notSame($field, $value)`                   | Check that a field does not equal a value (using `!==`) 
-`greaterThan($field, $value)`               | Check that a field is greater than a value 
-`greaterThanEqual($field, $value)`          | Check that a field is greater than or equal to a value 
-`lessThan($field, $value)`                  | Check that a field is less than a value 
-`lessThanEqual($field, $value)`             | Check that a field is less than or equal to a value 
-`startsWith($field, $prefix)`               | Check that a field starts with a given string 
-`endsWith($field, $suffix)`                 | Check that a field ends with a given string 
-`matches($field, $regExp)`                  | Check that a field matches a regular expression 
-`oneOf($field, $values, $strict = true)`    | Check that a field contains one of a list of values
+Selectors
+---------
 
-### Array Expressions
+Every method in [`Expr`] accepts the name of the tested array key as last,
+optional argument:
 
-Method                                               | Description
----------------------------------------------------- | --------------------------------------------------------
-`keyExists($field, $key)`                            | Check that a key exists 
-`keyNotExists($field, $key)`                         | Check that a key does not exist 
-`keyNull($field, $key)`                              | Check that a key is `null` 
-`keyNotNull($field, $key)`                           | Check that a key is not `null` 
-`keyEmpty($field, $key)`                             | Check that a key is empty (using `empty()`) 
-`keyNotEmpty($field, $key)`                          | Check that a key is not empty (using `empty()`) 
-`keyTrue($field, $key, $strict = true)`              | Check that a key is `true` 
-`keyFalse($field, $key, $strict = true)`             | Check that a key is `false`
-`keyEquals($field, $key, $value)`                    | Check that a key equals a value (using `==`) 
-`keyNotEquals($field, $key, $value)`                 | Check that a key does not equal a value (using `!=`) 
-`keySame($field, $key, $value)`                      | Check that a key is identical to a value (using `===`) 
-`keyNotSame($field, $key, $value)`                   | Check that a key does not equal a value (using `!==`) 
-`keyGreaterThan($field, $key, $value)`               | Check that a key is greater than a value 
-`keyGreaterThanEqual($field, $key, $value)`          | Check that a key is greater than or equal to a value 
-`keyLessThan($field, $key, $value)`                  | Check that a key is less than a value 
-`keyLessThanEqual($field, $key, $value)`             | Check that a key is less than or equal to a value 
-`keyStartsWith($field, $key, $prefix)`               | Check that a key starts with a given string 
-`keyEndsWith($field, $key, $suffix)`                 | Check that a key ends with a given string 
-`keyMatches($field, $key, $regExp)`                  | Check that a key matches a regular expression 
-`keyOneOf($field, $key, $values, $strict = true)`    | Check that a key contains one of a list of values
-`key($field, $key, Expression $expr)`                | Check that a key matches some expression
+```php
+$expr = Expr::greaterThan(10, 'age');
+
+$expr->evaluate(array('age' => 10));
+// => true
+```
+
+If the name of the key is omitted, the expression is evaluated directly for the
+passed value:
+
+```php
+$expr = Expr::greaterThan(10);
+
+$expr->evaluate(12);
+// => true
+```
+
+Passing the array key is equivalent to using the `key()` selector of the
+['Expr'] class:
+
+```php
+$expr = Expr::greaterThan(10, 'age');
+
+// same as
+$expr = Expr::key('age', Expr::greaterThan(10));
+```
+
+By using the `key()` method directly, you can evaluate expressions for
+multi-dimensional arrays:
+
+```php
+$expr = Expr::key('parameters', Expr::key('age', Expr::greaterThan(10)));
+
+$expr->evaluate(array(
+    'parameters' => array(
+        'age' => 12,
+    ),
+));
+// => true
+```
+
+The ['Expr'] class features several other selectors similar to `key()`. The
+following table lists them all:
+
+Method                      | Description
+--------------------------- | --------------------------------------------------------
+`key($key, $expr)`          | Evaluate an expression for a key of an array
 
 Logical Operators
 -----------------
@@ -153,37 +181,37 @@ Logical Operators
 You can negate an expression with `not()`:
 
 ```php
-$expr = Expr::not(Expr::startsWith(Person::FIRST_NAME, 'Tho'));
+$expr = Expr::not(Expr::startsWith('Tho', Person::FIRST_NAME));
 ```
 
 You can connect multiple expressions with "and" using the `and*()` methods:
 
 ```php
-$expr = Expr::startsWith(Person::FIRST_NAME, 'Tho')
-    ->andGreaterThan(Person::AGE, 35);
+$expr = Expr::startsWith('Tho', Person::FIRST_NAME)
+    ->andGreaterThan(35, Person::AGE);
 ```
 
 The same is possible for the "or" operator:
 
 ```php
-$expr = Expr::startsWith(Person::FIRST_NAME, 'Tho')
-    ->orGreaterThan(Person::AGE, 35);
+$expr = Expr::startsWith('Tho', Person::FIRST_NAME)
+    ->orGreaterThan(35, Person::AGE);
 ```
 
 If you want to mix and match "and" and "or" operators, use `andX()` and `orX()`
 to add embedded expressions:
 
 ```php
-$expr = Expr::startsWith(Person::FIRST_NAME, 'Tho')
+$expr = Expr::startsWith('Tho', Person::FIRST_NAME)
     ->andX(
-        Expr::greaterThan(Person::AGE, 35)
-            ->orLessThan(Person::AGE, 20);
+        Expr::greaterThan(35, Person::AGE)
+            ->orLessThan(20, Person::AGE);
     );
     
-$expr = Expr::startsWith(Person::FIRST_NAME, 'Tho')
+$expr = Expr::startsWith('Tho', Person::FIRST_NAME)
     ->orX(
         Expr::notEmpty(Person::FIRST_NAME)
-            ->andGreaterThan(Person::AGE, 35);
+            ->andGreaterThan(35, Person::AGE);
     );
 ```
 
@@ -221,8 +249,8 @@ as objects:
  
 ```php
 // Logically equivalent
-$c1 = Expr::notNull(Person::FIRST_NAME)->andSame(Person::AGE, 35);
-$c2 = Expr::same(Person::AGE, 35)->andNotNull(Person::FIRST_NAME);
+$c1 = Expr::notNull(Person::FIRST_NAME)->andSame(35, Person::AGE);
+$c2 = Expr::same(35, Person::AGE)->andNotNull(Person::FIRST_NAME);
 
 $c1 == $c2;
 // => false
@@ -231,8 +259,8 @@ $c1->equals($c2);
 // => true
 
 // Also logically equivalent
-$c1 = Expr::same(Person::AGE, 35);
-$c2 = Expr::oneOf(Person::AGE, array(35));
+$c1 = Expr::same(35, Person::AGE);
+$c2 = Expr::oneOf(array(35), Person::AGE);
 
 $c1 == $c2;
 // => false

@@ -11,6 +11,7 @@
 
 namespace Webmozart\Expression\Comparison;
 
+use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
 use Webmozart\Expression\Util\StringUtil;
 
@@ -22,7 +23,7 @@ use Webmozart\Expression\Util\StringUtil;
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class LessThan extends Literal
+final class LessThan extends Literal
 {
     /**
      * @var mixed
@@ -55,6 +56,15 @@ class LessThan extends Literal
     public function evaluate($value)
     {
         return $value < $this->comparedValue;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function equivalentTo(Expression $other)
+    {
+        // Since this class is final, we can check with instanceof
+        return $other instanceof $this && $this->comparedValue == $other->comparedValue;
     }
 
     /**

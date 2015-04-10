@@ -39,7 +39,7 @@ class LiteralTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider \Webmozart\Expression\Tests\ExprTest::getCriterionTests
+     * @dataProvider \Webmozart\Expression\Tests\ExprTest::getMethodTests
      */
     public function testAnd($method, $args, $expected)
     {
@@ -71,7 +71,7 @@ class LiteralTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider \Webmozart\Expression\Tests\ExprTest::getCriterionTests
+     * @dataProvider \Webmozart\Expression\Tests\ExprTest::getMethodTests
      */
     public function testOr($method, $args, $expected)
     {
@@ -85,16 +85,5 @@ class LiteralTest extends PHPUnit_Framework_TestCase
         $result = call_user_func_array(array($literal, $method), $args);
 
         $this->assertEquals(new Disjunction(array($literal, $expected)), $result);
-    }
-
-    public function testEquals()
-    {
-        $expr1 = new TestLiteral('foo');
-        $expr2 = new Same('10');
-
-        $this->assertTrue($expr1->equals(new TestLiteral('foo')));
-        $this->assertFalse($expr1->equals(new TestLiteral('bar')));
-        $this->assertTrue($expr2->equals(new Same('10')));
-        $this->assertFalse($expr2->equals(new Same('11')));
     }
 }

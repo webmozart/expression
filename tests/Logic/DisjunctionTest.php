@@ -15,8 +15,8 @@ use PHPUnit_Framework_TestCase;
 use Webmozart\Expression\Comparison\EndsWith;
 use Webmozart\Expression\Comparison\GreaterThan;
 use Webmozart\Expression\Comparison\Same;
-use Webmozart\Expression\Key\Key;
 use Webmozart\Expression\Logic\Disjunction;
+use Webmozart\Expression\Selector\Key;
 
 /**
  * @since  1.0
@@ -79,7 +79,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider \Webmozart\Expression\Tests\ExprTest::getCriterionTests
+     * @dataProvider \Webmozart\Expression\Tests\ExprTest::getMethodTests
      */
     public function testOr($method, $args, $expected)
     {
@@ -109,7 +109,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($disjunction->evaluate(array('name' => null, 'age' => 0)));
     }
 
-    public function testEquals()
+    public function testEquivalentTo()
     {
         $disjunction1 = new Disjunction(array(
             new Key('name', new Same('10')),
@@ -126,12 +126,12 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
             new Key('age', new GreaterThan(0)),
         ));
 
-        $this->assertTrue($disjunction1->equals($disjunction2));
-        $this->assertTrue($disjunction2->equals($disjunction1));
-        $this->assertFalse($disjunction2->equals($disjunction3));
-        $this->assertFalse($disjunction3->equals($disjunction2));
-        $this->assertFalse($disjunction1->equals($disjunction3));
-        $this->assertFalse($disjunction3->equals($disjunction1));
+        $this->assertTrue($disjunction1->equivalentTo($disjunction2));
+        $this->assertTrue($disjunction2->equivalentTo($disjunction1));
+        $this->assertFalse($disjunction2->equivalentTo($disjunction3));
+        $this->assertFalse($disjunction3->equivalentTo($disjunction2));
+        $this->assertFalse($disjunction1->equivalentTo($disjunction3));
+        $this->assertFalse($disjunction3->equivalentTo($disjunction1));
     }
 
     public function testToString()

@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Expression\Tests\Key;
+namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Expression\Key\KeyNotExists;
+use Webmozart\Expression\Comparison\KeyNotExists;
 
 /**
  * @since  1.0
@@ -26,16 +26,7 @@ class KeyNotExistsTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($expr->evaluate(array()));
         $this->assertFalse($expr->evaluate(array('key' => 11)));
-    }
-
-    /**
-     * @expectedException \RuntimeException
-     */
-    public function testMatchFailsIfNoArray()
-    {
-        $expr = new KeyNotExists('key');
-
-        $expr->evaluate('foobar');
+        $this->assertFalse($expr->evaluate('foobar'));
     }
 
     public function testToString()

@@ -19,7 +19,7 @@ use Webmozart\Expression\Expression;
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class Not extends Literal
+final class Not extends Literal
 {
     /**
      * @var Expression
@@ -57,14 +57,10 @@ class Not extends Literal
     /**
      * {@inheritdoc}
      */
-    public function equals(Expression $other)
+    public function equivalentTo(Expression $other)
     {
-        if (get_class($this) !== get_class($other)) {
-            return false;
-        }
-
-        /** @var Not $other */
-        return $this->expr->equals($other->expr);
+        // Since this class is final, we can check with instanceof
+        return $other instanceof $this && $this->expr->equivalentTo($other->expr);
     }
 
     /**

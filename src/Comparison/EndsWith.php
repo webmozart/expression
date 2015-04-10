@@ -11,6 +11,7 @@
 
 namespace Webmozart\Expression\Comparison;
 
+use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
 use Webmozart\Expression\Util\StringUtil;
 
@@ -20,7 +21,7 @@ use Webmozart\Expression\Util\StringUtil;
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class EndsWith extends Literal
+final class EndsWith extends Literal
 {
     /**
      * @var string
@@ -53,6 +54,15 @@ class EndsWith extends Literal
     public function evaluate($value)
     {
         return $this->acceptedSuffix === substr($value, -strlen($this->acceptedSuffix));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function equivalentTo(Expression $other)
+    {
+        // Since this class is final, we can check with instanceof
+        return $other instanceof $this && $this->acceptedSuffix == $other->acceptedSuffix;
     }
 
     /**

@@ -23,7 +23,7 @@ use Webmozart\Expression\Expression;
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class Disjunction implements Expression
+final class Disjunction implements Expression
 {
     /**
      * @var Expression[]
@@ -62,7 +62,7 @@ class Disjunction implements Expression
     public function orX(Expression $expr)
     {
         foreach ($this->disjuncts as $disjunct) {
-            if ($disjunct->equals($expr)) {
+            if ($disjunct->equivalentTo($expr)) {
                 return $this;
             }
         }
@@ -83,199 +83,109 @@ class Disjunction implements Expression
         return $this->orX(Expr::not($expr));
     }
 
-    public function orNull($field)
+    public function orKey($key, Expression $expr)
     {
-        return $this->orX(Expr::null($field));
+        return $this->orX(Expr::key($key, $expr));
     }
 
-    public function orNotNull($field)
+    public function orNull($key = null)
     {
-        return $this->orX(Expr::notNull($field));
+        return $this->orX(Expr::null($key));
     }
 
-    public function orEmpty($field)
+    public function orNotNull($key = null)
     {
-        return $this->orX(Expr::isEmpty($field));
+        return $this->orX(Expr::notNull($key));
     }
 
-    public function orNotEmpty($field)
+    public function orEmpty($key = null)
     {
-        return $this->orX(Expr::notEmpty($field));
+        return $this->orX(Expr::isEmpty($key));
     }
 
-    public function orTrue($field, $strict = true)
+    public function orNotEmpty($key = null)
     {
-        return $this->orX(Expr::true($field, $strict));
+        return $this->orX(Expr::notEmpty($key));
     }
 
-    public function orFalse($field, $strict = true)
+    public function orTrue($key = null)
     {
-        return $this->orX(Expr::false($field, $strict));
+        return $this->orX(Expr::true($key));
     }
 
-    public function orEquals($field, $value)
+    public function orFalse($key = null)
     {
-        return $this->orX(Expr::equals($field, $value));
+        return $this->orX(Expr::false($key));
     }
 
-    public function orNotEquals($field, $value)
+    public function orEquals($value, $key = null)
     {
-        return $this->orX(Expr::notEquals($field, $value));
+        return $this->orX(Expr::equals($value, $key));
     }
 
-    public function orSame($field, $value)
+    public function orNotEquals($value, $key = null)
     {
-        return $this->orX(Expr::same($field, $value));
+        return $this->orX(Expr::notEquals($value, $key));
     }
 
-    public function orNotSame($field, $value)
+    public function orSame($value, $key = null)
     {
-        return $this->orX(Expr::notSame($field, $value));
+        return $this->orX(Expr::same($value, $key));
     }
 
-    public function orGreaterThan($field, $value)
+    public function orNotSame($value, $key = null)
     {
-        return $this->orX(Expr::greaterThan($field, $value));
+        return $this->orX(Expr::notSame($value, $key));
     }
 
-    public function orGreaterThanEqual($field, $value)
+    public function orGreaterThan($value, $key = null)
     {
-        return $this->orX(Expr::greaterThanEqual($field, $value));
+        return $this->orX(Expr::greaterThan($value, $key));
     }
 
-    public function orLessThan($field, $value)
+    public function orGreaterThanEqual($value, $key = null)
     {
-        return $this->orX(Expr::lessThan($field, $value));
+        return $this->orX(Expr::greaterThanEqual($value, $key));
     }
 
-    public function orLessThanEqual($field, $value)
+    public function orLessThan($value, $key = null)
     {
-        return $this->orX(Expr::lessThanEqual($field, $value));
+        return $this->orX(Expr::lessThan($value, $key));
     }
 
-    public function orOneOf($field, array $values, $strict = true)
+    public function orLessThanEqual($value, $key = null)
     {
-        return $this->orX(Expr::oneOf($field, $values, $strict));
+        return $this->orX(Expr::lessThanEqual($value, $key));
     }
 
-    public function orMatches($field, $regExp)
+    public function orOneOf(array $values, $key = null)
     {
-        return $this->orX(Expr::matches($field, $regExp));
+        return $this->orX(Expr::oneOf($values, $key));
     }
 
-    public function orStartsWith($field, $prefix)
+    public function orMatches($regExp, $key = null)
     {
-        return $this->orX(Expr::startsWith($field, $prefix));
+        return $this->orX(Expr::matches($regExp, $key));
     }
 
-    public function orEndsWith($field, $suffix)
+    public function orStartsWith($prefix, $key = null)
     {
-        return $this->orX(Expr::endsWith($field, $suffix));
+        return $this->orX(Expr::startsWith($prefix, $key));
     }
 
-    public function orKey($field, $key, Expression $expr)
+    public function orEndsWith($suffix, $key = null)
     {
-        return $this->orX(Expr::key($field, $key, $expr));
+        return $this->orX(Expr::endsWith($suffix, $key));
     }
 
-    public function orKeyExists($field, $key)
+    public function orKeyExists($keyName, $key = null)
     {
-        return $this->orX(Expr::keyExists($field, $key));
+        return $this->orX(Expr::keyExists($keyName, $key));
     }
 
-    public function orKeyNotExists($field, $key)
+    public function orKeyNotExists($keyName, $key = null)
     {
-        return $this->orX(Expr::keyNotExists($field, $key));
-    }
-
-    public function orKeyNull($field, $key)
-    {
-        return $this->orX(Expr::keyNull($field, $key));
-    }
-
-    public function orKeyNotNull($field, $key)
-    {
-        return $this->orX(Expr::keyNotNull($field, $key));
-    }
-
-    public function orKeyEmpty($field, $key)
-    {
-        return $this->orX(Expr::keyEmpty($field, $key));
-    }
-
-    public function orKeyNotEmpty($field, $key)
-    {
-        return $this->orX(Expr::keyNotEmpty($field, $key));
-    }
-
-    public function orKeyTrue($field, $key, $strict = true)
-    {
-        return $this->orX(Expr::keyTrue($field, $key, $strict));
-    }
-
-    public function orKeyFalse($field, $key, $strict = true)
-    {
-        return $this->orX(Expr::keyFalse($field, $key, $strict));
-    }
-
-    public function orKeyEquals($field, $key, $value)
-    {
-        return $this->orX(Expr::keyEquals($field, $key, $value));
-    }
-
-    public function orKeyNotEquals($field, $key, $value)
-    {
-        return $this->orX(Expr::keyNotEquals($field, $key, $value));
-    }
-
-    public function orKeySame($field, $key, $value)
-    {
-        return $this->orX(Expr::keySame($field, $key, $value));
-    }
-
-    public function orKeyNotSame($field, $key, $value)
-    {
-        return $this->orX(Expr::keyNotSame($field, $key, $value));
-    }
-
-    public function orKeyGreaterThan($field, $key, $value)
-    {
-        return $this->orX(Expr::keyGreaterThan($field, $key, $value));
-    }
-
-    public function orKeyGreaterThanEqual($field, $key, $value)
-    {
-        return $this->orX(Expr::keyGreaterThanEqual($field, $key, $value));
-    }
-
-    public function orKeyLessThan($field, $key, $value)
-    {
-        return $this->orX(Expr::keyLessThan($field, $key, $value));
-    }
-
-    public function orKeyLessThanEqual($field, $key, $value)
-    {
-        return $this->orX(Expr::keyLessThanEqual($field, $key, $value));
-    }
-
-    public function orKeyOneOf($field, $key, array $values, $strict = true)
-    {
-        return $this->orX(Expr::keyOneOf($field, $key, $values, $strict));
-    }
-
-    public function orKeyMatches($field, $key, $regExp)
-    {
-        return $this->orX(Expr::keyMatches($field, $key, $regExp));
-    }
-
-    public function orKeyStartsWith($field, $key, $prefix)
-    {
-        return $this->orX(Expr::keyStartsWith($field, $key, $prefix));
-    }
-
-    public function orKeyEndsWith($field, $key, $suffix)
-    {
-        return $this->orX(Expr::keyEndsWith($field, $key, $suffix));
+        return $this->orX(Expr::keyNotExists($keyName, $key));
     }
 
     /**
@@ -295,7 +205,7 @@ class Disjunction implements Expression
     /**
      * {@inheritdoc}
      */
-    public function equals(Expression $other)
+    public function equivalentTo(Expression $other)
     {
         if (get_class($this) !== get_class($other)) {
             return false;
@@ -307,7 +217,7 @@ class Disjunction implements Expression
 
         foreach ($leftDisjuncts as $leftDisjunct) {
             foreach ($rightDisjuncts as $j => $rightDisjunct) {
-                if ($leftDisjunct->equals($rightDisjunct)) {
+                if ($leftDisjunct->equivalentTo($rightDisjunct)) {
                     unset($rightDisjuncts[$j]);
                     continue 2;
                 }

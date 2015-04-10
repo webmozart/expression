@@ -21,7 +21,7 @@ use Webmozart\Expression\Util\StringUtil;
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class OneOf extends Literal
+final class OneOf extends Literal
 {
     /**
      * @var array
@@ -77,7 +77,7 @@ class OneOf extends Literal
     /**
      * {@inheritdoc}
      */
-    public function equals(Expression $other)
+    public function equivalentTo(Expression $other)
     {
         if (1 === count($this->acceptedValues)) {
             // OneOf is logically equivalent to Same if strict and only one value
@@ -91,7 +91,27 @@ class OneOf extends Literal
             }
         }
 
-        return $this == $other;
+        // Since this class is final, we can check with instanceof
+        if (!$other instanceof $this) {
+            return false;
+        }
+
+        if ($this->strict !== $other->strict) {
+            return false;
+        }
+
+        if (!$this->strict) {
+            return $this->acceptedValues == $other->acceptedValues;
+        }
+
+        $acceptedValuesLeft = $this->acceptedValues;
+        $acceptedValuesRight = $other->acceptedValues;
+
+        // Ignore order
+        sort($acceptedValuesLeft);
+        sort($acceptedValuesRight);
+
+        return $acceptedValuesLeft === $acceptedValuesRight;
     }
 
     /**

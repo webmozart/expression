@@ -37,7 +37,7 @@ interface Expression
      * @return bool Returns `true` if the expressions are logically equivalent
      *              and `false` otherwise.
      */
-    public function equals(Expression $other);
+    public function equivalentTo(Expression $other);
 
     /**
      * Returns a string representation of the expression.

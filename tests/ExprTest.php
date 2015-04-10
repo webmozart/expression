@@ -17,6 +17,8 @@ use Webmozart\Expression\Comparison\Equals;
 use Webmozart\Expression\Comparison\GreaterThan;
 use Webmozart\Expression\Comparison\GreaterThanEqual;
 use Webmozart\Expression\Comparison\IsEmpty;
+use Webmozart\Expression\Comparison\KeyExists;
+use Webmozart\Expression\Comparison\KeyNotExists;
 use Webmozart\Expression\Comparison\LessThan;
 use Webmozart\Expression\Comparison\LessThanEqual;
 use Webmozart\Expression\Comparison\Matches;
@@ -27,10 +29,8 @@ use Webmozart\Expression\Comparison\OneOf;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Expr;
-use Webmozart\Expression\Key\Key;
-use Webmozart\Expression\Key\KeyExists;
-use Webmozart\Expression\Key\KeyNotExists;
 use Webmozart\Expression\Logic\Not;
+use Webmozart\Expression\Selector\Key;
 
 /**
  * @since  1.0
@@ -40,7 +40,19 @@ class ExprTest extends PHPUnit_Framework_TestCase
 {
     public static function getComparisons()
     {
+        $expr = new Same('10');
+
         return array(
+            array(
+                'keyExists',
+                array('key'),
+                new KeyExists('key'),
+            ),
+            array(
+                'keyNotExists',
+                array('key'),
+                new KeyNotExists('key'),
+            ),
             array(
                 'null',
                 array(),
@@ -63,23 +75,13 @@ class ExprTest extends PHPUnit_Framework_TestCase
             ),
             array(
                 'true',
-                array(true),
+                array(),
                 new Same(true)
             ),
             array(
-                'true',
-                array(false),
-                new Equals(true)
-            ),
-            array(
                 'false',
-                array(true),
+                array(),
                 new Same(false)
-            ),
-            array(
-                'false',
-                array(false),
-                new Equals(false)
             ),
             array(
                 'equals',
@@ -138,17 +140,17 @@ class ExprTest extends PHPUnit_Framework_TestCase
             ),
             array(
                 'oneOf',
-                array(array('1', '2', '3'), false),
-                new OneOf(array('1', '2', '3'), false)
+                array(array('1', '2', '3')),
+                new OneOf(array('1', '2', '3'))
             ),
         );
     }
 
-    public static function getCriterionTests()
+    public static function getMethodTests()
     {
         $expr = new Same('10');
 
-        $tests = array(
+        $tests = array_merge(array(
             array(
                 'not',
                 array($expr),
@@ -156,40 +158,17 @@ class ExprTest extends PHPUnit_Framework_TestCase
             ),
             array(
                 'key',
-                array('field', 'key', $expr),
-                new Key('field', new Key('key', $expr)),
+                array('key', $expr),
+                new Key('key', $expr),
             ),
-            array(
-                'keyExists',
-                array('field', 'key'),
-                new Key('field', new KeyExists('key')),
-            ),
-            array(
-                'keyNotExists',
-                array('field', 'key'),
-                new Key('field', new KeyNotExists('key')),
-            ),
-        );
+        ), self::getComparisons());
 
-        // Add tests for the field methods
+        // Add tests for the $key arguments
         foreach (self::getComparisons() as $comparisonTest) {
             $tests[] = array(
                 $comparisonTest[0],
-                array_merge(array('field'), $comparisonTest[1]),
+                array_merge($comparisonTest[1], array('field')),
                 new Key('field', $comparisonTest[2]),
-            );
-        }
-
-        // Add tests for the key methods
-        foreach (self::getComparisons() as $comparisonTest) {
-            if ('is' === substr($comparisonTest[0], 0, 2)) {
-                $comparisonTest[0] = substr($comparisonTest[0], 2);
-            }
-
-            $tests[] = array(
-                'key'.ucfirst($comparisonTest[0]),
-                array_merge(array('field', 'key'), $comparisonTest[1]),
-                new Key('field', new Key('key', $comparisonTest[2])),
             );
         }
 
@@ -197,7 +176,7 @@ class ExprTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider getCriterionTests
+     * @dataProvider getMethodTests
      */
     public function testCreate($method, $args, $expected)
     {

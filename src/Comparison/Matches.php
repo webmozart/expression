@@ -11,6 +11,7 @@
 
 namespace Webmozart\Expression\Comparison;
 
+use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
 use Webmozart\Expression\Util\StringUtil;
 
@@ -22,7 +23,7 @@ use Webmozart\Expression\Util\StringUtil;
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class Matches extends Literal
+final class Matches extends Literal
 {
     /**
      * @var string
@@ -55,6 +56,15 @@ class Matches extends Literal
     public function evaluate($value)
     {
         return (bool) preg_match($this->regExp, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function equivalentTo(Expression $other)
+    {
+        // Since this class is final, we can check with instanceof
+        return $other instanceof $this && $this->regExp === $other->regExp;
     }
 
     /**

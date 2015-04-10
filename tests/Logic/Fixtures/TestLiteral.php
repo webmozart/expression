@@ -11,6 +11,7 @@
 
 namespace Webmozart\Expression\Tests\Logic\Fixtures;
 
+use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
 
 /**
@@ -28,6 +29,11 @@ class TestLiteral extends Literal
 
     public function evaluate($value)
     {
+    }
+
+    public function equivalentTo(Expression $other)
+    {
+        return $other instanceof $this && $this->value === $other->value;
     }
 
     public function toString()

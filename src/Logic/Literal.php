@@ -37,17 +37,9 @@ use Webmozart\Expression\Expression;
  */
 abstract class Literal implements Expression
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function equals(Expression $other)
-    {
-        return $other == $this;
-    }
-
     public function andX(Expression $expr)
     {
-        if ($this->equals($expr)) {
+        if ($this->equivalentTo($expr)) {
             return $this;
         }
 
@@ -59,204 +51,114 @@ abstract class Literal implements Expression
         return $this->andX(Expr::not($expr));
     }
 
-    public function andNull($field)
+    public function andKey($key, Expression $expr)
     {
-        return $this->andX(Expr::null($field));
+        return $this->andX(Expr::key($key, $expr));
     }
 
-    public function andNotNull($field)
+    public function andNull($key = null)
     {
-        return $this->andX(Expr::notNull($field));
+        return $this->andX(Expr::null($key));
     }
 
-    public function andEmpty($field)
+    public function andNotNull($key = null)
     {
-        return $this->andX(Expr::isEmpty($field));
+        return $this->andX(Expr::notNull($key));
     }
 
-    public function andNotEmpty($field)
+    public function andEmpty($key = null)
     {
-        return $this->andX(Expr::notEmpty($field));
+        return $this->andX(Expr::isEmpty($key));
     }
 
-    public function andTrue($field, $strict = true)
+    public function andNotEmpty($key = null)
     {
-        return $this->andX(Expr::true($field, $strict));
+        return $this->andX(Expr::notEmpty($key));
     }
 
-    public function andFalse($field, $strict = true)
+    public function andTrue($key = null)
     {
-        return $this->andX(Expr::false($field, $strict));
+        return $this->andX(Expr::true($key));
     }
 
-    public function andEquals($field, $value)
+    public function andFalse($key = null)
     {
-        return $this->andX(Expr::equals($field, $value));
+        return $this->andX(Expr::false($key));
     }
 
-    public function andNotEquals($field, $value)
+    public function andEquals($value, $key = null)
     {
-        return $this->andX(Expr::notEquals($field, $value));
+        return $this->andX(Expr::equals($value, $key));
     }
 
-    public function andSame($field, $value)
+    public function andNotEquals($value, $key = null)
     {
-        return $this->andX(Expr::same($field, $value));
+        return $this->andX(Expr::notEquals($value, $key));
     }
 
-    public function andNotSame($field, $value)
+    public function andSame($value, $key = null)
     {
-        return $this->andX(Expr::notSame($field, $value));
+        return $this->andX(Expr::same($value, $key));
     }
 
-    public function andGreaterThan($field, $value)
+    public function andNotSame($value, $key = null)
     {
-        return $this->andX(Expr::greaterThan($field, $value));
+        return $this->andX(Expr::notSame($value, $key));
     }
 
-    public function andGreaterThanEqual($field, $value)
+    public function andGreaterThan($value, $key = null)
     {
-        return $this->andX(Expr::greaterThanEqual($field, $value));
+        return $this->andX(Expr::greaterThan($value, $key));
     }
 
-    public function andLessThan($field, $value)
+    public function andGreaterThanEqual($value, $key = null)
     {
-        return $this->andX(Expr::lessThan($field, $value));
+        return $this->andX(Expr::greaterThanEqual($value, $key));
     }
 
-    public function andLessThanEqual($field, $value)
+    public function andLessThan($value, $key = null)
     {
-        return $this->andX(Expr::lessThanEqual($field, $value));
+        return $this->andX(Expr::lessThan($value, $key));
     }
 
-    public function andOneOf($field, array $values, $strict = true)
+    public function andLessThanEqual($value, $key = null)
     {
-        return $this->andX(Expr::oneOf($field, $values, $strict));
+        return $this->andX(Expr::lessThanEqual($value, $key));
     }
 
-    public function andMatches($field, $regExp)
+    public function andOneOf(array $values, $key = null)
     {
-        return $this->andX(Expr::matches($field, $regExp));
+        return $this->andX(Expr::oneOf($values, $key));
     }
 
-    public function andStartsWith($field, $prefix)
+    public function andMatches($regExp, $key = null)
     {
-        return $this->andX(Expr::startsWith($field, $prefix));
+        return $this->andX(Expr::matches($regExp, $key));
     }
 
-    public function andEndsWith($field, $suffix)
+    public function andStartsWith($prefix, $key = null)
     {
-        return $this->andX(Expr::endsWith($field, $suffix));
+        return $this->andX(Expr::startsWith($prefix, $key));
     }
 
-    public function andKey($field, $key, Expression $expr)
+    public function andEndsWith($suffix, $key = null)
     {
-        return $this->andX(Expr::key($field, $key, $expr));
+        return $this->andX(Expr::endsWith($suffix, $key));
     }
 
-    public function andKeyExists($field, $key)
+    public function andKeyExists($keyName, $key = null)
     {
-        return $this->andX(Expr::keyExists($field, $key));
+        return $this->andX(Expr::keyExists($keyName, $key));
     }
 
-    public function andKeyNotExists($field, $key)
+    public function andKeyNotExists($keyName, $key = null)
     {
-        return $this->andX(Expr::keyNotExists($field, $key));
-    }
-
-    public function andKeyNull($field, $key)
-    {
-        return $this->andX(Expr::keyNull($field, $key));
-    }
-
-    public function andKeyNotNull($field, $key)
-    {
-        return $this->andX(Expr::keyNotNull($field, $key));
-    }
-
-    public function andKeyEmpty($field, $key)
-    {
-        return $this->andX(Expr::keyEmpty($field, $key));
-    }
-
-    public function andKeyNotEmpty($field, $key)
-    {
-        return $this->andX(Expr::keyNotEmpty($field, $key));
-    }
-
-    public function andKeyTrue($field, $key, $strict = true)
-    {
-        return $this->andX(Expr::keyTrue($field, $key, $strict));
-    }
-
-    public function andKeyFalse($field, $key, $strict = true)
-    {
-        return $this->andX(Expr::keyFalse($field, $key, $strict));
-    }
-
-    public function andKeyEquals($field, $key, $value)
-    {
-        return $this->andX(Expr::keyEquals($field, $key, $value));
-    }
-
-    public function andKeyNotEquals($field, $key, $value)
-    {
-        return $this->andX(Expr::keyNotEquals($field, $key, $value));
-    }
-
-    public function andKeySame($field, $key, $value)
-    {
-        return $this->andX(Expr::keySame($field, $key, $value));
-    }
-
-    public function andKeyNotSame($field, $key, $value)
-    {
-        return $this->andX(Expr::keyNotSame($field, $key, $value));
-    }
-
-    public function andKeyGreaterThan($field, $key, $value)
-    {
-        return $this->andX(Expr::keyGreaterThan($field, $key, $value));
-    }
-
-    public function andKeyGreaterThanEqual($field, $key, $value)
-    {
-        return $this->andX(Expr::keyGreaterThanEqual($field, $key, $value));
-    }
-
-    public function andKeyLessThan($field, $key, $value)
-    {
-        return $this->andX(Expr::keyLessThan($field, $key, $value));
-    }
-
-    public function andKeyLessThanEqual($field, $key, $value)
-    {
-        return $this->andX(Expr::keyLessThanEqual($field, $key, $value));
-    }
-
-    public function andKeyOneOf($field, $key, array $values, $strict = true)
-    {
-        return $this->andX(Expr::keyOneOf($field, $key, $values, $strict));
-    }
-
-    public function andKeyMatches($field, $key, $regExp)
-    {
-        return $this->andX(Expr::keyMatches($field, $key, $regExp));
-    }
-
-    public function andKeyStartsWith($field, $key, $prefix)
-    {
-        return $this->andX(Expr::keyStartsWith($field, $key, $prefix));
-    }
-
-    public function andKeyEndsWith($field, $key, $suffix)
-    {
-        return $this->andX(Expr::keyEndsWith($field, $key, $suffix));
+        return $this->andX(Expr::keyNotExists($keyName, $key));
     }
 
     public function orX(Expression $expr)
     {
-        if ($this->equals($expr)) {
+        if ($this->equivalentTo($expr)) {
             return $this;
         }
 
@@ -268,199 +170,109 @@ abstract class Literal implements Expression
         return $this->orX(Expr::not($expr));
     }
 
-    public function orNull($field)
+    public function orKey($key, Expression $expr)
     {
-        return $this->orX(Expr::null($field));
+        return $this->orX(Expr::key($key, $expr));
     }
 
-    public function orNotNull($field)
+    public function orNull($key = null)
     {
-        return $this->orX(Expr::notNull($field));
+        return $this->orX(Expr::null($key));
     }
 
-    public function orEmpty($field)
+    public function orNotNull($key = null)
     {
-        return $this->orX(Expr::isEmpty($field));
+        return $this->orX(Expr::notNull($key));
     }
 
-    public function orNotEmpty($field)
+    public function orEmpty($key = null)
     {
-        return $this->orX(Expr::notEmpty($field));
+        return $this->orX(Expr::isEmpty($key));
     }
 
-    public function orTrue($field, $strict = true)
+    public function orNotEmpty($key = null)
     {
-        return $this->orX(Expr::true($field, $strict));
+        return $this->orX(Expr::notEmpty($key));
     }
 
-    public function orFalse($field, $strict = true)
+    public function orTrue($key = null)
     {
-        return $this->orX(Expr::false($field, $strict));
+        return $this->orX(Expr::true($key));
     }
 
-    public function orEquals($field, $value)
+    public function orFalse($key = null)
     {
-        return $this->orX(Expr::equals($field, $value));
+        return $this->orX(Expr::false($key));
     }
 
-    public function orNotEquals($field, $value)
+    public function orEquals($value, $key = null)
     {
-        return $this->orX(Expr::notEquals($field, $value));
+        return $this->orX(Expr::equals($value, $key));
     }
 
-    public function orSame($field, $value)
+    public function orNotEquals($value, $key = null)
     {
-        return $this->orX(Expr::same($field, $value));
+        return $this->orX(Expr::notEquals($value, $key));
     }
 
-    public function orNotSame($field, $value)
+    public function orSame($value, $key = null)
     {
-        return $this->orX(Expr::notSame($field, $value));
+        return $this->orX(Expr::same($value, $key));
     }
 
-    public function orGreaterThan($field, $value)
+    public function orNotSame($value, $key = null)
     {
-        return $this->orX(Expr::greaterThan($field, $value));
+        return $this->orX(Expr::notSame($value, $key));
     }
 
-    public function orGreaterThanEqual($field, $value)
+    public function orGreaterThan($value, $key = null)
     {
-        return $this->orX(Expr::greaterThanEqual($field, $value));
+        return $this->orX(Expr::greaterThan($value, $key));
     }
 
-    public function orLessThan($field, $value)
+    public function orGreaterThanEqual($value, $key = null)
     {
-        return $this->orX(Expr::lessThan($field, $value));
+        return $this->orX(Expr::greaterThanEqual($value, $key));
     }
 
-    public function orLessThanEqual($field, $value)
+    public function orLessThan($value, $key = null)
     {
-        return $this->orX(Expr::lessThanEqual($field, $value));
+        return $this->orX(Expr::lessThan($value, $key));
     }
 
-    public function orOneOf($field, array $values, $strict = true)
+    public function orLessThanEqual($value, $key = null)
     {
-        return $this->orX(Expr::oneOf($field, $values, $strict));
+        return $this->orX(Expr::lessThanEqual($value, $key));
     }
 
-    public function orMatches($field, $regExp)
+    public function orOneOf(array $values, $key = null)
     {
-        return $this->orX(Expr::matches($field, $regExp));
+        return $this->orX(Expr::oneOf($values, $key));
     }
 
-    public function orStartsWith($field, $prefix)
+    public function orMatches($regExp, $key = null)
     {
-        return $this->orX(Expr::startsWith($field, $prefix));
+        return $this->orX(Expr::matches($regExp, $key));
     }
 
-    public function orEndsWith($field, $suffix)
+    public function orStartsWith($prefix, $key = null)
     {
-        return $this->orX(Expr::endsWith($field, $suffix));
+        return $this->orX(Expr::startsWith($prefix, $key));
     }
 
-    public function orKey($field, $key, Expression $expr)
+    public function orEndsWith($suffix, $key = null)
     {
-        return $this->orX(Expr::key($field, $key, $expr));
+        return $this->orX(Expr::endsWith($suffix, $key));
     }
 
-    public function orKeyExists($field, $key)
+    public function orKeyExists($keyName, $key = null)
     {
-        return $this->orX(Expr::keyExists($field, $key));
+        return $this->orX(Expr::keyExists($keyName, $key));
     }
 
-    public function orKeyNotExists($field, $key)
+    public function orKeyNotExists($keyName, $key = null)
     {
-        return $this->orX(Expr::keyNotExists($field, $key));
-    }
-
-    public function orKeyNull($field, $key)
-    {
-        return $this->orX(Expr::keyNull($field, $key));
-    }
-
-    public function orKeyNotNull($field, $key)
-    {
-        return $this->orX(Expr::keyNotNull($field, $key));
-    }
-
-    public function orKeyEmpty($field, $key)
-    {
-        return $this->orX(Expr::keyEmpty($field, $key));
-    }
-
-    public function orKeyNotEmpty($field, $key)
-    {
-        return $this->orX(Expr::keyNotEmpty($field, $key));
-    }
-
-    public function orKeyTrue($field, $key, $strict = true)
-    {
-        return $this->orX(Expr::keyTrue($field, $key, $strict));
-    }
-
-    public function orKeyFalse($field, $key, $strict = true)
-    {
-        return $this->orX(Expr::keyFalse($field, $key, $strict));
-    }
-
-    public function orKeyEquals($field, $key, $value)
-    {
-        return $this->orX(Expr::keyEquals($field, $key, $value));
-    }
-
-    public function orKeyNotEquals($field, $key, $value)
-    {
-        return $this->orX(Expr::keyNotEquals($field, $key, $value));
-    }
-
-    public function orKeySame($field, $key, $value)
-    {
-        return $this->orX(Expr::keySame($field, $key, $value));
-    }
-
-    public function orKeyNotSame($field, $key, $value)
-    {
-        return $this->orX(Expr::keyNotSame($field, $key, $value));
-    }
-
-    public function orKeyGreaterThan($field, $key, $value)
-    {
-        return $this->orX(Expr::keyGreaterThan($field, $key, $value));
-    }
-
-    public function orKeyGreaterThanEqual($field, $key, $value)
-    {
-        return $this->orX(Expr::keyGreaterThanEqual($field, $key, $value));
-    }
-
-    public function orKeyLessThan($field, $key, $value)
-    {
-        return $this->orX(Expr::keyLessThan($field, $key, $value));
-    }
-
-    public function orKeyLessThanEqual($field, $key, $value)
-    {
-        return $this->orX(Expr::keyLessThanEqual($field, $key, $value));
-    }
-
-    public function orKeyOneOf($field, $key, array $values, $strict = true)
-    {
-        return $this->orX(Expr::keyOneOf($field, $key, $values, $strict));
-    }
-
-    public function orKeyMatches($field, $key, $regExp)
-    {
-        return $this->orX(Expr::keyMatches($field, $key, $regExp));
-    }
-
-    public function orKeyStartsWith($field, $key, $prefix)
-    {
-        return $this->orX(Expr::keyStartsWith($field, $key, $prefix));
-    }
-
-    public function orKeyEndsWith($field, $key, $suffix)
-    {
-        return $this->orX(Expr::keyEndsWith($field, $key, $suffix));
+        return $this->orX(Expr::keyNotExists($keyName, $key));
     }
 
     public function __toString()

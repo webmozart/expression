@@ -14,10 +14,10 @@ namespace Webmozart\Expression\Tests\Traversal;
 use PHPUnit_Framework_TestCase;
 use Webmozart\Expression\Comparison\GreaterThan;
 use Webmozart\Expression\Comparison\Same;
-use Webmozart\Expression\Key\Key;
 use Webmozart\Expression\Logic\Conjunction;
 use Webmozart\Expression\Logic\Disjunction;
 use Webmozart\Expression\Logic\Not;
+use Webmozart\Expression\Selector\Key;
 use Webmozart\Expression\Traversal\ExpressionTraverser;
 
 /**

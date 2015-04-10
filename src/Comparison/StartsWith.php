@@ -11,6 +11,7 @@
 
 namespace Webmozart\Expression\Comparison;
 
+use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
 use Webmozart\Expression\Util\StringUtil;
 
@@ -20,7 +21,7 @@ use Webmozart\Expression\Util\StringUtil;
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class StartsWith extends Literal
+final class StartsWith extends Literal
 {
     /**
      * @var string
@@ -53,6 +54,15 @@ class StartsWith extends Literal
     public function evaluate($value)
     {
         return 0 === strpos($value, $this->acceptedPrefix);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function equivalentTo(Expression $other)
+    {
+        // Since this class is final, we can check with instanceof
+        return $other instanceof $this && $this->acceptedPrefix == $other->acceptedPrefix;
     }
 
     /**

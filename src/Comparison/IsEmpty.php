@@ -11,6 +11,7 @@
 
 namespace Webmozart\Expression\Comparison;
 
+use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
 
 /**
@@ -19,7 +20,7 @@ use Webmozart\Expression\Logic\Literal;
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class IsEmpty extends Literal
+final class IsEmpty extends Literal
 {
     /**
      * {@inheritdoc}
@@ -27,6 +28,15 @@ class IsEmpty extends Literal
     public function evaluate($value)
     {
         return empty($value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function equivalentTo(Expression $other)
+    {
+        // Since this class is final, we can check with instanceof
+        return $other instanceof $this;
     }
 
     /**

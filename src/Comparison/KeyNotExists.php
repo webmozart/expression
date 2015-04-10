@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Expression\Key;
+namespace Webmozart\Expression\Comparison;
 
-use RuntimeException;
+use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
 use Webmozart\Expression\Util\StringUtil;
 
 /**
- * Checks that an array key exists.
+ * Checks that an array key does not exist.
  *
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class KeyExists extends Literal
+final class KeyNotExists extends Literal
 {
     /**
      * @var string
@@ -54,13 +54,19 @@ class KeyExists extends Literal
     public function evaluate($value)
     {
         if (!is_array($value)) {
-            throw new RuntimeException(sprintf(
-                'Cannot evaluate expression: Expected an array. Got: %s',
-                is_object($value) ? get_class($value) : gettype($value)
-            ));
+            return false;
         }
 
-        return array_key_exists($this->key, $value);
+        return !array_key_exists($this->key, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function equivalentTo(Expression $other)
+    {
+        // Since this class is final, we can check with instanceof
+        return $other instanceof $this && $this->key == $other->key;
     }
 
     /**
@@ -68,6 +74,6 @@ class KeyExists extends Literal
      */
     public function toString()
     {
-        return 'keyExists('.StringUtil::formatValue($this->key).')';
+        return 'keyNotExists('.StringUtil::formatValue($this->key).')';
     }
 }

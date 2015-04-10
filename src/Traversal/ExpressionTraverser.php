@@ -12,10 +12,10 @@
 namespace Webmozart\Expression\Traversal;
 
 use Webmozart\Expression\Expression;
-use Webmozart\Expression\Key\Key;
 use Webmozart\Expression\Logic\Conjunction;
 use Webmozart\Expression\Logic\Disjunction;
 use Webmozart\Expression\Logic\Not;
+use Webmozart\Expression\Selector\Key;
 
 /**
  * Traverses {@link Expression} instances.

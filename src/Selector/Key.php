@@ -9,19 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Expression\Key;
+namespace Webmozart\Expression\Selector;
 
-use RuntimeException;
 use Webmozart\Expression\Expression;
-use Webmozart\Expression\Logic\Literal;
 
 /**
- * Checks that an array key matches some expression.
+ * Checks whether an array key matches an expression.
  *
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class Key extends Literal
+final class Key extends Selector
 {
     /**
      * @var string
@@ -29,26 +27,22 @@ class Key extends Literal
     private $key;
 
     /**
-     * @var Expression
-     */
-    private $expr;
-
-    /**
      * Creates the expression.
      *
-     * @param string     $key  The array key.
-     * @param Expression $expr The expression.
+     * @param string|int $key  The array key.
+     * @param Expression $expr The expression to evaluate for the key.
      */
     public function __construct($key, Expression $expr)
     {
+        parent::__construct($expr);
+
         $this->key = $key;
-        $this->expr = $expr;
     }
 
     /**
      * Returns the array key.
      *
-     * @return string The array key.
+     * @return string|int The array key.
      */
     public function getKey()
     {
@@ -56,45 +50,32 @@ class Key extends Literal
     }
 
     /**
-     * Returns the expression.
-     *
-     * @return Expression The expression.
-     */
-    public function getExpression()
-    {
-        return $this->expr;
-    }
-
-    /**
      * {@inheritdoc}
      */
-    public function evaluate($value)
+    protected function select($value)
     {
         if (!is_array($value)) {
-            throw new RuntimeException(sprintf(
-                'Cannot evaluate expression: Expected an array. Got: %s',
-                is_object($value) ? get_class($value) : gettype($value)
-            ));
+            throw new SelectFailedException('Array expected.');
         }
 
         if (!array_key_exists($this->key, $value)) {
-            return false;
+            throw new SelectFailedException('Key not found expected.');
         }
 
-        return $this->expr->evaluate($value[$this->key]);
+        return $value[$this->key];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function equals(Expression $other)
+    public function equivalentTo(Expression $other)
     {
-        if (get_class($this) !== get_class($other)) {
+        if (!parent::equivalentTo($other)) {
             return false;
         }
 
         /** @var Key $other */
-        return $this->key === $other->key && $this->expr->equals($other->expr);
+        return $this->key == $other->key;
     }
 
     /**
@@ -102,7 +83,7 @@ class Key extends Literal
      */
     public function toString()
     {
-        $exprString = $this->expr->toString();
+        $exprString = parent::toString();
 
         // Append "functions" with "."
         if (isset($exprString[0]) && ctype_alpha($exprString[0])) {

@@ -32,15 +32,15 @@ class NotTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($expr->evaluate('Thomas Edison'));
     }
 
-    public function testEquals()
+    public function testEquivalentTo()
     {
         $expr1 = new Not(new Disjunction(array(new LessThan(0), new GreaterThan(10))));
         $expr2 = new Not(new Disjunction(array(new GreaterThan(10), new LessThan(0))));
         $expr3 = new Not(new Disjunction(array(new GreaterThan(10))));
 
-        $this->assertTrue($expr1->equals($expr2));
-        $this->assertFalse($expr2->equals($expr3));
-        $this->assertFalse($expr1->equals($expr3));
+        $this->assertTrue($expr1->equivalentTo($expr2));
+        $this->assertFalse($expr2->equivalentTo($expr3));
+        $this->assertFalse($expr1->equivalentTo($expr3));
     }
 
     public function testToString()
