@@ -30,7 +30,7 @@ use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Expr;
 use Webmozart\Expression\Logic\Not;
-use Webmozart\Expression\Selector\AtLeastOne;
+use Webmozart\Expression\Selector\AtLeast;
 use Webmozart\Expression\Selector\Exactly;
 use Webmozart\Expression\Selector\Key;
 
@@ -162,9 +162,9 @@ class ExprTest extends PHPUnit_Framework_TestCase
                 new Key('key', $expr),
             ),
             array(
-                'atLeastOne',
-                array($expr),
-                new AtLeastOne($expr),
+                'atLeast',
+                array(2, $expr),
+                new AtLeast(2, $expr),
             ),
             array(
                 'exactly',

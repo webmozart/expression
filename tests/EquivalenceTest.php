@@ -30,7 +30,7 @@ use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Not;
-use Webmozart\Expression\Selector\AtLeastOne;
+use Webmozart\Expression\Selector\AtLeast;
 use Webmozart\Expression\Selector\Key;
 
 /**
@@ -94,7 +94,7 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
             array(new Key('key', new Same('10')), new Key('key', new Same('10'))),
             array(new Key('42', new Same('10')), new Key(42, new Same('10'))),
 
-            array(new AtLeastOne(new Same('10')), new AtLeastOne(new Same('10'))),
+            array(new AtLeast(1, new Same('10')), new AtLeast(1, new Same('10'))),
         );
     }
 
@@ -169,8 +169,9 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
             array(new Key('foo', new Same('10')), new Key('foo', new Same(10))),
             array(new Key('foo', new Same('10')), new Same('10')),
 
-            array(new AtLeastOne(new Same('10')), new AtLeastOne(new Same(10))),
-            array(new AtLeastOne(new Same('10')), new Same('10')),
+            array(new AtLeast(1, new Same('10')), new AtLeast(2, new Same('10'))),
+            array(new AtLeast(1, new Same('10')), new AtLeast(1, new Same(10))),
+            array(new AtLeast(1, new Same('10')), new Same('10')),
         );
     }
 

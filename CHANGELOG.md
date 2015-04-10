@@ -9,7 +9,7 @@ Changelog
    and made it optional for all test methods
  * removed argument `$field` from `key()`
  * removed argument `$strict` from `true()`, `false()` and `oneOf()`
- * added `atLeastOne()` selector
+ * added `atLeast()` selector
  * added `exactly()` selector
 
 * 1.0.0-beta (2015-03-19)

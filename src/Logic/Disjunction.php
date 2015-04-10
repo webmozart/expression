@@ -88,9 +88,9 @@ final class Disjunction implements Expression
         return $this->orX(Expr::key($key, $expr));
     }
 
-    public function orAtLeastOne(Expression $expr)
+    public function orAtLeast($count, Expression $expr)
     {
-        return $this->orX(Expr::atLeastOne($expr));
+        return $this->orX(Expr::atLeast($count, $expr));
     }
 
     public function orExactly($count, Expression $expr)

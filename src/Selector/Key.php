@@ -76,7 +76,7 @@ final class Key extends Selector
             return false;
         }
 
-        /** @var Key $other */
+        /** @var static $other */
         return $this->key == $other->key;
     }
 

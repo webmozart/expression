@@ -28,7 +28,7 @@ use Webmozart\Expression\Comparison\OneOf;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Logic\Not;
-use Webmozart\Expression\Selector\AtLeastOne;
+use Webmozart\Expression\Selector\AtLeast;
 use Webmozart\Expression\Selector\Exactly;
 use Webmozart\Expression\Selector\Key;
 
@@ -97,21 +97,22 @@ class Expr
     }
 
     /**
-     * Check that at least one entry of a traversable value matches an expression.
+     * Check that at least N entries of a traversable value match an expression.
      *
-     * @param Expression $expr The evaluated expression.
+     * @param int        $count The minimum number of entries that need to match.
+     * @param Expression $expr  The evaluated expression.
      *
      * @return Key The created expression.
      */
-    public static function atLeastOne(Expression $expr)
+    public static function atLeast($count, Expression $expr)
     {
-        return new AtLeastOne($expr);
+        return new AtLeast($count, $expr);
     }
 
     /**
-     * Check that at exactly N entries of a traversable value match an expression.
+     * Check that exactly N entries of a traversable value match an expression.
      *
-     * @param int        $count The number of entries that needs to match.
+     * @param int        $count The number of entries that need to match.
      * @param Expression $expr  The evaluated expression.
      *
      * @return Key The created expression.

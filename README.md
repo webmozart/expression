@@ -174,7 +174,7 @@ following table lists them all:
 Method                      | Description
 --------------------------- | --------------------------------------------------------------------------
 `key($key, $expr)`          | Evaluate an expression for a key of an array
-`atLeastOne($expr)`         | Check that an expression matches for at least one entries
+`atLeast($count, $expr)`    | Check that an expression matches for at least `$count` entries
 `exactly($count, $expr)`    | Check that an expression matches for exactly `$count` entries
 
 Logical Operators

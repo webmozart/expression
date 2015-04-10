@@ -88,9 +88,9 @@ final class Conjunction implements Expression
         return $this->andX(Expr::key($key, $expr));
     }
 
-    public function andAtLeastOne(Expression $expr)
+    public function andAtLeast($count, Expression $expr)
     {
-        return $this->andX(Expr::atLeastOne($expr));
+        return $this->andX(Expr::atLeast($count, $expr));
     }
 
     public function andExactly($count, Expression $expr)
