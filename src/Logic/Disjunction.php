@@ -183,9 +183,9 @@ final class Disjunction implements Expression
         return $this->orX(Expr::lessThanEqual($value, $key));
     }
 
-    public function orOneOf(array $values, $key = null)
+    public function orIn(array $values, $key = null)
     {
-        return $this->orX(Expr::oneOf($values, $key));
+        return $this->orX(Expr::in($values, $key));
     }
 
     public function orMatches($regExp, $key = null)

@@ -25,7 +25,7 @@ use Webmozart\Expression\Comparison\Matches;
 use Webmozart\Expression\Comparison\NotEmpty;
 use Webmozart\Expression\Comparison\NotEquals;
 use Webmozart\Expression\Comparison\NotSame;
-use Webmozart\Expression\Comparison\OneOf;
+use Webmozart\Expression\Comparison\In;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Expression;
@@ -47,14 +47,14 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
     {
         return array(
             array(new Same('10'), new Same('10')),
-            array(new Same('10'), new OneOf(array('10'), true)),
+            array(new Same('10'), new In(array('10'), true)),
 
             array(new NotSame('10'), new NotSame('10')),
 
             array(new Equals('10'), new Equals('10')),
             array(new Equals('10'), new Equals(10)),
-            array(new Equals('10'), new OneOf(array('10'), false)),
-            array(new Equals('10'), new OneOf(array(10), false)),
+            array(new Equals('10'), new In(array('10'), false)),
+            array(new Equals('10'), new In(array(10), false)),
 
             array(new NotEquals('10'), new NotEquals('10')),
             array(new NotEquals('10'), new NotEquals(10)),
@@ -83,9 +83,9 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
 
             array(new Matches('foo.*'), new Matches('foo.*')),
 
-            array(new OneOf(array('10'), false), new OneOf(array('10'), false)),
-            array(new OneOf(array('10'), false), new OneOf(array(10), false)),
-            array(new OneOf(array('10'), true), new OneOf(array('10'), true)),
+            array(new In(array('10'), false), new In(array('10'), false)),
+            array(new In(array('10'), false), new In(array(10), false)),
+            array(new In(array('10'), true), new In(array('10'), true)),
 
             array(new StartsWith('10'), new StartsWith('10')),
             array(new StartsWith('10'), new StartsWith(10)),
@@ -126,19 +126,19 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
             array(new Same('10'), new Same(10)),
             array(new Same('10'), new Equals('10')),
 
-            array(new Same('10'), new OneOf(array(10), true)),
-            array(new Same('10'), new OneOf(array('10'), false)),
-            array(new Same('10'), new OneOf(array(), true)),
-            array(new Same('10'), new OneOf(array('10', '11'), true)),
+            array(new Same('10'), new In(array(10), true)),
+            array(new Same('10'), new In(array('10'), false)),
+            array(new Same('10'), new In(array(), true)),
+            array(new Same('10'), new In(array('10', '11'), true)),
 
             array(new NotSame('10'), new NotSame('11')),
             array(new NotSame('10'), new NotSame(10)),
             array(new NotSame('10'), new NotEquals('10')),
 
             array(new Equals('10'), new Equals('11')),
-            array(new Equals('10'), new OneOf(array('10'), true)),
-            array(new Equals('10'), new OneOf(array(), false)),
-            array(new Equals('10'), new OneOf(array('10', '11'), false)),
+            array(new Equals('10'), new In(array('10'), true)),
+            array(new Equals('10'), new In(array(), false)),
+            array(new Equals('10'), new In(array('10', '11'), false)),
 
             array(new GreaterThan('10'), new GreaterThan('11')),
             array(new GreaterThan('10'), new LessThan('10')),
@@ -163,10 +163,10 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
             array(new Matches('10'), new Matches(10)),
             array(new Matches('10'), new Equals('10')),
 
-            array(new OneOf(array('10'), true), new OneOf(array('11'), true)),
-            array(new OneOf(array('10'), true), new OneOf(array(10), true)),
-            array(new OneOf(array('10'), true), new OneOf(array('11'), false)),
-            array(new OneOf(array('10'), true), new IsEmpty()),
+            array(new In(array('10'), true), new In(array('11'), true)),
+            array(new In(array('10'), true), new In(array(10), true)),
+            array(new In(array('10'), true), new In(array('11'), false)),
+            array(new In(array('10'), true), new IsEmpty()),
 
             array(new StartsWith('10'), new StartsWith('11')),
             array(new StartsWith('10'), new Equals('10')),

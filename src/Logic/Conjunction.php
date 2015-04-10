@@ -183,9 +183,9 @@ final class Conjunction implements Expression
         return $this->andX(Expr::lessThanEqual($value, $key));
     }
 
-    public function andOneOf(array $values, $key = null)
+    public function andIn(array $values, $key = null)
     {
-        return $this->andX(Expr::oneOf($values, $key));
+        return $this->andX(Expr::in($values, $key));
     }
 
     public function andMatches($regExp, $key = null)

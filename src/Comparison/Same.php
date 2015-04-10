@@ -63,7 +63,7 @@ final class Same extends Literal
      */
     public function equivalentTo(Expression $other)
     {
-        if ($other instanceof OneOf && $other->isStrict()) {
+        if ($other instanceof In && $other->isStrict()) {
             return array($this->comparedValue) === $other->getAcceptedValues();
         }
 

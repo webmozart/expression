@@ -25,7 +25,7 @@ use Webmozart\Expression\Comparison\Matches;
 use Webmozart\Expression\Comparison\NotEmpty;
 use Webmozart\Expression\Comparison\NotEquals;
 use Webmozart\Expression\Comparison\NotSame;
-use Webmozart\Expression\Comparison\OneOf;
+use Webmozart\Expression\Comparison\In;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Expr;
@@ -142,9 +142,9 @@ class ExprTest extends PHPUnit_Framework_TestCase
                 new EndsWith('.css')
             ),
             array(
-                'oneOf',
+                'in',
                 array(array('1', '2', '3')),
-                new OneOf(array('1', '2', '3'))
+                new In(array('1', '2', '3'))
             ),
         );
     }

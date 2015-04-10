@@ -24,7 +24,7 @@ use Webmozart\Expression\Comparison\Matches;
 use Webmozart\Expression\Comparison\NotEmpty;
 use Webmozart\Expression\Comparison\NotEquals;
 use Webmozart\Expression\Comparison\NotSame;
-use Webmozart\Expression\Comparison\OneOf;
+use Webmozart\Expression\Comparison\In;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Logic\Not;
@@ -44,7 +44,7 @@ use Webmozart\Expression\Selector\Key;
  * $expr = Expr::greaterThan(20)->orLessThan(10);
  * ```
  *
- * You can evaluate the expression with a value {@link Expression::evaluate()}:
+ * You can evaluate the expression with another value {@link Expression::evaluate()}:
  *
  * ```php
  * if ($expr->evaluate($value)) {
@@ -163,7 +163,7 @@ class Expr
     }
 
     /**
-     * Check that a field is null.
+     * Check that a value is null.
      *
      * @param string|int|null $key The array key to apply the expression to.
      *                             Equivalent to calling {@link key()}.
@@ -180,7 +180,7 @@ class Expr
     }
 
     /**
-     * Check that a field is not null.
+     * Check that a value is not null.
      *
      * @param string|int|null $key The array key to apply the expression to.
      *                             Equivalent to calling {@link key()}.
@@ -197,7 +197,7 @@ class Expr
     }
 
     /**
-     * Check that a field is empty.
+     * Check that a value is empty.
      *
      * @param string|int|null $key The array key to apply the expression to.
      *                             Equivalent to calling {@link key()}.
@@ -214,7 +214,7 @@ class Expr
     }
 
     /**
-     * Check that a field is not empty.
+     * Check that a value is not empty.
      *
      * @param string|int|null $key The array key to apply the expression to.
      *                             Equivalent to calling {@link key()}.
@@ -231,7 +231,7 @@ class Expr
     }
 
     /**
-     * Check that a field is true.
+     * Check that a value is true.
      *
      * @param string|int|null $key The array key to apply the expression to.
      *                             Equivalent to calling {@link key()}.
@@ -248,7 +248,7 @@ class Expr
     }
 
     /**
-     * Check that a field is false.
+     * Check that a value is false.
      *
      * @param string|int|null $key The array key to apply the expression to.
      *                             Equivalent to calling {@link key()}.
@@ -265,7 +265,7 @@ class Expr
     }
 
     /**
-     * Check that a field equals a value.
+     * Check that a value equals another value.
      *
      * @param mixed           $value The compared value.
      * @param string|int|null $key   The array key to apply the expression to.
@@ -283,7 +283,7 @@ class Expr
     }
 
     /**
-     * Check that a field does not equal a value.
+     * Check that a value does not equal another value.
      *
      * @param mixed           $value The compared value.
      * @param string|int|null $key   The array key to apply the expression to.
@@ -301,7 +301,7 @@ class Expr
     }
 
     /**
-     * Check that a field is identical to a value.
+     * Check that a value is identical to another value.
      *
      * @param mixed           $value The compared value.
      * @param string|int|null $key   The array key to apply the expression to.
@@ -319,7 +319,7 @@ class Expr
     }
 
     /**
-     * Check that a field is not identical to a value.
+     * Check that a value is not identical to another value.
      *
      * @param mixed           $value The compared value.
      * @param string|int|null $key   The array key to apply the expression to.
@@ -337,7 +337,7 @@ class Expr
     }
 
     /**
-     * Check that a field is greater than a value.
+     * Check that a value is greater than another value.
      *
      * @param mixed           $value The compared value.
      * @param string|int|null $key   The array key to apply the expression to.
@@ -355,7 +355,7 @@ class Expr
     }
 
     /**
-     * Check that a field is greater than or equal to a value.
+     * Check that a value is greater than or equal to another value.
      *
      * @param mixed           $value The compared value.
      * @param string|int|null $key   The array key to apply the expression to.
@@ -373,7 +373,7 @@ class Expr
     }
 
     /**
-     * Check that a field is less than a value.
+     * Check that a value is less than another value.
      *
      * @param mixed           $value The compared value.
      * @param string|int|null $key   The array key to apply the expression to.
@@ -391,7 +391,7 @@ class Expr
     }
 
     /**
-     * Check that a field is less than or equal to a value.
+     * Check that a value is less than or equal to another value.
      *
      * @param mixed           $value The compared value.
      * @param string|int|null $key   The array key to apply the expression to.
@@ -409,25 +409,25 @@ class Expr
     }
 
     /**
-     * Check that a field contains one of a set of values.
+     * Check that a value occurs in a list of values.
      *
      * @param array           $values The compared values.
      * @param string|int|null $key    The array key to apply the expression to.
      *                                Equivalent to calling {@link key()}.
      *
-     * @return OneOf|Key The created expression.
+     * @return In|Key The created expression.
      */
-    public static function oneOf(array $values, $key = null)
+    public static function in(array $values, $key = null)
     {
         if (null !== $key) {
-            return self::key($key, new OneOf($values));
+            return self::key($key, new In($values));
         }
 
-        return new OneOf($values);
+        return new In($values);
     }
 
     /**
-     * Check that a field matches a regular expression.
+     * Check that a value matches a regular expression.
      *
      * @param string          $regExp The regular expression.
      * @param string|int|null $key    The array key to apply the expression to.
@@ -445,7 +445,7 @@ class Expr
     }
 
     /**
-     * Check that a field starts with a given string.
+     * Check that a value starts with a given string.
      *
      * @param string          $prefix The prefix string.
      * @param string|int|null $key    The array key to apply the expression to.
@@ -463,7 +463,7 @@ class Expr
     }
 
     /**
-     * Check that a field ends with a given string.
+     * Check that a value ends with a given string.
      *
      * @param string          $suffix The suffix string.
      * @param string|int|null $key    The array key to apply the expression to.
@@ -481,7 +481,7 @@ class Expr
     }
 
     /**
-     * Check that a field key exists.
+     * Check that a value key exists.
      *
      * @param string          $keyName The key name.
      * @param string|int|null $key     The array key to apply the expression to.
@@ -499,7 +499,7 @@ class Expr
     }
 
     /**
-     * Check that a field key does not exist.
+     * Check that a value key does not exist.
      *
      * @param string          $keyName The key name.
      * @param string|int|null $key     The array key to apply the expression to.

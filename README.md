@@ -117,7 +117,7 @@ Method                      | Description
 `startsWith($prefix)`       | Check that a value starts with a given string
 `endsWith($suffix)`         | Check that a value ends with a given string
 `matches($regExp)`          | Check that a value matches a regular expression
-`oneOf($values)`            | Check that a value is one of a list of values
+`in($values)`               | Check that a value occurs in a list of values
 `keyExists($key)`           | Check that a key exists in a value
 `keyNotExists($key)`        | Check that a key does not exist in a value
 

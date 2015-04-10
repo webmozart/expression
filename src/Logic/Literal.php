@@ -30,7 +30,7 @@ use Webmozart\Expression\Expression;
  * The following examples are *not* literals:
  *
  *  * greaterThan(0) and lessThan(120)
- *  * oneOf(["A", "B", "C]) or null()
+ *  * in(["A", "B", "C]) or null()
  *
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
@@ -151,9 +151,9 @@ abstract class Literal implements Expression
         return $this->andX(Expr::lessThanEqual($value, $key));
     }
 
-    public function andOneOf(array $values, $key = null)
+    public function andIn(array $values, $key = null)
     {
-        return $this->andX(Expr::oneOf($values, $key));
+        return $this->andX(Expr::in($values, $key));
     }
 
     public function andMatches($regExp, $key = null)
@@ -295,9 +295,9 @@ abstract class Literal implements Expression
         return $this->orX(Expr::lessThanEqual($value, $key));
     }
 
-    public function orOneOf(array $values, $key = null)
+    public function orIn(array $values, $key = null)
     {
-        return $this->orX(Expr::oneOf($values, $key));
+        return $this->orX(Expr::in($values, $key));
     }
 
     public function orMatches($regExp, $key = null)

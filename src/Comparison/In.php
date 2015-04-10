@@ -21,7 +21,7 @@ use Webmozart\Expression\Util\StringUtil;
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class OneOf extends Literal
+final class In extends Literal
 {
     /**
      * @var array
@@ -36,7 +36,7 @@ final class OneOf extends Literal
     /**
      * Creates the expression.
      *
-     * @param array $acceptedValues The accepted value.
+     * @param array $acceptedValues The accepted values.
      * @param bool  $strict         Whether to do strict comparison.
      */
     public function __construct(array $acceptedValues, $strict = true)
@@ -80,12 +80,12 @@ final class OneOf extends Literal
     public function equivalentTo(Expression $other)
     {
         if (1 === count($this->acceptedValues)) {
-            // OneOf is logically equivalent to Same if strict and only one value
+            // In is logically equivalent to Same if strict and only one value
             if ($this->strict && $other instanceof Same) {
                 return reset($this->acceptedValues) === $other->getComparedValue();
             }
 
-            // OneOf is logically equivalent to Equals if not strict and only one value
+            // In is logically equivalent to Equals if not strict and only one value
             if (!$this->strict && $other instanceof Equals) {
                 return reset($this->acceptedValues) == $other->getComparedValue();
             }
@@ -123,6 +123,6 @@ final class OneOf extends Literal
             return StringUtil::formatValue($value);
         }, $this->acceptedValues);
 
-        return 'oneOf('.implode(', ', $values).')';
+        return 'in('.implode(', ', $values).')';
     }
 }

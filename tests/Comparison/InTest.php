@@ -12,17 +12,17 @@
 namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Expression\Comparison\OneOf;
+use Webmozart\Expression\Comparison\In;
 
 /**
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class OneOfTest extends PHPUnit_Framework_TestCase
+class InTest extends PHPUnit_Framework_TestCase
 {
     public function testEvaluateStrict()
     {
-        $expr = new OneOf(array('1', '2', '3'));
+        $expr = new In(array('1', '2', '3'));
 
         $this->assertTrue($expr->evaluate('1'));
         $this->assertFalse($expr->evaluate(1));
@@ -34,7 +34,7 @@ class OneOfTest extends PHPUnit_Framework_TestCase
 
     public function testEvaluateNonStrict()
     {
-        $expr = new OneOf(array('1', '2', '3'), false);
+        $expr = new In(array('1', '2', '3'), false);
 
         $this->assertTrue($expr->evaluate('1'));
         $this->assertTrue($expr->evaluate(1));
@@ -46,8 +46,8 @@ class OneOfTest extends PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $expr = new OneOf(array('1', '2', '3'), false);
+        $expr = new In(array('1', '2', '3'), false);
 
-        $this->assertSame('oneOf("1", "2", "3")', $expr->toString());
+        $this->assertSame('in("1", "2", "3")', $expr->toString());
     }
 }

@@ -14,6 +14,7 @@ Changelog
  * added `all()` selector
  * added `atMost()` selector
  * added `count()` selector
+ * renamed `oneOf()` to `in()`
 
 * 1.0.0-beta (2015-03-19)
 
