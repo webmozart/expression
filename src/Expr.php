@@ -27,6 +27,7 @@ use Webmozart\Expression\Comparison\NotSame;
 use Webmozart\Expression\Comparison\In;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
+use Webmozart\Expression\Logic\Invalid;
 use Webmozart\Expression\Logic\Not;
 use Webmozart\Expression\Logic\Valid;
 use Webmozart\Expression\Selector\All;
@@ -88,13 +89,23 @@ class Expr
     }
 
     /**
-     * Always valid (tautology).
+     * Always true (tautology).
      *
      * @return Valid The created expression.
      */
     public static function valid()
     {
         return new Valid();
+    }
+
+    /**
+     * Always false (contradiction).
+     *
+     * @return Valid The created expression.
+     */
+    public static function invalid()
+    {
+        return new Invalid();
     }
 
     /**

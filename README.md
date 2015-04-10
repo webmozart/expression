@@ -121,6 +121,7 @@ Method                      | Description
 `keyExists($key)`           | Check that a key exists in a value
 `keyNotExists($key)`        | Check that a key does not exist in a value
 `valid()`                   | Always true (tautology)
+`invalid()`                 | Always false (contradiction)
 
 Selectors
 ---------

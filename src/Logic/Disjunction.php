@@ -88,6 +88,11 @@ final class Disjunction implements Expression
         return $this->orX(Expr::valid());
     }
 
+    public function orInvalid()
+    {
+        return $this->orX(Expr::invalid());
+    }
+
     public function orKey($key, Expression $expr)
     {
         return $this->orX(Expr::key($key, $expr));

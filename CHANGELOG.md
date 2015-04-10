@@ -15,7 +15,8 @@ Changelog
  * added `atMost()` selector
  * added `count()` selector
  * renamed `oneOf()` to `in()`
- * added `valid()` test
+ * added `valid()`
+ * added `invalid()`
 
 * 1.0.0-beta (2015-03-19)
 
