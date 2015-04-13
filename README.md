@@ -7,7 +7,7 @@ Webmozart Expression
 [![Total Downloads](https://poser.pugx.org/webmozart/expression/downloads.svg)](https://packagist.org/packages/webmozart/expression)
 [![Dependency Status](https://www.versioneye.com/php/webmozart:expression/1.0.0/badge.svg)](https://www.versioneye.com/php/webmozart:expression/1.0.0)
 
-Latest release: [1.0.0-beta](https://packagist.org/packages/webmozart/expression#1.0.0-beta)
+Latest release: [1.0.0-beta2](https://packagist.org/packages/webmozart/expression#1.0.0-beta2)
 
 PHP >= 5.3.9
 
