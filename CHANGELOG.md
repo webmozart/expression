@@ -1,7 +1,7 @@
 Changelog
 =========
 
-* 1.0.0-next (@release_date@)
+* 1.0.0-beta2 (2015-04-13)
 
  * added `Selector`
  * removed `key*()` methods
