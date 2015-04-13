@@ -16,6 +16,8 @@ use Webmozart\Expression\Comparison\EndsWith;
 use Webmozart\Expression\Comparison\GreaterThan;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Logic\Disjunction;
+use Webmozart\Expression\Logic\Invalid;
+use Webmozart\Expression\Logic\Valid;
 use Webmozart\Expression\Selector\Key;
 
 /**
@@ -78,11 +80,48 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
         $this->assertSame(array($notNull, $greaterThan), $disjunction3->getDisjuncts());
     }
 
+    public function testOrInvalidIgnored()
+    {
+        $disjunction1 = new Disjunction(array($notNull = new Same('10')));
+        $disjunction2 = $disjunction1->orInvalid();
+
+        $this->assertSame($disjunction1, $disjunction2);
+    }
+
+    public function testOrXIgnoresInvalid()
+    {
+        $disjunction1 = new Disjunction(array($notNull = new Same('10')));
+        $disjunction2 = $disjunction1->orX(new Invalid());
+
+        $this->assertSame($disjunction1, $disjunction2);
+    }
+
+    public function testOrValidReturnsValid()
+    {
+        $disjunction1 = new Disjunction(array($notNull = new Same('10')));
+        $disjunction2 = $disjunction1->orValid();
+
+        $this->assertInstanceOf('Webmozart\Expression\Logic\Valid', $disjunction2);
+    }
+
+    public function testOrXReturnsValid()
+    {
+        $disjunction1 = new Disjunction(array($notNull = new Same('10')));
+        $disjunction2 = $disjunction1->orX($valid = new Valid());
+
+        $this->assertSame($valid, $disjunction2);
+    }
+
     /**
      * @dataProvider \Webmozart\Expression\Tests\ExprTest::getMethodTests
      */
     public function testOr($method, $args, $expected)
     {
+        // tested separately
+        if ('valid' === $method || 'invalid' === $method) {
+            return;
+        }
+
         if ('is' === substr($method, 0, 2)) {
             $method = substr($method, 2);
         }

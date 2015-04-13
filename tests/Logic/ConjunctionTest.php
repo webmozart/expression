@@ -15,6 +15,7 @@ use PHPUnit_Framework_TestCase;
 use Webmozart\Expression\Comparison\EndsWith;
 use Webmozart\Expression\Comparison\GreaterThan;
 use Webmozart\Expression\Comparison\Same;
+use Webmozart\Expression\Expr;
 use Webmozart\Expression\Logic\Conjunction;
 use Webmozart\Expression\Selector\Key;
 
@@ -76,11 +77,48 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
         $this->assertSame(array($notNull, $greaterThan), $conjunction3->getConjuncts());
     }
 
+    public function testAndValidIgnored()
+    {
+        $conjunction1 = new Conjunction(array($notNull = new Same('10')));
+        $conjunction2 = $conjunction1->andValid();
+
+        $this->assertSame($conjunction1, $conjunction2);
+    }
+
+    public function testAndXIgnoresValid()
+    {
+        $conjunction1 = new Conjunction(array($notNull = new Same('10')));
+        $conjunction2 = $conjunction1->andX(Expr::valid());
+
+        $this->assertSame($conjunction1, $conjunction2);
+    }
+
+    public function testAndInvalidReturnsInvalid()
+    {
+        $conjunction1 = new Conjunction(array($notNull = new Same('10')));
+        $conjunction2 = $conjunction1->andInvalid();
+
+        $this->assertInstanceOf('Webmozart\Expression\Logic\Invalid', $conjunction2);
+    }
+
+    public function testAndXReturnsInvalid()
+    {
+        $conjunction1 = new Conjunction(array($notNull = new Same('10')));
+        $conjunction2 = $conjunction1->andX($invalid = Expr::invalid());
+
+        $this->assertSame($invalid, $conjunction2);
+    }
+
     /**
      * @dataProvider \Webmozart\Expression\Tests\ExprTest::getMethodTests
      */
     public function testAnd($method, $args, $expected)
     {
+        // tested separately
+        if ('valid' === $method || 'invalid' === $method) {
+            return;
+        }
+
         if ('is' === substr($method, 0, 2)) {
             $method = substr($method, 2);
         }

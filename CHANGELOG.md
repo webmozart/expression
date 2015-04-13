@@ -17,6 +17,7 @@ Changelog
  * renamed `oneOf()` to `in()`
  * added `valid()`
  * added `invalid()`
+ * optimized `andValid()`, `andInvalid()`, `orValid()` and `orInvalid()`
 
 * 1.0.0-beta (2015-03-19)
 

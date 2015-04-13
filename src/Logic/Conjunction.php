@@ -61,6 +61,12 @@ final class Conjunction implements Expression
 
     public function andX(Expression $expr)
     {
+        if ($expr instanceof Valid) {
+            return $this;
+        } elseif ($expr instanceof Invalid) {
+            return $expr;
+        }
+
         foreach ($this->conjuncts as $conjunct) {
             if ($conjunct->equivalentTo($expr)) {
                 return $this;
@@ -85,12 +91,12 @@ final class Conjunction implements Expression
 
     public function andValid()
     {
-        return $this->andX(Expr::valid());
+        return $this;
     }
 
     public function andInvalid()
     {
-        return $this->andX(Expr::invalid());
+        return Expr::invalid();
     }
 
     public function andKey($key, Expression $expr)
