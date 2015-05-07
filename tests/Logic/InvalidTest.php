@@ -13,6 +13,7 @@ namespace Webmozart\Expression\Tests\Logic;
 
 use PHPUnit_Framework_TestCase;
 use stdClass;
+use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Logic\Invalid;
 
 /**
@@ -35,5 +36,21 @@ class InvalidTest extends PHPUnit_Framework_TestCase
         $expr = new Invalid();
 
         $this->assertSame('invalid', $expr->toString());
+    }
+
+    public function testAndReturnsInvalid()
+    {
+        $expr = new Invalid();
+        $same = new Same('10');
+
+        $this->assertSame($expr, $expr->andX($same));
+    }
+
+    public function testOrReturnsConjunct()
+    {
+        $expr = new Invalid();
+        $same = new Same('10');
+
+        $this->assertSame($same, $expr->orX($same));
     }
 }

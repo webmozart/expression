@@ -13,6 +13,7 @@ namespace Webmozart\Expression\Tests\Logic;
 
 use PHPUnit_Framework_TestCase;
 use stdClass;
+use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Logic\Valid;
 
 /**
@@ -35,5 +36,21 @@ class ValidTest extends PHPUnit_Framework_TestCase
         $expr = new Valid();
 
         $this->assertSame('valid', $expr->toString());
+    }
+
+    public function testAndReturnsConjunct()
+    {
+        $expr = new Valid();
+        $same = new Same('10');
+
+        $this->assertSame($same, $expr->andX($same));
+    }
+
+    public function testOrReturnsValid()
+    {
+        $expr = new Valid();
+        $same = new Same('10');
+
+        $this->assertSame($expr, $expr->orX($same));
     }
 }

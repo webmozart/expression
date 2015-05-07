@@ -45,4 +45,20 @@ final class Valid extends Literal
     {
         return 'valid';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function andX(Expression $expr)
+    {
+        return $expr;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function orX(Expression $expr)
+    {
+        return $this;
+    }
 }
