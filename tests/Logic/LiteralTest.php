@@ -16,8 +16,8 @@ use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Expr;
 use Webmozart\Expression\Logic\Conjunction;
 use Webmozart\Expression\Logic\Disjunction;
-use Webmozart\Expression\Logic\False;
-use Webmozart\Expression\Logic\True;
+use Webmozart\Expression\Logic\AlwaysFalse;
+use Webmozart\Expression\Logic\AlwaysTrue;
 use Webmozart\Expression\Tests\Logic\Fixtures\TestLiteral;
 
 /**
@@ -62,7 +62,7 @@ class LiteralTest extends PHPUnit_Framework_TestCase
         $literal = new TestLiteral('value');
         $conjunction = $literal->andFalse();
 
-        $this->assertInstanceOf('Webmozart\Expression\Logic\False', $conjunction);
+        $this->assertInstanceOf('Webmozart\Expression\Logic\AlwaysFalse', $conjunction);
     }
 
     public function testAndXReturnsFalse()
@@ -121,7 +121,7 @@ class LiteralTest extends PHPUnit_Framework_TestCase
     public function testOrXIgnoresFalse()
     {
         $literal = new TestLiteral('value');
-        $disjunction = $literal->orX(new False());
+        $disjunction = $literal->orX(new AlwaysFalse());
 
         $this->assertSame($literal, $disjunction);
     }
@@ -131,13 +131,13 @@ class LiteralTest extends PHPUnit_Framework_TestCase
         $literal = new TestLiteral('value');
         $disjunction = $literal->orTrue();
 
-        $this->assertInstanceOf('Webmozart\Expression\Logic\True', $disjunction);
+        $this->assertInstanceOf('Webmozart\Expression\Logic\AlwaysTrue', $disjunction);
     }
 
     public function testOrXReturnsTrue()
     {
         $literal = new TestLiteral('value');
-        $disjunction = $literal->orX($true = new True());
+        $disjunction = $literal->orX($true = new AlwaysTrue());
 
         $this->assertSame($true, $disjunction);
     }

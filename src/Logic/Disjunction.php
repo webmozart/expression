@@ -61,9 +61,9 @@ final class Disjunction implements Expression
 
     public function orX(Expression $expr)
     {
-        if ($expr instanceof False) {
+        if ($expr instanceof AlwaysFalse) {
             return $this;
-        } elseif ($expr instanceof True) {
+        } elseif ($expr instanceof AlwaysTrue) {
             return $expr;
         }
 

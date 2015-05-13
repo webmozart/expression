@@ -14,19 +14,19 @@ namespace Webmozart\Expression\Logic;
 use Webmozart\Expression\Expression;
 
 /**
- * Always true (tautology).
+ * Always false (contradiction).
  *
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class True extends Literal
+final class AlwaysFalse extends Literal
 {
     /**
      * {@inheritdoc}
      */
     public function evaluate($value)
     {
-        return true;
+        return false;
     }
 
     /**
@@ -43,7 +43,7 @@ final class True extends Literal
      */
     public function toString()
     {
-        return 'true';
+        return 'false';
     }
 
     /**
@@ -51,7 +51,7 @@ final class True extends Literal
      */
     public function andX(Expression $expr)
     {
-        return $expr;
+        return $this;
     }
 
     /**
@@ -59,6 +59,6 @@ final class True extends Literal
      */
     public function orX(Expression $expr)
     {
-        return $this;
+        return $expr;
     }
 }

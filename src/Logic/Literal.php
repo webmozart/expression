@@ -39,9 +39,9 @@ abstract class Literal implements Expression
 {
     public function andX(Expression $expr)
     {
-        if ($expr instanceof True) {
+        if ($expr instanceof AlwaysTrue) {
             return $this;
-        } elseif ($expr instanceof False) {
+        } elseif ($expr instanceof AlwaysFalse) {
             return $expr;
         }
 
@@ -194,9 +194,9 @@ abstract class Literal implements Expression
 
     public function orX(Expression $expr)
     {
-        if ($expr instanceof False) {
+        if ($expr instanceof AlwaysFalse) {
             return $this;
-        } elseif ($expr instanceof True) {
+        } elseif ($expr instanceof AlwaysTrue) {
             return $expr;
         }
 

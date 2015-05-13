@@ -61,9 +61,9 @@ final class Conjunction implements Expression
 
     public function andX(Expression $expr)
     {
-        if ($expr instanceof True) {
+        if ($expr instanceof AlwaysTrue) {
             return $this;
-        } elseif ($expr instanceof False) {
+        } elseif ($expr instanceof AlwaysFalse) {
             return $expr;
         }
 

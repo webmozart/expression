@@ -18,8 +18,8 @@ use Webmozart\Expression\Comparison\GreaterThan;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Logic\Conjunction;
 use Webmozart\Expression\Logic\Disjunction;
-use Webmozart\Expression\Logic\False;
-use Webmozart\Expression\Logic\True;
+use Webmozart\Expression\Logic\AlwaysFalse;
+use Webmozart\Expression\Logic\AlwaysTrue;
 use Webmozart\Expression\Selector\Key;
 
 /**
@@ -93,7 +93,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
     public function testOrXIgnoresFalse()
     {
         $disjunction1 = new Disjunction(array($notNull = new Same('10')));
-        $disjunction2 = $disjunction1->orX(new False());
+        $disjunction2 = $disjunction1->orX(new AlwaysFalse());
 
         $this->assertSame($disjunction1, $disjunction2);
     }
@@ -103,13 +103,13 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
         $disjunction1 = new Disjunction(array($notNull = new Same('10')));
         $disjunction2 = $disjunction1->orTrue();
 
-        $this->assertInstanceOf('Webmozart\Expression\Logic\True', $disjunction2);
+        $this->assertInstanceOf('Webmozart\Expression\Logic\AlwaysTrue', $disjunction2);
     }
 
     public function testOrXReturnsTrue()
     {
         $disjunction1 = new Disjunction(array($notNull = new Same('10')));
-        $disjunction2 = $disjunction1->orX($true = new True());
+        $disjunction2 = $disjunction1->orX($true = new AlwaysTrue());
 
         $this->assertSame($true, $disjunction2);
     }

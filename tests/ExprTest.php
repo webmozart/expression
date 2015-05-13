@@ -30,9 +30,9 @@ use Webmozart\Expression\Comparison\In;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Expr;
-use Webmozart\Expression\Logic\False;
+use Webmozart\Expression\Logic\AlwaysFalse;
 use Webmozart\Expression\Logic\Not;
-use Webmozart\Expression\Logic\True;
+use Webmozart\Expression\Logic\AlwaysTrue;
 use Webmozart\Expression\Selector\All;
 use Webmozart\Expression\Selector\AtLeast;
 use Webmozart\Expression\Selector\AtMost;
@@ -190,12 +190,12 @@ class ExprTest extends PHPUnit_Framework_TestCase
             array(
                 'true',
                 array(),
-                new True(),
+                new AlwaysTrue(),
             ),
             array(
                 'false',
                 array(),
-                new False(),
+                new AlwaysFalse(),
             ),
         ), self::getComparisons());
 

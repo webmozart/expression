@@ -28,9 +28,9 @@ use Webmozart\Expression\Comparison\NotSame;
 use Webmozart\Expression\Comparison\In;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
-use Webmozart\Expression\Logic\False;
+use Webmozart\Expression\Logic\AlwaysFalse;
 use Webmozart\Expression\Logic\Not;
-use Webmozart\Expression\Logic\True;
+use Webmozart\Expression\Logic\AlwaysTrue;
 use Webmozart\Expression\Selector\All;
 use Webmozart\Expression\Selector\AtLeast;
 use Webmozart\Expression\Selector\AtMost;
@@ -96,7 +96,7 @@ class Expr
      */
     public static function true()
     {
-        return new True();
+        return new AlwaysTrue();
     }
 
     /**
@@ -106,7 +106,7 @@ class Expr
      */
     public static function false()
     {
-        return new False();
+        return new AlwaysFalse();
     }
 
     /**

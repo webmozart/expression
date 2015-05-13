@@ -14,17 +14,17 @@ namespace Webmozart\Expression\Tests\Logic;
 use PHPUnit_Framework_TestCase;
 use stdClass;
 use Webmozart\Expression\Comparison\Same;
-use Webmozart\Expression\Logic\True;
+use Webmozart\Expression\Logic\AlwaysTrue;
 
 /**
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class TrueTest extends PHPUnit_Framework_TestCase
+class AlwaysTrueTest extends PHPUnit_Framework_TestCase
 {
     public function testEvaluate()
     {
-        $expr = new True();
+        $expr = new AlwaysTrue();
 
         $this->assertTrue($expr->evaluate(123));
         $this->assertTrue($expr->evaluate(true));
@@ -33,14 +33,14 @@ class TrueTest extends PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $expr = new True();
+        $expr = new AlwaysTrue();
 
         $this->assertSame('true', $expr->toString());
     }
 
     public function testAndReturnsConjunct()
     {
-        $expr = new True();
+        $expr = new AlwaysTrue();
         $same = new Same('10');
 
         $this->assertSame($same, $expr->andX($same));
@@ -48,7 +48,7 @@ class TrueTest extends PHPUnit_Framework_TestCase
 
     public function testOrReturnsTrue()
     {
-        $expr = new True();
+        $expr = new AlwaysTrue();
         $same = new Same('10');
 
         $this->assertSame($expr, $expr->orX($same));

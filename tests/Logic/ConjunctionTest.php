@@ -100,7 +100,7 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
         $conjunction1 = new Conjunction(array($notNull = new Same('10')));
         $conjunction2 = $conjunction1->andFalse();
 
-        $this->assertInstanceOf('Webmozart\Expression\Logic\False', $conjunction2);
+        $this->assertInstanceOf('Webmozart\Expression\Logic\AlwaysFalse', $conjunction2);
     }
 
     public function testAndXReturnsFalse()
