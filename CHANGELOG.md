@@ -8,6 +8,7 @@ Changelog
  * removed `true()` and `false()`. Use `same()` instead
  * renamed `valid()` to `true()` and `invalid()` to `false()`
  * added `contains()`
+ * added brackets around string output of nested conjunctions/disjunctions
 
 * 1.0.0-beta2 (2015-04-13)
 

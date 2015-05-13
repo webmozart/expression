@@ -12,9 +12,11 @@
 namespace Webmozart\Expression\Tests\Logic;
 
 use PHPUnit_Framework_TestCase;
+use Webmozart\Expression\Comparison\Contains;
 use Webmozart\Expression\Comparison\EndsWith;
 use Webmozart\Expression\Comparison\GreaterThan;
 use Webmozart\Expression\Comparison\Same;
+use Webmozart\Expression\Logic\Conjunction;
 use Webmozart\Expression\Logic\Disjunction;
 use Webmozart\Expression\Logic\False;
 use Webmozart\Expression\Logic\True;
@@ -177,8 +179,10 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
     {
         $expr1 = new Disjunction();
         $expr2 = new Disjunction(array(new GreaterThan(10), new EndsWith('.css')));
+        $expr3 = new Disjunction(array(new GreaterThan(10), new Conjunction(array(new Contains('foo'), new EndsWith('.css')))));
 
         $this->assertSame('', $expr1->toString());
         $this->assertSame('>10 || endsWith(".css")', $expr2->toString());
+        $this->assertSame('>10 || (contains("foo") && endsWith(".css"))', $expr3->toString());
     }
 }

@@ -272,7 +272,9 @@ final class Disjunction implements Expression
      */
     public function toString()
     {
-        return implode(' || ', $this->disjuncts);
+        return implode(' || ', array_map(function (Expression $disjunct) {
+            return $disjunct instanceof Conjunction ? '('.$disjunct->toString().')' : $disjunct->toString();
+        }, $this->disjuncts));
     }
 
     public function __toString()

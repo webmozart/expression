@@ -272,7 +272,9 @@ final class Conjunction implements Expression
      */
     public function toString()
     {
-        return implode(' && ', $this->conjuncts);
+        return implode(' && ', array_map(function (Expression $conjunct) {
+            return $conjunct instanceof Disjunction ? '('.$conjunct->toString().')' : $conjunct->toString();
+        }, $this->conjuncts));
     }
 
     public function __toString()
