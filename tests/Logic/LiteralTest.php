@@ -16,8 +16,8 @@ use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Expr;
 use Webmozart\Expression\Logic\Conjunction;
 use Webmozart\Expression\Logic\Disjunction;
-use Webmozart\Expression\Logic\Invalid;
-use Webmozart\Expression\Logic\Valid;
+use Webmozart\Expression\Logic\False;
+use Webmozart\Expression\Logic\True;
 use Webmozart\Expression\Tests\Logic\Fixtures\TestLiteral;
 
 /**
@@ -41,36 +41,36 @@ class LiteralTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($literal, $literal->andX(new TestLiteral('value')));
     }
 
-    public function testAndValidIgnored()
+    public function testAndTrueIgnored()
     {
         $literal = new TestLiteral('value');
-        $conjunction = $literal->andValid();
+        $conjunction = $literal->andTrue();
 
         $this->assertSame($literal, $conjunction);
     }
 
-    public function testAndXIgnoresValid()
+    public function testAndXIgnoresTrue()
     {
         $literal = new TestLiteral('value');
-        $conjunction = $literal->andX(Expr::valid());
+        $conjunction = $literal->andX(Expr::true());
 
         $this->assertSame($literal, $conjunction);
     }
 
-    public function testAndInvalidReturnsInvalid()
+    public function testAndFalseReturnsFalse()
     {
         $literal = new TestLiteral('value');
-        $conjunction = $literal->andInvalid();
+        $conjunction = $literal->andFalse();
 
-        $this->assertInstanceOf('Webmozart\Expression\Logic\Invalid', $conjunction);
+        $this->assertInstanceOf('Webmozart\Expression\Logic\False', $conjunction);
     }
 
-    public function testAndXReturnsInvalid()
+    public function testAndXReturnsFalse()
     {
         $literal = new TestLiteral('value');
-        $conjunction = $literal->andX($invalid = Expr::invalid());
+        $conjunction = $literal->andX($false = Expr::false());
 
-        $this->assertSame($invalid, $conjunction);
+        $this->assertSame($false, $conjunction);
     }
 
     /**
@@ -79,7 +79,7 @@ class LiteralTest extends PHPUnit_Framework_TestCase
     public function testAnd($method, $args, $expected)
     {
         // tested separately
-        if ('valid' === $method || 'invalid' === $method) {
+        if ('true' === $method || 'false' === $method) {
             return;
         }
 
@@ -110,36 +110,36 @@ class LiteralTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($literal, $literal->orX(new TestLiteral('value')));
     }
 
-    public function testOrInvalidIgnored()
+    public function testOrFalseIgnored()
     {
         $literal = new TestLiteral('value');
-        $disjunction = $literal->orInvalid();
+        $disjunction = $literal->orFalse();
 
         $this->assertSame($literal, $disjunction);
     }
 
-    public function testOrXIgnoresInvalid()
+    public function testOrXIgnoresFalse()
     {
         $literal = new TestLiteral('value');
-        $disjunction = $literal->orX(new Invalid());
+        $disjunction = $literal->orX(new False());
 
         $this->assertSame($literal, $disjunction);
     }
 
-    public function testOrValidReturnsValid()
+    public function testOrTrueReturnsTrue()
     {
         $literal = new TestLiteral('value');
-        $disjunction = $literal->orValid();
+        $disjunction = $literal->orTrue();
 
-        $this->assertInstanceOf('Webmozart\Expression\Logic\Valid', $disjunction);
+        $this->assertInstanceOf('Webmozart\Expression\Logic\True', $disjunction);
     }
 
-    public function testOrXReturnsValid()
+    public function testOrXReturnsTrue()
     {
         $literal = new TestLiteral('value');
-        $disjunction = $literal->orX($valid = new Valid());
+        $disjunction = $literal->orX($true = new True());
 
-        $this->assertSame($valid, $disjunction);
+        $this->assertSame($true, $disjunction);
     }
 
     /**
@@ -148,7 +148,7 @@ class LiteralTest extends PHPUnit_Framework_TestCase
     public function testOr($method, $args, $expected)
     {
         // tested separately
-        if ('valid' === $method || 'invalid' === $method) {
+        if ('true' === $method || 'false' === $method) {
             return;
         }
 

@@ -77,36 +77,36 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
         $this->assertSame(array($notNull, $greaterThan), $conjunction3->getConjuncts());
     }
 
-    public function testAndValidIgnored()
+    public function testAndTrueIgnored()
     {
         $conjunction1 = new Conjunction(array($notNull = new Same('10')));
-        $conjunction2 = $conjunction1->andValid();
+        $conjunction2 = $conjunction1->andTrue();
 
         $this->assertSame($conjunction1, $conjunction2);
     }
 
-    public function testAndXIgnoresValid()
+    public function testAndXIgnoresTrue()
     {
         $conjunction1 = new Conjunction(array($notNull = new Same('10')));
-        $conjunction2 = $conjunction1->andX(Expr::valid());
+        $conjunction2 = $conjunction1->andX(Expr::true());
 
         $this->assertSame($conjunction1, $conjunction2);
     }
 
-    public function testAndInvalidReturnsInvalid()
+    public function testAndFalseReturnsFalse()
     {
         $conjunction1 = new Conjunction(array($notNull = new Same('10')));
-        $conjunction2 = $conjunction1->andInvalid();
+        $conjunction2 = $conjunction1->andFalse();
 
-        $this->assertInstanceOf('Webmozart\Expression\Logic\Invalid', $conjunction2);
+        $this->assertInstanceOf('Webmozart\Expression\Logic\False', $conjunction2);
     }
 
-    public function testAndXReturnsInvalid()
+    public function testAndXReturnsFalse()
     {
         $conjunction1 = new Conjunction(array($notNull = new Same('10')));
-        $conjunction2 = $conjunction1->andX($invalid = Expr::invalid());
+        $conjunction2 = $conjunction1->andX($false = Expr::false());
 
-        $this->assertSame($invalid, $conjunction2);
+        $this->assertSame($false, $conjunction2);
     }
 
     /**
@@ -115,7 +115,7 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
     public function testAnd($method, $args, $expected)
     {
         // tested separately
-        if ('valid' === $method || 'invalid' === $method) {
+        if ('true' === $method || 'false' === $method) {
             return;
         }
 

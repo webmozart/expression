@@ -29,9 +29,9 @@ use Webmozart\Expression\Comparison\In;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Expr;
-use Webmozart\Expression\Logic\Invalid;
+use Webmozart\Expression\Logic\False;
 use Webmozart\Expression\Logic\Not;
-use Webmozart\Expression\Logic\Valid;
+use Webmozart\Expression\Logic\True;
 use Webmozart\Expression\Selector\All;
 use Webmozart\Expression\Selector\AtLeast;
 use Webmozart\Expression\Selector\AtMost;
@@ -182,14 +182,14 @@ class ExprTest extends PHPUnit_Framework_TestCase
                 new Count($expr),
             ),
             array(
-                'valid',
+                'true',
                 array(),
-                new Valid(),
+                new True(),
             ),
             array(
-                'invalid',
+                'false',
                 array(),
-                new Invalid(),
+                new False(),
             ),
         ), self::getComparisons());
 

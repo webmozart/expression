@@ -19,7 +19,7 @@ use Webmozart\Expression\Expression;
  * @since  1.0
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class Invalid extends Literal
+final class False extends Literal
 {
     /**
      * {@inheritdoc}
@@ -43,7 +43,7 @@ final class Invalid extends Literal
      */
     public function toString()
     {
-        return 'invalid';
+        return 'false';
     }
 
     /**

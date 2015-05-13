@@ -104,8 +104,6 @@ Method                      | Description
 `notNull()`                 | Check that a value is not `null`
 `isEmpty()`                 | Check that a value is empty (using `empty()`)
 `notEmpty()`                | Check that a value is not empty (using `empty()`)
-`true()`                    | Check that a value is `true`
-`false()`                   | Check that a value is `false`
 `equals($value)`            | Check that a value equals another value (using `==`)
 `notEquals($value)`         | Check that a value does not equal another value (using `!=`)
 `same($value)`              | Check that a value is identical to another value (using `===`)
@@ -120,8 +118,8 @@ Method                      | Description
 `in($values)`               | Check that a value occurs in a list of values
 `keyExists($key)`           | Check that a key exists in a value
 `keyNotExists($key)`        | Check that a key does not exist in a value
-`valid()`                   | Always true (tautology)
-`invalid()`                 | Always false (contradiction)
+`true()`                    | Always `true` (tautology)
+`false()`                   | Always `false` (contradiction)
 
 Selectors
 ---------

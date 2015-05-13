@@ -61,9 +61,9 @@ final class Disjunction implements Expression
 
     public function orX(Expression $expr)
     {
-        if ($expr instanceof Invalid) {
+        if ($expr instanceof False) {
             return $this;
-        } elseif ($expr instanceof Valid) {
+        } elseif ($expr instanceof True) {
             return $expr;
         }
 
@@ -89,12 +89,12 @@ final class Disjunction implements Expression
         return $this->orX(Expr::not($expr));
     }
 
-    public function orValid()
+    public function orTrue()
     {
-        return Expr::valid();
+        return Expr::true();
     }
 
-    public function orInvalid()
+    public function orFalse()
     {
         return $this;
     }

@@ -61,9 +61,9 @@ final class Conjunction implements Expression
 
     public function andX(Expression $expr)
     {
-        if ($expr instanceof Valid) {
+        if ($expr instanceof True) {
             return $this;
-        } elseif ($expr instanceof Invalid) {
+        } elseif ($expr instanceof False) {
             return $expr;
         }
 
@@ -89,14 +89,14 @@ final class Conjunction implements Expression
         return $this->andX(Expr::not($expr));
     }
 
-    public function andValid()
+    public function andTrue()
     {
         return $this;
     }
 
-    public function andInvalid()
+    public function andFalse()
     {
-        return Expr::invalid();
+        return Expr::false();
     }
 
     public function andKey($key, Expression $expr)

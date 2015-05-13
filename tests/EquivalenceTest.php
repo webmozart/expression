@@ -29,9 +29,9 @@ use Webmozart\Expression\Comparison\In;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Expression;
-use Webmozart\Expression\Logic\Invalid;
+use Webmozart\Expression\Logic\False;
 use Webmozart\Expression\Logic\Not;
-use Webmozart\Expression\Logic\Valid;
+use Webmozart\Expression\Logic\True;
 use Webmozart\Expression\Selector\All;
 use Webmozart\Expression\Selector\AtLeast;
 use Webmozart\Expression\Selector\AtMost;
@@ -110,9 +110,9 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
 
             array(new Count(new Same(10)), new Count(new Same(10))),
 
-            array(new Valid(), new Valid()),
+            array(new True(), new True()),
 
-            array(new Invalid(), new Invalid()),
+            array(new False(), new False()),
         );
     }
 
@@ -205,9 +205,9 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
             array(new Count(new Same('10')), new Count(new Same(10))),
             array(new Count(new Same('10')), new Same('10')),
 
-            array(new Valid(), new Same(10)),
+            array(new True(), new Same(10)),
 
-            array(new Invalid(), new Same(10)),
+            array(new False(), new Same(10)),
         );
     }
 

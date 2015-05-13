@@ -16,8 +16,8 @@ use Webmozart\Expression\Comparison\EndsWith;
 use Webmozart\Expression\Comparison\GreaterThan;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Logic\Disjunction;
-use Webmozart\Expression\Logic\Invalid;
-use Webmozart\Expression\Logic\Valid;
+use Webmozart\Expression\Logic\False;
+use Webmozart\Expression\Logic\True;
 use Webmozart\Expression\Selector\Key;
 
 /**
@@ -80,36 +80,36 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
         $this->assertSame(array($notNull, $greaterThan), $disjunction3->getDisjuncts());
     }
 
-    public function testOrInvalidIgnored()
+    public function testOrFalseIgnored()
     {
         $disjunction1 = new Disjunction(array($notNull = new Same('10')));
-        $disjunction2 = $disjunction1->orInvalid();
+        $disjunction2 = $disjunction1->orFalse();
 
         $this->assertSame($disjunction1, $disjunction2);
     }
 
-    public function testOrXIgnoresInvalid()
+    public function testOrXIgnoresFalse()
     {
         $disjunction1 = new Disjunction(array($notNull = new Same('10')));
-        $disjunction2 = $disjunction1->orX(new Invalid());
+        $disjunction2 = $disjunction1->orX(new False());
 
         $this->assertSame($disjunction1, $disjunction2);
     }
 
-    public function testOrValidReturnsValid()
+    public function testOrTrueReturnsTrue()
     {
         $disjunction1 = new Disjunction(array($notNull = new Same('10')));
-        $disjunction2 = $disjunction1->orValid();
+        $disjunction2 = $disjunction1->orTrue();
 
-        $this->assertInstanceOf('Webmozart\Expression\Logic\Valid', $disjunction2);
+        $this->assertInstanceOf('Webmozart\Expression\Logic\True', $disjunction2);
     }
 
-    public function testOrXReturnsValid()
+    public function testOrXReturnsTrue()
     {
         $disjunction1 = new Disjunction(array($notNull = new Same('10')));
-        $disjunction2 = $disjunction1->orX($valid = new Valid());
+        $disjunction2 = $disjunction1->orX($true = new True());
 
-        $this->assertSame($valid, $disjunction2);
+        $this->assertSame($true, $disjunction2);
     }
 
     /**
@@ -118,7 +118,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
     public function testOr($method, $args, $expected)
     {
         // tested separately
-        if ('valid' === $method || 'invalid' === $method) {
+        if ('true' === $method || 'false' === $method) {
             return;
         }
 
