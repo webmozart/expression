@@ -253,40 +253,6 @@ class Expr
     }
 
     /**
-     * Check that a value is true.
-     *
-     * @param string|int|null $key The array key to apply the expression to.
-     *                             Equivalent to calling {@link key()}.
-     *
-     * @return Same|Key The created expression.
-     */
-    public static function true($key = null)
-    {
-        if (null !== $key) {
-            return self::key($key, new Same(true));
-        }
-
-        return new Same(true);
-    }
-
-    /**
-     * Check that a value is false.
-     *
-     * @param string|int|null $key The array key to apply the expression to.
-     *                             Equivalent to calling {@link key()}.
-     *
-     * @return Same|Key The created expression.
-     */
-    public static function false($key = null)
-    {
-        if (null !== $key) {
-            return self::key($key, new Same(false));
-        }
-
-        return new Same(false);
-    }
-
-    /**
      * Check that a value equals another value.
      *
      * @param mixed           $value The compared value.

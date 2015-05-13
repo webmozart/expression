@@ -149,16 +149,6 @@ final class Conjunction implements Expression
         return $this->andX(Expr::notEmpty($key));
     }
 
-    public function andTrue($key = null)
-    {
-        return $this->andX(Expr::true($key));
-    }
-
-    public function andFalse($key = null)
-    {
-        return $this->andX(Expr::false($key));
-    }
-
     public function andEquals($value, $key = null)
     {
         return $this->andX(Expr::equals($value, $key));

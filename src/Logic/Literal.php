@@ -117,16 +117,6 @@ abstract class Literal implements Expression
         return $this->andX(Expr::notEmpty($key));
     }
 
-    public function andTrue($key = null)
-    {
-        return $this->andX(Expr::true($key));
-    }
-
-    public function andFalse($key = null)
-    {
-        return $this->andX(Expr::false($key));
-    }
-
     public function andEquals($value, $key = null)
     {
         return $this->andX(Expr::equals($value, $key));
@@ -275,16 +265,6 @@ abstract class Literal implements Expression
     public function orNotEmpty($key = null)
     {
         return $this->orX(Expr::notEmpty($key));
-    }
-
-    public function orTrue($key = null)
-    {
-        return $this->orX(Expr::true($key));
-    }
-
-    public function orFalse($key = null)
-    {
-        return $this->orX(Expr::false($key));
     }
 
     public function orEquals($value, $key = null)

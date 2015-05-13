@@ -79,16 +79,6 @@ class ExprTest extends PHPUnit_Framework_TestCase
                 new NotEmpty()
             ),
             array(
-                'true',
-                array(),
-                new Same(true)
-            ),
-            array(
-                'false',
-                array(),
-                new Same(false)
-            ),
-            array(
                 'equals',
                 array(10),
                 new Equals(10)

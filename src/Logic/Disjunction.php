@@ -149,16 +149,6 @@ final class Disjunction implements Expression
         return $this->orX(Expr::notEmpty($key));
     }
 
-    public function orTrue($key = null)
-    {
-        return $this->orX(Expr::true($key));
-    }
-
-    public function orFalse($key = null)
-    {
-        return $this->orX(Expr::false($key));
-    }
-
     public function orEquals($value, $key = null)
     {
         return $this->orX(Expr::equals($value, $key));
