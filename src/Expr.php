@@ -11,6 +11,7 @@
 
 namespace Webmozart\Expression;
 
+use Webmozart\Expression\Comparison\Contains;
 use Webmozart\Expression\Comparison\EndsWith;
 use Webmozart\Expression\Comparison\Equals;
 use Webmozart\Expression\Comparison\GreaterThan;
@@ -466,6 +467,24 @@ class Expr
         }
 
         return new EndsWith($suffix);
+    }
+
+    /**
+     * Check that a value contains a given string.
+     *
+     * @param string          $string The sub-string.
+     * @param string|int|null $key    The array key to apply the expression to.
+     *                                Equivalent to calling {@link key()}.
+     *
+     * @return Contains|Key The created expression.
+     */
+    public static function contains($string, $key = null)
+    {
+        if (null !== $key) {
+            return self::key($key, new Contains($string));
+        }
+
+        return new Contains($string);
     }
 
     /**

@@ -7,6 +7,7 @@ Changelog
  * optimized `Invalid::andX()` and `Invalid::orX()`
  * removed `true()` and `false()`. Use `same()` instead
  * renamed `valid()` to `true()` and `invalid()` to `false()`
+ * added `contains()`
 
 * 1.0.0-beta2 (2015-04-13)
 

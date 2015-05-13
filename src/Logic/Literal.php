@@ -177,6 +177,11 @@ abstract class Literal implements Expression
         return $this->andX(Expr::endsWith($suffix, $key));
     }
 
+    public function andContains($string, $key = null)
+    {
+        return $this->andX(Expr::contains($string, $key));
+    }
+
     public function andKeyExists($keyName, $key = null)
     {
         return $this->andX(Expr::keyExists($keyName, $key));
@@ -325,6 +330,11 @@ abstract class Literal implements Expression
     public function orEndsWith($suffix, $key = null)
     {
         return $this->orX(Expr::endsWith($suffix, $key));
+    }
+
+    public function orContains($string, $key = null)
+    {
+        return $this->orX(Expr::contains($string, $key));
     }
 
     public function orKeyExists($keyName, $key = null)

@@ -209,6 +209,11 @@ final class Conjunction implements Expression
         return $this->andX(Expr::endsWith($suffix, $key));
     }
 
+    public function andContains($string, $key = null)
+    {
+        return $this->andX(Expr::contains($string, $key));
+    }
+
     public function andKeyExists($keyName, $key = null)
     {
         return $this->andX(Expr::keyExists($keyName, $key));

@@ -209,6 +209,11 @@ final class Disjunction implements Expression
         return $this->orX(Expr::endsWith($suffix, $key));
     }
 
+    public function orContains($string, $key = null)
+    {
+        return $this->orX(Expr::contains($string, $key));
+    }
+
     public function orKeyExists($keyName, $key = null)
     {
         return $this->orX(Expr::keyExists($keyName, $key));

@@ -12,6 +12,7 @@
 namespace Webmozart\Expression\Tests;
 
 use PHPUnit_Framework_TestCase;
+use Webmozart\Expression\Comparison\Contains;
 use Webmozart\Expression\Comparison\EndsWith;
 use Webmozart\Expression\Comparison\Equals;
 use Webmozart\Expression\Comparison\GreaterThan;
@@ -132,6 +133,11 @@ class ExprTest extends PHPUnit_Framework_TestCase
                 'endsWith',
                 array('.css'),
                 new EndsWith('.css')
+            ),
+            array(
+                'contains',
+                array('css'),
+                new Contains('css')
             ),
             array(
                 'in',
