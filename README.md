@@ -114,6 +114,7 @@ Method                      | Description
 `lessThanEqual($value)`     | Check that a value is less than or equal to another value
 `startsWith($prefix)`       | Check that a value starts with a given string
 `endsWith($suffix)`         | Check that a value ends with a given string
+`contains($string)`         | Check that a value contains a given string
 `matches($regExp)`          | Check that a value matches a regular expression
 `in($values)`               | Check that a value occurs in a list of values
 `keyExists($key)`           | Check that a key exists in a value
