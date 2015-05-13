@@ -262,7 +262,7 @@ $c2 = Expr::same(35, Person::AGE)->andNotNull(Person::FIRST_NAME);
 $c1 == $c2;
 // => false
 
-$c1->equals($c2);
+$c1->equivalentTo($c2);
 // => true
 
 // Also logically equivalent
@@ -272,7 +272,7 @@ $c2 = Expr::oneOf(array(35), Person::AGE);
 $c1 == $c2;
 // => false
 
-$c1->equals($c2);
+$c1->equivalentTo($c2);
 // => true
 ```
 
