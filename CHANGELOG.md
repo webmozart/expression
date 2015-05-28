@@ -1,7 +1,7 @@
 Changelog
 =========
 
-* 1.0.0-next (@release_date@)
+* 1.0.0-beta3 (2015-05-28)
 
  * optimized `Valid::andX()` and `Valid::orX()`
  * optimized `Invalid::andX()` and `Invalid::orX()`
