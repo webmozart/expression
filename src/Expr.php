@@ -92,7 +92,7 @@ class Expr
     /**
      * Always true (tautology).
      *
-     * @return True The created expression.
+     * @return AlwaysTrue The created expression.
      */
     public static function true()
     {
@@ -102,7 +102,7 @@ class Expr
     /**
      * Always false (contradiction).
      *
-     * @return False The created expression.
+     * @return AlwaysFalse The created expression.
      */
     public static function false()
     {
