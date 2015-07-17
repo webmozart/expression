@@ -16,6 +16,7 @@ use Webmozart\Expression\Comparison\IsEmpty;
 
 /**
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class IsEmptyTest extends PHPUnit_Framework_TestCase

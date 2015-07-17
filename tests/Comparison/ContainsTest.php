@@ -16,6 +16,7 @@ use Webmozart\Expression\Comparison\Contains;
 
 /**
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  * @author Stephan Wentz <stephan@wentz.it>
  */

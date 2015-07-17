@@ -14,14 +14,15 @@ namespace Webmozart\Expression\Tests\Logic;
 use PHPUnit_Framework_TestCase;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Expr;
-use Webmozart\Expression\Logic\Conjunction;
-use Webmozart\Expression\Logic\Disjunction;
 use Webmozart\Expression\Logic\AlwaysFalse;
 use Webmozart\Expression\Logic\AlwaysTrue;
+use Webmozart\Expression\Logic\Conjunction;
+use Webmozart\Expression\Logic\Disjunction;
 use Webmozart\Expression\Tests\Logic\Fixtures\TestLiteral;
 
 /**
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class LiteralTest extends PHPUnit_Framework_TestCase

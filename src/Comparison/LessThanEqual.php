@@ -21,6 +21,7 @@ use Webmozart\Expression\Util\StringUtil;
  * The comparison is done using PHP's "<=" comparison operator.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 final class LessThanEqual extends Literal

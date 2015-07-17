@@ -18,6 +18,7 @@ use Webmozart\Expression\Expression;
  * Checks that at most N iterator entries match an expression.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 final class AtMost extends Selector
@@ -74,7 +75,7 @@ final class AtMost extends Selector
             return false;
         }
 
-        /** @var static $other */
+        /* @var static $other */
         return $this->count == $other->count;
     }
 

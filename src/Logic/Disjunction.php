@@ -21,6 +21,7 @@ use Webmozart\Expression\Expression;
  * "or" operators.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 final class Disjunction implements Expression
@@ -81,7 +82,7 @@ final class Disjunction implements Expression
             $disjuncts[] = $expr;
         }
 
-        return new Disjunction($disjuncts);
+        return new self($disjuncts);
     }
 
     public function orNot(Expression $expr)
@@ -247,7 +248,7 @@ final class Disjunction implements Expression
             return false;
         }
 
-        /** @var static $other */
+        /* @var static $other */
         $leftDisjuncts = $this->disjuncts;
         $rightDisjuncts = $other->disjuncts;
 

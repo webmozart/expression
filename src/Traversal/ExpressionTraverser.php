@@ -24,6 +24,7 @@ use Webmozart\Expression\Selector\Key;
  * will be invoked for every node of the expression tree.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class ExpressionTraverser

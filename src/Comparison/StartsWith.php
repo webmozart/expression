@@ -19,6 +19,7 @@ use Webmozart\Expression\Util\StringUtil;
  * Checks that a value has a given prefix.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 final class StartsWith extends Literal

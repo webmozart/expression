@@ -16,6 +16,7 @@ use Webmozart\Expression\Comparison\NotSame;
 
 /**
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class NotSameTest extends PHPUnit_Framework_TestCase

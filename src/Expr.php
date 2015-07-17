@@ -16,6 +16,7 @@ use Webmozart\Expression\Comparison\EndsWith;
 use Webmozart\Expression\Comparison\Equals;
 use Webmozart\Expression\Comparison\GreaterThan;
 use Webmozart\Expression\Comparison\GreaterThanEqual;
+use Webmozart\Expression\Comparison\In;
 use Webmozart\Expression\Comparison\IsEmpty;
 use Webmozart\Expression\Comparison\KeyExists;
 use Webmozart\Expression\Comparison\KeyNotExists;
@@ -25,12 +26,11 @@ use Webmozart\Expression\Comparison\Matches;
 use Webmozart\Expression\Comparison\NotEmpty;
 use Webmozart\Expression\Comparison\NotEquals;
 use Webmozart\Expression\Comparison\NotSame;
-use Webmozart\Expression\Comparison\In;
 use Webmozart\Expression\Comparison\Same;
 use Webmozart\Expression\Comparison\StartsWith;
 use Webmozart\Expression\Logic\AlwaysFalse;
-use Webmozart\Expression\Logic\Not;
 use Webmozart\Expression\Logic\AlwaysTrue;
+use Webmozart\Expression\Logic\Not;
 use Webmozart\Expression\Selector\All;
 use Webmozart\Expression\Selector\AtLeast;
 use Webmozart\Expression\Selector\AtMost;
@@ -73,6 +73,7 @@ use Webmozart\Expression\Selector\Key;
  * ```
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class Expr

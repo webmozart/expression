@@ -23,6 +23,7 @@ use Webmozart\Expression\Selector\Key;
 
 /**
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class ConjunctionTest extends PHPUnit_Framework_TestCase
@@ -31,7 +32,7 @@ class ConjunctionTest extends PHPUnit_Framework_TestCase
     {
         $conjunction = new Conjunction(array(
             $notNull = new Same('10'),
-            $greaterThan = new GreaterThan('age', 0)
+            $greaterThan = new GreaterThan('age', 0),
         ));
 
         $this->assertSame(array($notNull, $greaterThan), $conjunction->getConjuncts());

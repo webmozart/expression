@@ -18,6 +18,7 @@ use Webmozart\Expression\Logic\Literal;
  * Checks that a value is empty.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 final class IsEmpty extends Literal

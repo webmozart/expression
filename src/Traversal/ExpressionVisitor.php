@@ -20,6 +20,7 @@ use Webmozart\Expression\Expression;
  * traverser invokes the visitor for every node of the expression tree.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 interface ExpressionVisitor

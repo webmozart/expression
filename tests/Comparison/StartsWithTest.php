@@ -16,6 +16,7 @@ use Webmozart\Expression\Comparison\StartsWith;
 
 /**
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class StartsWithTest extends PHPUnit_Framework_TestCase

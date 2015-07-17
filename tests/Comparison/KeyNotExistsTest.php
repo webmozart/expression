@@ -16,6 +16,7 @@ use Webmozart\Expression\Comparison\KeyNotExists;
 
 /**
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class KeyNotExistsTest extends PHPUnit_Framework_TestCase

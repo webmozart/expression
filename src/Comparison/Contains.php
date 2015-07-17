@@ -19,6 +19,7 @@ use Webmozart\Expression\Util\StringUtil;
  * Checks that a value contains another value.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  * @author Stephan Wentz <stephan@wentz.it>
  */

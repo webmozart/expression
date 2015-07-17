@@ -21,6 +21,7 @@ use Webmozart\Expression\Expression;
  * "and" operators.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 final class Conjunction implements Expression
@@ -81,7 +82,7 @@ final class Conjunction implements Expression
             $conjuncts[] = $expr;
         }
 
-        return new Conjunction($conjuncts);
+        return new self($conjuncts);
     }
 
     public function andNot(Expression $expr)
@@ -247,7 +248,7 @@ final class Conjunction implements Expression
             return false;
         }
 
-        /** @var static $other */
+        /* @var static $other */
         $leftConjuncts = $this->conjuncts;
         $rightConjuncts = $other->conjuncts;
 

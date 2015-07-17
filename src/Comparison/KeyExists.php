@@ -19,6 +19,7 @@ use Webmozart\Expression\Util\StringUtil;
  * Checks that an array key exists.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 final class KeyExists extends Literal

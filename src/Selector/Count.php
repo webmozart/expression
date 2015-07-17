@@ -17,6 +17,7 @@ use Countable;
  * Checks that the count of a collection matches an expression.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 final class Count extends Selector

@@ -20,6 +20,7 @@ use Webmozart\Expression\Logic\Literal;
  * Evaluates an expression for elements of a structured value.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 abstract class Selector extends Literal
@@ -59,7 +60,7 @@ abstract class Selector extends Literal
             return false;
         }
 
-        /** @var Selector $other */
+        /* @var Selector $other */
         return $this->expr->equivalentTo($other->expr);
     }
 }

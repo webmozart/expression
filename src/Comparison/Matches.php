@@ -21,6 +21,7 @@ use Webmozart\Expression\Util\StringUtil;
  * The comparison is done using PHP's `preg_match()` function.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 final class Matches extends Literal

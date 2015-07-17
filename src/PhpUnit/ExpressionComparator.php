@@ -19,6 +19,7 @@ use Webmozart\Expression\Expression;
  * Compares {@link Expression} objects for equality.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class ExpressionComparator extends Comparator

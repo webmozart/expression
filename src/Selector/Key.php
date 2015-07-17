@@ -19,6 +19,7 @@ use Webmozart\Expression\Logic\Disjunction;
  * Checks whether an array key matches an expression.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 final class Key extends Selector
@@ -76,7 +77,7 @@ final class Key extends Selector
             return false;
         }
 
-        /** @var static $other */
+        /* @var static $other */
         return $this->key == $other->key;
     }
 

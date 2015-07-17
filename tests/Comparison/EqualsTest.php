@@ -16,6 +16,7 @@ use Webmozart\Expression\Comparison\Equals;
 
 /**
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class EqualsTest extends PHPUnit_Framework_TestCase

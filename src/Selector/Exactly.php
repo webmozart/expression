@@ -18,6 +18,7 @@ use Webmozart\Expression\Expression;
  * Checks that exactly N iterator entries match an expression.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 final class Exactly extends Selector
@@ -74,7 +75,7 @@ final class Exactly extends Selector
             return false;
         }
 
-        /** @var static $other */
+        /* @var static $other */
         return $this->count == $other->count;
     }
 

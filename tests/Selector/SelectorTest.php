@@ -17,6 +17,7 @@ use Webmozart\Expression\Tests\Selector\Fixtures\TestSelector;
 
 /**
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class SelectorTest extends PHPUnit_Framework_TestCase

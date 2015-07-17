@@ -16,14 +16,15 @@ use Webmozart\Expression\Comparison\Contains;
 use Webmozart\Expression\Comparison\EndsWith;
 use Webmozart\Expression\Comparison\GreaterThan;
 use Webmozart\Expression\Comparison\Same;
-use Webmozart\Expression\Logic\Conjunction;
-use Webmozart\Expression\Logic\Disjunction;
 use Webmozart\Expression\Logic\AlwaysFalse;
 use Webmozart\Expression\Logic\AlwaysTrue;
+use Webmozart\Expression\Logic\Conjunction;
+use Webmozart\Expression\Logic\Disjunction;
 use Webmozart\Expression\Selector\Key;
 
 /**
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class DisjunctionTest extends PHPUnit_Framework_TestCase
@@ -32,7 +33,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
     {
         $disjunction = new Disjunction(array(
             $notNull = new Same('10'),
-            $greaterThan = new GreaterThan('age', 0)
+            $greaterThan = new GreaterThan('age', 0),
         ));
 
         $this->assertSame(array($notNull, $greaterThan), $disjunction->getDisjuncts());

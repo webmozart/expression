@@ -20,6 +20,7 @@ use Webmozart\Expression\Selector\Exactly;
 
 /**
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class ExactlyTest extends PHPUnit_Framework_TestCase

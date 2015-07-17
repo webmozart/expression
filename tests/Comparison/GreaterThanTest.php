@@ -16,6 +16,7 @@ use Webmozart\Expression\Comparison\GreaterThan;
 
 /**
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class GreaterThanTest extends PHPUnit_Framework_TestCase

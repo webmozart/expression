@@ -17,6 +17,7 @@ use Webmozart\Expression\Expression;
  * Always false (contradiction).
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 final class AlwaysFalse extends Literal

@@ -16,6 +16,7 @@ use Webmozart\Expression\Logic\Literal;
 
 /**
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class TestLiteral extends Literal

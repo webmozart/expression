@@ -21,6 +21,7 @@ use Webmozart\Expression\Util\StringUtil;
  * The comparison is done using PHP's "==" equality operator.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 final class Equals extends Literal
@@ -33,7 +34,7 @@ final class Equals extends Literal
     /**
      * Creates the expression.
      *
-     * @param mixed  $comparedValue The compared value.
+     * @param mixed $comparedValue The compared value.
      */
     public function __construct($comparedValue)
     {

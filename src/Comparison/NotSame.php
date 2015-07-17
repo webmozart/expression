@@ -21,6 +21,7 @@ use Webmozart\Expression\Util\StringUtil;
  * The comparison is done using PHP's "!==" equality operator.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 final class NotSame extends Literal

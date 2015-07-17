@@ -33,6 +33,7 @@ use Webmozart\Expression\Expression;
  *  * in(["A", "B", "C]) or null()
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 abstract class Literal implements Expression

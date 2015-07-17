@@ -19,6 +19,7 @@ use Webmozart\Expression\Util\StringUtil;
  * Checks that a value is one of a list of values.
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 final class In extends Literal
@@ -58,8 +59,8 @@ final class In extends Literal
     /**
      * Returns whether the value is compared strictly.
      *
-     * @return boolean Returns `true` if using strict comparison (`===`) and
-     *                 `false` if using weak comparison (`==`).
+     * @return bool Returns `true` if using strict comparison (`===`) and
+     *              `false` if using weak comparison (`==`).
      */
     public function isStrict()
     {

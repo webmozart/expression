@@ -22,6 +22,7 @@ use Webmozart\Expression\Traversal\ExpressionTraverser;
 
 /**
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class ExpressionTraverserTest extends PHPUnit_Framework_TestCase

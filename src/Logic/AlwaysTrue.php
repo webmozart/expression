@@ -17,6 +17,7 @@ use Webmozart\Expression\Expression;
  * Always true (tautology).
  *
  * @since  1.0
+ *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 final class AlwaysTrue extends Literal
