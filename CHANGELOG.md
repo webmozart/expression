@@ -1,6 +1,11 @@
 Changelog
 =========
 
+* 1.0.0-beta4 (2015-08-24)
+
+ * fixed return types in `Expr::true()` and `Expr::false()`
+ * fixed minimum versions in composer.json
+
 * 1.0.0-beta3 (2015-05-28)
 
  * optimized `Valid::andX()` and `Valid::orX()`
