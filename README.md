@@ -1,5 +1,5 @@
 The Webmozart Expression API Documentation
-===============================================
+==========================================
 
 This repository contains the API documentation of the [Webmozart Expression]. 
 The documentation is rendered at https://webmozart.github.io/expression/api 
