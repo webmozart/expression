@@ -1,0 +1,6 @@
+source:
+    - vendor/webmozart/expression/src
+
+title: Webmozart Expression API
+
+baseUrl: https://webmozart.github.io/expression/api/latest
