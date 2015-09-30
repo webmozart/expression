@@ -24,6 +24,7 @@ use Webmozart\Expression\Comparison\KeyNotExists;
 use Webmozart\Expression\Comparison\LessThan;
 use Webmozart\Expression\Comparison\LessThanEqual;
 use Webmozart\Expression\Comparison\Matches;
+use Webmozart\Expression\Comparison\NotEmpty;
 use Webmozart\Expression\Comparison\NotEquals;
 use Webmozart\Expression\Comparison\NotSame;
 use Webmozart\Expression\Comparison\Same;
@@ -242,6 +243,16 @@ class Expr
     public static function isEmpty()
     {
         return new IsEmpty();
+    }
+
+    /**
+     * Check that a value is not empty.
+     *
+     * @return NotEmpty The created expression.
+     */
+    public static function notEmpty()
+    {
+        return new NotEmpty();
     }
 
     /**

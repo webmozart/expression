@@ -25,6 +25,7 @@ use Webmozart\Expression\Comparison\KeyNotExists;
 use Webmozart\Expression\Comparison\LessThan;
 use Webmozart\Expression\Comparison\LessThanEqual;
 use Webmozart\Expression\Comparison\Matches;
+use Webmozart\Expression\Comparison\NotEmpty;
 use Webmozart\Expression\Comparison\NotEquals;
 use Webmozart\Expression\Comparison\NotSame;
 use Webmozart\Expression\Comparison\Same;
@@ -80,6 +81,11 @@ class ExprTest extends PHPUnit_Framework_TestCase
                 'isInstanceOf',
                 array('DateTime'),
                 new IsInstanceOf('DateTime'),
+            ),
+            array(
+                'notEmpty',
+                array(),
+                new NotEmpty(),
             ),
             array(
                 'equals',
