@@ -41,8 +41,8 @@ When querying persons from the repository, you can create new expressions with
 the [`Expr`] factory class:
 
 ```php
-$expr = Expr::method('getFirstName', Expr::startsWith('Tho', Person::FIRST_NAME))
-    ->andMethod('getAge', Expr::greaterThan(35, Person::AGE));
+$expr = Expr::method('getFirstName', Expr::startsWith('Tho'))
+    ->andMethod('getAge', Expr::greaterThan(35));
     
 $persons = $repository->findPersons($expr);
 ```
