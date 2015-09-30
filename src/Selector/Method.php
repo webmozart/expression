@@ -33,7 +33,7 @@ final class Method extends Selector
      * Creates the expression.
      *
      * @param string     $propertyName The name of the method to call.
-     * @param Expression $expr       The expression to evaluate for the result.
+     * @param Expression $expr         The expression to evaluate for the result.
      */
     public function __construct($propertyName, Expression $expr)
     {

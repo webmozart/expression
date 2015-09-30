@@ -13,7 +13,6 @@ namespace Webmozart\Expression\Comparison;
 
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
-use Webmozart\Expression\Util\StringUtil;
 
 /**
  * Checks that a value is an instance of a given class name.
