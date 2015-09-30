@@ -96,7 +96,7 @@ final class Method extends Selector
         }
 
         /* @var static $other */
-        return $this->methodName == $other->methodName && $this->arguments === $other->arguments;
+        return $this->methodName === $other->methodName && $this->arguments === $other->arguments;
     }
 
     /**

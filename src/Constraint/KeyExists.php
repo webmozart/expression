@@ -36,7 +36,7 @@ final class KeyExists extends Literal
      */
     public function __construct($key)
     {
-        $this->key = $key;
+        $this->key = (string) $key;
     }
 
     /**
@@ -67,7 +67,7 @@ final class KeyExists extends Literal
     public function equivalentTo(Expression $other)
     {
         // Since this class is final, we can check with instanceof
-        return $other instanceof $this && $this->key == $other->key;
+        return $other instanceof $this && $this->key === $other->key;
     }
 
     /**

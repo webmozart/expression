@@ -36,7 +36,7 @@ final class StartsWith extends Literal
      */
     public function __construct($acceptedPrefix)
     {
-        $this->acceptedPrefix = $acceptedPrefix;
+        $this->acceptedPrefix = (string) $acceptedPrefix;
     }
 
     /**
@@ -63,7 +63,7 @@ final class StartsWith extends Literal
     public function equivalentTo(Expression $other)
     {
         // Since this class is final, we can check with instanceof
-        return $other instanceof $this && $this->acceptedPrefix == $other->acceptedPrefix;
+        return $other instanceof $this && $this->acceptedPrefix === $other->acceptedPrefix;
     }
 
     /**

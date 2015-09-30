@@ -36,7 +36,7 @@ final class EndsWith extends Literal
      */
     public function __construct($acceptedSuffix)
     {
-        $this->acceptedSuffix = $acceptedSuffix;
+        $this->acceptedSuffix = (string) $acceptedSuffix;
     }
 
     /**
@@ -63,7 +63,7 @@ final class EndsWith extends Literal
     public function equivalentTo(Expression $other)
     {
         // Since this class is final, we can check with instanceof
-        return $other instanceof $this && $this->acceptedSuffix == $other->acceptedSuffix;
+        return $other instanceof $this && $this->acceptedSuffix === $other->acceptedSuffix;
     }
 
     /**
