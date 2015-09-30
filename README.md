@@ -80,7 +80,8 @@ Method                      | Description
 `null()`                    | Check that a value is `null`
 `notNull()`                 | Check that a value is not `null`
 `isEmpty()`                 | Check that a value is empty (using `empty()`)
-`isInstanceOf($className)`  | Check that a value is instance of a class
+`notEmpty()`                | Check that a value is not empty (using `empty()`)
+`isInstanceOf($className)`  | Check that a value is instance of a class (using `instanceof`)
 `equals($value)`            | Check that a value equals another value (using `==`)
 `notEquals($value)`         | Check that a value does not equal another value (using `!=`)
 `same($value)`              | Check that a value is identical to another value (using `===`)

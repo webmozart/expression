@@ -8,6 +8,7 @@ Changelog
  * removed optional `$key` arguments. Use the `key()`/`method()`/`property()`
    selectors instead
  * added `isInstanceOf()`
+ * removed class `NotEmpty` and used `Not` with `IsEmpty` instead
 
 * 1.0.0-beta4 (2015-08-24)
 

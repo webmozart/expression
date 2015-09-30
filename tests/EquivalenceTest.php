@@ -24,7 +24,6 @@ use Webmozart\Expression\Comparison\KeyNotExists;
 use Webmozart\Expression\Comparison\LessThan;
 use Webmozart\Expression\Comparison\LessThanEqual;
 use Webmozart\Expression\Comparison\Matches;
-use Webmozart\Expression\Comparison\NotEmpty;
 use Webmozart\Expression\Comparison\NotEquals;
 use Webmozart\Expression\Comparison\NotSame;
 use Webmozart\Expression\Comparison\Same;
@@ -78,8 +77,6 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
             array(new LessThanEqual('10'), new LessThanEqual(10)),
 
             array(new IsEmpty(), new IsEmpty()),
-
-            array(new NotEmpty(), new NotEmpty()),
 
             array(new IsInstanceOf('SplFileInfo'), new IsInstanceOf('SplFileInfo')),
 
@@ -167,8 +164,6 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
 
             array(new LessThanEqual('10'), new LessThanEqual('11')),
             array(new LessThanEqual('10'), new GreaterThan('10')),
-
-            array(new IsEmpty(), new NotEmpty()),
 
             array(new IsInstanceOf('SplFileInfo'), new IsInstanceOf('DateTime')),
 
