@@ -153,7 +153,7 @@ class ExprTest extends PHPUnit_Framework_TestCase
     {
         $expr = new Same('10');
 
-        $tests = array_merge(array(
+        return array_merge(array(
             array(
                 'not',
                 array($expr),
@@ -210,17 +210,6 @@ class ExprTest extends PHPUnit_Framework_TestCase
                 new AlwaysFalse(),
             ),
         ), self::getComparisons());
-
-        // Add tests for the $key arguments
-        foreach (self::getComparisons() as $comparisonTest) {
-            $tests[] = array(
-                $comparisonTest[0],
-                array_merge($comparisonTest[1], array('field')),
-                new Key('field', $comparisonTest[2]),
-            );
-        }
-
-        return $tests;
     }
 
     /**

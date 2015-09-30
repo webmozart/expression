@@ -217,338 +217,220 @@ class Expr
     /**
      * Check that a value is null.
      *
-     * @param string|int|null $key The array key to apply the expression to.
-     *                             Equivalent to calling {@link key()}.
-     *
      * @return Same|Key The created expression.
      */
-    public static function null($key = null)
+    public static function null()
     {
-        if (null !== $key) {
-            return self::key($key, new Same(null));
-        }
-
         return new Same(null);
     }
 
     /**
      * Check that a value is not null.
      *
-     * @param string|int|null $key The array key to apply the expression to.
-     *                             Equivalent to calling {@link key()}.
-     *
      * @return NotSame|Key The created expression.
      */
-    public static function notNull($key = null)
+    public static function notNull()
     {
-        if (null !== $key) {
-            return self::key($key, new NotSame(null));
-        }
-
         return new NotSame(null);
     }
 
     /**
      * Check that a value is empty.
      *
-     * @param string|int|null $key The array key to apply the expression to.
-     *                             Equivalent to calling {@link key()}.
-     *
      * @return IsEmpty|Key The created expression.
      */
-    public static function isEmpty($key = null)
+    public static function isEmpty()
     {
-        if (null !== $key) {
-            return self::key($key, new IsEmpty());
-        }
-
         return new IsEmpty();
     }
 
     /**
      * Check that a value is not empty.
      *
-     * @param string|int|null $key The array key to apply the expression to.
-     *                             Equivalent to calling {@link key()}.
-     *
      * @return NotEmpty|Key The created expression.
      */
-    public static function notEmpty($key = null)
+    public static function notEmpty()
     {
-        if (null !== $key) {
-            return self::key($key, new NotEmpty());
-        }
-
         return new NotEmpty();
     }
 
     /**
      * Check that a value equals another value.
      *
-     * @param mixed           $value The compared value.
-     * @param string|int|null $key   The array key to apply the expression to.
-     *                               Equivalent to calling {@link key()}.
+     * @param mixed $value The compared value.
      *
      * @return Equals|Key The created expression.
      */
-    public static function equals($value, $key = null)
+    public static function equals($value)
     {
-        if (null !== $key) {
-            return self::key($key, new Equals($value));
-        }
-
         return new Equals($value);
     }
 
     /**
      * Check that a value does not equal another value.
      *
-     * @param mixed           $value The compared value.
-     * @param string|int|null $key   The array key to apply the expression to.
-     *                               Equivalent to calling {@link key()}.
+     * @param mixed $value The compared value.
      *
      * @return NotEquals|Key The created expression.
      */
-    public static function notEquals($value, $key = null)
+    public static function notEquals($value)
     {
-        if (null !== $key) {
-            return self::key($key, new NotEquals($value));
-        }
-
         return new NotEquals($value);
     }
 
     /**
      * Check that a value is identical to another value.
      *
-     * @param mixed           $value The compared value.
-     * @param string|int|null $key   The array key to apply the expression to.
-     *                               Equivalent to calling {@link key()}.
+     * @param mixed $value The compared value.
      *
      * @return Same|Key The created expression.
      */
-    public static function same($value, $key = null)
+    public static function same($value)
     {
-        if (null !== $key) {
-            return self::key($key, new Same($value));
-        }
-
         return new Same($value);
     }
 
     /**
      * Check that a value is not identical to another value.
      *
-     * @param mixed           $value The compared value.
-     * @param string|int|null $key   The array key to apply the expression to.
-     *                               Equivalent to calling {@link key()}.
+     * @param mixed $value The compared value.
      *
      * @return NotSame|Key The created expression.
      */
-    public static function notSame($value, $key = null)
+    public static function notSame($value)
     {
-        if (null !== $key) {
-            return self::key($key, new NotSame($value));
-        }
-
         return new NotSame($value);
     }
 
     /**
      * Check that a value is greater than another value.
      *
-     * @param mixed           $value The compared value.
-     * @param string|int|null $key   The array key to apply the expression to.
-     *                               Equivalent to calling {@link key()}.
+     * @param mixed $value The compared value.
      *
      * @return GreaterThan|Key The created expression.
      */
-    public static function greaterThan($value, $key = null)
+    public static function greaterThan($value)
     {
-        if (null !== $key) {
-            return self::key($key, new GreaterThan($value));
-        }
-
         return new GreaterThan($value);
     }
 
     /**
      * Check that a value is greater than or equal to another value.
      *
-     * @param mixed           $value The compared value.
-     * @param string|int|null $key   The array key to apply the expression to.
-     *                               Equivalent to calling {@link key()}.
+     * @param mixed $value The compared value.
      *
      * @return GreaterThanEqual|Key The created expression.
      */
-    public static function greaterThanEqual($value, $key = null)
+    public static function greaterThanEqual($value)
     {
-        if (null !== $key) {
-            return self::key($key, new GreaterThanEqual($value));
-        }
-
         return new GreaterThanEqual($value);
     }
 
     /**
      * Check that a value is less than another value.
      *
-     * @param mixed           $value The compared value.
-     * @param string|int|null $key   The array key to apply the expression to.
-     *                               Equivalent to calling {@link key()}.
+     * @param mixed $value The compared value.
      *
      * @return LessThan|Key The created expression.
      */
-    public static function lessThan($value, $key = null)
+    public static function lessThan($value)
     {
-        if (null !== $key) {
-            return self::key($key, new LessThan($value));
-        }
-
         return new LessThan($value);
     }
 
     /**
      * Check that a value is less than or equal to another value.
      *
-     * @param mixed           $value The compared value.
-     * @param string|int|null $key   The array key to apply the expression to.
-     *                               Equivalent to calling {@link key()}.
+     * @param mixed $value The compared value.
      *
      * @return LessThanEqual|Key The created expression.
      */
-    public static function lessThanEqual($value, $key = null)
+    public static function lessThanEqual($value)
     {
-        if (null !== $key) {
-            return self::key($key, new LessThanEqual($value));
-        }
-
         return new LessThanEqual($value);
     }
 
     /**
      * Check that a value occurs in a list of values.
      *
-     * @param array           $values The compared values.
-     * @param string|int|null $key    The array key to apply the expression to.
-     *                                Equivalent to calling {@link key()}.
+     * @param array $values The compared values.
      *
      * @return In|Key The created expression.
      */
-    public static function in(array $values, $key = null)
+    public static function in(array $values)
     {
-        if (null !== $key) {
-            return self::key($key, new In($values));
-        }
-
         return new In($values);
     }
 
     /**
      * Check that a value matches a regular expression.
      *
-     * @param string          $regExp The regular expression.
-     * @param string|int|null $key    The array key to apply the expression to.
-     *                                Equivalent to calling {@link key()}.
+     * @param string $regExp The regular expression.
      *
      * @return Matches|Key The created expression.
      */
-    public static function matches($regExp, $key = null)
+    public static function matches($regExp)
     {
-        if (null !== $key) {
-            return self::key($key, new Matches($regExp));
-        }
-
         return new Matches($regExp);
     }
 
     /**
      * Check that a value starts with a given string.
      *
-     * @param string          $prefix The prefix string.
-     * @param string|int|null $key    The array key to apply the expression to.
-     *                                Equivalent to calling {@link key()}.
+     * @param string $prefix The prefix string.
      *
      * @return StartsWith|Key The created expression.
      */
-    public static function startsWith($prefix, $key = null)
+    public static function startsWith($prefix)
     {
-        if (null !== $key) {
-            return self::key($key, new StartsWith($prefix));
-        }
-
         return new StartsWith($prefix);
     }
 
     /**
      * Check that a value ends with a given string.
      *
-     * @param string          $suffix The suffix string.
-     * @param string|int|null $key    The array key to apply the expression to.
-     *                                Equivalent to calling {@link key()}.
+     * @param string $suffix The suffix string.
      *
      * @return EndsWith|Key The created expression.
      */
-    public static function endsWith($suffix, $key = null)
+    public static function endsWith($suffix)
     {
-        if (null !== $key) {
-            return self::key($key, new EndsWith($suffix));
-        }
-
         return new EndsWith($suffix);
     }
 
     /**
      * Check that a value contains a given string.
      *
-     * @param string          $string The sub-string.
-     * @param string|int|null $key    The array key to apply the expression to.
-     *                                Equivalent to calling {@link key()}.
+     * @param string $string The sub-string.
      *
      * @return Contains|Key The created expression.
      */
-    public static function contains($string, $key = null)
+    public static function contains($string)
     {
-        if (null !== $key) {
-            return self::key($key, new Contains($string));
-        }
-
         return new Contains($string);
     }
 
     /**
      * Check that a value key exists.
      *
-     * @param string          $keyName The key name.
-     * @param string|int|null $key     The array key to apply the expression to.
-     *                                 Equivalent to calling {@link key()}.
+     * @param string $keyName The key name.
      *
      * @return KeyExists|Key The created expression.
      */
-    public static function keyExists($keyName, $key = null)
+    public static function keyExists($keyName)
     {
-        if (null !== $key) {
-            return self::key($key, new KeyExists($keyName));
-        }
-
         return new KeyExists($keyName);
     }
 
     /**
      * Check that a value key does not exist.
      *
-     * @param string          $keyName The key name.
-     * @param string|int|null $key     The array key to apply the expression to.
-     *                                 Equivalent to calling {@link key()}.
+     * @param string $keyName The key name.
      *
      * @return KeyNotExists|Key The created expression.
      */
-    public static function keyNotExists($keyName, $key = null)
+    public static function keyNotExists($keyName)
     {
-        if (null !== $key) {
-            return self::key($key, new KeyNotExists($keyName));
-        }
-
         return new KeyNotExists($keyName);
     }
 

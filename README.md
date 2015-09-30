@@ -41,37 +41,14 @@ When querying persons from the repository, you can create new expressions with
 the [`Expr`] factory class:
 
 ```php
-$expr = Expr::startsWith('Tho', Person::FIRST_NAME)
-    ->andGreaterThan(35, Person::AGE);
+$expr = Expr::method('getFirstName', Expr::startsWith('Tho', Person::FIRST_NAME))
+    ->andMethod('getAge', Expr::greaterThan(35, Person::AGE));
     
 $persons = $repository->findPersons($expr);
 ```
 
-Add the constants for the available search fields and a method `match()` to
-your domain object:
-
-```php
-class Person
-{
-    const FIRST_NAME = 'firstName';
-    
-    const AGE = 'age';
-    
-    // ...
-    
-    public function match(Expression $expr)
-    {
-        return $expr->evaluate(array(
-            self::FIRST_NAME => $this->firstName,
-            self::AGE => $this->age,
-            // ...
-        ));
-    }
-}
-```
-
-The repository implementation can use this method to match individual persons
-against the criteria:
+The repository implementation can use the `evaluate()` method to match 
+individual persons against the criteria:
 
 ```php
 class PersonRepositoryImpl implements PersonRepository
@@ -83,7 +60,7 @@ class PersonRepositoryImpl implements PersonRepository
         $result = array();
         
         foreach ($this->persons as $person) {
-            if ($person->match($expr)) {
+            if ($expr->evaluate($person)) {
                 $result[] = $person;
             }
         }
@@ -125,52 +102,48 @@ Method                      | Description
 Selectors
 ---------
 
-Every method in [`Expr`] accepts the name of the tested array key as last,
-optional argument:
+With composite values like arrays or objects, you often want to match only a
+part of that value (like an array key or the result of a getter) against an
+expression. You can select the evaluated parts with a *selector*.
+
+When you evaluate arrays, use the `key()` selector to match the value of an
+array key:
 
 ```php
-$expr = Expr::greaterThan(10, 'age');
-
-$expr->evaluate(array('age' => 10));
-// => true
-```
-
-If the name of the key is omitted, the expression is evaluated directly for the
-passed value:
-
-```php
-$expr = Expr::greaterThan(10);
-
-$expr->evaluate(12);
-// => true
-```
-
-Passing the array key is equivalent to using the `key()` selector of the
-[`Expr`] class:
-
-```php
-$expr = Expr::greaterThan(10, 'age');
-
-// same as
 $expr = Expr::key('age', Expr::greaterThan(10));
-```
 
-By using the `key()` method directly, you can evaluate expressions for
-multi-dimensional arrays:
-
-```php
-$expr = Expr::key('parameters', Expr::key('age', Expr::greaterThan(10)));
-
-$expr->evaluate(array(
-    'parameters' => array(
-        'age' => 12,
-    ),
-));
+$expr->evaluate(array('age' => 12));
 // => true
 ```
 
-The [`Expr`] class features several other selectors similar to `key()`. The
-following table lists them all:
+Each selector method accepts the expression as last argument that should be
+evaluated for the selected value.
+
+When evaluating objects, use `property()` and `method()` to evaluate the values
+of properties and the results of method calls:
+
+```php
+$expr = Expr::property('age', Expr::greaterThan(10));
+
+$expr->evaluate(new Person(12));
+// => true
+
+$expr = Expr::method('getAge', Expr::greaterThan(10));
+
+$expr->evaluate(new Person(12));
+// => true
+```
+
+You can nest selectors to evaluate expressions for nested objects or arrays:
+
+```php
+$expr = Expr::atLeastOne(Expr::method('getAge', Expr::greaterThan(10)));
+
+$expr->evaluate(array(new Person(12), new Person(9)));
+// => true
+```
+
+The following table lists all available selectors:
 
 Method                      | Description
 --------------------------- | -------------------------------------------------------------------------------
@@ -189,37 +162,37 @@ Logical Operators
 You can negate an expression with `not()`:
 
 ```php
-$expr = Expr::not(Expr::startsWith('Tho', Person::FIRST_NAME));
+$expr = Expr::not(Expr::method('getFirstName', Expr::startsWith('Tho')));
 ```
 
 You can connect multiple expressions with "and" using the `and*()` methods:
 
 ```php
-$expr = Expr::startsWith('Tho', Person::FIRST_NAME)
-    ->andGreaterThan(35, Person::AGE);
+$expr = Expr::method('getFirstName', Expr::startsWith('Tho'))
+    ->andMethod('getAge', Expr::greaterThan(35));
 ```
 
 The same is possible for the "or" operator:
 
 ```php
-$expr = Expr::startsWith('Tho', Person::FIRST_NAME)
-    ->orGreaterThan(35, Person::AGE);
+$expr = Expr::method('getFirstName', Expr::startsWith('Tho'))
+    ->orMethod('getAge', Expr::greaterThan(35));
+```
+
+You can use and/or inside selectors:
+
+```php
+$expr = Expr::method('getAge', Expr::greaterThan(35)->orLessThan(20));
 ```
 
 If you want to mix and match "and" and "or" operators, use `andX()` and `orX()`
 to add embedded expressions:
 
 ```php
-$expr = Expr::startsWith('Tho', Person::FIRST_NAME)
+$expr = Expr::method('getFirstName', Expr::startsWith('Tho'))
     ->andX(
-        Expr::greaterThan(35, Person::AGE)
-            ->orLessThan(20, Person::AGE)
-    );
-    
-$expr = Expr::startsWith('Tho', Person::FIRST_NAME)
-    ->orX(
-        Expr::notEmpty(Person::FIRST_NAME)
-            ->andGreaterThan(35, Person::AGE)
+        Expr::method('getAge', Expr::lessThan(14))
+            ->orMethod('isReduced', Expr::same(true))
     );
 ```
 
@@ -257,8 +230,8 @@ as objects:
  
 ```php
 // Logically equivalent
-$c1 = Expr::notNull(Person::FIRST_NAME)->andSame(35, Person::AGE);
-$c2 = Expr::same(35, Person::AGE)->andNotNull(Person::FIRST_NAME);
+$c1 = Expr::notNull()->andSame(35);
+$c2 = Expr::same(35)->andNotNull();
 
 $c1 == $c2;
 // => false
@@ -267,8 +240,8 @@ $c1->equivalentTo($c2);
 // => true
 
 // Also logically equivalent
-$c1 = Expr::same(35, Person::AGE);
-$c2 = Expr::oneOf(array(35), Person::AGE);
+$c1 = Expr::same(35);
+$c2 = Expr::oneOf(array(35));
 
 $c1 == $c2;
 // => false
