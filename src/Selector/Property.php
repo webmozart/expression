@@ -80,7 +80,7 @@ final class Property extends Selector
         }
 
         /* @var static $other */
-        return $this->propertyName == $other->propertyName;
+        return $this->propertyName === $other->propertyName;
     }
 
     /**

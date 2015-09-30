@@ -12,6 +12,7 @@
 namespace Webmozart\Expression\Tests;
 
 use PHPUnit_Framework_TestCase;
+use Webmozart\Expression\Constraint\Contains;
 use Webmozart\Expression\Constraint\EndsWith;
 use Webmozart\Expression\Constraint\Equals;
 use Webmozart\Expression\Constraint\GreaterThan;
@@ -98,6 +99,9 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
             array(new EndsWith('10'), new EndsWith('10')),
             array(new EndsWith('10'), new EndsWith(10)),
 
+            array(new Contains('10'), new Contains('10')),
+            array(new Contains('10'), new Contains(10)),
+
             array(new Not(new Same('10')), new Not(new Same('10'))),
 
             array(new Key('key', new Same('10')), new Key('key', new Same('10'))),
@@ -105,8 +109,8 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
 
             array(new Property('prop', new Same('10')), new Property('prop', new Same('10'))),
 
-            array(new Method('method', array(), new Same('10')), new Method('method', array(), new Same('10'))),
-            array(new Method('method', array(42), new Same('10')), new Method('method', array(42), new Same('10'))),
+            array(new Method('getFoo', array(), new Same('10')), new Method('getFoo', array(), new Same('10'))),
+            array(new Method('getFoo', array(42), new Same('10')), new Method('getFoo', array(42), new Same('10'))),
 
             array(new AtLeast(1, new Same('10')), new AtLeast(1, new Same('10'))),
 
@@ -169,9 +173,11 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
             array(new IsInstanceOf('SplFileInfo'), new IsInstanceOf('DateTime')),
 
             array(new KeyExists('10'), new KeyExists('11')),
+            array(new KeyExists('foo'), new KeyExists(0)),
             array(new KeyExists('10'), new Equals('10')),
 
             array(new KeyNotExists('10'), new KeyNotExists('11')),
+            array(new KeyNotExists('foo'), new KeyNotExists(0)),
             array(new KeyNotExists('10'), new Equals('10')),
 
             array(new Matches('10'), new Matches(10)),
@@ -183,15 +189,22 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
             array(new In(array('10'), true), new IsEmpty()),
 
             array(new StartsWith('10'), new StartsWith('11')),
+            array(new StartsWith('foo'), new StartsWith(0)),
             array(new StartsWith('10'), new Equals('10')),
 
             array(new EndsWith('10'), new EndsWith('11')),
+            array(new EndsWith('foo'), new EndsWith(0)),
             array(new EndsWith('10'), new Equals('10')),
+
+            array(new Contains('10'), new Contains('11')),
+            array(new Contains('foo'), new Contains(0)),
+            array(new Contains('10'), new Equals('10')),
 
             array(new Not(new Same('10')), new Not(new Same(10))),
             array(new Not(new Same('10')), new Same(10)),
 
             array(new Key('foo', new Same('10')), new Key('bar', new Same('10'))),
+            array(new Key('foo', new Same('10')), new Key(0, new Same('10'))),
             array(new Key('foo', new Same('10')), new Key('foo', new Same(10))),
             array(new Key('foo', new Same('10')), new Same('10')),
 
@@ -199,8 +212,8 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
             array(new Property('foo', new Same('10')), new Property('foo', new Same(10))),
             array(new Property('foo', new Same('10')), new Same('10')),
 
-            array(new Method('method', array(42), new Same('10')), new Method('method', array('42'), new Same('10'))),
-            array(new Method('method', array(42), new Same('10')), new Method('method', array(42, true), new Same('10'))),
+            array(new Method('getFoo', array(42), new Same('10')), new Method('getFoo', array('42'), new Same('10'))),
+            array(new Method('getFoo', array(42), new Same('10')), new Method('getFoo', array(42, true), new Same('10'))),
             array(new Method('getFoo', array(), new Same('10')), new Method('getBar', array(), new Same('10'))),
             array(new Method('getFoo', array(), new Same('10')), new Method('getFoo', array(), new Same(10))),
             array(new Method('getFoo', array(), new Same('10')), new Same('10')),

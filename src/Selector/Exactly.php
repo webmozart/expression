@@ -76,7 +76,7 @@ final class Exactly extends Selector
         }
 
         /* @var static $other */
-        return $this->count == $other->count;
+        return $this->count === $other->count;
     }
 
     /**

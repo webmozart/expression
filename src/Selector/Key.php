@@ -39,7 +39,7 @@ final class Key extends Selector
     {
         parent::__construct($expr);
 
-        $this->key = $key;
+        $this->key = (string) $key;
     }
 
     /**
@@ -78,7 +78,7 @@ final class Key extends Selector
         }
 
         /* @var static $other */
-        return $this->key == $other->key;
+        return $this->key === $other->key;
     }
 
     /**

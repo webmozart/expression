@@ -37,7 +37,7 @@ final class Contains extends Literal
      */
     public function __construct($comparedValue)
     {
-        $this->comparedValue = $comparedValue;
+        $this->comparedValue = (string) $comparedValue;
     }
 
     /**
@@ -64,7 +64,7 @@ final class Contains extends Literal
     public function equivalentTo(Expression $other)
     {
         // Since this class is final, we can check with instanceof
-        return $other instanceof $this && $this->comparedValue == $other->comparedValue;
+        return $other instanceof $this && $this->comparedValue === $other->comparedValue;
     }
 
     /**
