@@ -12,7 +12,7 @@
 namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Expression\Comparison\EndsWith;
+use Webmozart\Expression\Constraint\EndsWith;
 
 /**
  * @since  1.0

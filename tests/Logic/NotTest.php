@@ -12,9 +12,9 @@
 namespace Webmozart\Expression\Tests\Logic;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Expression\Comparison\GreaterThan;
-use Webmozart\Expression\Comparison\LessThan;
-use Webmozart\Expression\Comparison\StartsWith;
+use Webmozart\Expression\Constraint\GreaterThan;
+use Webmozart\Expression\Constraint\LessThan;
+use Webmozart\Expression\Constraint\StartsWith;
 use Webmozart\Expression\Logic\Disjunction;
 use Webmozart\Expression\Logic\Not;
 

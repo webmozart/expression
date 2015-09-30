@@ -13,7 +13,7 @@ namespace Webmozart\Expression\Tests\Selector;
 
 use ArrayIterator;
 use PHPUnit_Framework_TestCase;
-use Webmozart\Expression\Comparison\GreaterThan;
+use Webmozart\Expression\Constraint\GreaterThan;
 use Webmozart\Expression\Selector\Count;
 
 /**

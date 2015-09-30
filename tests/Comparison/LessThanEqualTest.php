@@ -12,7 +12,7 @@
 namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Expression\Comparison\LessThanEqual;
+use Webmozart\Expression\Constraint\LessThanEqual;
 
 /**
  * @since  1.0

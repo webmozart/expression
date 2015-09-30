@@ -14,7 +14,7 @@ namespace Webmozart\Expression\Tests\Comparison;
 use DirectoryIterator;
 use PHPUnit_Framework_TestCase;
 use SplFileInfo;
-use Webmozart\Expression\Comparison\IsInstanceOf;
+use Webmozart\Expression\Constraint\IsInstanceOf;
 
 /**
  * @since  1.0

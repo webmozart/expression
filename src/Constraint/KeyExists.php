@@ -9,46 +9,44 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Expression\Comparison;
+namespace Webmozart\Expression\Constraint;
 
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
 use Webmozart\Expression\Util\StringUtil;
 
 /**
- * Checks that a value is less than a given value.
- *
- * The comparison is done using PHP's "<" comparison operator.
+ * Checks that an array key exists.
  *
  * @since  1.0
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class LessThan extends Literal
+final class KeyExists extends Literal
 {
     /**
-     * @var mixed
+     * @var string
      */
-    private $comparedValue;
+    private $key;
 
     /**
      * Creates the expression.
      *
-     * @param mixed $comparedValue The compared value.
+     * @param string $key The array key.
      */
-    public function __construct($comparedValue)
+    public function __construct($key)
     {
-        $this->comparedValue = $comparedValue;
+        $this->key = $key;
     }
 
     /**
-     * Returns the compared value.
+     * Returns the array key.
      *
-     * @return mixed The compared value.
+     * @return string The array key.
      */
-    public function getComparedValue()
+    public function getKey()
     {
-        return $this->comparedValue;
+        return $this->key;
     }
 
     /**
@@ -56,7 +54,11 @@ final class LessThan extends Literal
      */
     public function evaluate($value)
     {
-        return $value < $this->comparedValue;
+        if (!is_array($value)) {
+            return false;
+        }
+
+        return array_key_exists($this->key, $value);
     }
 
     /**
@@ -65,7 +67,7 @@ final class LessThan extends Literal
     public function equivalentTo(Expression $other)
     {
         // Since this class is final, we can check with instanceof
-        return $other instanceof $this && $this->comparedValue == $other->comparedValue;
+        return $other instanceof $this && $this->key == $other->key;
     }
 
     /**
@@ -73,6 +75,6 @@ final class LessThan extends Literal
      */
     public function toString()
     {
-        return '<'.StringUtil::formatValue($this->comparedValue);
+        return 'keyExists('.StringUtil::formatValue($this->key).')';
     }
 }

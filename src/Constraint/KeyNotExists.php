@@ -9,46 +9,44 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Expression\Comparison;
+namespace Webmozart\Expression\Constraint;
 
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
 use Webmozart\Expression\Util\StringUtil;
 
 /**
- * Checks that a value matches a given regular expression.
- *
- * The comparison is done using PHP's `preg_match()` function.
+ * Checks that an array key does not exist.
  *
  * @since  1.0
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class Matches extends Literal
+final class KeyNotExists extends Literal
 {
     /**
      * @var string
      */
-    private $regExp;
+    private $key;
 
     /**
      * Creates the expression.
      *
-     * @param string $regExp The regular expression.
+     * @param string $key The array key.
      */
-    public function __construct($regExp)
+    public function __construct($key)
     {
-        $this->regExp = $regExp;
+        $this->key = $key;
     }
 
     /**
-     * Returns the regular expression.
+     * Returns the array key.
      *
-     * @return mixed The regular expression.
+     * @return string The array key.
      */
-    public function getRegularExpression()
+    public function getKey()
     {
-        return $this->regExp;
+        return $this->key;
     }
 
     /**
@@ -56,7 +54,11 @@ final class Matches extends Literal
      */
     public function evaluate($value)
     {
-        return (bool) preg_match($this->regExp, $value);
+        if (!is_array($value)) {
+            return false;
+        }
+
+        return !array_key_exists($this->key, $value);
     }
 
     /**
@@ -65,7 +67,7 @@ final class Matches extends Literal
     public function equivalentTo(Expression $other)
     {
         // Since this class is final, we can check with instanceof
-        return $other instanceof $this && $this->regExp === $other->regExp;
+        return $other instanceof $this && $this->key == $other->key;
     }
 
     /**
@@ -73,6 +75,6 @@ final class Matches extends Literal
      */
     public function toString()
     {
-        return 'matches('.StringUtil::formatValue($this->regExp).')';
+        return 'keyNotExists('.StringUtil::formatValue($this->key).')';
     }
 }

@@ -12,10 +12,10 @@
 namespace Webmozart\Expression\Tests\Logic;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Expression\Comparison\Contains;
-use Webmozart\Expression\Comparison\EndsWith;
-use Webmozart\Expression\Comparison\GreaterThan;
-use Webmozart\Expression\Comparison\Same;
+use Webmozart\Expression\Constraint\Contains;
+use Webmozart\Expression\Constraint\EndsWith;
+use Webmozart\Expression\Constraint\GreaterThan;
+use Webmozart\Expression\Constraint\Same;
 use Webmozart\Expression\Logic\AlwaysFalse;
 use Webmozart\Expression\Logic\AlwaysTrue;
 use Webmozart\Expression\Logic\Conjunction;

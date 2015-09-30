@@ -9,44 +9,46 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Expression\Comparison;
+namespace Webmozart\Expression\Constraint;
 
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
 use Webmozart\Expression\Util\StringUtil;
 
 /**
- * Checks that a value has a given suffix.
+ * Checks that a value is not identical to another value.
+ *
+ * The comparison is done using PHP's "!==" equality operator.
  *
  * @since  1.0
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class EndsWith extends Literal
+final class NotSame extends Literal
 {
     /**
-     * @var string
+     * @var mixed
      */
-    private $acceptedSuffix;
+    private $comparedValue;
 
     /**
      * Creates the expression.
      *
-     * @param string $acceptedSuffix The accepted suffix.
+     * @param mixed $comparedValue The compared value.
      */
-    public function __construct($acceptedSuffix)
+    public function __construct($comparedValue)
     {
-        $this->acceptedSuffix = $acceptedSuffix;
+        $this->comparedValue = $comparedValue;
     }
 
     /**
-     * Returns the accepted suffix.
+     * Returns the compared value.
      *
-     * @return string The accepted suffix.
+     * @return mixed The compared value.
      */
-    public function getAcceptedSuffix()
+    public function getComparedValue()
     {
-        return $this->acceptedSuffix;
+        return $this->comparedValue;
     }
 
     /**
@@ -54,7 +56,7 @@ final class EndsWith extends Literal
      */
     public function evaluate($value)
     {
-        return $this->acceptedSuffix === substr($value, -strlen($this->acceptedSuffix));
+        return $this->comparedValue !== $value;
     }
 
     /**
@@ -63,7 +65,7 @@ final class EndsWith extends Literal
     public function equivalentTo(Expression $other)
     {
         // Since this class is final, we can check with instanceof
-        return $other instanceof $this && $this->acceptedSuffix == $other->acceptedSuffix;
+        return $other instanceof $this && $this->comparedValue === $other->comparedValue;
     }
 
     /**
@@ -71,6 +73,6 @@ final class EndsWith extends Literal
      */
     public function toString()
     {
-        return 'endsWith('.StringUtil::formatValue($this->acceptedSuffix).')';
+        return '!=='.StringUtil::formatValue($this->comparedValue);
     }
 }

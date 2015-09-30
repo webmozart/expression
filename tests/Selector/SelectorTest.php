@@ -12,7 +12,7 @@
 namespace Webmozart\Expression\Tests\Selector;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Expression\Comparison\Same;
+use Webmozart\Expression\Constraint\Same;
 use Webmozart\Expression\Tests\Selector\Fixtures\TestSelector;
 
 /**

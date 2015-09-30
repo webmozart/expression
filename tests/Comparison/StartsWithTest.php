@@ -12,7 +12,7 @@
 namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Expression\Comparison\StartsWith;
+use Webmozart\Expression\Constraint\StartsWith;
 
 /**
  * @since  1.0

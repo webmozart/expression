@@ -12,8 +12,8 @@
 namespace Webmozart\Expression\Tests\Traversal;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Expression\Comparison\GreaterThan;
-use Webmozart\Expression\Comparison\Same;
+use Webmozart\Expression\Constraint\GreaterThan;
+use Webmozart\Expression\Constraint\Same;
 use Webmozart\Expression\Logic\Conjunction;
 use Webmozart\Expression\Logic\Disjunction;
 use Webmozart\Expression\Logic\Not;

@@ -9,46 +9,44 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Expression\Comparison;
+namespace Webmozart\Expression\Constraint;
 
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
 use Webmozart\Expression\Util\StringUtil;
 
 /**
- * Checks that a value is less than or equal to a given value.
- *
- * The comparison is done using PHP's "<=" comparison operator.
+ * Checks that a value has a given suffix.
  *
  * @since  1.0
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class LessThanEqual extends Literal
+final class EndsWith extends Literal
 {
     /**
-     * @var mixed
+     * @var string
      */
-    private $comparedValue;
+    private $acceptedSuffix;
 
     /**
      * Creates the expression.
      *
-     * @param mixed $comparedValue The compared value.
+     * @param string $acceptedSuffix The accepted suffix.
      */
-    public function __construct($comparedValue)
+    public function __construct($acceptedSuffix)
     {
-        $this->comparedValue = $comparedValue;
+        $this->acceptedSuffix = $acceptedSuffix;
     }
 
     /**
-     * Returns the compared value.
+     * Returns the accepted suffix.
      *
-     * @return mixed The compared value.
+     * @return string The accepted suffix.
      */
-    public function getComparedValue()
+    public function getAcceptedSuffix()
     {
-        return $this->comparedValue;
+        return $this->acceptedSuffix;
     }
 
     /**
@@ -56,7 +54,7 @@ final class LessThanEqual extends Literal
      */
     public function evaluate($value)
     {
-        return $value <= $this->comparedValue;
+        return $this->acceptedSuffix === substr($value, -strlen($this->acceptedSuffix));
     }
 
     /**
@@ -65,7 +63,7 @@ final class LessThanEqual extends Literal
     public function equivalentTo(Expression $other)
     {
         // Since this class is final, we can check with instanceof
-        return $other instanceof $this && $this->comparedValue == $other->comparedValue;
+        return $other instanceof $this && $this->acceptedSuffix == $other->acceptedSuffix;
     }
 
     /**
@@ -73,6 +71,6 @@ final class LessThanEqual extends Literal
      */
     public function toString()
     {
-        return '<='.StringUtil::formatValue($this->comparedValue);
+        return 'endsWith('.StringUtil::formatValue($this->acceptedSuffix).')';
     }
 }

@@ -9,43 +9,46 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Expression\Comparison;
+namespace Webmozart\Expression\Constraint;
 
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
+use Webmozart\Expression\Util\StringUtil;
 
 /**
- * Checks that a value is an instance of a given class name.
+ * Checks that a value is greater than or equal to a given value.
+ *
+ * The comparison is done using PHP's ">=" comparison operator.
  *
  * @since  1.0
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class IsInstanceOf extends Literal
+final class GreaterThanEqual extends Literal
 {
     /**
-     * @var array
+     * @var mixed
      */
-    private $className;
+    private $comparedValue;
 
     /**
      * Creates the expression.
      *
-     * @param string $className The accepted class name.
+     * @param mixed $comparedValue The compared value.
      */
-    public function __construct($className)
+    public function __construct($comparedValue)
     {
-        $this->className = $className;
+        $this->comparedValue = $comparedValue;
     }
 
     /**
-     * Returns the accepted class name.
+     * Returns the compared value.
      *
-     * @return array The accepted class name.
+     * @return mixed The compared value.
      */
-    public function getClassName()
+    public function getComparedValue()
     {
-        return $this->className;
+        return $this->comparedValue;
     }
 
     /**
@@ -53,7 +56,7 @@ final class IsInstanceOf extends Literal
      */
     public function evaluate($value)
     {
-        return $value instanceof $this->className;
+        return $value >= $this->comparedValue;
     }
 
     /**
@@ -62,11 +65,7 @@ final class IsInstanceOf extends Literal
     public function equivalentTo(Expression $other)
     {
         // Since this class is final, we can check with instanceof
-        if (!$other instanceof $this) {
-            return false;
-        }
-
-        return $this->className === $other->className;
+        return $other instanceof $this && $this->comparedValue == $other->comparedValue;
     }
 
     /**
@@ -74,6 +73,6 @@ final class IsInstanceOf extends Literal
      */
     public function toString()
     {
-        return 'instanceOf('.$this->className.')';
+        return '>='.StringUtil::formatValue($this->comparedValue);
     }
 }

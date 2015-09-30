@@ -13,7 +13,7 @@ namespace Webmozart\Expression\Tests\Logic;
 
 use PHPUnit_Framework_TestCase;
 use stdClass;
-use Webmozart\Expression\Comparison\Same;
+use Webmozart\Expression\Constraint\Same;
 use Webmozart\Expression\Logic\AlwaysFalse;
 
 /**

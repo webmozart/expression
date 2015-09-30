@@ -9,45 +9,46 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Expression\Comparison;
+namespace Webmozart\Expression\Constraint;
 
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
 use Webmozart\Expression\Util\StringUtil;
 
 /**
- * Checks that a value contains another value.
+ * Checks that a value matches a given regular expression.
+ *
+ * The comparison is done using PHP's `preg_match()` function.
  *
  * @since  1.0
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
- * @author Stephan Wentz <stephan@wentz.it>
  */
-final class Contains extends Literal
+final class Matches extends Literal
 {
     /**
      * @var string
      */
-    private $comparedValue;
+    private $regExp;
 
     /**
      * Creates the expression.
      *
-     * @param string $comparedValue The compared value.
+     * @param string $regExp The regular expression.
      */
-    public function __construct($comparedValue)
+    public function __construct($regExp)
     {
-        $this->comparedValue = $comparedValue;
+        $this->regExp = $regExp;
     }
 
     /**
-     * Returns the accepted suffix.
+     * Returns the regular expression.
      *
-     * @return string The accepted suffix.
+     * @return mixed The regular expression.
      */
-    public function getComparedValue()
+    public function getRegularExpression()
     {
-        return $this->comparedValue;
+        return $this->regExp;
     }
 
     /**
@@ -55,7 +56,7 @@ final class Contains extends Literal
      */
     public function evaluate($value)
     {
-        return false !== strpos($value, $this->comparedValue);
+        return (bool) preg_match($this->regExp, $value);
     }
 
     /**
@@ -64,7 +65,7 @@ final class Contains extends Literal
     public function equivalentTo(Expression $other)
     {
         // Since this class is final, we can check with instanceof
-        return $other instanceof $this && $this->comparedValue == $other->comparedValue;
+        return $other instanceof $this && $this->regExp === $other->regExp;
     }
 
     /**
@@ -72,6 +73,6 @@ final class Contains extends Literal
      */
     public function toString()
     {
-        return 'contains('.StringUtil::formatValue($this->comparedValue).')';
+        return 'matches('.StringUtil::formatValue($this->regExp).')';
     }
 }

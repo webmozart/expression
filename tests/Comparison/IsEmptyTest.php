@@ -12,7 +12,7 @@
 namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Expression\Comparison\IsEmpty;
+use Webmozart\Expression\Constraint\IsEmpty;
 
 /**
  * @since  1.0

@@ -9,32 +9,31 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Expression\Comparison;
+namespace Webmozart\Expression\Constraint;
 
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
 use Webmozart\Expression\Util\StringUtil;
 
 /**
- * Checks that a value is not identical to another value.
- *
- * The comparison is done using PHP's "!==" equality operator.
+ * Checks that a value contains another value.
  *
  * @since  1.0
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
+ * @author Stephan Wentz <stephan@wentz.it>
  */
-final class NotSame extends Literal
+final class Contains extends Literal
 {
     /**
-     * @var mixed
+     * @var string
      */
     private $comparedValue;
 
     /**
      * Creates the expression.
      *
-     * @param mixed $comparedValue The compared value.
+     * @param string $comparedValue The compared value.
      */
     public function __construct($comparedValue)
     {
@@ -42,9 +41,9 @@ final class NotSame extends Literal
     }
 
     /**
-     * Returns the compared value.
+     * Returns the accepted suffix.
      *
-     * @return mixed The compared value.
+     * @return string The accepted suffix.
      */
     public function getComparedValue()
     {
@@ -56,7 +55,7 @@ final class NotSame extends Literal
      */
     public function evaluate($value)
     {
-        return $this->comparedValue !== $value;
+        return false !== strpos($value, $this->comparedValue);
     }
 
     /**
@@ -65,7 +64,7 @@ final class NotSame extends Literal
     public function equivalentTo(Expression $other)
     {
         // Since this class is final, we can check with instanceof
-        return $other instanceof $this && $this->comparedValue === $other->comparedValue;
+        return $other instanceof $this && $this->comparedValue == $other->comparedValue;
     }
 
     /**
@@ -73,6 +72,6 @@ final class NotSame extends Literal
      */
     public function toString()
     {
-        return '!=='.StringUtil::formatValue($this->comparedValue);
+        return 'contains('.StringUtil::formatValue($this->comparedValue).')';
     }
 }

@@ -9,22 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Expression\Comparison;
+namespace Webmozart\Expression\Constraint;
 
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
 use Webmozart\Expression\Util\StringUtil;
 
 /**
- * Checks that a value is greater than a given value.
+ * Checks that a value is less than a given value.
  *
- * The comparison is done using PHP's ">" comparison operator.
+ * The comparison is done using PHP's "<" comparison operator.
  *
  * @since  1.0
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class GreaterThan extends Literal
+final class LessThan extends Literal
 {
     /**
      * @var mixed
@@ -56,7 +56,7 @@ final class GreaterThan extends Literal
      */
     public function evaluate($value)
     {
-        return $value > $this->comparedValue;
+        return $value < $this->comparedValue;
     }
 
     /**
@@ -73,6 +73,6 @@ final class GreaterThan extends Literal
      */
     public function toString()
     {
-        return '>'.StringUtil::formatValue($this->comparedValue);
+        return '<'.StringUtil::formatValue($this->comparedValue);
     }
 }

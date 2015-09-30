@@ -9,25 +9,25 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Expression\Comparison;
+namespace Webmozart\Expression\Constraint;
 
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
 use Webmozart\Expression\Util\StringUtil;
 
 /**
- * Checks that a value is identical to another value.
+ * Checks that a value equals another value.
  *
- * The comparison is done using PHP's "===" equality operator.
+ * The comparison is done using PHP's "==" equality operator.
  *
  * @since  1.0
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class Same extends Literal
+final class Equals extends Literal
 {
     /**
-     * @var mixed
+     * @var string
      */
     private $comparedValue;
 
@@ -56,7 +56,7 @@ final class Same extends Literal
      */
     public function evaluate($value)
     {
-        return $this->comparedValue === $value;
+        return $this->comparedValue == $value;
     }
 
     /**
@@ -64,12 +64,12 @@ final class Same extends Literal
      */
     public function equivalentTo(Expression $other)
     {
-        if ($other instanceof In && $other->isStrict()) {
-            return array($this->comparedValue) === $other->getAcceptedValues();
+        if ($other instanceof In && !$other->isStrict()) {
+            return array($this->comparedValue) == $other->getAcceptedValues();
         }
 
         // Since this class is final, we can check with instanceof
-        return $other instanceof $this && $this->comparedValue === $other->comparedValue;
+        return $other instanceof $this && $this->comparedValue == $other->comparedValue;
     }
 
     /**
@@ -77,6 +77,6 @@ final class Same extends Literal
      */
     public function toString()
     {
-        return '==='.StringUtil::formatValue($this->comparedValue);
+        return '=='.StringUtil::formatValue($this->comparedValue);
     }
 }

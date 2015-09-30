@@ -12,7 +12,7 @@
 namespace Webmozart\Expression\Tests\Comparison;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Expression\Comparison\KeyNotExists;
+use Webmozart\Expression\Constraint\KeyNotExists;
 
 /**
  * @since  1.0

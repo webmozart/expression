@@ -9,44 +9,43 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Expression\Comparison;
+namespace Webmozart\Expression\Constraint;
 
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
-use Webmozart\Expression\Util\StringUtil;
 
 /**
- * Checks that a value has a given prefix.
+ * Checks that a value is an instance of a given class name.
  *
  * @since  1.0
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class StartsWith extends Literal
+final class IsInstanceOf extends Literal
 {
     /**
-     * @var string
+     * @var array
      */
-    private $acceptedPrefix;
+    private $className;
 
     /**
      * Creates the expression.
      *
-     * @param string $acceptedPrefix The accepted prefix.
+     * @param string $className The accepted class name.
      */
-    public function __construct($acceptedPrefix)
+    public function __construct($className)
     {
-        $this->acceptedPrefix = $acceptedPrefix;
+        $this->className = $className;
     }
 
     /**
-     * Returns the accepted prefix.
+     * Returns the accepted class name.
      *
-     * @return string The accepted prefix.
+     * @return array The accepted class name.
      */
-    public function getAcceptedPrefix()
+    public function getClassName()
     {
-        return $this->acceptedPrefix;
+        return $this->className;
     }
 
     /**
@@ -54,7 +53,7 @@ final class StartsWith extends Literal
      */
     public function evaluate($value)
     {
-        return 0 === strpos($value, $this->acceptedPrefix);
+        return $value instanceof $this->className;
     }
 
     /**
@@ -63,7 +62,11 @@ final class StartsWith extends Literal
     public function equivalentTo(Expression $other)
     {
         // Since this class is final, we can check with instanceof
-        return $other instanceof $this && $this->acceptedPrefix == $other->acceptedPrefix;
+        if (!$other instanceof $this) {
+            return false;
+        }
+
+        return $this->className === $other->className;
     }
 
     /**
@@ -71,6 +74,6 @@ final class StartsWith extends Literal
      */
     public function toString()
     {
-        return 'startsWith('.StringUtil::formatValue($this->acceptedPrefix).')';
+        return 'instanceOf('.$this->className.')';
     }
 }

@@ -12,7 +12,7 @@
 namespace Webmozart\Expression\Tests\Logic;
 
 use PHPUnit_Framework_TestCase;
-use Webmozart\Expression\Comparison\Same;
+use Webmozart\Expression\Constraint\Same;
 use Webmozart\Expression\Expr;
 use Webmozart\Expression\Logic\AlwaysFalse;
 use Webmozart\Expression\Logic\AlwaysTrue;

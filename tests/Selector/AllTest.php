@@ -13,8 +13,8 @@ namespace Webmozart\Expression\Tests\Selector;
 
 use ArrayIterator;
 use PHPUnit_Framework_TestCase;
-use Webmozart\Expression\Comparison\EndsWith;
-use Webmozart\Expression\Comparison\GreaterThan;
+use Webmozart\Expression\Constraint\EndsWith;
+use Webmozart\Expression\Constraint\GreaterThan;
 use Webmozart\Expression\Logic\Conjunction;
 use Webmozart\Expression\Selector\All;
 

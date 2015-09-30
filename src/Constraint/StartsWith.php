@@ -9,46 +9,44 @@
  * file that was distributed with this source code.
  */
 
-namespace Webmozart\Expression\Comparison;
+namespace Webmozart\Expression\Constraint;
 
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Literal;
 use Webmozart\Expression\Util\StringUtil;
 
 /**
- * Checks that a value equals another value.
- *
- * The comparison is done using PHP's "==" equality operator.
+ * Checks that a value has a given prefix.
  *
  * @since  1.0
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class Equals extends Literal
+final class StartsWith extends Literal
 {
     /**
      * @var string
      */
-    private $comparedValue;
+    private $acceptedPrefix;
 
     /**
      * Creates the expression.
      *
-     * @param mixed $comparedValue The compared value.
+     * @param string $acceptedPrefix The accepted prefix.
      */
-    public function __construct($comparedValue)
+    public function __construct($acceptedPrefix)
     {
-        $this->comparedValue = $comparedValue;
+        $this->acceptedPrefix = $acceptedPrefix;
     }
 
     /**
-     * Returns the compared value.
+     * Returns the accepted prefix.
      *
-     * @return mixed The compared value.
+     * @return string The accepted prefix.
      */
-    public function getComparedValue()
+    public function getAcceptedPrefix()
     {
-        return $this->comparedValue;
+        return $this->acceptedPrefix;
     }
 
     /**
@@ -56,7 +54,7 @@ final class Equals extends Literal
      */
     public function evaluate($value)
     {
-        return $this->comparedValue == $value;
+        return 0 === strpos($value, $this->acceptedPrefix);
     }
 
     /**
@@ -64,12 +62,8 @@ final class Equals extends Literal
      */
     public function equivalentTo(Expression $other)
     {
-        if ($other instanceof In && !$other->isStrict()) {
-            return array($this->comparedValue) == $other->getAcceptedValues();
-        }
-
         // Since this class is final, we can check with instanceof
-        return $other instanceof $this && $this->comparedValue == $other->comparedValue;
+        return $other instanceof $this && $this->acceptedPrefix == $other->acceptedPrefix;
     }
 
     /**
@@ -77,6 +71,6 @@ final class Equals extends Literal
      */
     public function toString()
     {
-        return '=='.StringUtil::formatValue($this->comparedValue);
+        return 'startsWith('.StringUtil::formatValue($this->acceptedPrefix).')';
     }
 }
