@@ -18,6 +18,7 @@ use Webmozart\Expression\Comparison\GreaterThan;
 use Webmozart\Expression\Comparison\GreaterThanEqual;
 use Webmozart\Expression\Comparison\In;
 use Webmozart\Expression\Comparison\IsEmpty;
+use Webmozart\Expression\Comparison\IsInstanceOf;
 use Webmozart\Expression\Comparison\KeyExists;
 use Webmozart\Expression\Comparison\KeyNotExists;
 use Webmozart\Expression\Comparison\LessThan;
@@ -38,6 +39,8 @@ use Webmozart\Expression\Selector\AtMost;
 use Webmozart\Expression\Selector\Count;
 use Webmozart\Expression\Selector\Exactly;
 use Webmozart\Expression\Selector\Key;
+use Webmozart\Expression\Selector\Method;
+use Webmozart\Expression\Selector\Property;
 
 /**
  * @since  1.0
@@ -78,6 +81,8 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
 
             array(new NotEmpty(), new NotEmpty()),
 
+            array(new IsInstanceOf('SplFileInfo'), new IsInstanceOf('SplFileInfo')),
+
             array(new KeyExists('10'), new KeyExists('10')),
             array(new KeyExists('10'), new KeyExists(10)),
 
@@ -100,6 +105,10 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
 
             array(new Key('key', new Same('10')), new Key('key', new Same('10'))),
             array(new Key('42', new Same('10')), new Key(42, new Same('10'))),
+
+            array(new Property('prop', new Same('10')), new Property('prop', new Same('10'))),
+
+            array(new Method('method', new Same('10')), new Method('method', new Same('10'))),
 
             array(new AtLeast(1, new Same('10')), new AtLeast(1, new Same('10'))),
 
@@ -161,6 +170,8 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
 
             array(new IsEmpty(), new NotEmpty()),
 
+            array(new IsInstanceOf('SplFileInfo'), new IsInstanceOf('DateTime')),
+
             array(new KeyExists('10'), new KeyExists('11')),
             array(new KeyExists('10'), new Equals('10')),
 
@@ -187,6 +198,14 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
             array(new Key('foo', new Same('10')), new Key('bar', new Same('10'))),
             array(new Key('foo', new Same('10')), new Key('foo', new Same(10))),
             array(new Key('foo', new Same('10')), new Same('10')),
+
+            array(new Property('foo', new Same('10')), new Property('bar', new Same('10'))),
+            array(new Property('foo', new Same('10')), new Property('foo', new Same(10))),
+            array(new Property('foo', new Same('10')), new Same('10')),
+
+            array(new Method('getFoo', new Same('10')), new Method('getBar', new Same('10'))),
+            array(new Method('getFoo', new Same('10')), new Method('getFoo', new Same(10))),
+            array(new Method('getFoo', new Same('10')), new Same('10')),
 
             array(new AtLeast(1, new Same('10')), new AtLeast(2, new Same('10'))),
             array(new AtLeast(1, new Same('10')), new AtLeast(1, new Same(10))),

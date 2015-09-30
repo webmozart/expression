@@ -160,6 +160,11 @@ final class Disjunction implements Expression
         return $this->orX(Expr::notEmpty());
     }
 
+    public function orInstanceOf($className)
+    {
+        return $this->orX(Expr::isInstanceOf($className));
+    }
+
     public function orEquals($value)
     {
         return $this->orX(Expr::equals($value));

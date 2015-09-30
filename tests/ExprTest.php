@@ -19,6 +19,7 @@ use Webmozart\Expression\Comparison\GreaterThan;
 use Webmozart\Expression\Comparison\GreaterThanEqual;
 use Webmozart\Expression\Comparison\In;
 use Webmozart\Expression\Comparison\IsEmpty;
+use Webmozart\Expression\Comparison\IsInstanceOf;
 use Webmozart\Expression\Comparison\KeyExists;
 use Webmozart\Expression\Comparison\KeyNotExists;
 use Webmozart\Expression\Comparison\LessThan;
@@ -75,6 +76,11 @@ class ExprTest extends PHPUnit_Framework_TestCase
                 'isEmpty',
                 array(),
                 new IsEmpty(),
+            ),
+            array(
+                'isInstanceOf',
+                array('DateTime'),
+                new IsInstanceOf('DateTime'),
             ),
             array(
                 'notEmpty',

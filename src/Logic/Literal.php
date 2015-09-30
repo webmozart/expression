@@ -128,6 +128,11 @@ abstract class Literal implements Expression
         return $this->andX(Expr::notEmpty());
     }
 
+    public function andInstanceOf($className)
+    {
+        return $this->andX(Expr::isInstanceOf($className));
+    }
+
     public function andEquals($value)
     {
         return $this->andX(Expr::equals($value));
@@ -291,6 +296,11 @@ abstract class Literal implements Expression
     public function orNotEmpty()
     {
         return $this->orX(Expr::notEmpty());
+    }
+
+    public function orInstanceOf($className)
+    {
+        return $this->orX(Expr::isInstanceOf($className));
     }
 
     public function orEquals($value)

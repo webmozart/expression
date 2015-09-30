@@ -7,6 +7,7 @@ Changelog
  * added `property()` selector
  * removed optional `$key` arguments. Use the `key()`/`method()`/`property()`
    selectors instead
+ * added `isInstanceOf()`
 
 * 1.0.0-beta4 (2015-08-24)
 

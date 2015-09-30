@@ -18,6 +18,7 @@ use Webmozart\Expression\Comparison\GreaterThan;
 use Webmozart\Expression\Comparison\GreaterThanEqual;
 use Webmozart\Expression\Comparison\In;
 use Webmozart\Expression\Comparison\IsEmpty;
+use Webmozart\Expression\Comparison\IsInstanceOf;
 use Webmozart\Expression\Comparison\KeyExists;
 use Webmozart\Expression\Comparison\KeyNotExists;
 use Webmozart\Expression\Comparison\LessThan;
@@ -217,7 +218,7 @@ class Expr
     /**
      * Check that a value is null.
      *
-     * @return Same|Key The created expression.
+     * @return Same The created expression.
      */
     public static function null()
     {
@@ -227,7 +228,7 @@ class Expr
     /**
      * Check that a value is not null.
      *
-     * @return NotSame|Key The created expression.
+     * @return NotSame The created expression.
      */
     public static function notNull()
     {
@@ -237,7 +238,7 @@ class Expr
     /**
      * Check that a value is empty.
      *
-     * @return IsEmpty|Key The created expression.
+     * @return IsEmpty The created expression.
      */
     public static function isEmpty()
     {
@@ -247,7 +248,7 @@ class Expr
     /**
      * Check that a value is not empty.
      *
-     * @return NotEmpty|Key The created expression.
+     * @return NotEmpty The created expression.
      */
     public static function notEmpty()
     {
@@ -255,11 +256,23 @@ class Expr
     }
 
     /**
+     * Check that a value is an instance of a given class.
+     *
+     * @param string $className The class name.
+     *
+     * @return IsEmpty The created expression.
+     */
+    public static function isInstanceOf($className)
+    {
+        return new IsInstanceOf($className);
+    }
+
+    /**
      * Check that a value equals another value.
      *
      * @param mixed $value The compared value.
      *
-     * @return Equals|Key The created expression.
+     * @return Equals The created expression.
      */
     public static function equals($value)
     {
@@ -271,7 +284,7 @@ class Expr
      *
      * @param mixed $value The compared value.
      *
-     * @return NotEquals|Key The created expression.
+     * @return NotEquals The created expression.
      */
     public static function notEquals($value)
     {
@@ -283,7 +296,7 @@ class Expr
      *
      * @param mixed $value The compared value.
      *
-     * @return Same|Key The created expression.
+     * @return Same The created expression.
      */
     public static function same($value)
     {
@@ -295,7 +308,7 @@ class Expr
      *
      * @param mixed $value The compared value.
      *
-     * @return NotSame|Key The created expression.
+     * @return NotSame The created expression.
      */
     public static function notSame($value)
     {
@@ -307,7 +320,7 @@ class Expr
      *
      * @param mixed $value The compared value.
      *
-     * @return GreaterThan|Key The created expression.
+     * @return GreaterThan The created expression.
      */
     public static function greaterThan($value)
     {
@@ -319,7 +332,7 @@ class Expr
      *
      * @param mixed $value The compared value.
      *
-     * @return GreaterThanEqual|Key The created expression.
+     * @return GreaterThanEqual The created expression.
      */
     public static function greaterThanEqual($value)
     {
@@ -331,7 +344,7 @@ class Expr
      *
      * @param mixed $value The compared value.
      *
-     * @return LessThan|Key The created expression.
+     * @return LessThan The created expression.
      */
     public static function lessThan($value)
     {
@@ -343,7 +356,7 @@ class Expr
      *
      * @param mixed $value The compared value.
      *
-     * @return LessThanEqual|Key The created expression.
+     * @return LessThanEqual The created expression.
      */
     public static function lessThanEqual($value)
     {
@@ -355,7 +368,7 @@ class Expr
      *
      * @param array $values The compared values.
      *
-     * @return In|Key The created expression.
+     * @return In The created expression.
      */
     public static function in(array $values)
     {
@@ -367,7 +380,7 @@ class Expr
      *
      * @param string $regExp The regular expression.
      *
-     * @return Matches|Key The created expression.
+     * @return Matches The created expression.
      */
     public static function matches($regExp)
     {
@@ -379,7 +392,7 @@ class Expr
      *
      * @param string $prefix The prefix string.
      *
-     * @return StartsWith|Key The created expression.
+     * @return StartsWith The created expression.
      */
     public static function startsWith($prefix)
     {
@@ -391,7 +404,7 @@ class Expr
      *
      * @param string $suffix The suffix string.
      *
-     * @return EndsWith|Key The created expression.
+     * @return EndsWith The created expression.
      */
     public static function endsWith($suffix)
     {
@@ -403,7 +416,7 @@ class Expr
      *
      * @param string $string The sub-string.
      *
-     * @return Contains|Key The created expression.
+     * @return Contains The created expression.
      */
     public static function contains($string)
     {
@@ -415,7 +428,7 @@ class Expr
      *
      * @param string $keyName The key name.
      *
-     * @return KeyExists|Key The created expression.
+     * @return KeyExists The created expression.
      */
     public static function keyExists($keyName)
     {
@@ -427,7 +440,7 @@ class Expr
      *
      * @param string $keyName The key name.
      *
-     * @return KeyNotExists|Key The created expression.
+     * @return KeyNotExists The created expression.
      */
     public static function keyNotExists($keyName)
     {

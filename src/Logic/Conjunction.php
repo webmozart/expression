@@ -160,6 +160,11 @@ final class Conjunction implements Expression
         return $this->andX(Expr::notEmpty());
     }
 
+    public function andInstanceOf($className)
+    {
+        return $this->andX(Expr::isInstanceOf($className));
+    }
+
     public function andEquals($value)
     {
         return $this->andX(Expr::equals($value));
