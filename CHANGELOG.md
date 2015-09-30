@@ -4,6 +4,7 @@ Changelog
 * 1.0.0-beta5 (@release_date@)
 
  * added `method()` selector
+ * added `property()` selector
 
 * 1.0.0-beta4 (2015-08-24)
 

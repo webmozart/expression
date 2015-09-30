@@ -16,40 +16,40 @@ use Webmozart\Expression\Logic\Conjunction;
 use Webmozart\Expression\Logic\Disjunction;
 
 /**
- * Checks whether the result of a method call matches an expression.
+ * Checks whether the value of a property matches an expression.
  *
  * @since  1.0
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class Method extends Selector
+final class Property extends Selector
 {
     /**
      * @var string
      */
-    private $methodName;
+    private $propertyName;
 
     /**
      * Creates the expression.
      *
-     * @param string     $propertyName The name of the method to call.
-     * @param Expression $expr       The expression to evaluate for the result.
+     * @param string     $propertyName The name of the property.
+     * @param Expression $expr         The expression to evaluate for the result.
      */
     public function __construct($propertyName, Expression $expr)
     {
         parent::__construct($expr);
 
-        $this->methodName = $propertyName;
+        $this->propertyName = $propertyName;
     }
 
     /**
-     * Returns the method name.
+     * Returns the property name.
      *
-     * @return string The method name.
+     * @return string The property name.
      */
-    public function getMethodName()
+    public function getPropertyName()
     {
-        return $this->methodName;
+        return $this->propertyName;
     }
 
     /**
@@ -61,13 +61,13 @@ final class Method extends Selector
             return false;
         }
 
-        $methodName = $this->methodName;
+        $propertyName = $this->propertyName;
 
-        if (!method_exists($value, $methodName)) {
+        if (!property_exists($value, $propertyName)) {
             return false;
         }
 
-        return $this->expr->evaluate($value->$methodName());
+        return $this->expr->evaluate($value->$propertyName);
     }
 
     /**
@@ -80,7 +80,7 @@ final class Method extends Selector
         }
 
         /* @var static $other */
-        return $this->methodName == $other->methodName;
+        return $this->propertyName == $other->propertyName;
     }
 
     /**
@@ -91,14 +91,14 @@ final class Method extends Selector
         $exprString = $this->expr->toString();
 
         if ($this->expr instanceof Conjunction || $this->expr instanceof Disjunction) {
-            return $this->methodName.'(){'.$exprString.'}';
+            return $this->propertyName.'{'.$exprString.'}';
         }
 
         // Append "functions" with "."
         if (isset($exprString[0]) && ctype_alpha($exprString[0])) {
-            return $this->methodName.'().'.$exprString;
+            return $this->propertyName.'.'.$exprString;
         }
 
-        return $this->methodName.'()'.$exprString;
+        return $this->propertyName.$exprString;
     }
 }

@@ -38,6 +38,7 @@ use Webmozart\Expression\Selector\Count;
 use Webmozart\Expression\Selector\Exactly;
 use Webmozart\Expression\Selector\Key;
 use Webmozart\Expression\Selector\Method;
+use Webmozart\Expression\Selector\Property;
 
 /**
  * Factory for {@link Expression} instances.
@@ -135,6 +136,19 @@ class Expr
     public static function method($methodName, Expression $expr)
     {
         return new Method($methodName, $expr);
+    }
+
+    /**
+     * Check that the value of a property matches an expression.
+     *
+     * @param string     $propertyName The name of the property.
+     * @param Expression $expr         The evaluated expression.
+     *
+     * @return Method The created expression.
+     */
+    public static function property($propertyName, Expression $expr)
+    {
+        return new Property($propertyName, $expr);
     }
 
     /**

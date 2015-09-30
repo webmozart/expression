@@ -110,6 +110,11 @@ final class Disjunction implements Expression
         return $this->orX(Expr::method($methodName, $expr));
     }
 
+    public function orProperty($propertyName, Expression $expr)
+    {
+        return $this->orX(Expr::property($propertyName, $expr));
+    }
+
     public function orAtLeast($count, Expression $expr)
     {
         return $this->orX(Expr::atLeast($count, $expr));

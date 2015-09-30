@@ -110,6 +110,11 @@ final class Conjunction implements Expression
         return $this->andX(Expr::method($methodName, $expr));
     }
 
+    public function andProperty($propertyName, Expression $expr)
+    {
+        return $this->andX(Expr::property($propertyName, $expr));
+    }
+
     public function andAtLeast($count, Expression $expr)
     {
         return $this->andX(Expr::atLeast($count, $expr));
