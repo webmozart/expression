@@ -16,40 +16,40 @@ use Webmozart\Expression\Logic\Conjunction;
 use Webmozart\Expression\Logic\Disjunction;
 
 /**
- * Checks whether an array key matches an expression.
+ * Checks whether the result of a method call matches an expression.
  *
  * @since  1.0
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class Key extends Selector
+final class Method extends Selector
 {
     /**
      * @var string
      */
-    private $key;
+    private $methodName;
 
     /**
      * Creates the expression.
      *
-     * @param string|int $key  The array key.
-     * @param Expression $expr The expression to evaluate for the key.
+     * @param string     $methodName The name of the method to call.
+     * @param Expression $expr       The expression to evaluate for the result.
      */
-    public function __construct($key, Expression $expr)
+    public function __construct($methodName, Expression $expr)
     {
         parent::__construct($expr);
 
-        $this->key = $key;
+        $this->methodName = $methodName;
     }
 
     /**
-     * Returns the array key.
+     * Returns the method name.
      *
-     * @return string|int The array key.
+     * @return string The method name.
      */
-    public function getKey()
+    public function getMethodName()
     {
-        return $this->key;
+        return $this->methodName;
     }
 
     /**
@@ -57,15 +57,17 @@ final class Key extends Selector
      */
     public function evaluate($value)
     {
-        if (!is_array($value)) {
+        if (!is_object($value)) {
             return false;
         }
 
-        if (!array_key_exists($this->key, $value)) {
+        $methodName = $this->methodName;
+
+        if (!method_exists($value, $methodName)) {
             return false;
         }
 
-        return $this->expr->evaluate($value[$this->key]);
+        return $this->expr->evaluate($value->$methodName());
     }
 
     /**
@@ -78,7 +80,7 @@ final class Key extends Selector
         }
 
         /* @var static $other */
-        return $this->key == $other->key;
+        return $this->methodName == $other->methodName;
     }
 
     /**
@@ -89,14 +91,14 @@ final class Key extends Selector
         $exprString = $this->expr->toString();
 
         if ($this->expr instanceof Conjunction || $this->expr instanceof Disjunction) {
-            return $this->key.'{'.$exprString.'}';
+            return $this->methodName.'(){'.$exprString.'}';
         }
 
         // Append "functions" with "."
         if (isset($exprString[0]) && ctype_alpha($exprString[0])) {
-            return $this->key.'.'.$exprString;
+            return $this->methodName.'().'.$exprString;
         }
 
-        return $this->key.$exprString;
+        return $this->methodName.'()'.$exprString;
     }
 }

@@ -45,6 +45,6 @@ class KeyTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame('name>10', $expr1->toString());
         $this->assertSame('name.endsWith(".css")', $expr2->toString());
-        $this->assertSame('name(>10 && endsWith(".css"))', $expr3->toString());
+        $this->assertSame('name{>10 && endsWith(".css")}', $expr3->toString());
     }
 }

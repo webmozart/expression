@@ -37,6 +37,7 @@ use Webmozart\Expression\Selector\AtMost;
 use Webmozart\Expression\Selector\Count;
 use Webmozart\Expression\Selector\Exactly;
 use Webmozart\Expression\Selector\Key;
+use Webmozart\Expression\Selector\Method;
 
 /**
  * Factory for {@link Expression} instances.
@@ -121,6 +122,19 @@ class Expr
     public static function key($key, Expression $expr)
     {
         return new Key($key, $expr);
+    }
+
+    /**
+     * Check that the result of a method call matches an expression.
+     *
+     * @param string     $methodName The name of the method to call.
+     * @param Expression $expr       The evaluated expression.
+     *
+     * @return Method The created expression.
+     */
+    public static function method($methodName, Expression $expr)
+    {
+        return new Method($methodName, $expr);
     }
 
     /**

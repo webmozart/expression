@@ -73,6 +73,11 @@ abstract class Literal implements Expression
         return $this->andX(Expr::key($key, $expr));
     }
 
+    public function andMethod($methodName, Expression $expr)
+    {
+        return $this->andX(Expr::method($methodName, $expr));
+    }
+
     public function andAtLeast($count, Expression $expr)
     {
         return $this->andX(Expr::atLeast($count, $expr));
@@ -226,6 +231,11 @@ abstract class Literal implements Expression
     public function orKey($key, Expression $expr)
     {
         return $this->orX(Expr::key($key, $expr));
+    }
+
+    public function orMethod($methodName, Expression $expr)
+    {
+        return $this->orX(Expr::method($methodName, $expr));
     }
 
     public function orAtLeast($count, Expression $expr)

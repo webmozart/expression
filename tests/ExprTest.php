@@ -38,6 +38,7 @@ use Webmozart\Expression\Selector\AtMost;
 use Webmozart\Expression\Selector\Count;
 use Webmozart\Expression\Selector\Exactly;
 use Webmozart\Expression\Selector\Key;
+use Webmozart\Expression\Selector\Method;
 
 /**
  * @since  1.0
@@ -161,6 +162,11 @@ class ExprTest extends PHPUnit_Framework_TestCase
                 'key',
                 array('key', $expr),
                 new Key('key', $expr),
+            ),
+            array(
+                'method',
+                array('getFoo', $expr),
+                new Method('getFoo', $expr),
             ),
             array(
                 'atLeast',
