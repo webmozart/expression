@@ -144,6 +144,16 @@ $expr->evaluate(array(new Person(12), new Person(9)));
 // => true
 ```
 
+The `method()` selector also accepts arguments that will be passed to the 
+method. Pass the arguments before the evaluated expression:
+
+```php
+$expr = Expr::method('getParameter', 'age', Expr::greaterThan(10));
+
+$expr->evaluate(array(new Person(12), new Person(9)));
+// => true
+```
+
 The following table lists all available selectors:
 
 Method                      | Description

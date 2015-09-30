@@ -14,6 +14,7 @@ namespace Webmozart\Expression\Selector;
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\Conjunction;
 use Webmozart\Expression\Logic\Disjunction;
+use Webmozart\Expression\Util\StringUtil;
 
 /**
  * Checks whether the result of a method call matches an expression.
@@ -30,16 +31,23 @@ final class Method extends Selector
     private $methodName;
 
     /**
+     * @var array
+     */
+    private $arguments;
+
+    /**
      * Creates the expression.
      *
-     * @param string     $propertyName The name of the method to call.
-     * @param Expression $expr         The expression to evaluate for the result.
+     * @param string     $methodName The name of the method to call.
+     * @param array      $arguments  The arguments to pass to the method.
+     * @param Expression $expr       The expression to evaluate for the result.
      */
-    public function __construct($propertyName, Expression $expr)
+    public function __construct($methodName, array $arguments, Expression $expr)
     {
         parent::__construct($expr);
 
-        $this->methodName = $propertyName;
+        $this->methodName = $methodName;
+        $this->arguments = $arguments;
     }
 
     /**
@@ -53,6 +61,16 @@ final class Method extends Selector
     }
 
     /**
+     * Returns the method arguments.
+     *
+     * @return array The method arguments.
+     */
+    public function getArguments()
+    {
+        return $this->arguments;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function evaluate($value)
@@ -61,13 +79,11 @@ final class Method extends Selector
             return false;
         }
 
-        $methodName = $this->methodName;
-
-        if (!method_exists($value, $methodName)) {
+        if (!method_exists($value, $this->methodName)) {
             return false;
         }
 
-        return $this->expr->evaluate($value->$methodName());
+        return $this->expr->evaluate(call_user_func_array(array($value, $this->methodName), $this->arguments));
     }
 
     /**
@@ -80,7 +96,7 @@ final class Method extends Selector
         }
 
         /* @var static $other */
-        return $this->methodName == $other->methodName;
+        return $this->methodName == $other->methodName && $this->arguments === $other->arguments;
     }
 
     /**
@@ -89,16 +105,17 @@ final class Method extends Selector
     public function toString()
     {
         $exprString = $this->expr->toString();
+        $argsString = implode(', ', StringUtil::formatValues($this->arguments));
 
         if ($this->expr instanceof Conjunction || $this->expr instanceof Disjunction) {
-            return $this->methodName.'(){'.$exprString.'}';
+            return $this->methodName.'('.$argsString.'){'.$exprString.'}';
         }
 
         // Append "functions" with "."
         if (isset($exprString[0]) && ctype_alpha($exprString[0])) {
-            return $this->methodName.'().'.$exprString;
+            return $this->methodName.'('.$argsString.').'.$exprString;
         }
 
-        return $this->methodName.'()'.$exprString;
+        return $this->methodName.'('.$argsString.')'.$exprString;
     }
 }

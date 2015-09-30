@@ -172,7 +172,12 @@ class ExprTest extends PHPUnit_Framework_TestCase
             array(
                 'method',
                 array('getFoo', $expr),
-                new Method('getFoo', $expr),
+                new Method('getFoo', array(), $expr),
+            ),
+            array(
+                'method',
+                array('getFoo', 42, 'bar', $expr),
+                new Method('getFoo', array(42, 'bar'), $expr),
             ),
             array(
                 'property',

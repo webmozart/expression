@@ -105,7 +105,8 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
 
             array(new Property('prop', new Same('10')), new Property('prop', new Same('10'))),
 
-            array(new Method('method', new Same('10')), new Method('method', new Same('10'))),
+            array(new Method('method', array(), new Same('10')), new Method('method', array(), new Same('10'))),
+            array(new Method('method', array(42), new Same('10')), new Method('method', array(42), new Same('10'))),
 
             array(new AtLeast(1, new Same('10')), new AtLeast(1, new Same('10'))),
 
@@ -198,9 +199,11 @@ class EquivalenceTest extends PHPUnit_Framework_TestCase
             array(new Property('foo', new Same('10')), new Property('foo', new Same(10))),
             array(new Property('foo', new Same('10')), new Same('10')),
 
-            array(new Method('getFoo', new Same('10')), new Method('getBar', new Same('10'))),
-            array(new Method('getFoo', new Same('10')), new Method('getFoo', new Same(10))),
-            array(new Method('getFoo', new Same('10')), new Same('10')),
+            array(new Method('method', array(42), new Same('10')), new Method('method', array('42'), new Same('10'))),
+            array(new Method('method', array(42), new Same('10')), new Method('method', array(42, true), new Same('10'))),
+            array(new Method('getFoo', array(), new Same('10')), new Method('getBar', array(), new Same('10'))),
+            array(new Method('getFoo', array(), new Same('10')), new Method('getFoo', array(), new Same(10))),
+            array(new Method('getFoo', array(), new Same('10')), new Same('10')),
 
             array(new AtLeast(1, new Same('10')), new AtLeast(2, new Same('10'))),
             array(new AtLeast(1, new Same('10')), new AtLeast(1, new Same(10))),

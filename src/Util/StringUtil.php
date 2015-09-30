@@ -45,7 +45,31 @@ class StringUtil
             return '"'.$value.'"';
         }
 
+        if (is_object($value)) {
+            return 'object';
+        }
+
+        if (is_array($value)) {
+            return 'array';
+        }
+
         return (string) $value;
+    }
+
+    /**
+     * Formats a list of values as strings.
+     *
+     * @param array $values The values.
+     *
+     * @return array The values as strings.
+     */
+    public static function formatValues(array $values)
+    {
+        foreach ($values as $key => $value) {
+            $values[$key] = self::formatValue($value);
+        }
+
+        return $values;
     }
 
     /**

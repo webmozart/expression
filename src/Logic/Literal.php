@@ -73,9 +73,9 @@ abstract class Literal implements Expression
         return $this->andX(Expr::key($keyName, $expr));
     }
 
-    public function andMethod($methodName, Expression $expr)
+    public function andMethod($methodName, $args)
     {
-        return $this->andX(Expr::method($methodName, $expr));
+        return $this->andX(call_user_func_array(array('Webmozart\Expression\Expr', 'method'), func_get_args()));
     }
 
     public function andProperty($propertyName, Expression $expr)
@@ -243,9 +243,9 @@ abstract class Literal implements Expression
         return $this->orX(Expr::key($keyName, $expr));
     }
 
-    public function orMethod($methodName, Expression $expr)
+    public function orMethod($methodName, $args)
     {
-        return $this->orX(Expr::method($methodName, $expr));
+        return $this->orX(call_user_func_array(array('Webmozart\Expression\Expr', 'method'), func_get_args()));
     }
 
     public function orProperty($propertyName, Expression $expr)

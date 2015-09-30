@@ -129,13 +129,18 @@ class Expr
      * Check that the result of a method call matches an expression.
      *
      * @param string     $methodName The name of the method to call.
+     * @param mixed      $args...    The method arguments.
      * @param Expression $expr       The evaluated expression.
      *
      * @return Method The created expression.
      */
-    public static function method($methodName, Expression $expr)
+    public static function method($methodName, $args)
     {
-        return new Method($methodName, $expr);
+        $args = func_get_args();
+        $methodName = array_shift($args);
+        $expr = array_pop($args);
+
+        return new Method($methodName, $args, $expr);
     }
 
     /**
