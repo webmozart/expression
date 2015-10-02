@@ -1,7 +1,7 @@
 Changelog
 =========
 
-* 1.0.0-beta5 (@release_date@)
+* 1.0.0-beta5 (2015-10-02)
 
  * added `method()` selector
  * added `property()` selector
