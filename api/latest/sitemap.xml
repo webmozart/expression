@@ -10,7 +10,7 @@
 	<loc>https://webmozart.github.io/expression/api/latest/namespace-Webmozart.Expression.html</loc>
 </url>
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/namespace-Webmozart.Expression.Comparison.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/namespace-Webmozart.Expression.Constraint.html</loc>
 </url>
 <url>
 	<loc>https://webmozart.github.io/expression/api/latest/namespace-Webmozart.Expression.Logic.html</loc>
@@ -30,55 +30,55 @@
 
 
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Comparison.Contains.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Constraint.Contains.html</loc>
 </url>
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Comparison.EndsWith.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Constraint.EndsWith.html</loc>
 </url>
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Comparison.Equals.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Constraint.Equals.html</loc>
 </url>
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Comparison.GreaterThan.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Constraint.GreaterThan.html</loc>
 </url>
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Comparison.GreaterThanEqual.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Constraint.GreaterThanEqual.html</loc>
 </url>
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Comparison.In.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Constraint.In.html</loc>
 </url>
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Comparison.IsEmpty.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Constraint.IsEmpty.html</loc>
 </url>
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Comparison.KeyExists.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Constraint.IsInstanceOf.html</loc>
 </url>
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Comparison.KeyNotExists.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Constraint.KeyExists.html</loc>
 </url>
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Comparison.LessThan.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Constraint.KeyNotExists.html</loc>
 </url>
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Comparison.LessThanEqual.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Constraint.LessThan.html</loc>
 </url>
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Comparison.Matches.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Constraint.LessThanEqual.html</loc>
 </url>
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Comparison.NotEmpty.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Constraint.Matches.html</loc>
 </url>
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Comparison.NotEquals.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Constraint.NotEquals.html</loc>
 </url>
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Comparison.NotSame.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Constraint.NotSame.html</loc>
 </url>
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Comparison.Same.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Constraint.Same.html</loc>
 </url>
 <url>
-	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Comparison.StartsWith.html</loc>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Constraint.StartsWith.html</loc>
 </url>
 <url>
 	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Expr.html</loc>
@@ -121,6 +121,12 @@
 </url>
 <url>
 	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Selector.Key.html</loc>
+</url>
+<url>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Selector.Method.html</loc>
+</url>
+<url>
+	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Selector.Property.html</loc>
 </url>
 <url>
 	<loc>https://webmozart.github.io/expression/api/latest/class-Webmozart.Expression.Selector.Selector.html</loc>

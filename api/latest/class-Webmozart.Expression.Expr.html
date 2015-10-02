@@ -31,8 +31,8 @@
 
 						<ul>
 				<li>
-					<a href="namespace-Webmozart.Expression.Comparison.html">
-						Comparison					</a>
+					<a href="namespace-Webmozart.Expression.Constraint.html">
+						Constraint					</a>
 
 						</li>
 				<li>
@@ -158,7 +158,7 @@ second argument:</p>
 				Bernhard Schussek <a href="&#x6d;&#x61;&#105;&#108;&#116;&#x6f;&#x3a;&#x62;&#115;&#99;h&#x75;&#x73;&#115;&#101;&#107;&#x40;&#x67;&#x6d;&#97;&#105;l&#x2e;&#x63;&#111;&#109;">&#x62;&#115;&#99;h&#x75;&#x73;&#115;&#101;&#107;&#x40;&#x67;&#x6d;&#97;&#105;l&#x2e;&#x63;&#111;&#109;</a><br>
 				<b>Since:</b>
 				1.0<br>
-			<b>Located at</b> <a href="source-class-Webmozart.Expression.Expr.html#41-533" title="Go to source code">Expr.php</a>
+			<b>Located at</b> <a href="source-class-Webmozart.Expression.Expr.html#43-460" title="Go to source code">Expr.php</a>
 		<br>
 	</div>
 
@@ -178,7 +178,7 @@ second argument:</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_not">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#81-91" title="Go to source code">not</a>( <span><code><a href="class-Webmozart.Expression.Expression.html">Webmozart\Expression\Expression</a></code> <var>$expr</var></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#83-93" title="Go to source code">not</a>( <span><code><a href="class-Webmozart.Expression.Expression.html">Webmozart\Expression\Expression</a></code> <var>$expr</var></span> )</code>
 
 		<div class="description short">
 			<p>Negate an expression.</p>
@@ -217,7 +217,7 @@ second argument:</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_true">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#93-101" title="Go to source code">true</a>( )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#95-103" title="Go to source code">true</a>( )</code>
 
 		<div class="description short">
 			<p>Always true (tautology).</p>
@@ -251,7 +251,7 @@ second argument:</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_false">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#103-111" title="Go to source code">false</a>( )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#105-113" title="Go to source code">false</a>( )</code>
 
 		<div class="description short">
 			<p>Always false (contradiction).</p>
@@ -285,7 +285,7 @@ second argument:</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_key">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#113-124" title="Go to source code">key</a>( <span>string|integer <var>$key</var></span>, <span><code><a href="class-Webmozart.Expression.Expression.html">Webmozart\Expression\Expression</a></code> <var>$expr</var></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#115-126" title="Go to source code">key</a>( <span>string|integer <var>$key</var></span>, <span><code><a href="class-Webmozart.Expression.Expression.html">Webmozart\Expression\Expression</a></code> <var>$expr</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that the value of an array key matches an expression.</p>
@@ -314,6 +314,90 @@ second argument:</p>
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="method" id="_method">
+
+		<td class="attributes"><code>
+			 public static
+
+			<code><a href="class-Webmozart.Expression.Selector.Method.html">Webmozart\Expression\Selector\Method</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_method">#</a>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#128-144" title="Go to source code">method</a>( <span>string <var>$methodName</var></span>, <span>mixed <var>$args</var></span>, <span><code><a href="class-Webmozart.Expression.Expression.html">Webmozart\Expression\Expression</a></code> <var>$expr</var>,…</span> )</code>
+
+		<div class="description short">
+			<p>Check that the result of a method call matches an expression.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Check that the result of a method call matches an expression.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$methodName</var></dt>
+					<dd>The name of the method to call.</dd>
+					<dt><var>$args</var></dt>
+					<dd>$args...    The method arguments.</dd>
+					<dt><var>$expr</var>,…</dt>
+					<dd>The evaluated expression.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Webmozart.Expression.Selector.Method.html">Webmozart\Expression\Selector\Method</a></code><br>The created expression.
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="property" id="_property">
+
+		<td class="attributes"><code>
+			 public static
+
+			<code><a href="class-Webmozart.Expression.Selector.Method.html">Webmozart\Expression\Selector\Method</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_property">#</a>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#146-157" title="Go to source code">property</a>( <span>string <var>$propertyName</var></span>, <span><code><a href="class-Webmozart.Expression.Expression.html">Webmozart\Expression\Expression</a></code> <var>$expr</var></span> )</code>
+
+		<div class="description short">
+			<p>Check that the value of a property matches an expression.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Check that the value of a property matches an expression.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$propertyName</var></dt>
+					<dd>The name of the property.</dd>
+					<dt><var>$expr</var></dt>
+					<dd>The evaluated expression.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Webmozart.Expression.Selector.Method.html">Webmozart\Expression\Selector\Method</a></code><br>The created expression.
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="atLeast" id="_atLeast">
 
 		<td class="attributes"><code>
@@ -326,7 +410,7 @@ second argument:</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_atLeast">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#126-137" title="Go to source code">atLeast</a>( <span>integer <var>$count</var></span>, <span><code><a href="class-Webmozart.Expression.Expression.html">Webmozart\Expression\Expression</a></code> <var>$expr</var></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#159-170" title="Go to source code">atLeast</a>( <span>integer <var>$count</var></span>, <span><code><a href="class-Webmozart.Expression.Expression.html">Webmozart\Expression\Expression</a></code> <var>$expr</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that at least N entries of a traversable value match an expression.</p>
@@ -367,7 +451,7 @@ second argument:</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_atMost">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#139-150" title="Go to source code">atMost</a>( <span>integer <var>$count</var></span>, <span><code><a href="class-Webmozart.Expression.Expression.html">Webmozart\Expression\Expression</a></code> <var>$expr</var></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#172-183" title="Go to source code">atMost</a>( <span>integer <var>$count</var></span>, <span><code><a href="class-Webmozart.Expression.Expression.html">Webmozart\Expression\Expression</a></code> <var>$expr</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that at most N entries of a traversable value match an expression.</p>
@@ -408,7 +492,7 @@ second argument:</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_exactly">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#152-163" title="Go to source code">exactly</a>( <span>integer <var>$count</var></span>, <span><code><a href="class-Webmozart.Expression.Expression.html">Webmozart\Expression\Expression</a></code> <var>$expr</var></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#185-196" title="Go to source code">exactly</a>( <span>integer <var>$count</var></span>, <span><code><a href="class-Webmozart.Expression.Expression.html">Webmozart\Expression\Expression</a></code> <var>$expr</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that exactly N entries of a traversable value match an expression.</p>
@@ -449,7 +533,7 @@ second argument:</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_all">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#165-175" title="Go to source code">all</a>( <span><code><a href="class-Webmozart.Expression.Expression.html">Webmozart\Expression\Expression</a></code> <var>$expr</var></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#198-208" title="Go to source code">all</a>( <span><code><a href="class-Webmozart.Expression.Expression.html">Webmozart\Expression\Expression</a></code> <var>$expr</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that all entries of a traversable value match an expression.</p>
@@ -488,7 +572,7 @@ second argument:</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_count">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#177-187" title="Go to source code">count</a>( <span><code><a href="class-Webmozart.Expression.Expression.html">Webmozart\Expression\Expression</a></code> <var>$expr</var></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#210-220" title="Go to source code">count</a>( <span><code><a href="class-Webmozart.Expression.Expression.html">Webmozart\Expression\Expression</a></code> <var>$expr</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that the count of a collection matches an expression.</p>
@@ -520,14 +604,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.Same.html">Webmozart\Expression\Comparison\Same</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.Same.html">Webmozart\Expression\Constraint\Same</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_null">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#189-204" title="Go to source code">null</a>( <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#222-230" title="Go to source code">null</a>( )</code>
 
 		<div class="description short">
 			<p>Check that a value is null.</p>
@@ -537,16 +621,10 @@ second argument:</p>
 			<p>Check that a value is null.</p>
 
 
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                            Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
-				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.Same.html">Webmozart\Expression\Comparison\Same</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.Same.html">Webmozart\Expression\Constraint\Same</a></code><br>The created expression.
 				</div>
 
 
@@ -560,14 +638,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.NotSame.html">Webmozart\Expression\Comparison\NotSame</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.NotSame.html">Webmozart\Expression\Constraint\NotSame</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_notNull">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#206-221" title="Go to source code">notNull</a>( <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#232-240" title="Go to source code">notNull</a>( )</code>
 
 		<div class="description short">
 			<p>Check that a value is not null.</p>
@@ -577,16 +655,10 @@ second argument:</p>
 			<p>Check that a value is not null.</p>
 
 
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                            Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
-				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.NotSame.html">Webmozart\Expression\Comparison\NotSame</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.NotSame.html">Webmozart\Expression\Constraint\NotSame</a></code><br>The created expression.
 				</div>
 
 
@@ -600,14 +672,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.IsEmpty.html">Webmozart\Expression\Comparison\IsEmpty</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.IsEmpty.html">Webmozart\Expression\Constraint\IsEmpty</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_isEmpty">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#223-238" title="Go to source code">isEmpty</a>( <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#242-250" title="Go to source code">isEmpty</a>( )</code>
 
 		<div class="description short">
 			<p>Check that a value is empty.</p>
@@ -617,16 +689,10 @@ second argument:</p>
 			<p>Check that a value is empty.</p>
 
 
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                            Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
-				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.IsEmpty.html">Webmozart\Expression\Comparison\IsEmpty</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.IsEmpty.html">Webmozart\Expression\Constraint\IsEmpty</a></code><br>The created expression.
 				</div>
 
 
@@ -640,14 +706,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.NotEmpty.html">Webmozart\Expression\Comparison\NotEmpty</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Logic.Not.html">Webmozart\Expression\Logic\Not</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_notEmpty">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#240-255" title="Go to source code">notEmpty</a>( <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#252-260" title="Go to source code">notEmpty</a>( )</code>
 
 		<div class="description short">
 			<p>Check that a value is not empty.</p>
@@ -657,16 +723,49 @@ second argument:</p>
 			<p>Check that a value is not empty.</p>
 
 
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><a href="class-Webmozart.Expression.Logic.Not.html">Webmozart\Expression\Logic\Not</a></code><br>The created expression.
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isInstanceOf" id="_isInstanceOf">
+
+		<td class="attributes"><code>
+			 public static
+
+			<code><a href="class-Webmozart.Expression.Constraint.IsEmpty.html">Webmozart\Expression\Constraint\IsEmpty</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isInstanceOf">#</a>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#262-272" title="Go to source code">isInstanceOf</a>( <span>string <var>$className</var></span> )</code>
+
+		<div class="description short">
+			<p>Check that a value is an instance of a given class.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Check that a value is an instance of a given class.</p>
+
+
 				<h4>Parameters</h4>
 				<div class="list"><dl>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                            Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
+					<dt><var>$className</var></dt>
+					<dd>The class name.</dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.NotEmpty.html">Webmozart\Expression\Comparison\NotEmpty</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.IsEmpty.html">Webmozart\Expression\Constraint\IsEmpty</a></code><br>The created expression.
 				</div>
 
 
@@ -680,14 +779,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.Equals.html">Webmozart\Expression\Comparison\Equals</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.Equals.html">Webmozart\Expression\Constraint\Equals</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_equals">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#257-273" title="Go to source code">equals</a>( <span>mixed <var>$value</var></span>, <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#274-284" title="Go to source code">equals</a>( <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that a value equals another value.</p>
@@ -701,14 +800,11 @@ second argument:</p>
 				<div class="list"><dl>
 					<dt><var>$value</var></dt>
 					<dd>The compared value.</dd>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                              Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.Equals.html">Webmozart\Expression\Comparison\Equals</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.Equals.html">Webmozart\Expression\Constraint\Equals</a></code><br>The created expression.
 				</div>
 
 
@@ -722,14 +818,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.NotEquals.html">Webmozart\Expression\Comparison\NotEquals</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.NotEquals.html">Webmozart\Expression\Constraint\NotEquals</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_notEquals">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#275-291" title="Go to source code">notEquals</a>( <span>mixed <var>$value</var></span>, <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#286-296" title="Go to source code">notEquals</a>( <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that a value does not equal another value.</p>
@@ -743,14 +839,11 @@ second argument:</p>
 				<div class="list"><dl>
 					<dt><var>$value</var></dt>
 					<dd>The compared value.</dd>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                              Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.NotEquals.html">Webmozart\Expression\Comparison\NotEquals</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.NotEquals.html">Webmozart\Expression\Constraint\NotEquals</a></code><br>The created expression.
 				</div>
 
 
@@ -764,14 +857,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.Same.html">Webmozart\Expression\Comparison\Same</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.Same.html">Webmozart\Expression\Constraint\Same</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_same">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#293-309" title="Go to source code">same</a>( <span>mixed <var>$value</var></span>, <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#298-308" title="Go to source code">same</a>( <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that a value is identical to another value.</p>
@@ -785,14 +878,11 @@ second argument:</p>
 				<div class="list"><dl>
 					<dt><var>$value</var></dt>
 					<dd>The compared value.</dd>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                              Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.Same.html">Webmozart\Expression\Comparison\Same</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.Same.html">Webmozart\Expression\Constraint\Same</a></code><br>The created expression.
 				</div>
 
 
@@ -806,14 +896,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.NotSame.html">Webmozart\Expression\Comparison\NotSame</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.NotSame.html">Webmozart\Expression\Constraint\NotSame</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_notSame">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#311-327" title="Go to source code">notSame</a>( <span>mixed <var>$value</var></span>, <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#310-320" title="Go to source code">notSame</a>( <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that a value is not identical to another value.</p>
@@ -827,14 +917,11 @@ second argument:</p>
 				<div class="list"><dl>
 					<dt><var>$value</var></dt>
 					<dd>The compared value.</dd>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                              Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.NotSame.html">Webmozart\Expression\Comparison\NotSame</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.NotSame.html">Webmozart\Expression\Constraint\NotSame</a></code><br>The created expression.
 				</div>
 
 
@@ -848,14 +935,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.GreaterThan.html">Webmozart\Expression\Comparison\GreaterThan</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.GreaterThan.html">Webmozart\Expression\Constraint\GreaterThan</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_greaterThan">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#329-345" title="Go to source code">greaterThan</a>( <span>mixed <var>$value</var></span>, <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#322-332" title="Go to source code">greaterThan</a>( <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that a value is greater than another value.</p>
@@ -869,14 +956,11 @@ second argument:</p>
 				<div class="list"><dl>
 					<dt><var>$value</var></dt>
 					<dd>The compared value.</dd>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                              Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.GreaterThan.html">Webmozart\Expression\Comparison\GreaterThan</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.GreaterThan.html">Webmozart\Expression\Constraint\GreaterThan</a></code><br>The created expression.
 				</div>
 
 
@@ -890,14 +974,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.GreaterThanEqual.html">Webmozart\Expression\Comparison\GreaterThanEqual</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.GreaterThanEqual.html">Webmozart\Expression\Constraint\GreaterThanEqual</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_greaterThanEqual">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#347-363" title="Go to source code">greaterThanEqual</a>( <span>mixed <var>$value</var></span>, <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#334-344" title="Go to source code">greaterThanEqual</a>( <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that a value is greater than or equal to another value.</p>
@@ -911,14 +995,11 @@ second argument:</p>
 				<div class="list"><dl>
 					<dt><var>$value</var></dt>
 					<dd>The compared value.</dd>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                              Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.GreaterThanEqual.html">Webmozart\Expression\Comparison\GreaterThanEqual</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.GreaterThanEqual.html">Webmozart\Expression\Constraint\GreaterThanEqual</a></code><br>The created expression.
 				</div>
 
 
@@ -932,14 +1013,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.LessThan.html">Webmozart\Expression\Comparison\LessThan</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.LessThan.html">Webmozart\Expression\Constraint\LessThan</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lessThan">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#365-381" title="Go to source code">lessThan</a>( <span>mixed <var>$value</var></span>, <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#346-356" title="Go to source code">lessThan</a>( <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that a value is less than another value.</p>
@@ -953,14 +1034,11 @@ second argument:</p>
 				<div class="list"><dl>
 					<dt><var>$value</var></dt>
 					<dd>The compared value.</dd>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                              Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.LessThan.html">Webmozart\Expression\Comparison\LessThan</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.LessThan.html">Webmozart\Expression\Constraint\LessThan</a></code><br>The created expression.
 				</div>
 
 
@@ -974,14 +1052,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.LessThanEqual.html">Webmozart\Expression\Comparison\LessThanEqual</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.LessThanEqual.html">Webmozart\Expression\Constraint\LessThanEqual</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lessThanEqual">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#383-399" title="Go to source code">lessThanEqual</a>( <span>mixed <var>$value</var></span>, <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#358-368" title="Go to source code">lessThanEqual</a>( <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that a value is less than or equal to another value.</p>
@@ -995,14 +1073,11 @@ second argument:</p>
 				<div class="list"><dl>
 					<dt><var>$value</var></dt>
 					<dd>The compared value.</dd>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                              Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.LessThanEqual.html">Webmozart\Expression\Comparison\LessThanEqual</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.LessThanEqual.html">Webmozart\Expression\Constraint\LessThanEqual</a></code><br>The created expression.
 				</div>
 
 
@@ -1016,14 +1091,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.In.html">Webmozart\Expression\Comparison\In</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.In.html">Webmozart\Expression\Constraint\In</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_in">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#401-417" title="Go to source code">in</a>( <span>array <var>$values</var></span>, <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#370-380" title="Go to source code">in</a>( <span>array <var>$values</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that a value occurs in a list of values.</p>
@@ -1037,14 +1112,11 @@ second argument:</p>
 				<div class="list"><dl>
 					<dt><var>$values</var></dt>
 					<dd>The compared values.</dd>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                               Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.In.html">Webmozart\Expression\Comparison\In</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.In.html">Webmozart\Expression\Constraint\In</a></code><br>The created expression.
 				</div>
 
 
@@ -1058,14 +1130,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.Matches.html">Webmozart\Expression\Comparison\Matches</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.Matches.html">Webmozart\Expression\Constraint\Matches</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_matches">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#419-435" title="Go to source code">matches</a>( <span>string <var>$regExp</var></span>, <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#382-392" title="Go to source code">matches</a>( <span>string <var>$regExp</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that a value matches a regular expression.</p>
@@ -1079,14 +1151,11 @@ second argument:</p>
 				<div class="list"><dl>
 					<dt><var>$regExp</var></dt>
 					<dd>The regular expression.</dd>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                               Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.Matches.html">Webmozart\Expression\Comparison\Matches</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.Matches.html">Webmozart\Expression\Constraint\Matches</a></code><br>The created expression.
 				</div>
 
 
@@ -1100,14 +1169,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.StartsWith.html">Webmozart\Expression\Comparison\StartsWith</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.StartsWith.html">Webmozart\Expression\Constraint\StartsWith</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_startsWith">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#437-453" title="Go to source code">startsWith</a>( <span>string <var>$prefix</var></span>, <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#394-404" title="Go to source code">startsWith</a>( <span>string <var>$prefix</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that a value starts with a given string.</p>
@@ -1121,14 +1190,11 @@ second argument:</p>
 				<div class="list"><dl>
 					<dt><var>$prefix</var></dt>
 					<dd>The prefix string.</dd>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                               Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.StartsWith.html">Webmozart\Expression\Comparison\StartsWith</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.StartsWith.html">Webmozart\Expression\Constraint\StartsWith</a></code><br>The created expression.
 				</div>
 
 
@@ -1142,14 +1208,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.EndsWith.html">Webmozart\Expression\Comparison\EndsWith</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.EndsWith.html">Webmozart\Expression\Constraint\EndsWith</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_endsWith">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#455-471" title="Go to source code">endsWith</a>( <span>string <var>$suffix</var></span>, <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#406-416" title="Go to source code">endsWith</a>( <span>string <var>$suffix</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that a value ends with a given string.</p>
@@ -1163,14 +1229,11 @@ second argument:</p>
 				<div class="list"><dl>
 					<dt><var>$suffix</var></dt>
 					<dd>The suffix string.</dd>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                               Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.EndsWith.html">Webmozart\Expression\Comparison\EndsWith</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.EndsWith.html">Webmozart\Expression\Constraint\EndsWith</a></code><br>The created expression.
 				</div>
 
 
@@ -1184,14 +1247,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.Contains.html">Webmozart\Expression\Comparison\Contains</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.Contains.html">Webmozart\Expression\Constraint\Contains</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_contains">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#473-489" title="Go to source code">contains</a>( <span>string <var>$string</var></span>, <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#418-428" title="Go to source code">contains</a>( <span>string <var>$string</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that a value contains a given string.</p>
@@ -1205,14 +1268,11 @@ second argument:</p>
 				<div class="list"><dl>
 					<dt><var>$string</var></dt>
 					<dd>The sub-string.</dd>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                               Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.Contains.html">Webmozart\Expression\Comparison\Contains</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.Contains.html">Webmozart\Expression\Constraint\Contains</a></code><br>The created expression.
 				</div>
 
 
@@ -1226,14 +1286,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.KeyExists.html">Webmozart\Expression\Comparison\KeyExists</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.KeyExists.html">Webmozart\Expression\Constraint\KeyExists</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_keyExists">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#491-507" title="Go to source code">keyExists</a>( <span>string <var>$keyName</var></span>, <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#430-440" title="Go to source code">keyExists</a>( <span>string <var>$keyName</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that a value key exists.</p>
@@ -1247,14 +1307,11 @@ second argument:</p>
 				<div class="list"><dl>
 					<dt><var>$keyName</var></dt>
 					<dd>The key name.</dd>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                                Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.KeyExists.html">Webmozart\Expression\Comparison\KeyExists</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.KeyExists.html">Webmozart\Expression\Constraint\KeyExists</a></code><br>The created expression.
 				</div>
 
 
@@ -1268,14 +1325,14 @@ second argument:</p>
 		<td class="attributes"><code>
 			 public static
 
-			<code><a href="class-Webmozart.Expression.Comparison.KeyNotExists.html">Webmozart\Expression\Comparison\KeyNotExists</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code>
+			<code><a href="class-Webmozart.Expression.Constraint.KeyNotExists.html">Webmozart\Expression\Constraint\KeyNotExists</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_keyNotExists">#</a>
-		<code><a href="source-class-Webmozart.Expression.Expr.html#509-525" title="Go to source code">keyNotExists</a>( <span>string <var>$keyName</var></span>, <span>string|integer|<code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code> <var>$key</var> = <code><a href="class-Webmozart.Expression.Expr.html#_null">Webmozart\Expression\Expr::null()</a></code></span> )</code>
+		<code><a href="source-class-Webmozart.Expression.Expr.html#442-452" title="Go to source code">keyNotExists</a>( <span>string <var>$keyName</var></span> )</code>
 
 		<div class="description short">
 			<p>Check that a value key does not exist.</p>
@@ -1289,14 +1346,11 @@ second argument:</p>
 				<div class="list"><dl>
 					<dt><var>$keyName</var></dt>
 					<dd>The key name.</dd>
-					<dt><var>$key</var></dt>
-					<dd><p>The array key to apply the expression to.
-                                Equivalent to calling <code><a href="class-Webmozart.Expression.Expr.html#_key">Webmozart\Expression\Expr::key()</a></code>.</p></dd>
 				</dl></div>
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-Webmozart.Expression.Comparison.KeyNotExists.html">Webmozart\Expression\Comparison\KeyNotExists</a></code>|<code><a href="class-Webmozart.Expression.Selector.Key.html">Webmozart\Expression\Selector\Key</a></code><br>The created expression.
+					<code><a href="class-Webmozart.Expression.Constraint.KeyNotExists.html">Webmozart\Expression\Constraint\KeyNotExists</a></code><br>The created expression.
 				</div>
 
 
