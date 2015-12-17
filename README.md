@@ -11,8 +11,16 @@ Latest release: [1.0.0-beta5](https://packagist.org/packages/webmozart/expressio
 
 PHP >= 5.3.9
 
-With this library, you can easily filter results of your domain services using
-logical expressions.
+This library implements the [Specification Pattern] for PHP. You can use it to
+easily filter results of your domain services by logical expressions.
+
+Conversely to [rulerz], this library focuses on providing a usable and efficient
+PHP API first. An expression language that converts string expressions into
+`Expression` instances can be built on top, but is not included in the current
+release.
+
+Visitors can be implemented that convert `Expression` objects into Doctrine
+queries and similar objects.
 
 Installation
 ------------
@@ -386,3 +394,5 @@ All contents of this package are licensed under the [MIT license].
 [`ExpressionComparator`]: src/PhpUnit/ExpressionComparator.php
 [`ExpressionTraverser`]: src/Traversal/ExpressionTraverser.php
 [`ExpressionVisitor`]: src/Traversal/ExpressionVisitor.php
+[Specification Pattern]: http://www.martinfowler.com/apsupp/spec.pdf
+[rulerz]: https://github.com/K-Phoen/rulerz
