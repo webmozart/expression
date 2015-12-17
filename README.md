@@ -100,12 +100,7 @@ class HasPreviousBookings extends Method
 }
 
 // Check if a customer is premium
-if (Expr::expr(new IsPremium())->evaluate($customer)) {
-    // ...
-}
-
-// Check if a customer is premium (PHP 7)
-if (new IsPremium()->evaluate($customer)) {
+if ((new IsPremium())->evaluate($customer)) {
     // ...
 }
 
