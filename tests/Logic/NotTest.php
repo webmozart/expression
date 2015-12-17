@@ -15,8 +15,8 @@ use PHPUnit_Framework_TestCase;
 use Webmozart\Expression\Constraint\GreaterThan;
 use Webmozart\Expression\Constraint\LessThan;
 use Webmozart\Expression\Constraint\StartsWith;
-use Webmozart\Expression\Logic\OrX;
 use Webmozart\Expression\Logic\Not;
+use Webmozart\Expression\Logic\OrX;
 
 /**
  * @since  1.0

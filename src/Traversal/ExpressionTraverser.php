@@ -13,8 +13,8 @@ namespace Webmozart\Expression\Traversal;
 
 use Webmozart\Expression\Expression;
 use Webmozart\Expression\Logic\AndX;
-use Webmozart\Expression\Logic\OrX;
 use Webmozart\Expression\Logic\Not;
+use Webmozart\Expression\Logic\OrX;
 use Webmozart\Expression\Selector\Key;
 
 /**
