@@ -1,7 +1,7 @@
 {
     "name": "webmozart/expression",
-    "description": "Formulate expressions and search criteria using PHP objects.",
-    "keywords": ["criteria", "formula", "expression", "filter"],
+    "description": "Implementation of the Specification pattern and logical expressions for PHP.",
+    "keywords": ["specification", "criteria", "formula", "expression", "filter", "logic"],
     "license": "MIT",
     "authors": [
         {
