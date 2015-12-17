@@ -1,7 +1,7 @@
 Webmozart Expression
 ====================
 
-[![Build Status](https://travis-ci.org/webmozart/expression.svg?branch=master)](https://travis-ci.org/webmozart/expression)
+[![Build Status](https://travis-ci.org/webmozart/expression.svg?branch=1.0.0)](https://travis-ci.org/webmozart/expression)
 [![Build status](https://ci.appveyor.com/api/projects/status/6dstc380h5pr5rk3/branch/master?svg=true)](https://ci.appveyor.com/project/webmozart/expression/branch/master)
 [![Latest Stable Version](https://poser.pugx.org/webmozart/expression/v/stable.svg)](https://packagist.org/packages/webmozart/expression)
 [![Total Downloads](https://poser.pugx.org/webmozart/expression/downloads.svg)](https://packagist.org/packages/webmozart/expression)
