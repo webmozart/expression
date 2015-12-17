@@ -70,6 +70,9 @@ class PersonRepositoryImpl implements PersonRepository
 }
 ```
 
+[Visitors](#expression-transformation) can be built to convert expressions into
+other types of specifications, such as Doctrine query builders.
+
 Domain Expressions
 ------------------
 
