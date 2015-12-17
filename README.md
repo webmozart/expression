@@ -12,7 +12,7 @@ Latest release: [1.0.0](https://packagist.org/packages/webmozart/expression#1.0.
 PHP >= 5.3.9
 
 This library implements the [Specification Pattern] for PHP. You can use it to
-easily filter results of your domain services by logical expressions.
+easily filter results of your domain services by evaluating logical expressions.
 
 Conversely to [rulerz], this library focuses on providing a usable and efficient
 PHP API first. An expression language that converts string expressions into
