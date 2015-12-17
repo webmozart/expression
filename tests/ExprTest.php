@@ -11,6 +11,7 @@
 
 namespace Webmozart\Expression\Tests;
 
+use ArrayObject;
 use PHPUnit_Framework_TestCase;
 use Webmozart\Expression\Constraint\Contains;
 use Webmozart\Expression\Constraint\EndsWith;
@@ -29,6 +30,7 @@ use Webmozart\Expression\Constraint\NotEquals;
 use Webmozart\Expression\Constraint\NotSame;
 use Webmozart\Expression\Constraint\Same;
 use Webmozart\Expression\Constraint\StartsWith;
+use Webmozart\Expression\Expr;
 use Webmozart\Expression\Logic\AlwaysFalse;
 use Webmozart\Expression\Logic\AlwaysTrue;
 use Webmozart\Expression\Logic\Not;
@@ -228,5 +230,21 @@ class ExprTest extends PHPUnit_Framework_TestCase
     public function testCreate($method, $args, $expected)
     {
         $this->assertEquals($expected, call_user_func_array(array('Webmozart\Expression\Expr', $method), $args));
+    }
+
+    public function testFilterArray()
+    {
+        $input = range(1, 10);
+        $output = array_filter($input, function ($i) { return $i > 4; });
+
+        $this->assertSame($output, Expr::filter($input, Expr::greaterThan(4)));
+    }
+
+    public function testFilterCollection()
+    {
+        $input = new ArrayObject(range(1, 10));
+        $output = new ArrayObject(array_filter(range(1, 10), function ($i) { return $i > 4; }));
+
+        $this->assertEquals($output, Expr::filter($input, Expr::greaterThan(4)));
     }
 }

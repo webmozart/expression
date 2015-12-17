@@ -11,6 +11,9 @@
 
 namespace Webmozart\Expression;
 
+use ArrayAccess;
+use InvalidArgumentException;
+use Traversable;
 use Webmozart\Expression\Constraint\Contains;
 use Webmozart\Expression\Constraint\EndsWith;
 use Webmozart\Expression\Constraint\Equals;
@@ -80,6 +83,41 @@ use Webmozart\Expression\Selector\Property;
  */
 class Expr
 {
+    /**
+     * Filter a collection for entries matching the expression.
+     *
+     * @param array|ArrayAccess|Traversable $collection An array or an object
+     *                                                  implementing Traversable
+     *                                                  and ArrayAccess.
+     * @param Expression                    $expr       The expression to
+     *                                                  evaluate for each entry.
+     *
+     * @return array|ArrayAccess|Traversable The filtered collection.
+     */
+    public static function filter($collection, Expression $expr)
+    {
+        if (is_array($collection)) {
+            return array_filter($collection, array($expr, 'evaluate'));
+        }
+
+        if (!($collection instanceof Traversable && $collection instanceof ArrayAccess)) {
+            throw new InvalidArgumentException(sprintf(
+                'Expected an array or an instance of Traversable and ArrayAccess. Got: %s',
+                is_object($collection) ? get_class($collection) : gettype($collection)
+            ));
+        }
+
+        $clone = clone $collection;
+
+        foreach ($collection as $key => $value) {
+            if (!$expr->evaluate($value)) {
+                unset($clone[$key]);
+            }
+        }
+
+        return $clone;
+    }
+
     /**
      * Negate an expression.
      *

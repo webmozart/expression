@@ -1,6 +1,10 @@
 Changelog
 =========
 
+* 1.0.0 (2015-12-17)
+
+ * added `Expr::filter()` to filter collections
+
 * 1.0.0-beta5 (2015-10-02)
 
  * added `method()` selector

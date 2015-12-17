@@ -57,15 +57,7 @@ class PersonRepositoryImpl implements PersonRepository
     
     public function findPersons(Expression $expr)
     {
-        $result = array();
-        
-        foreach ($this->persons as $person) {
-            if ($expr->evaluate($person)) {
-                $result[] = $person;
-            }
-        }
-        
-        return $result;
+        return Expr::filter($this->persons, $expr);
     }
 }
 ```
