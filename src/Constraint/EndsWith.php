@@ -22,7 +22,7 @@ use Webmozart\Expression\Util\StringUtil;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class EndsWith extends Literal
+class EndsWith extends Literal
 {
     /**
      * @var string

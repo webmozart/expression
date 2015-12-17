@@ -23,8 +23,8 @@ Use [Composer] to install the package:
 $ composer require webmozart/expression:~1.0@beta
 ```
 
-Usage
------
+Basic Usage
+-----------
 
 Use the [`Expression`] interface in finder methods of your service classes:
 
@@ -53,7 +53,7 @@ individual persons against the criteria:
 ```php
 class PersonRepositoryImpl implements PersonRepository
 {
-    private $persons = array();
+    private $persons = [];
     
     public function findPersons(Expression $expr)
     {
@@ -61,6 +61,51 @@ class PersonRepositoryImpl implements PersonRepository
     }
 }
 ```
+
+Domain Expressions
+------------------
+
+Extend existing expressions to build domain-specific expressions:
+
+```php
+class IsPremium extends Method
+{
+    public function __construct()
+    {
+        parent::__construct('isPremium', [], Expr::same(true));
+    }
+}
+
+class HasPreviousBookings extends Method
+{
+    public function __construct()
+    {
+        parent::__construct(
+            'getBookings', 
+            [], 
+            Expr::count(Expr::greaterThan(0))
+        );
+    }
+}
+
+// Check if a customer is premium
+if (Expr::expr(new IsPremium())->evaluate($customer)) {
+    // ...
+}
+
+// Check if a customer is premium (PHP 7)
+if (new IsPremium()->evaluate($customer)) {
+    // ...
+}
+
+// Get premium customers with bookings
+$customers = $repo->findCustomers(Expr::andX([
+    new IsPremium(),
+    new HasPreviousBookings(),
+]));
+```
+
+The following sections describe the core expressions in detail.
 
 Expressions
 -----------
@@ -105,7 +150,7 @@ array key:
 ```php
 $expr = Expr::key('age', Expr::greaterThan(10));
 
-$expr->evaluate(array('age' => 12));
+$expr->evaluate(['age' => 12]);
 // => true
 ```
 
@@ -132,7 +177,7 @@ You can nest selectors to evaluate expressions for nested objects or arrays:
 ```php
 $expr = Expr::atLeastOne(Expr::method('getAge', Expr::greaterThan(10)));
 
-$expr->evaluate(array(new Person(12), new Person(9)));
+$expr->evaluate([new Person(12), new Person(9)]);
 // => true
 ```
 
@@ -142,7 +187,7 @@ method. Pass the arguments before the evaluated expression:
 ```php
 $expr = Expr::method('getParameter', 'age', Expr::greaterThan(10));
 
-$expr->evaluate(array(new Person(12), new Person(9)));
+$expr->evaluate([new Person(12), new Person(9)]);
 // => true
 ```
 
@@ -244,7 +289,7 @@ $c1->equivalentTo($c2);
 
 // Also logically equivalent
 $c1 = Expr::same(35);
-$c2 = Expr::oneOf(array(35));
+$c2 = Expr::oneOf([35]);
 
 $c1 == $c2;
 // => false

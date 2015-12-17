@@ -24,7 +24,7 @@ use Webmozart\Expression\Expression;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class Disjunction implements Expression
+class OrX implements Expression
 {
     /**
      * @var Expression[]
@@ -289,7 +289,7 @@ final class Disjunction implements Expression
     public function toString()
     {
         return implode(' || ', array_map(function (Expression $disjunct) {
-            return $disjunct instanceof Conjunction ? '('.$disjunct->toString().')' : $disjunct->toString();
+            return $disjunct instanceof AndX ? '('.$disjunct->toString().')' : $disjunct->toString();
         }, $this->disjuncts));
     }
 

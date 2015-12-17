@@ -12,8 +12,8 @@
 namespace Webmozart\Expression\Selector;
 
 use Webmozart\Expression\Expression;
-use Webmozart\Expression\Logic\Conjunction;
-use Webmozart\Expression\Logic\Disjunction;
+use Webmozart\Expression\Logic\AndX;
+use Webmozart\Expression\Logic\OrX;
 
 /**
  * Checks whether the value of a property matches an expression.
@@ -22,7 +22,7 @@ use Webmozart\Expression\Logic\Disjunction;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class Property extends Selector
+class Property extends Selector
 {
     /**
      * @var string
@@ -90,7 +90,7 @@ final class Property extends Selector
     {
         $exprString = $this->expr->toString();
 
-        if ($this->expr instanceof Conjunction || $this->expr instanceof Disjunction) {
+        if ($this->expr instanceof AndX || $this->expr instanceof OrX) {
             return $this->propertyName.'{'.$exprString.'}';
         }
 

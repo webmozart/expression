@@ -21,7 +21,7 @@ use Webmozart\Expression\Logic\Literal;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class IsInstanceOf extends Literal
+class IsInstanceOf extends Literal
 {
     /**
      * @var array

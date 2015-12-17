@@ -21,7 +21,7 @@ use Webmozart\Expression\Logic\Literal;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class IsEmpty extends Literal
+class IsEmpty extends Literal
 {
     /**
      * {@inheritdoc}

@@ -24,7 +24,7 @@ use Webmozart\Expression\Util\StringUtil;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class GreaterThan extends Literal
+class GreaterThan extends Literal
 {
     /**
      * @var mixed

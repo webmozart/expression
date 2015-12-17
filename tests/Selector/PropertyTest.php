@@ -14,7 +14,7 @@ namespace Webmozart\Expression\Tests\Selector;
 use PHPUnit_Framework_TestCase;
 use Webmozart\Expression\Constraint\EndsWith;
 use Webmozart\Expression\Constraint\GreaterThan;
-use Webmozart\Expression\Logic\Conjunction;
+use Webmozart\Expression\Logic\AndX;
 use Webmozart\Expression\Selector\Property;
 
 /**
@@ -39,7 +39,7 @@ class PropertyTest extends PHPUnit_Framework_TestCase
     {
         $expr1 = new Property('prop', new GreaterThan(10));
         $expr2 = new Property('prop', new EndsWith('.css'));
-        $expr3 = new Property('prop', new Conjunction(array(
+        $expr3 = new Property('prop', new AndX(array(
             new GreaterThan(10),
             new EndsWith('.css'),
         )));

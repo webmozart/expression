@@ -24,7 +24,7 @@ use Webmozart\Expression\Util\StringUtil;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class NotEquals extends Literal
+class NotEquals extends Literal
 {
     /**
      * @var mixed

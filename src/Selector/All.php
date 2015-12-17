@@ -20,7 +20,7 @@ use Traversable;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class All extends Selector
+class All extends Selector
 {
     /**
      * {@inheritdoc}

@@ -15,7 +15,7 @@ use PHPUnit_Framework_TestCase;
 use Webmozart\Expression\Constraint\GreaterThan;
 use Webmozart\Expression\Constraint\LessThan;
 use Webmozart\Expression\Constraint\StartsWith;
-use Webmozart\Expression\Logic\Disjunction;
+use Webmozart\Expression\Logic\OrX;
 use Webmozart\Expression\Logic\Not;
 
 /**
@@ -35,9 +35,9 @@ class NotTest extends PHPUnit_Framework_TestCase
 
     public function testEquivalentTo()
     {
-        $expr1 = new Not(new Disjunction(array(new LessThan(0), new GreaterThan(10))));
-        $expr2 = new Not(new Disjunction(array(new GreaterThan(10), new LessThan(0))));
-        $expr3 = new Not(new Disjunction(array(new GreaterThan(10))));
+        $expr1 = new Not(new OrX(array(new LessThan(0), new GreaterThan(10))));
+        $expr2 = new Not(new OrX(array(new GreaterThan(10), new LessThan(0))));
+        $expr3 = new Not(new OrX(array(new GreaterThan(10))));
 
         $this->assertTrue($expr1->equivalentTo($expr2));
         $this->assertFalse($expr2->equivalentTo($expr3));
@@ -47,7 +47,7 @@ class NotTest extends PHPUnit_Framework_TestCase
     public function testToString()
     {
         $expr1 = new Not(new StartsWith('Thomas'));
-        $expr2 = new Not(new Disjunction(array(new GreaterThan(10), new LessThan(0))));
+        $expr2 = new Not(new OrX(array(new GreaterThan(10), new LessThan(0))));
 
         $this->assertSame('not(startsWith("Thomas"))', $expr1->toString());
         $this->assertSame('not(>10 || <0)', $expr2->toString());

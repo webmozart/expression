@@ -22,7 +22,7 @@ use Webmozart\Expression\Util\StringUtil;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class KeyNotExists extends Literal
+class KeyNotExists extends Literal
 {
     /**
      * @var string

@@ -18,8 +18,8 @@ use Webmozart\Expression\Constraint\GreaterThan;
 use Webmozart\Expression\Constraint\Same;
 use Webmozart\Expression\Logic\AlwaysFalse;
 use Webmozart\Expression\Logic\AlwaysTrue;
-use Webmozart\Expression\Logic\Conjunction;
-use Webmozart\Expression\Logic\Disjunction;
+use Webmozart\Expression\Logic\AndX;
+use Webmozart\Expression\Logic\OrX;
 use Webmozart\Expression\Selector\Key;
 
 /**
@@ -31,7 +31,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
 {
     public function testCreate()
     {
-        $disjunction = new Disjunction(array(
+        $disjunction = new OrX(array(
             $notNull = new Same('10'),
             $greaterThan = new GreaterThan('age', 0),
         ));
@@ -41,9 +41,9 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
 
     public function testCreateInlinesDisjunctions()
     {
-        $disjunction = new Disjunction(array(
+        $disjunction = new OrX(array(
             $notNull = new Same('10'),
-            new Disjunction(array($greaterThan = new GreaterThan('age', 0))),
+            new OrX(array($greaterThan = new GreaterThan('age', 0))),
         ));
 
         $this->assertSame(array($notNull, $greaterThan), $disjunction->getDisjuncts());
@@ -51,7 +51,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
 
     public function testOrX()
     {
-        $disjunction1 = new Disjunction(array($notNull = new Same('10')));
+        $disjunction1 = new OrX(array($notNull = new Same('10')));
 
         // Expressions are value objects, hence we must not alter the original
         // conjunction
@@ -63,7 +63,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
 
     public function testOrXIgnoresDuplicates()
     {
-        $disjunction1 = new Disjunction(array($notNull = new Same('10')));
+        $disjunction1 = new OrX(array($notNull = new Same('10')));
         $disjunction2 = $disjunction1->orX(new Same('10'));
 
         $this->assertSame($disjunction1, $disjunction2);
@@ -71,8 +71,8 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
 
     public function testOrXInlinesDisjunctions()
     {
-        $disjunction1 = new Disjunction(array($notNull = new Same('10')));
-        $disjunction2 = new Disjunction(array($greaterThan = new GreaterThan('age', 0)));
+        $disjunction1 = new OrX(array($notNull = new Same('10')));
+        $disjunction2 = new OrX(array($greaterThan = new GreaterThan('age', 0)));
 
         // Expressions are value objects, hence we must not alter the original
         // conjunction
@@ -85,7 +85,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
 
     public function testOrFalseIgnored()
     {
-        $disjunction1 = new Disjunction(array($notNull = new Same('10')));
+        $disjunction1 = new OrX(array($notNull = new Same('10')));
         $disjunction2 = $disjunction1->orFalse();
 
         $this->assertSame($disjunction1, $disjunction2);
@@ -93,7 +93,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
 
     public function testOrXIgnoresFalse()
     {
-        $disjunction1 = new Disjunction(array($notNull = new Same('10')));
+        $disjunction1 = new OrX(array($notNull = new Same('10')));
         $disjunction2 = $disjunction1->orX(new AlwaysFalse());
 
         $this->assertSame($disjunction1, $disjunction2);
@@ -101,7 +101,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
 
     public function testOrTrueReturnsTrue()
     {
-        $disjunction1 = new Disjunction(array($notNull = new Same('10')));
+        $disjunction1 = new OrX(array($notNull = new Same('10')));
         $disjunction2 = $disjunction1->orTrue();
 
         $this->assertInstanceOf('Webmozart\Expression\Logic\AlwaysTrue', $disjunction2);
@@ -109,7 +109,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
 
     public function testOrXReturnsTrue()
     {
-        $disjunction1 = new Disjunction(array($notNull = new Same('10')));
+        $disjunction1 = new OrX(array($notNull = new Same('10')));
         $disjunction2 = $disjunction1->orX($true = new AlwaysTrue());
 
         $this->assertSame($true, $disjunction2);
@@ -130,7 +130,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
         }
 
         $method = 'or'.ucfirst($method);
-        $disjunction1 = new Disjunction();
+        $disjunction1 = new OrX();
 
         $disjunction2 = call_user_func_array(array($disjunction1, $method), $args);
 
@@ -140,7 +140,7 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
 
     public function testEvaluate()
     {
-        $disjunction = new Disjunction(array(
+        $disjunction = new OrX(array(
             new Key('name', new Same('Thomas')),
             new Key('age', new GreaterThan(0)),
         ));
@@ -153,18 +153,18 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
 
     public function testEquivalentTo()
     {
-        $disjunction1 = new Disjunction(array(
+        $disjunction1 = new OrX(array(
             new Key('name', new Same('10')),
             new Key('age', new GreaterThan(0)),
         ));
 
         // disjunctions match independent of the order of the conjuncts
-        $disjunction2 = new Disjunction(array(
+        $disjunction2 = new OrX(array(
             new Key('age', new GreaterThan(0)),
             new Key('name', new Same('10')),
         ));
 
-        $disjunction3 = new Disjunction(array(
+        $disjunction3 = new OrX(array(
             new Key('age', new GreaterThan(0)),
         ));
 
@@ -178,9 +178,9 @@ class DisjunctionTest extends PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $expr1 = new Disjunction();
-        $expr2 = new Disjunction(array(new GreaterThan(10), new EndsWith('.css')));
-        $expr3 = new Disjunction(array(new GreaterThan(10), new Conjunction(array(new Contains('foo'), new EndsWith('.css')))));
+        $expr1 = new OrX();
+        $expr2 = new OrX(array(new GreaterThan(10), new EndsWith('.css')));
+        $expr3 = new OrX(array(new GreaterThan(10), new AndX(array(new Contains('foo'), new EndsWith('.css')))));
 
         $this->assertSame('', $expr1->toString());
         $this->assertSame('>10 || endsWith(".css")', $expr2->toString());

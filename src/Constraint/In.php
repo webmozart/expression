@@ -22,7 +22,7 @@ use Webmozart\Expression\Util\StringUtil;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class In extends Literal
+class In extends Literal
 {
     /**
      * @var array

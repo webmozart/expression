@@ -14,8 +14,8 @@ namespace Webmozart\Expression\Tests\Traversal;
 use PHPUnit_Framework_TestCase;
 use Webmozart\Expression\Constraint\GreaterThan;
 use Webmozart\Expression\Constraint\Same;
-use Webmozart\Expression\Logic\Conjunction;
-use Webmozart\Expression\Logic\Disjunction;
+use Webmozart\Expression\Logic\AndX;
+use Webmozart\Expression\Logic\OrX;
 use Webmozart\Expression\Logic\Not;
 use Webmozart\Expression\Selector\Key;
 use Webmozart\Expression\Traversal\ExpressionTraverser;
@@ -411,7 +411,7 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
 
     public function testTraverseConjunction()
     {
-        $expr = new Conjunction(array(
+        $expr = new AndX(array(
             $gt = new GreaterThan(10),
             $same = new Same('5'),
         ));
@@ -449,11 +449,11 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
 
     public function testModifyConjunctInEnterExpression()
     {
-        $expr1 = new Conjunction(array(
+        $expr1 = new AndX(array(
             $gt1 = new GreaterThan(10),
             $same = new Same('5'),
         ));
-        $expr2 = new Conjunction(array(
+        $expr2 = new AndX(array(
             $gt2 = new GreaterThan(5),
             $same,
         ));
@@ -491,11 +491,11 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
 
     public function testModifyConjunctInLeaveExpression()
     {
-        $expr1 = new Conjunction(array(
+        $expr1 = new AndX(array(
             $gt1 = new GreaterThan(10),
             $same = new Same('5'),
         ));
-        $expr2 = new Conjunction(array(
+        $expr2 = new AndX(array(
             $gt2 = new GreaterThan(5),
             $same,
         ));
@@ -533,11 +533,11 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
 
     public function testRemoveConjunct()
     {
-        $expr1 = new Conjunction(array(
+        $expr1 = new AndX(array(
             $gt1 = new GreaterThan(10),
             $same = new Same('5'),
         ));
-        $expr2 = new Conjunction(array($same));
+        $expr2 = new AndX(array($same));
 
         $visitor = $this->getMock('Webmozart\Expression\Traversal\ExpressionVisitor');
         $visitor->expects($this->at(0))
@@ -572,7 +572,7 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
 
     public function testRemoveAllConjuncts()
     {
-        $expr1 = new Conjunction(array(
+        $expr1 = new AndX(array(
             $gt1 = new GreaterThan(10),
             $same = new Same('5'),
         ));
@@ -606,7 +606,7 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
 
     public function testTraverseDisjunction()
     {
-        $expr = new Disjunction(array(
+        $expr = new OrX(array(
             $gt = new GreaterThan(10),
             $same = new Same('5'),
         ));
@@ -644,11 +644,11 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
 
     public function testModifyDisjunctInEnterExpression()
     {
-        $expr1 = new Disjunction(array(
+        $expr1 = new OrX(array(
             $gt1 = new GreaterThan(10),
             $same = new Same('5'),
         ));
-        $expr2 = new Disjunction(array(
+        $expr2 = new OrX(array(
             $gt2 = new GreaterThan(5),
             $same,
         ));
@@ -686,11 +686,11 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
 
     public function testModifyDisjunctInLeaveExpression()
     {
-        $expr1 = new Disjunction(array(
+        $expr1 = new OrX(array(
             $gt1 = new GreaterThan(10),
             $same = new Same('5'),
         ));
-        $expr2 = new Disjunction(array(
+        $expr2 = new OrX(array(
             $gt2 = new GreaterThan(5),
             $same,
         ));
@@ -728,11 +728,11 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
 
     public function testRemoveDisjunct()
     {
-        $expr1 = new Disjunction(array(
+        $expr1 = new OrX(array(
             $gt1 = new GreaterThan(10),
             $same = new Same('5'),
         ));
-        $expr2 = new Disjunction(array($same));
+        $expr2 = new OrX(array($same));
 
         $visitor = $this->getMock('Webmozart\Expression\Traversal\ExpressionVisitor');
         $visitor->expects($this->at(0))
@@ -767,7 +767,7 @@ class ExpressionTraverserTest extends PHPUnit_Framework_TestCase
 
     public function testRemoveAllDisjuncts()
     {
-        $expr1 = new Disjunction(array(
+        $expr1 = new OrX(array(
             $gt1 = new GreaterThan(10),
             $same = new Same('5'),
         ));

@@ -50,7 +50,7 @@ abstract class Literal implements Expression
             return $this;
         }
 
-        return new Conjunction(array($this, $expr));
+        return new AndX(array($this, $expr));
     }
 
     public function andNot(Expression $expr)
@@ -220,7 +220,7 @@ abstract class Literal implements Expression
             return $this;
         }
 
-        return new Disjunction(array($this, $expr));
+        return new OrX(array($this, $expr));
     }
 
     public function orNot(Expression $expr)

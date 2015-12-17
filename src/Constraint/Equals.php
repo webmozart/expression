@@ -24,7 +24,7 @@ use Webmozart\Expression\Util\StringUtil;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class Equals extends Literal
+class Equals extends Literal
 {
     /**
      * @var string

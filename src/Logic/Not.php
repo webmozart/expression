@@ -20,7 +20,7 @@ use Webmozart\Expression\Expression;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class Not extends Literal
+class Not extends Literal
 {
     /**
      * @var Expression

@@ -20,7 +20,7 @@ use Countable;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class Count extends Selector
+class Count extends Selector
 {
     /**
      * {@inheritdoc}

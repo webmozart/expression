@@ -33,7 +33,9 @@ use Webmozart\Expression\Constraint\Same;
 use Webmozart\Expression\Constraint\StartsWith;
 use Webmozart\Expression\Logic\AlwaysFalse;
 use Webmozart\Expression\Logic\AlwaysTrue;
+use Webmozart\Expression\Logic\AndX;
 use Webmozart\Expression\Logic\Not;
+use Webmozart\Expression\Logic\OrX;
 use Webmozart\Expression\Selector\All;
 use Webmozart\Expression\Selector\AtLeast;
 use Webmozart\Expression\Selector\AtMost;
@@ -119,6 +121,20 @@ class Expr
     }
 
     /**
+     * Returns the expression.
+     *
+     * Facilitates usage of expressions on PHP < 7.
+     *
+     * @param Expression $expr An expression.
+     *
+     * @return Expression The expression.
+     */
+    public static function expr(Expression $expr)
+    {
+        return $expr;
+    }
+
+    /**
      * Negate an expression.
      *
      * @param Expression $expr The negated expression.
@@ -128,6 +144,30 @@ class Expr
     public static function not(Expression $expr)
     {
         return new Not($expr);
+    }
+
+    /**
+     * Create a conjunction.
+     *
+     * @param Expression[] $conjuncts The conjuncts.
+     *
+     * @return AndX The created conjunction.
+     */
+    public static function andX(array $conjuncts)
+    {
+        return new AndX($conjuncts);
+    }
+
+    /**
+     * Create a disjunction.
+     *
+     * @param Expression[] $disjuncts The disjuncts.
+     *
+     * @return OrX The created disjunction.
+     */
+    public static function orX(array $disjuncts)
+    {
+        return new OrX($disjuncts);
     }
 
     /**

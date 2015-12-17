@@ -14,7 +14,7 @@ namespace Webmozart\Expression\Tests\Selector;
 use PHPUnit_Framework_TestCase;
 use Webmozart\Expression\Constraint\EndsWith;
 use Webmozart\Expression\Constraint\GreaterThan;
-use Webmozart\Expression\Logic\Conjunction;
+use Webmozart\Expression\Logic\AndX;
 use Webmozart\Expression\Selector\Key;
 
 /**
@@ -38,7 +38,7 @@ class KeyTest extends PHPUnit_Framework_TestCase
     {
         $expr1 = new Key('name', new GreaterThan(10));
         $expr2 = new Key('name', new EndsWith('.css'));
-        $expr3 = new Key('name', new Conjunction(array(
+        $expr3 = new Key('name', new AndX(array(
             new GreaterThan(10),
             new EndsWith('.css'),
         )));

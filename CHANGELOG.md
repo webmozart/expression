@@ -4,6 +4,11 @@ Changelog
 * 1.0.0 (2015-12-17)
 
  * added `Expr::filter()` to filter collections
+ * removed `final` keyword of expression classes to facilitate building
+   domain expressions
+ * renamed `Conjunction` to `AndX`
+ * renamed `Disjunction` to `OrX`
+ * added `Expr::andX()` and `Expr::orX()`
 
 * 1.0.0-beta5 (2015-10-02)
 

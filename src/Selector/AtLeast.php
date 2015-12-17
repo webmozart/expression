@@ -21,7 +21,7 @@ use Webmozart\Expression\Expression;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class AtLeast extends Selector
+class AtLeast extends Selector
 {
     /**
      * @var int

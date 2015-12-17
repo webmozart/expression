@@ -24,7 +24,7 @@ use Webmozart\Expression\Util\StringUtil;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class Same extends Literal
+class Same extends Literal
 {
     /**
      * @var mixed

@@ -23,7 +23,7 @@ use Webmozart\Expression\Util\StringUtil;
  * @author Bernhard Schussek <bschussek@gmail.com>
  * @author Stephan Wentz <stephan@wentz.it>
  */
-final class Contains extends Literal
+class Contains extends Literal
 {
     /**
      * @var string

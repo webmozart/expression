@@ -20,7 +20,7 @@ use Webmozart\Expression\Expression;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class AlwaysTrue extends Literal
+class AlwaysTrue extends Literal
 {
     /**
      * {@inheritdoc}

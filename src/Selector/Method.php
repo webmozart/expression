@@ -12,8 +12,8 @@
 namespace Webmozart\Expression\Selector;
 
 use Webmozart\Expression\Expression;
-use Webmozart\Expression\Logic\Conjunction;
-use Webmozart\Expression\Logic\Disjunction;
+use Webmozart\Expression\Logic\AndX;
+use Webmozart\Expression\Logic\OrX;
 use Webmozart\Expression\Util\StringUtil;
 
 /**
@@ -23,7 +23,7 @@ use Webmozart\Expression\Util\StringUtil;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-final class Method extends Selector
+class Method extends Selector
 {
     /**
      * @var string
@@ -107,7 +107,7 @@ final class Method extends Selector
         $exprString = $this->expr->toString();
         $argsString = implode(', ', StringUtil::formatValues($this->arguments));
 
-        if ($this->expr instanceof Conjunction || $this->expr instanceof Disjunction) {
+        if ($this->expr instanceof AndX || $this->expr instanceof OrX) {
             return $this->methodName.'('.$argsString.'){'.$exprString.'}';
         }
 

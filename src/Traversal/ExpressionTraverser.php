@@ -12,8 +12,8 @@
 namespace Webmozart\Expression\Traversal;
 
 use Webmozart\Expression\Expression;
-use Webmozart\Expression\Logic\Conjunction;
-use Webmozart\Expression\Logic\Disjunction;
+use Webmozart\Expression\Logic\AndX;
+use Webmozart\Expression\Logic\OrX;
 use Webmozart\Expression\Logic\Not;
 use Webmozart\Expression\Selector\Key;
 
@@ -103,9 +103,9 @@ class ExpressionTraverser
             $expr = $this->traverseKey($expr);
         } elseif ($expr instanceof Not) {
             $expr = $this->traverseNot($expr);
-        } elseif ($expr instanceof Conjunction) {
+        } elseif ($expr instanceof AndX) {
             $expr = $this->traverseConjunction($expr);
-        } elseif ($expr instanceof Disjunction) {
+        } elseif ($expr instanceof OrX) {
             $expr = $this->traverseDisjunction($expr);
         }
 
@@ -140,7 +140,7 @@ class ExpressionTraverser
         return $negatedExpr2 ? new Not($negatedExpr2) : null;
     }
 
-    private function traverseConjunction(Conjunction $expr)
+    private function traverseConjunction(AndX $expr)
     {
         $conjuncts1 = $expr->getConjuncts();
         $conjuncts2 = array();
@@ -155,10 +155,10 @@ class ExpressionTraverser
             return $expr;
         }
 
-        return $conjuncts2 ? new Conjunction($conjuncts2) : null;
+        return $conjuncts2 ? new AndX($conjuncts2) : null;
     }
 
-    private function traverseDisjunction(Disjunction $expr)
+    private function traverseDisjunction(OrX $expr)
     {
         $disjuncts1 = $expr->getDisjuncts();
         $disjuncts2 = array();
@@ -173,6 +173,6 @@ class ExpressionTraverser
             return $expr;
         }
 
-        return $disjuncts2 ? new Disjunction($disjuncts2) : null;
+        return $disjuncts2 ? new OrX($disjuncts2) : null;
     }
 }

@@ -33,7 +33,9 @@ use Webmozart\Expression\Constraint\StartsWith;
 use Webmozart\Expression\Expr;
 use Webmozart\Expression\Logic\AlwaysFalse;
 use Webmozart\Expression\Logic\AlwaysTrue;
+use Webmozart\Expression\Logic\AndX;
 use Webmozart\Expression\Logic\Not;
+use Webmozart\Expression\Logic\OrX;
 use Webmozart\Expression\Selector\All;
 use Webmozart\Expression\Selector\AtLeast;
 use Webmozart\Expression\Selector\AtMost;
@@ -230,6 +232,27 @@ class ExprTest extends PHPUnit_Framework_TestCase
     public function testCreate($method, $args, $expected)
     {
         $this->assertEquals($expected, call_user_func_array(array('Webmozart\Expression\Expr', $method), $args));
+    }
+
+    public function testExpr()
+    {
+        $expr = new Same(true);
+
+        $this->assertSame($expr, Expr::expr($expr));
+    }
+
+    public function testAndX()
+    {
+        $andX = new AndX(array(new GreaterThan(5), new LessThan(10)));
+
+        $this->assertEquals($andX, Expr::andX(array(Expr::greaterThan(5), Expr::lessThan(10))));
+    }
+
+    public function testOrX()
+    {
+        $andX = new OrX(array(new LessThan(5), new GreaterThan(10)));
+
+        $this->assertEquals($andX, Expr::orX(array(Expr::lessThan(5), Expr::greaterThan(10))));
     }
 
     public function testFilterArray()

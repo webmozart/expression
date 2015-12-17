@@ -16,8 +16,8 @@ use Webmozart\Expression\Constraint\Same;
 use Webmozart\Expression\Expr;
 use Webmozart\Expression\Logic\AlwaysFalse;
 use Webmozart\Expression\Logic\AlwaysTrue;
-use Webmozart\Expression\Logic\Conjunction;
-use Webmozart\Expression\Logic\Disjunction;
+use Webmozart\Expression\Logic\AndX;
+use Webmozart\Expression\Logic\OrX;
 use Webmozart\Expression\Tests\Logic\Fixtures\TestLiteral;
 
 /**
@@ -32,7 +32,7 @@ class LiteralTest extends PHPUnit_Framework_TestCase
         $literal = new TestLiteral();
         $expr = new Same('10');
 
-        $this->assertEquals(new Conjunction(array($literal, $expr)), $literal->andX($expr));
+        $this->assertEquals(new AndX(array($literal, $expr)), $literal->andX($expr));
     }
 
     public function testAndXIgnoresDuplicates()
@@ -93,7 +93,7 @@ class LiteralTest extends PHPUnit_Framework_TestCase
 
         $result = call_user_func_array(array($literal, $method), $args);
 
-        $this->assertEquals(new Conjunction(array($literal, $expected)), $result);
+        $this->assertEquals(new AndX(array($literal, $expected)), $result);
     }
 
     public function testOrX()
@@ -101,7 +101,7 @@ class LiteralTest extends PHPUnit_Framework_TestCase
         $literal = new TestLiteral();
         $expr = new Same('10');
 
-        $this->assertEquals(new Disjunction(array($literal, $expr)), $literal->orX($expr));
+        $this->assertEquals(new OrX(array($literal, $expr)), $literal->orX($expr));
     }
 
     public function testOrXIgnoresDuplicates()
@@ -162,6 +162,6 @@ class LiteralTest extends PHPUnit_Framework_TestCase
 
         $result = call_user_func_array(array($literal, $method), $args);
 
-        $this->assertEquals(new Disjunction(array($literal, $expected)), $result);
+        $this->assertEquals(new OrX(array($literal, $expected)), $result);
     }
 }

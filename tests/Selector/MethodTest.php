@@ -15,7 +15,7 @@ use PHPUnit_Framework_TestCase;
 use stdClass;
 use Webmozart\Expression\Constraint\EndsWith;
 use Webmozart\Expression\Constraint\GreaterThan;
-use Webmozart\Expression\Logic\Conjunction;
+use Webmozart\Expression\Logic\AndX;
 use Webmozart\Expression\Selector\Method;
 
 /**
@@ -47,7 +47,7 @@ class MethodTest extends PHPUnit_Framework_TestCase
     {
         $expr1 = new Method('getName', array(42, true), new GreaterThan(10));
         $expr2 = new Method('getName', array('foo'), new EndsWith('.css'));
-        $expr3 = new Method('getName', array(new stdClass()), new Conjunction(array(
+        $expr3 = new Method('getName', array(new stdClass()), new AndX(array(
             new GreaterThan(10),
             new EndsWith('.css'),
         )));
