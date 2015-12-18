@@ -178,37 +178,55 @@ $expr->evaluate(new Person(12));
 // => true
 ```
 
-You can nest selectors to evaluate expressions for nested objects or arrays:
-
-```php
-$expr = Expr::atLeastOne(Expr::method('getAge', Expr::greaterThan(10)));
-
-$expr->evaluate([new Person(12), new Person(9)]);
-// => true
-```
-
 The `method()` selector also accepts arguments that will be passed to the 
 method. Pass the arguments before the evaluated expression:
 
 ```php
 $expr = Expr::method('getParameter', 'age', Expr::greaterThan(10));
 
-$expr->evaluate([new Person(12), new Person(9)]);
+$expr->evaluate(new Person(12));
 // => true
+```
+
+You can nest selectors to evaluate expressions for nested objects or arrays:
+
+```php
+$expr = Expr::method('getBirthDate', Expr::method('format', 'Y', Expr::lessThan(2000)));
+
+$expr->evaluate(new Person(12));
+// => false
 ```
 
 The following table lists all available selectors:
 
-Method                      | Description
---------------------------- | -------------------------------------------------------------------------------
-`key($key, $expr)`          | Evaluate an expression for a key of an array
-`method($name, $expr)`      | Evaluate an expression for the result of a method call
-`property($name, $expr)`    | Evaluate an expression for the value of a property
-`atLeast($count, $expr)`    | Check that an expression matches for at least `$count` entries of a traversable
-`atMost($count, $expr)`     | Check that an expression matches for at most `$count` entries of a traversable
-`exactly($count, $expr)`    | Check that an expression matches for exactly `$count` entries of a traversable
-`all($expr)`                | Check that an expression matches for all entries of a traversable
-`count($expr)`              | Check that an expression matches for the count of a collection
+Method                   | Description
+------------------------ | -------------------------------------------------------------------------------
+`key($key, $expr)`       | Evaluate an expression for a key of an array
+`method($name, $expr)`   | Evaluate an expression for the result of a method call
+`property($name, $expr)` | Evaluate an expression for the value of a property
+`count($expr)`           | Evaluate an expression for the count of a collection
+
+Quantors
+--------
+
+Quantors are applied to collections and test whether an expression evaluates to
+true for a certain number of elements. A famous one is the all-quantor:
+
+```php
+$expr = Expr::all(Expr::method('getAge', Expr::greaterThan(10)));
+
+$expr->evaluate([new Person(12), new Person(11)]);
+// => true
+```
+
+The following table lists all available quantors:
+
+Method                   | Description
+------------------------ | -------------------------------------------------------------------------------
+`all($expr)`             | Check that an expression matches for all entries of a traversable
+`atLeast($count, $expr)` | Check that an expression matches for at least `$count` entries of a traversable
+`atMost($count, $expr)`  | Check that an expression matches for at most `$count` entries of a traversable
+`exactly($count, $expr)` | Check that an expression matches for exactly `$count` entries of a traversable
 
 Logical Operators
 -----------------
