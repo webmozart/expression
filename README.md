@@ -206,11 +206,13 @@ Method                   | Description
 `property($name, $expr)` | Evaluate an expression for the value of a property
 `count($expr)`           | Evaluate an expression for the count of a collection
 
+The `count()` selector accepts arrays and `Countable` objects.
+
 Quantors
 --------
 
-Quantors are applied to collections and test whether an expression evaluates to
-true for a certain number of elements. A famous one is the all-quantor:
+Quantors are applied to collections and test whether an expression matches for a c
+ertain number of elements. A famous one is the all-quantor:
 
 ```php
 $expr = Expr::all(Expr::method('getAge', Expr::greaterThan(10)));
@@ -219,14 +221,15 @@ $expr->evaluate([new Person(12), new Person(11)]);
 // => true
 ```
 
-The following table lists all available quantors:
+Quantors accept both arrays and `Traversable` instances. The following table 
+lists all available quantors:
 
 Method                   | Description
 ------------------------ | -------------------------------------------------------------------------------
-`all($expr)`             | Check that an expression matches for all entries of a traversable
-`atLeast($count, $expr)` | Check that an expression matches for at least `$count` entries of a traversable
-`atMost($count, $expr)`  | Check that an expression matches for at most `$count` entries of a traversable
-`exactly($count, $expr)` | Check that an expression matches for exactly `$count` entries of a traversable
+`all($expr)`             | Check that an expression matches for all entries of a collection
+`atLeast($count, $expr)` | Check that an expression matches for at least `$count` entries of a collection
+`atMost($count, $expr)`  | Check that an expression matches for at most `$count` entries of a collection
+`exactly($count, $expr)` | Check that an expression matches for exactly `$count` entries of a collection
 
 Logical Operators
 -----------------
