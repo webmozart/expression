@@ -211,8 +211,8 @@ The `count()` selector accepts arrays and `Countable` objects.
 Quantors
 --------
 
-Quantors are applied to collections and test whether an expression matches for a c
-ertain number of elements. A famous one is the all-quantor:
+Quantors are applied to collections and test whether an expression matches for a
+certain number of elements. A famous one is the all-quantor:
 
 ```php
 $expr = Expr::all(Expr::method('getAge', Expr::greaterThan(10)));
