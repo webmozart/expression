@@ -47,7 +47,7 @@ class AndX implements Expression
             } else {
                 $this->conjuncts[] = $conjunct;
             }
-        };
+        }
     }
 
     /**
