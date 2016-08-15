@@ -258,7 +258,9 @@ class ExprTest extends PHPUnit_Framework_TestCase
     public function testFilterArray()
     {
         $input = range(1, 10);
-        $output = array_filter($input, function ($i) { return $i > 4; });
+        $output = array_filter($input, function ($i) {
+            return $i > 4;
+        });
 
         $this->assertSame($output, Expr::filter($input, Expr::greaterThan(4)));
     }
@@ -266,7 +268,9 @@ class ExprTest extends PHPUnit_Framework_TestCase
     public function testFilterCollection()
     {
         $input = new ArrayObject(range(1, 10));
-        $output = new ArrayObject(array_filter(range(1, 10), function ($i) { return $i > 4; }));
+        $output = new ArrayObject(array_filter(range(1, 10), function ($i) {
+            return $i > 4;
+        }));
 
         $this->assertEquals($output, Expr::filter($input, Expr::greaterThan(4)));
     }
